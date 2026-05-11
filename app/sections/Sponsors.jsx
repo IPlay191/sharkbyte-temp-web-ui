@@ -14,31 +14,17 @@ const Sponsors = () => {
       href: "https://www.mdc.edu/entec/",
       src: "https://i.ibb.co/DfLvZNcc/entec.png",
       alt: "entec_mdc_logo",
-      height: 90,
-      width: 180,
       className: "w-[180px] max-[1050px]:w-[120px] max-[700px]:w-[100px]"
     },
     {
       href: "https://www.roocapital.com/",
       src: "https://i.ibb.co/DgTndgYp/roo-capital.png",
       alt: "roo_capital_logo",
-      height: 170,
-      width: 180,
       className: "w-[180px] px-1 max-[1050px]:w-[140px] max-[1050px]:h-[120px] max-[700px]:w-[120px] max-[700px]:h-[120px] max-[700px]:hover:scale-100"
     },
-    /* {
-      href: "https://www.perplexity.ai/",
-      src: "https://res.cloudinary.com/dqo1uzz0i/image/upload/v1760653896/Perplexity_AI_logo.svg_tljxnl.png",
-      height: 170,
-      width: 180,
-      alt: "perplexity_logo",
-      className: "max-[1050px]:w-[120px] max-[700px]:w-[100px] px-1"
-    }, */
     {
       href: "https://www.microsoft.com/en-us/",
       src: "https://i.ibb.co/bRW3gGHy/microsoft.png",
-      height: 160,
-      width: 180,
       alt: "microsoft_logo",
       className: "max-[1050px]:w-[120px] max-[700px]:w-[110px] px-1"
     },
@@ -46,48 +32,36 @@ const Sponsors = () => {
       href: "https://www.purebuttons.com/",
       src: "https://i.ibb.co/x42zDFb/pure-buttons.png",
       alt: "pure_buttons_logo",
-      height: 90,
-      width: 180,
       className: "w-[180px] max-[1050px]:w-[120px] max-[700px]:w-[110px]"
     },
     {
       href: "https://4geeks.com/",
       src: "https://i.ibb.co/BHd04wnq/4geeks.png",
       alt: "4_geeks_academy_logo",
-      height: 90,
-      width: 180,
       className: "w-[180px] max-[1050px]:w-[120px] max-[700px]:w-[110px]"
     },
     {
       href: "https://cybriant.com/",
       src: "https://i.ibb.co/rRgFM5vj/cybriant.png",
       alt: "cybriant_logo",
-      height: 170,
-      width: 170,
       className: "w-[180px] max-[1050px]:w-[160px] max-[1050px]:h-[150px] max-[700px]:w-[120px] max-[700px]:h-[120px] max-[700px]:hover:scale-100"
     },
     {
       href: "https://miamitechworks.org/",
       src: "/svgs/miami_tech_works.svg",
       alt: "miami_tech_works_logo",
-      height: 170,
-      width: 180,
       className: "w-[180px] px-1 max-[1050px]:w-[140px] max-[1050px]:h-[120px] max-[700px]:w-[120px] max-[700px]:h-[120px] max-[700px]:hover:scale-100"
     },
     {
       href: "https://www.redbull.com/",
       src: "/svgs/redbull.svg",
       alt: "redbull_logo",
-      height: 170,
-      width: 180,
       className: "w-[180px] px-1 max-[1050px]:w-[140px] max-[1050px]:h-[120px] max-[700px]:w-[120px] max-[700px]:h-[120px] max-[700px]:hover:scale-100"
     },
     {
       href: "https://www.reactmiami.com/",
       src: "https://i.ibb.co/vCMCRTrc/react-miami.webp",
       alt: "react_miami_logo",
-      height: 160,
-      width: 170,
       className: "w-[180px] px-1 max-[1050px]:w-[140px] max-[1050px]:h-[120px] max-[700px]:w-[120px] max-[700px]:h-[120px] max-[700px]:hover:scale-100"
     }
   ];
@@ -123,7 +97,7 @@ const Sponsors = () => {
         {/* TITLE */}
         <div className="mb-3 max-[850px]:mb-2 max-[750px]:mb-1.5 max-[650px]:mb-1 relative">
           <div className="bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-4 py-2 border-3 border-gray-600 pixel-shadow max-[850px]:px-3 max-[850px]:py-1.5 max-[650px]:px-3 max-[650px]:py-1">
-            <h1 className="font-bold text-center text-[30px] laptop:text-[40px] desktop:text-[50px]">Sponsored By</h1>
+            <h1 className="font-bold text-center text-[30px] laptop:text-[40px] desktop:text-[50px]">Previous Sponsors</h1>
           </div>
         </div>
 
