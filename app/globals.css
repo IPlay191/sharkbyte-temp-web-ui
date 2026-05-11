@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+/* @ syntax defines css directives (at-rules)
+ex.
+@theme - Tells Tailwind v4 to automatically generate utility classes from your custom CSS variables.
+@keyframes - Defines the individual steps and styles to create custom CSS animations.
+@media - Applies CSS rules conditionally based on device features, like screen width or dark mode preferences.
+*/
+
+/* tailwindcss v4 unique class creator directive */
+@theme {
+  --font-pixel: 'VT323', monospace;
+  --breakpoint-mobile: 360px;
+  --breakpoint-tablet: 481px;
+  --breakpoint-laptop: 769px;
+  --breakpoint-desktop: 1025px;
+}
+
+/* custom utility class for pixelated box style */
+.retro-box {
+  @apply bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 border-3 border-gray-600 text-white;
+}
+
+/* pseudo-class, defines highest level element */
+:root {
+  --background: #fff;
+  --foreground: #000;
+}
+
+/* global element css */
+body {
+  /* using css variables as values */
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-pixel);
+
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+
+  /* browser specific css */
+  -webkit-font-smoothing: subpixel-antialiased; /* macintosh */
+  -moz-osx-font-smoothing: grayscale; /* firefox */
+}
+
+
+/* css backgrounds with images */
+.hero-bg,
+.stats-bg,
+.comingsoon-bg,
+.sponsors-bg,
+.socials-bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.hero-bg {
+  background-image: url('https://i.ibb.co/wNPWzc7J/Skyscrapers-Hero-Page.png');
+  background-position: center;
+}
+
+.stats-bg {
+  background-image: url('https://i.ibb.co/LhD9g6sk/Clouds-Stats-Page.png');
+  background-position: center;
+}
+
+.comingsoon-bg {
+  background-image: url('https://i.ibb.co/2YMDf26n/Temporary-website-page-4.png');
+  background-position: center;
+}
+
+.sponsors-bg {
+  background-image: url('https://i.ibb.co/rKcRScGt/section-team.png');
+  background-position: center;
+}
+
+.socials-bg {
+  background-image: url('https://i.ibb.co/zhVkj2XT/socials-pahir6.png');
+  background-position: center;
+}
+
+@keyframes bounce-high {
+  0%, 100% {
+    transform: translateY(100%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(-100%);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
