@@ -26,7 +26,7 @@ const Navbar = () => {
   }
 
   return (
-   <nav className="bg-gradient-to-b from-gray-950 via-gray-950 to-gray-900 fixed top-0 z-10 h-[60px] w-full text-white pixel-shadow-2">
+   <nav className="bg-gradient-to-b from-gray-950 via-gray-950 to-gray-900 fixed top-0 z-50 h-[60px] w-full text-white pixel-shadow-2">
      <div className="flex justify-between h-full relative px-4 max-laptop:px-0">
 
       {/* LOGO */}
@@ -102,7 +102,7 @@ const Navbar = () => {
                {/* Menu content */}
                <div className="flex flex-col items-end pr-8 space-y-6">
                  {/* Nav Links */}
-                 <div className="flex flex-col items-end space-y-15">
+                 <div className="flex flex-col items-end space-y-14">
                    <button onClick={() => { scrollToSection('statistics'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">Statistics</button>
                    <button onClick={() => { scrollToSection('sponsors'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">Sponsors</button>
                    <button onClick={() => { scrollToSection('socials'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">Socials</button>
