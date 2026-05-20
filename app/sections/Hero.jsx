@@ -4,11 +4,11 @@ export default function Hero() {
   return (
     <section id='hero' className="h-dvh w-dvw hero-bg flex justify-center items-center flex-row max-[700px]:flex-col relative">
       {/* Grouping the text-bubble and logo */}
-      <div className='relative flex justify-center items-center'>
+      <div className='relative flex-column justify-center items-center'>
         <div className="flex absolute left-[-3rem] top-[-1rem] desktop:left-[-10rem] -rotate-[15deg] z-9 animate-bounce">
         {/* TEXT-BUBBLE */}
           <Image className="w-[100px] h-auto desktop:w-[200px]"
-            src="https://i.ibb.co/N2h5M6Qn/image-removebg-preview-1.png"
+            src="https://i.ibb.co/Q7tQMWqH/image.png"
             alt="text-bubble for feedback form"
             width={300}
             height={300}
@@ -26,6 +26,8 @@ export default function Hero() {
           />
         </div>
 
+        {/* SUB-TITLE */}
+        <div className=" font-bold absolute text-nowrap justify-self-center text-white text-[1rem] tablet:text-[1.25rem] laptop:text-[1.5rem] desktop:text-[2rem] text-shadow-lg/100 text-shadow-white-900 "> Miami Dade College's Signature Hackathon </div>
       </div>
     </section>
   )
