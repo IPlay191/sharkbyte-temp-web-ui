@@ -13,8 +13,8 @@ const Statistics = () => {
             <div className=" relative flex flex-col items-center gap-[4vw] tablet:gap-8 max-h-[750px]:gap-4 z-10 flex-shrink-0">
 
                 {/* LEFT SIDE BIRDS */}
-                <img className="absolute max-laptop:hidden w-[160px] h-[160px] -left-[180px] top-[15%] animate-[bounce-high_6s_ease-in-out_infinite]" src='/Pixel Bird.png' alt="Bird1" />
-                <img className="absolute w-[80px] h-[80px] tablet:w-[120px] tablet:h-[120px] -left-[40px] tablet:-left-[100px] top-[55%] animate-[bounce-high_6s_ease-in-out_infinite]" src='/Pixel Bird.png' alt="Bird2" /> 
+                <img className="absolute max-laptop:hidden w-[160px] h-[160px] -left-[180px] top-[15%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none -z-10" src='/Pixel Bird.png' alt="Bird1" />
+                <img className="absolute w-[80px] h-[80px] tablet:w-[120px] tablet:h-[120px] -left-[40px] tablet:-left-[100px] top-[55%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none -z-10" src='/Pixel Bird.png' alt="Bird2" /> 
             
                 {/* THE TITLE */}
                 <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-20 desktop:py-8 max-h-[750px]:px-8 max-h-[750px]:py-3">
@@ -47,8 +47,8 @@ const Statistics = () => {
                 </div>
 
                 {/* RIGHT SIDE BIRDS */}
-                <img className="absolute w-[80px] h-[80px] tablet:w-[120px] tablet:h-[120px] -right-[40px] tablet:-right-[100px] top-[30%] animate-[bounce-high_6s_ease-in-out_infinite]" src='/Pixel Bird.png' alt="Bird3" /> 
-                <img className="absolute max-laptop:hidden w-[160px] h-[160px] -right-[180px] top-[70%] animate-[bounce-high_6s_ease-in-out_infinite]" src='/Pixel Bird.png' alt="Bird4" /> 
+                <img className="absolute w-[80px] h-[80px] tablet:w-[120px] tablet:h-[120px] -right-[40px] tablet:-right-[100px] top-[30%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none -z-10" src='/Pixel Bird.png' alt="Bird3" /> 
+                <img className="absolute max-laptop:hidden w-[160px] h-[160px] -right-[180px] top-[70%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none -z-10" src='/Pixel Bird.png' alt="Bird4" /> 
 
             </div>
 
