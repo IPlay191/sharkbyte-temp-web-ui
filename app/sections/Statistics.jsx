@@ -10,8 +10,8 @@ const Statistics = () => {
         <section id="statistics" className="w-full min-h-dvh flex items-center justify-center relative overflow-hidden stats-bg pt-[80px] pb-8">
 
             {/* LEFT SIDE BIRDS */}
-            <img className="absolute max-laptop:hidden w-[160px] h-[160px] left-[5%] top-[15%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-0" src='/Pixel Bird.png' alt="Bird1" />
-            <img className="absolute w-[80px] h-[80px] tablet:w-[120px] tablet:h-[120px] left-[2%] tablet:left-[8%] top-[55%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-0" src='/Pixel Bird.png' alt="Bird2" /> 
+            <img className="absolute max-laptop:hidden w-[160px] h-[160px] left-[5%] top-[15%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-15" src='/Pixel Bird.png' alt="Bird1" />
+            <img className="absolute w-[80px] h-[80px] tablet:w-[120px] tablet:h-[120px] left-[2%] tablet:left-[8%] top-[55%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-15" src='/Pixel Bird.png' alt="Bird2" /> 
 
             {/* MAIN Wrapper: Stacks the title above the statistics card */}
             <div className=" relative flex flex-col items-center gap-[4vw] tablet:gap-8 max-h-[750px]:gap-4 z-10 flex-shrink-0">
@@ -49,8 +49,8 @@ const Statistics = () => {
             </div>
 
             {/* RIGHT SIDE BIRDS */}
-            <img className="absolute w-[80px] h-[80px] tablet:w-[120px] tablet:h-[120px] right-[2%] tablet:right-[8%] top-[30%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-0" src='/Pixel Bird.png' alt="Bird3" /> 
-            <img className="absolute max-laptop:hidden w-[160px] h-[160px] right-[5%] top-[70%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-0" src='/Pixel Bird.png' alt="Bird4" /> 
+            <img className="absolute w-[80px] h-[80px] tablet:w-[120px] tablet:h-[120px] right-[2%] tablet:right-[8%] top-[30%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-15" src='/Pixel Bird.png' alt="Bird3" /> 
+            <img className="absolute max-laptop:hidden w-[160px] h-[160px] right-[5%] top-[70%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-15" src='/Pixel Bird.png' alt="Bird4" /> 
 
         </section>
     )
