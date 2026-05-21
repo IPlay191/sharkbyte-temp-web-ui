@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function Hero() {
   return (
-    <section id='hero' className="h-dvh w-dvw hero-bg flex justify-center items-center flex-row max-[700px]:flex-col relative">
+    <section id='hero' className="h-dvh w-full hero-bg flex justify-center items-center flex-row max-[700px]:flex-col relative">
       {/* Grouping the text-bubble and logo */}
       <div className='relative flex-column justify-center items-center'>
         <div className="flex absolute left-[-3rem] top-[-1rem] desktop:left-[-10rem] -rotate-[15deg] z-9 animate-bounce">
