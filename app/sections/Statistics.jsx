@@ -7,7 +7,7 @@ const Statistics = () => {
     ];
 
     return (
-        <section id="statistics" className="w-full min-h-dvh flex items-center justify-center relative overflow-hidden stats-bg pt-[80px] pb-8">
+        <section id="statistics" className="w-full min-h-svh flex items-center justify-center relative overflow-hidden stats-bg pt-[80px] pb-8">
 
             {/* LEFT SIDE BIRDS */}
             <img className="absolute max-laptop:hidden w-[160px] h-[160px] left-[5%] top-[15%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-15" src='/Pixel Bird.png' alt="Bird1" />

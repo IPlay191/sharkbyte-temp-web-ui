@@ -34,7 +34,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-pixel);
 
-  min-height: 100vh;
+  min-height: 100svh;
   text-rendering: optimizeLegibility;
 
   /* browser specific css */
