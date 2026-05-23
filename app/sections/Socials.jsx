@@ -3,7 +3,7 @@
 const Socials = () => {
 
   return (
-    <section id = 'socials' className = "w-screen h-screen flex flex-col justify-center items-center relative overflow-hidden socials-bg">
+    <section id = 'socials' className = "w-full h-svh flex flex-col justify-center items-center relative overflow-hidden socials-bg">
 
       {/* Main content wrapper for centering */}
       <div className="flex flex-col items-center gap-[6vw] tablet:gap-12">
