@@ -149,10 +149,10 @@ const Sponsors = () => {
           <p className="text-center text-[20px] laptop:text-[20px] desktop:text-[30px]">
             Want to sponsor? Email us at{" "}
             <a
-              href="mailto:mdc-north@weareinit.org"
+              href="mailto:industry@weareinit.org"
               className="text-[#8b5cf6] hover:underline whitespace-nowrap"
             >
-              mdc-north@weareinit.org
+              industry@weareinit.org
             </a>
           </p>
         </div>
