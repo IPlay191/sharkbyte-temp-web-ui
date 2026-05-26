@@ -92,7 +92,7 @@ const Sponsors = () => {
   );
 
   return (
-    <section id="sponsors" className=" z-9 sponsors-bg w-screen min-h-screen flex flex-col justify-center items-center relative overflow-hidden max-[850px]:py-4 max-[750px]:py-3 max-[650px]:py-2 max-h-screen overflow-y-auto">
+    <section id="sponsors" className=" z-9 sponsors-bg w-full min-h-svh flex flex-col justify-center items-center relative overflow-hidden max-[850px]:py-4 max-[750px]:py-3 max-[650px]:py-2 max-h-svh overflow-y-auto">
       <div className="w-full flex flex-col items-center">
         {/* TITLE */}
         <div className="mb-3 max-[850px]:mb-2 max-[750px]:mb-1.5 max-[650px]:mb-1 relative">
