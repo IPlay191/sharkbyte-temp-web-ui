@@ -29,6 +29,23 @@ export const metadata = {
   title: "SharkByte 2026",
   description: "Join SharkByte",
   icons: '/icons/favicon.ico'
+
+  ,openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://shark-byte.io',
+    siteName: 'SharkByte 2026 | Miami Dade College Signature Hackathon',
+    title: 'SharkByte 2026 | Miami Dade College Signature Hackathon',
+    description: 'Join SharkByte, Miami Dade College\'s official hackathon! A free 3-day tech sprint November 6-8, 2026 in Miami, FL. Build innovative projects, learn new skills, and connect with fellow developers.',
+    images: [
+      {
+        url: 'https://i.ibb.co/Kj4jgkm8/image.png',
+        width: 1200,
+        height: 630,
+        alt: 'SharkByte 2026 Hackathon - Miami Dade College',
+      },
+    ],
+  },
 }
 
 export default function RootLayout({ children }) {
