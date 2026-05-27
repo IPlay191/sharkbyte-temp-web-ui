@@ -28,7 +28,7 @@ export const VT323 = localFont({
 export const metadata = {
   title: 'SharkByte 2026 | Miami Dade College Hackathon',
   description: 'Join SharkByte, Miami Dade College\'s official hackathon! A free 3-day tech sprint November 6-8, 2026 in Miami, FL. Build innovative projects, learn new skills, and connect with fellow developers. Open to anyone 18+.',
-  keywords: 'hackathon, Miami Dade College, INIT, miami dade college hackathon, mdc hackathon, SharkByte, coding, programming, Miami, Florida, event',
+  keywords: 'hackathon, Miami Dade College, INIT, miami dade college hackathon, mdc hackathon, SharkByte, coding, programming, Miami, Florida, event, SharkByte 2026, FL Hackathon, tech event, software development',
   authors: [{ name: 'INIT MDC North' }],
   creator: 'INIT MDC North',
   publisher: 'Miami Dade College',
