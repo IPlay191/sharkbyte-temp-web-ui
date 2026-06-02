@@ -31,7 +31,7 @@ const Navbar = () => {
 
       {/* LOGO */}
       <div className="flex justify-center items-center w-min z-50">
-        <button onClick={() => scrollToSection('hero')} className=" text-[35px] transition-transform duration-300 cursor-pointer pl-4 hover:animate-pulse">SharkByte</button>
+        <button onClick={() => scrollToSection('hero')} className=" text-[35px] transition-transform duration-300 cursor-pointer pl-4 hover:animate-pulse">poop</button>
       </div>
 
       {/* _____ DESKTOP _____ */}
