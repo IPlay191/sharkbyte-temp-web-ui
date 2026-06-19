@@ -15,6 +15,7 @@ export default function Hero() {
             alt="text-bubble for feedback form"
             width={300}
             height={300}
+            priority
           />
 
         </div>

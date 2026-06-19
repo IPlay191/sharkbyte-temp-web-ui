@@ -23,7 +23,7 @@ const HorizontalScroll = ({ children, panels = 1 }) => {
       const screenWidth = window.innerWidth;
       const isMobile = screenWidth < 768;
       
-      // Matches your old logic: faster scroll speed on mobile
+      // Faster scroll speed on mobile
       const scrollFactor = isMobile ? 2 : 1.25; 
 
       // Set the initial width of the film strip
@@ -54,7 +54,6 @@ const HorizontalScroll = ({ children, panels = 1 }) => {
   }, [panels]);
 
   return (
-    // We only need a normal h-svh here. GSAP will inject the massive scroll space automatically!
     <section ref={trackRef} className="relative h-svh overflow-hidden bg-gray-950">
       
       {/* The Rail containing your slides */}
