@@ -21,6 +21,18 @@ ex.
   @apply bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 border-3 border-gray-600 text-white;
 }
 
+/* Creates a seamless fade-out effect on the left and right edges of the carousel */
+.carousel-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+/* Retro terminal blinking cursor animation */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 /* pseudo-class, defines highest level element */
 :root {
   --background: #fff;
