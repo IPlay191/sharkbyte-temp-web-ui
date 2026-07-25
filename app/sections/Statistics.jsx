@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Simple Auto-Cycling Window Carousel
 const TrainWindow = ({ images, interval = 3000 }) => {
@@ -47,93 +47,88 @@ const Statistics = () => {
     "https://i.ibb.co/bMjfhQWs/Whats-App-Image-2026-07-18-at-6-02-22-PM.jpg",
   ];
 
-  const windowCar2 = [
-    "https://i.ibb.co/HD2P9nVg/Screenshot-2026-07-23-202537.png",
-    "https://i.ibb.co/ymhXXTwG/Screenshot-2026-07-23-202555.png",
-    "https://i.ibb.co/JwvtQGNS/Screenshot-2026-07-23-202844.png",
-    "https://i.ibb.co/yFf0xK9C/Shark-Byte-picture.png",
-    "https://i.ibb.co/yFCCYxF5/Whats-App-Image-2026-07-01-at-1-05-58-PM.jpg",
-    "https://i.ibb.co/bMjfhQWs/Whats-App-Image-2026-07-18-at-6-02-22-PM.jpg",
-  ];
+  const windowCar2 = [...windowCar1];
+  const windowCar3 = [...windowCar1];
 
-  const windowCar3 = [
-    "https://i.ibb.co/HD2P9nVg/Screenshot-2026-07-23-202537.png",
-    "https://i.ibb.co/ymhXXTwG/Screenshot-2026-07-23-202555.png",
-    "https://i.ibb.co/JwvtQGNS/Screenshot-2026-07-23-202844.png",
-    "https://i.ibb.co/yFf0xK9C/Shark-Byte-picture.png",
-    "https://i.ibb.co/yFCCYxF5/Whats-App-Image-2026-07-01-at-1-05-58-PM.jpg",
-    "https://i.ibb.co/bMjfhQWs/Whats-App-Image-2026-07-18-at-6-02-22-PM.jpg",
-  ];
+  const sectionRef = useRef(null);
+  const trainRef = useRef(null);
 
   useEffect(() => {
-    const page = document.getElementById("statistics");
-    const trainWrapper = document.getElementById("train-wrapper");
-    const navBar = document.getElementById("navbar");
+    const handleScroll = () => {
+      if (!sectionRef.current || !trainRef.current) return;
 
-    if (!page || !trainWrapper || !navBar) return;
+      const section = sectionRef.current;
+      const train = trainRef.current;
 
-    const maxScrollDistance = page.clientHeight - window.innerHeight;
-    const maxScrollDistanceTrain = trainWrapper.scrollWidth - window.innerWidth;
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const viewportHeight = window.innerHeight;
 
-    function scrollHandler() {
-      const navBarBottom = navBar.getBoundingClientRect().bottom;
-      const pageTop = page.getBoundingClientRect().top;
-      const pageBottom = page.getBoundingClientRect().bottom;
-      const rawScrollPosition = (navBarBottom - pageTop) / maxScrollDistance;
-      const scrollPosition = Math.max(0, Math.min(1, rawScrollPosition));
+      // Distance available to scroll vertically while sticky
+      const totalScrollableDistance = sectionHeight - viewportHeight;
+      // Maximum horizontal travel distance for the train
+      const maxHorizontalScroll = train.scrollWidth - window.innerWidth;
 
-      // Translates left so content flows naturally from right to left as you scroll down
-      let currentX = -scrollPosition * maxScrollDistanceTrain;
+      if (totalScrollableDistance <= 0 || maxHorizontalScroll <= 0) return;
 
-      if (navBarBottom >= pageTop && navBarBottom < pageBottom) {
-        trainWrapper.style.transform = `translateX(${currentX}px)`;
-      }
-    }
+      // Current vertical scroll distance inside the section
+      const currentScroll = window.scrollY - sectionTop;
 
-    window.addEventListener("wheel", scrollHandler);
-    window.addEventListener("scroll", scrollHandler);
+      // Normalize between 0 and 1
+      const progress = Math.min(
+        Math.max(currentScroll / totalScrollableDistance, 0),
+        1
+      );
 
-    return () => {
-      window.removeEventListener("wheel", scrollHandler);
-      window.removeEventListener("scroll", scrollHandler);
+      // Translate train wrapper horizontally
+      train.style.transform = `translateX(-${progress * maxHorizontalScroll}px)`;
     };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Initial check
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <section
+      ref={sectionRef}
       id="statistics"
-      className="w-full stats-bg pt-[80px] pb-8 h-[100rem] background-repeat overflow-clip"
+      className="relative w-full h-[100rem] stats-bg background-repeat"
     >
-      {/* MAIN WRAPPER: TRAIN SIMULATION */}
-      <div
-        id="train-wrapper"
-        className="flex sticky top-0 flex-row bg-[url(https://i.ibb.co/TBVdYSgR/image.png)] bg-cover items-center gap-[4vw] px-[6vw] w-max h-[50rem] z-10 shrink-0"
-      >
-        {/* 1. THE TITLE (Visible first) */}
-        <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-10 desktop:py-30 max-h-[750px]:px-8 max-h-[750px]:py-3 shrink-0">
-          <h1 className="font-bold text-center text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl max-h-[750px]:text-2xl">
-            Last Year We Had...
-          </h1>
-        </div>
-
-        {/* 2. THE STATS BOX (Visible first)*/}
-        <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-10 desktop:py-6 max-h-[750px]:px-8 max-h-[750px]:py-3 shrink-0">
-          <div className="flex flex-col gap-6 tablet:gap-8 laptop:gap-10 desktop:gap-12 max-h-[750px]:gap-4">
-            {stats.map((stat, index) => (
-              <h2
-                key={index}
-                className={`font-bold text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl max-h-[750px]:text-2xl ${stat.hoverColor}`}
-              >
-                {stat.text}
-              </h2>
-            ))}
+      {/* STICKY CONTAINER */}
+      <div className="sticky top-0 h-screen overflow-hidden flex items-center">
+        <div
+          ref={trainRef}
+          id="train-wrapper"
+          className="flex flex-row bg-[url(https://i.ibb.co/TBVdYSgR/image.png)] bg-cover items-center gap-[4vw] px-[6vw] w-max h-[50rem] z-10 shrink-0 transition-transform duration-75 ease-out"
+        >
+          {/* 1. THE TITLE */}
+          <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-10 desktop:py-30 max-h-[750px]:px-8 max-h-[750px]:py-3 shrink-0">
+            <h1 className="font-bold text-center text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl max-h-[750px]:text-2xl">
+              Last Year We Had...
+            </h1>
           </div>
-        </div>
 
-        {/* 3. WINDOW CAROUSELS (At the end of the scroll) */}
-        <TrainWindow images={windowCar1} interval={2500} />
-        <TrainWindow images={windowCar2} interval={2000} />
-        <TrainWindow images={windowCar3} interval={3000} />
+          {/* 2. THE STATS BOX */}
+          <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-10 desktop:py-6 max-h-[750px]:px-8 max-h-[750px]:py-3 shrink-0">
+            <div className="flex flex-col gap-6 tablet:gap-8 laptop:gap-10 desktop:gap-12 max-h-[750px]:gap-4">
+              {stats.map((stat, index) => (
+                <h2
+                  key={index}
+                  className={`font-bold text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl max-h-[750px]:text-2xl ${stat.hoverColor}`}
+                >
+                  {stat.text}
+                </h2>
+              ))}
+            </div>
+          </div>
+
+          {/* 3. WINDOW CAROUSELS */}
+          <TrainWindow images={windowCar1} interval={2500} />
+          <TrainWindow images={windowCar2} interval={2000} />
+          <TrainWindow images={windowCar3} interval={3000} />
+        </div>
       </div>
     </section>
   );

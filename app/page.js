@@ -8,7 +8,7 @@ import HorizontalScroll from './components/HorizontalScroll'
 
 export default function Home() {
   return (
-    <main className="overflow-x-hidden bg-gray-950">
+    <main className="overflow-x-clip bg-gray-950">
 
       <Navbar />
 
