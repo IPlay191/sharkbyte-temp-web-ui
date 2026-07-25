@@ -8,61 +8,51 @@ const Sponsors = () => {
       href: "https://www.mdc.edu/north/",
       src: "https://i.ibb.co/1fsDggVX/mdc-north.png",
       alt: "mdc_north_logo",
-      className: "max-[1050px]:w-[120px] max-[700px]:w-[100px]"
     },
     {
       href: "https://www.mdc.edu/entec/",
       src: "https://i.ibb.co/DfLvZNcc/entec.png",
       alt: "entec_mdc_logo",
-      className: "w-[180px] max-[1050px]:w-[120px] max-[700px]:w-[100px]"
     },
     {
       href: "https://www.roocapital.com/",
       src: "https://i.ibb.co/DgTndgYp/roo-capital.png",
       alt: "roo_capital_logo",
-      className: "w-[180px] px-1 max-[1050px]:w-[140px] max-[1050px]:h-[120px] max-[700px]:w-[120px] max-[700px]:h-[120px] max-[700px]:hover:scale-100"
     },
     {
       href: "https://www.microsoft.com/en-us/",
       src: "https://i.ibb.co/bRW3gGHy/microsoft.png",
       alt: "microsoft_logo",
-      className: "max-[1050px]:w-[120px] max-[700px]:w-[110px] px-1"
     },
     {
       href: "https://www.purebuttons.com/",
       src: "https://i.ibb.co/x42zDFb/pure-buttons.png",
       alt: "pure_buttons_logo",
-      className: "w-[180px] max-[1050px]:w-[120px] max-[700px]:w-[110px]"
     },
     {
       href: "https://4geeks.com/",
       src: "https://i.ibb.co/BHd04wnq/4geeks.png",
       alt: "4_geeks_academy_logo",
-      className: "w-[180px] max-[1050px]:w-[120px] max-[700px]:w-[110px]"
     },
     {
       href: "https://cybriant.com/",
       src: "https://i.ibb.co/rRgFM5vj/cybriant.png",
       alt: "cybriant_logo",
-      className: "w-[180px] max-[1050px]:w-[160px] max-[1050px]:h-[150px] max-[700px]:w-[120px] max-[700px]:h-[120px] max-[700px]:hover:scale-100"
     },
     {
       href: "https://miamitechworks.org/",
       src: "/svgs/miami_tech_works.svg",
       alt: "miami_tech_works_logo",
-      className: "w-[180px] px-1 max-[1050px]:w-[140px] max-[1050px]:h-[120px] max-[700px]:w-[120px] max-[700px]:h-[120px] max-[700px]:hover:scale-100"
     },
     {
       href: "https://www.redbull.com/",
       src: "/svgs/redbull.svg",
       alt: "redbull_logo",
-      className: "w-[180px] px-1 max-[1050px]:w-[140px] max-[1050px]:h-[120px] max-[700px]:w-[120px] max-[700px]:h-[120px] max-[700px]:hover:scale-100"
     },
     {
       href: "https://www.reactmiami.com/",
       src: "https://i.ibb.co/vCMCRTrc/react-miami.webp",
       alt: "react_miami_logo",
-      className: "w-[180px] px-1 max-[1050px]:w-[140px] max-[1050px]:h-[120px] max-[700px]:w-[120px] max-[700px]:h-[120px] max-[700px]:hover:scale-100"
     }
   ];
 
@@ -75,17 +65,15 @@ const Sponsors = () => {
       href={sponsor.href} 
       target="_blank" 
       rel="noopener noreferrer" 
-      className="my-0.5 flex justify-center items-center transition-transform duration-300 hover:scale-105 border-3 border-gray-600 pixel-shadow bg-gradient-to-br from-white to-gray-300 py-1.5 min-h-[180px] min-w-[180px] max-[1350px]:min-w-[160px] max-[1350px]:min-h-[160px] max-[1050px]:min-w-[140px] max-[1050px]:min-h-[140px] max-[850px]:min-w-[120px] max-[850px]:min-h-[120px] max-[750px]:min-w-[110px] max-[750px]:min-h-[110px] max-[700px]:min-w-[100px] max-[700px]:min-h-[100px] max-[700px]:py-1 flex-shrink-0"
+      className="my-0.5 flex justify-center items-center transition-transform duration-300 hover:scale-105 border-3 border-gray-600 pixel-shadow bg-gray-200 p-4 tablet:p-5 min-h-[180px] min-w-[180px] max-[1350px]:min-w-[160px] max-[1350px]:min-h-[160px] max-[1050px]:min-w-[140px] max-[1050px]:min-h-[140px] max-[850px]:min-w-[120px] max-[850px]:min-h-[120px] max-[750px]:min-w-[110px] max-[750px]:min-h-[110px] max-[700px]:min-w-[100px] max-[700px]:min-h-[100px] flex-shrink-0 group"
     >
-      <div  className = {`flex justify-center items-center ${sponsor.className || 'w-[130px]'}`}>
+      <div className={`flex justify-center items-center w-full h-full relative transition-transform duration-300 group-hover:scale-105`}>
         <Image
           src={sponsor.src}
-          height={sponsor.height || 130}
-          width={sponsor.width || 130}
           alt={sponsor.alt}
+          fill
           sizes="(max-width: 700px) 100px, (max-width: 1050px) 120px, 180px"
           className="object-contain"
-          style={{ width: '100%', height: 'auto' }}
         />
       </div>
     </a>
@@ -102,7 +90,7 @@ const Sponsors = () => {
         </div>
 
         {/* DESKTOP TWO-ROW CAROUSEL */}
-        <div className="max-laptop:hidden relative border-x-8 border-x-gray-900 max-[850px]:border-x-6 max-[750px]:border-x-4 min-desktop:w-full max-w-4xl mx-auto overflow-hidden">
+        <div className="max-laptop:hidden relative min-desktop:w-full max-w-5xl mx-auto overflow-hidden carousel-mask">
           <div className="flex flex-col gap-0.5">
             {/* TOP ROW */}
             <div className="marquee overflow-hidden">
@@ -121,7 +109,7 @@ const Sponsors = () => {
         </div>
 
       {/* MOBILE TWO-ROW SCROLL */}
-      <div className="min-laptop:hidden relative w-full overflow-x-auto pb-1">
+      <div className="min-laptop:hidden relative w-full overflow-x-auto pb-1 carousel-mask">
         <div className="flex flex-col gap-1.5">
           {/* Top row - First 5 sponsors */}
           <div className="flex gap-1.5 px-3" style={{ width: 'max-content' }}>
@@ -143,17 +131,19 @@ const Sponsors = () => {
         ← Scroll horizontally →
       </div>
         
-      {/* SPONSOR CTA */}
-      <div className="relative w-[400px] laptop:w-[700px] desktop:w-[850px] mt-3 max-[850px]:mt-2 max-[750px]:mt-1.5 max-[650px]:mt-1">
-        <div className="bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-3 py-2.5 border-3 border-gray-600 pixel-shadow max-[850px]:py-2 max-[650px]:px-2 max-[650px]:py-1.5">
-          <p className="text-center text-[20px] laptop:text-[20px] desktop:text-[30px]">
-            Want to sponsor? Email us at{" "}
+      {/* SPONSOR CTA (Command Line Aesthetic) */}
+      <div className="relative w-[400px] laptop:w-[700px] desktop:w-[850px] mt-4 max-[850px]:mt-3 max-[750px]:mt-2">
+        <div className="retro-box pixel-shadow px-4 py-3 max-[850px]:py-2 max-[650px]:px-3">
+          <p className="text-left font-mono text-[16px] tablet:text-[18px] laptop:text-[22px] desktop:text-[26px]">
+            <span className="text-[#39ff14] mr-2">{">"}</span> 
+            Want to sponsor? Execute:{" "}
             <a
-              href="mailto:industry@weareinit.org"
-              className="text-[#8b5cf6] hover:underline whitespace-nowrap"
+              href="mailto:mdc-north@weareinit.org"
+              className="text-[#8b5cf6] hover:text-[#a78bfa] hover:underline whitespace-nowrap transition-colors"
             >
-              industry@weareinit.org
+              mdc-north@weareinit.org
             </a>
+            <span className="animate-blink text-[#39ff14] ml-1">_</span>
           </p>
         </div>
       </div>
