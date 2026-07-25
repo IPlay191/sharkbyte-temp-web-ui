@@ -1,48 +1,6 @@
-'use client'
-
 import Image from 'next/image'
-import { useEffect } from 'react'
-import { fadeOnScroll } from '../lib/fadeOnScroll'
-import { zoomOnScroll } from '../lib/zoomOnScroll'
 
 export default function Hero() {
-  useEffect(() => {
-    const hero = document.getElementById('hero')
-    const statistics = document.getElementById('statistics')
-
-    // Guard clause to ensure the function doesn't run if the page element is not found. This prevents errors in case the element is missing from the DOM.
-    if (!hero || !statistics) return undefined
-    // Multiply the startAt to make the animation happen earlier, divide it to make it happen later. Multiply the endAt to make the animation faster, divide it to make the transition slower.
-    const updateTransition = () => {
-      fadeOnScroll({
-        page: hero,
-        startAt: hero.offsetTop,
-        endAt: statistics.offsetTop,
-        startOpacity: 1,
-        endOpacity: 0,
-      })
-     // Multiply the startAt to make the animation happen earlier, divide it to make it happen later. Multiply the endAt to make the animation faster, divide it to make the transition slower. Change endScale to make the zoom in more or less.
-      zoomOnScroll({
-        page: hero,
-        startAt: hero.offsetTop - window.innerHeight * 0.001,
-        endAt: statistics.offsetTop - window.innerHeight * 0.00001,
-        startScale: 1,
-        endScale: 3.0,
-      })
-    }
-    
-    // Using passive event listeners for scroll to improve performance and prevent potential jank during scrolling.
-    updateTransition()
-    window.addEventListener('scroll', updateTransition, { passive: true })
-    window.addEventListener('resize', updateTransition)
-    
-    // Clean up event listeners on component unmount to prevent memory leaks and unintended behavior.
-    return () => {
-      window.removeEventListener('scroll', updateTransition)
-      window.removeEventListener('resize', updateTransition)
-    }
-  }, [])
-
   return (
     <section id='hero' className="h-svh w-full hero-bg flex justify-center items-center flex-row max-[700px]:flex-col relative overflow-hidden">
 
