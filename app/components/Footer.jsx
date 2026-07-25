@@ -21,14 +21,14 @@ const Footer = () => {
           "
         >
           <a
-            href="https://www.notion.so/weareinitold/Terms-and-Conditions-SharkByte-2025-2629f4e8ae4e80329c36f65620006db9?source=copy_link"
+            href="https://weareinit.notion.site/Terms-and-Conditions-SharkByte-2025-2629f4e8ae4e80329c36f65620006db9"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[#8b5cf6] transition-colors duration-300 text-center flex items-center justify-center"
           >
             SharkByte TOS
           </a>
-          {/*<a
+          <a
             href="https://github.com/MLH/mlh-policies/blob/main/code-of-conduct.md"
             target="_blank"
             rel="noopener noreferrer"
@@ -51,7 +51,7 @@ const Footer = () => {
             className="hover:text-[#8b5cf6] transition-colors duration-300 text-center flex items-center justify-center"
           >
             MLH Privacy Policy
-          </a> */}
+          </a>
         </div>
 
       </div>
