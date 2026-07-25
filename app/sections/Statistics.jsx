@@ -1,142 +1,59 @@
-"use client";
-import { useEffect, useState } from "react";
-
-// Simple Auto-Cycling Window Carousel
-const TrainWindow = ({ images, interval = 3000 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    if (!images || images.length <= 1) return;
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, interval);
-    return () => clearInterval(timer);
-  }, [images, interval]);
-
-  return ( 
-    <div className="retro-box pixel-shadow p-3 relative overflow-hidden w-[22rem] h-[16rem] tablet:w-[28rem] tablet:h-[20rem] desktop:w-[34rem] desktop:h-[24rem] shrink-0 flex items-center justify-center bg-black/40">
-      <div className="relative w-full h-full border-4 border-amber-100/30 rounded-md overflow-hidden bg-zinc-900">
-        {images.map((imgUrl, idx) => (
-          <img
-            key={idx}
-            src={imgUrl}
-            alt={`Window ${idx + 1}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
-              idx === currentIndex ? "opacity-100" : "opacity-0"
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
 const Statistics = () => {
-  const stats = [
-    { text: "200+ Attendees", hoverColor: "hover:text-blue-700" },
-    { text: "130 Participants", hoverColor: "hover:text-pink-400" },
-    { text: "52 Completed Projects", hoverColor: "hover:text-yellow-400" },
-  ];
 
-  const windowCar1 = [
-    "https://i.ibb.co/HD2P9nVg/Screenshot-2026-07-23-202537.png",
-    "https://i.ibb.co/ymhXXTwG/Screenshot-2026-07-23-202555.png",
-    "https://i.ibb.co/JwvtQGNS/Screenshot-2026-07-23-202844.png",
-    "https://i.ibb.co/yFf0xK9C/Shark-Byte-picture.png",
-    "https://i.ibb.co/yFCCYxF5/Whats-App-Image-2026-07-01-at-1-05-58-PM.jpg",
-    "https://i.ibb.co/bMjfhQWs/Whats-App-Image-2026-07-18-at-6-02-22-PM.jpg",
-  ];
+    const stats = [
+        { text: "200+ Attendees", hoverColor: "hover:text-blue-700" },
+        { text: "130 Participants", hoverColor: "hover:text-pink-400" },
+        { text: "52 Completed Projects", hoverColor: "hover:text-yellow-400" },
+    ];
 
-  const windowCar2 = [
-    "https://i.ibb.co/HD2P9nVg/Screenshot-2026-07-23-202537.png",
-    "https://i.ibb.co/ymhXXTwG/Screenshot-2026-07-23-202555.png",
-    "https://i.ibb.co/JwvtQGNS/Screenshot-2026-07-23-202844.png",
-    "https://i.ibb.co/yFf0xK9C/Shark-Byte-picture.png",
-    "https://i.ibb.co/yFCCYxF5/Whats-App-Image-2026-07-01-at-1-05-58-PM.jpg",
-    "https://i.ibb.co/bMjfhQWs/Whats-App-Image-2026-07-18-at-6-02-22-PM.jpg",
-  ];
+    return (
+        <section id="statistics" className="w-full min-h-svh flex items-center justify-center relative overflow-hidden stats-bg pt-[80px] pb-8">
 
-  const windowCar3 = [
-    "https://i.ibb.co/HD2P9nVg/Screenshot-2026-07-23-202537.png",
-    "https://i.ibb.co/ymhXXTwG/Screenshot-2026-07-23-202555.png",
-    "https://i.ibb.co/JwvtQGNS/Screenshot-2026-07-23-202844.png",
-    "https://i.ibb.co/yFf0xK9C/Shark-Byte-picture.png",
-    "https://i.ibb.co/yFCCYxF5/Whats-App-Image-2026-07-01-at-1-05-58-PM.jpg",
-    "https://i.ibb.co/bMjfhQWs/Whats-App-Image-2026-07-18-at-6-02-22-PM.jpg",
-  ];
+            {/* LEFT SIDE BIRDS */}
+            <img className="absolute max-laptop:hidden w-[160px] h-[160px] left-[5%] top-[15%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-15" src='/Pixel Bird.png' alt="Bird1" />
+            <img className="absolute w-[80px] h-[80px] tablet:w-[120px] tablet:h-[120px] left-[2%] tablet:left-[8%] top-[55%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-15" src='/Pixel Bird.png' alt="Bird2" /> 
 
-  useEffect(() => {
-    const page = document.getElementById("statistics");
-    const trainWrapper = document.getElementById("train-wrapper");
-    const navBar = document.getElementById("navbar");
+            {/* MAIN Wrapper: Stacks the title above the statistics card */}
+            <div className=" relative flex flex-col items-center gap-[4vw] tablet:gap-8 max-h-[750px]:gap-4 z-10 flex-shrink-0">
+            
+                {/* THE TITLE */}
+                <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-20 desktop:py-8 max-h-[750px]:px-8 max-h-[750px]:py-3">
 
-    if (!page || !trainWrapper || !navBar) return;
+                    <h1 className="font-bold text-center text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl max-h-[750px]:text-2xl">
 
-    const maxScrollDistance = page.clientHeight - window.innerHeight;
-    const maxScrollDistanceTrain = trainWrapper.scrollWidth - window.innerWidth;
+                        Last Year We Had...
 
-    function scrollHandler() {
-      const navBarBottom = navBar.getBoundingClientRect().bottom;
-      const pageTop = page.getBoundingClientRect().top;
-      const pageBottom = page.getBoundingClientRect().bottom;
-      const rawScrollPosition = (navBarBottom - pageTop) / maxScrollDistance;
-      const scrollPosition = Math.max(0, Math.min(1, rawScrollPosition));
+                    </h1>
 
-      // Translates left so content flows naturally from right to left as you scroll down
-      let currentX = -scrollPosition * maxScrollDistanceTrain;
+                </div>
 
-      if (navBarBottom >= pageTop && navBarBottom < pageBottom) {
-        trainWrapper.style.transform = `translateX(${currentX}px)`;
-      }
-    }
+                {/* THE BOX */}
+                <div className="retro-box pixel-shadow p-8 tablet:p-12 laptop:p-16 desktop:p-18 max-h-[750px]:p-6">
 
-    window.addEventListener("wheel", scrollHandler);
-    window.addEventListener("scroll", scrollHandler);
+                    <div className="flex flex-col gap-6 tablet:gap-8 laptop:gap-10 desktop:gap-12 max-h-[750px]:gap-4">
 
-    return () => {
-      window.removeEventListener("wheel", scrollHandler);
-      window.removeEventListener("scroll", scrollHandler);
-    };
-  }, []);
+                        {stats.map((stat, index) => (
 
-  return (
-    <section
-      id="statistics"
-      className="w-full stats-bg pt-[80px] pb-8 h-[100rem] background-repeat overflow-clip"
-    >
-      {/* MAIN WRAPPER: TRAIN SIMULATION */}
-      <div
-        id="train-wrapper"
-        className="flex sticky top-0 flex-row bg-[url(https://i.ibb.co/TBVdYSgR/image.png)] bg-cover items-center gap-[4vw] px-[6vw] w-max h-[50rem] z-10 shrink-0"
-      >
-        {/* 1. THE TITLE (Visible first) */}
-        <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-10 desktop:py-30 max-h-[750px]:px-8 max-h-[750px]:py-3 shrink-0">
-          <h1 className="font-bold text-center text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl max-h-[750px]:text-2xl">
-            Last Year We Had...
-          </h1>
-        </div>
+                            <h2 key={index} className={`font-bold text-2xl tablet:text-4xl laptop:text-5xl desktop:text-6xl max-h-[750px]:text-xl ${stat.hoverColor}`}>
+                                
+                                {stat.text}
+                            
+                            </h2>
 
-        {/* 2. THE STATS BOX (Visible first)*/}
-        <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-10 desktop:py-6 max-h-[750px]:px-8 max-h-[750px]:py-3 shrink-0">
-          <div className="flex flex-col gap-6 tablet:gap-8 laptop:gap-10 desktop:gap-12 max-h-[750px]:gap-4">
-            {stats.map((stat, index) => (
-              <h2
-                key={index}
-                className={`font-bold text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl max-h-[750px]:text-2xl ${stat.hoverColor}`}
-              >
-                {stat.text}
-              </h2>
-            ))}
-          </div>
-        </div>
+                        ))}
 
-        {/* 3. WINDOW CAROUSELS (At the end of the scroll) */}
-        <TrainWindow images={windowCar1} interval={2500} />
-        <TrainWindow images={windowCar2} interval={2000} />
-        <TrainWindow images={windowCar3} interval={3000} />
-      </div>
-    </section>
-  );
-};
+                    </div>
 
-export default Statistics;
+                </div>
+
+            </div>
+
+            {/* RIGHT SIDE BIRDS */}
+            <img className="absolute w-[80px] h-[80px] tablet:w-[120px] tablet:h-[120px] right-[2%] tablet:right-[8%] top-[30%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-15" src='/Pixel Bird.png' alt="Bird3" /> 
+            <img className="absolute max-laptop:hidden w-[160px] h-[160px] right-[5%] top-[70%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-15" src='/Pixel Bird.png' alt="Bird4" /> 
+
+        </section>
+    )
+}
+
+export default Statistics
