@@ -122,7 +122,7 @@ const Statistics = () => {
               {stats.map((stat, index) => (
                 <h2
                   key={index}
-                  className={`font-bold text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl max-h-[750px]:text-2xl ${stat.hoverColor}`}
+                  className={` hover:cursor-default font-bold text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl max-h-[750px]:text-2xl ${stat.hoverColor}`}
                 >
                   {stat.text}
                 </h2>
