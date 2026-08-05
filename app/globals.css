@@ -56,11 +56,14 @@ body {
 
 
 /* css backgrounds with images */
+.statistics-bg,
 .hero-bg,
 .stats-bg,
 .comingsoon-bg,
 .sponsors-bg,
-.socials-bg {
+.socials-bg,
+.team-bg
+ {
   background-repeat: no-repeat;
   background-size: cover;
   image-rendering: pixelated;
@@ -89,6 +92,11 @@ body {
 }
 
 .socials-bg {
+  background-image: url('https://i.ibb.co/zhVkj2XT/socials-pahir6.png');
+  background-position: center;
+}
+
+.team-bg{
   background-image: url('https://i.ibb.co/zhVkj2XT/socials-pahir6.png');
   background-position: center;
 }

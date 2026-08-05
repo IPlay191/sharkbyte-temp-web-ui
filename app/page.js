@@ -5,6 +5,7 @@ import ComingSoon from './sections/ComingSoon'
 import Sponsors from './sections/Sponsors'
 import Socials from './sections/Socials'
 import HorizontalScroll from './components/HorizontalScroll'
+import Team from './sections/Team'
 
 export default function Home() {
   return (
@@ -34,6 +35,7 @@ export default function Home() {
       </HorizontalScroll>
 
       {/* --- BACK TO VERTICAL SCROLLING --- */}
+      <Team />
       <Socials />
 
     </main>
