@@ -3,82 +3,82 @@
 const Team = () => {
  const teamMembers = [
    {
-     name: "Placeholder",
-     role: "Placeholder",
+     name: "Jimmy Jean Baptiste",
+     role: "Hack Project Manager",
      image: "https://placehold.net/avatar.svg",
-     linkedin: "https://www.linkedin.com/in/abigail-lozano317/"
+     linkedin: ""
    },
    {
-    name: "Placeholder",
-    role: "Placeholder",
-    image: "https://placehold.net/avatar.svg",
-    linkedin: "https://www.linkedin.com/in/alfredobenites/"
+    name: "Erick Gonzalez",
+    role: "President",
+    image: "https://i.ibb.co/B5Xf6bv9/Erick-Headshot.jpg",
+    linkedin: ""
    },
    {
-     name: "Placeholder",
-     role: "Placeholder",
+     name: "Elias Estrada",
+     role: "Vice President",
      image: "https://placehold.net/avatar.svg",
-     linkedin: "https://www.linkedin.com/in/elias-estrada-1445ab2b5"
+     linkedin: ""
    },
    {
-     name: "Placeholder",
-     role: "Placeholder",
+     name: "Dannia Dupotey",
+     role: "Director of Marketing",
      image: "https://placehold.net/avatar.svg",
-     linkedin: "https://www.linkedin.com/in/daniel-rodriguez-3ab841372"
+     linkedin: ""
    },
    {
-     name: "Placeholder",
-     role: "Placeholder",
+     name: "Kathween Vargas",
+     role: "Director of Marketing",
      image: "https://placehold.net/avatar.svg",
-     linkedin: "https://www.linkedin.com/in/jorge-rodriguez-27a4a6231/"
+     linkedin: ""
    },
    {
-     name: "Placeholder",
-     role: "Placeholder",
+     name: "Mikhail Guevara",
+     role: "Marketing",
      image: "https://placehold.net/avatar.svg",
-     linkedin: "https://www.linkedin.com/in/yp06/"
+     linkedin: ""
    },
    {
-     name: "Placeholder",
-     role: "Placeholder",
+     name: "Linet Lima",
+     role: "Director of Industry Relations",
      image: "https://placehold.net/avatar.svg",
-     linkedin: "https://www.linkedin.com/in/raul02/"
+     linkedin: ""
    },
    {
-     name: "Placeholder",
-     role: "Placeholder",
+     name: "Kelvin Rodriguez",
+     role: "Director of Industry Relations",
      image: "https://placehold.net/avatar.svg",
-     linkedin: "https://www.linkedin.com/in/julianna-chii/"
+     linkedin: ""
    },
    {
-     name: "Placeholder",
-     role: "Placeholder",
+     name: "Richard Canina Miranda",
+     role: "Director of Industry Relations",
      image: "https://placehold.net/avatar.svg",
-     linkedin: "https://www.linkedin.com/in/pablovaldes01/"
+     linkedin: ""
    },
    {
-     name: "Placeholder",
-     role: "Placeholder",
+     name: "Fritz Bonhomme",
+     role: "Director of Technology",
      image: "https://placehold.net/avatar.svg",
-     linkedin: "https://www.linkedin.com/in/santiago-padron-62922526b/"
+     linkedin: ""
    },
    {
-     name: "Placeholder",
-     role: "Placeholder",
+     name: "Oliver Martinez Fernandez",
+     role: "Director of Technology",
      image: "https://placehold.net/avatar.svg",
-     linkedin: "https://www.linkedin.com/in/jimmy-j-01679436a/?trk=contact-info"
-   },
-   {
-     name: "Placeholder",
-     role: "Placeholder",
-     image: "https://placehold.net/avatar.svg",
-     linkedin: "https://www.linkedin.com/in/christian-aguilera-4b480b306/"
+     linkedin: ""
    },
    {
      name: "Placeholder",
      role: "Placeholder",
      image: "https://placehold.net/avatar.svg",
-     linkedin: "https://www.linkedin.com/in/erick-gonzalez-888b7a377/"
+     linkedin: ""
+   },
+   {
+     name: "Placeholder",
+     role: "Placeholder",
+     image: "https://placehold.net/avatar.svg",
+     linkedin: ""
    }
  ]
 
@@ -111,17 +111,17 @@ const Team = () => {
    <section id="team" className="w-screen h-screen flex flex-col justify-center items-center relative overflow-hidden team-bg">
     <div className = "flex justify-center">
         {/* OURTEAM BUTTON */}
-        <div className=" mx-10 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-4 py-2 border-3 border-gray-600 pixel-shadow">
+        <button className=" mx-10 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-4 py-2 border-3 border-gray-600 pixel-shadow">
           <h1 className=" text-[4vw] font-bold text-center">Our Team</h1>
-        </div>
+        </button>
         {/*COMMUNITY MEMBERS BUTTON*/}
-        <div className="bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-4 py-2 border-3 border-gray-600 pixel-shadow">
-          <button className=" text-[4vw] font-bold text-center">Community Members</button>
-        </div>
+        <button className="bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-4 py-2 border-3 border-gray-600 pixel-shadow">
+          <div className=" text-[4vw] font-bold text-center">Community Members</div>
+        </button>
     </div>
 
       {/* DESKTOP TWO-ROW CAROUSEL */}
-      <div className="max-[650px]:hidden relative z-10 border-x-8 border-x-gray-900 w-full max-w-[700px] overflow-hidden">
+      <div className=" max-mobile:hidden relative z-10 border-x-8 border-x-gray-900 max-w-[80vw] overflow-hidden">
         <div className="flex flex-col">
           {/* TOP ROW */}
           <div className="marquee overflow-hidden">
