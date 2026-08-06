@@ -20,14 +20,14 @@ const Team = () => {
    {
      name: "Elias Estrada",
      role: "Vice President",
-     image: "https://placehold.net/avatar.svg",
+     image: "https://i.ibb.co/F4SBLzMq/image.png",
      linkedin: "https://www.linkedin.com/in/elias-estrada-1445ab2b5/"
    },
    {
      name: "Dannia Dupotey",
      role: "Director of Marketing",
-     image: "https://placehold.net/avatar.svg",
-     linkedin: ""
+     image: "https://i.ibb.co/SDRF5Ncj/image.png",
+     linkedin: "https://www.linkedin.com/in/dannia-dupotey-1169193b5/"
    },
    {
      name: "Kathween Vargas",
@@ -68,8 +68,8 @@ const Team = () => {
    {
      name: "Oliver Martinez Fernandez",
      role: "Director of Technology",
-     image: "https://placehold.net/avatar.svg",
-     linkedin: ""
+     image: "https://i.ibb.co/217YhzdL/image.png",
+     linkedin: "https://www.linkedin.com/in/oliver-martinez-9a1ba4340/"
    },
    {
      name: "Placeholder",
@@ -95,13 +95,13 @@ const Team = () => {
        href={member.linkedin} 
        target="_blank" 
        rel="noopener noreferrer"
-       className="my-1.5 flex justify-center items-center gap-0 flex-col bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-2 py-1 border-2 border-gray-600 pixel-shadow text-center transition-transform duration-300 hover:animate-[wiggle_2s_ease-in-out_infinite] hover:scale-105 cursor-pointer flex-shrink-0 w-[180px]"
+       className="my-1.5 flex justify-center items-center gap-0 flex-col bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-2 py-1 border-2 border-gray-600 pixel-shadow text-center transition-transform duration-300 hover:animate-[wiggle_2s_ease-in-out_infinite] hover:scale-105 cursor-pointer flex-shrink-0 w-[20vw] h-[20vw]"
      >
-       <div className="h-[150px]">
+       <div className="h-[20vw]">
          <img 
            src={member.image} 
            alt={member.name}
-           className="w-11 h-11 rounded-full mx-auto mb-0.5 mt-0.5 border border-gray-600"
+           className="w-[12vw] h-[12vw] rounded-full mx-auto mb-0.5 mt-0.5 border border-gray-600"
          />
          <h3 className="font-bold text-[20px]">{member.name}</h3>
          <p className="text-gray-300 relative top-[-10px] text-[20px]">{member.role}</p>
@@ -125,10 +125,16 @@ const Team = () => {
           <div className=" text-[4vw] font-bold text-center">Community Members</div>
         </button>
     </div>
+    {showCarousel == false &&(
+      <div className= "w-8/10 h-screen mx-10 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-4 py-2 border-3 border-gray-600 pixel-shadow"> 
+      
+      </div>
+    )}
+    
     {showCarousel && (
       <>
       {/* DESKTOP TWO-ROW CAROUSEL */}
-      <div className=" max-mobile:hidden relative z-10 border-x-8 border-x-gray-900 max-w-[80vw] overflow-hidden">
+      <div className=" max-mobile:hidden relative z-10 border-x-8 border-x-gray-900 w-8/10 overflow-hidden carousel-mask">
         <div className="flex flex-col">
           {/* TOP ROW */}
           <div className="marquee overflow-hidden">
