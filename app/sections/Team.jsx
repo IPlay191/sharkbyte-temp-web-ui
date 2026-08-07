@@ -4,6 +4,7 @@ import {useRef, useEffect, useState } from "react";
 
 const Team = () => {
  const [showCarousel, setShowCarousel] = useState(true);
+ const [showCMembers, setCMembers] = useState(true);
  const teamMembers = [
    {
      name: "Jimmy Jean Baptiste",
@@ -20,55 +21,55 @@ const Team = () => {
    {
      name: "Elias Estrada",
      role: "Vice President",
-     image: "https://i.ibb.co/F4SBLzMq/image.png",
+     image: "https://i.ibb.co/jZHvT0T1/image.png",
      linkedin: "https://www.linkedin.com/in/elias-estrada-1445ab2b5/"
    },
    {
      name: "Dannia Dupotey",
      role: "Director of Marketing",
-     image: "https://i.ibb.co/SDRF5Ncj/image.png",
+     image: "https://i.ibb.co/5Pkw1tg/image.png",
      linkedin: "https://www.linkedin.com/in/dannia-dupotey-1169193b5/"
    },
    {
      name: "Kathween Vargas",
      role: "Director of Marketing",
-     image: "https://placehold.net/avatar.svg",
+     image: "https://i.ibb.co/hFH9PFjv/image.png",
      linkedin: ""
    },
    {
      name: "Mikhail Guevara",
      role: "Marketing",
      image: "https://placehold.net/avatar.svg",
-     linkedin: ""
+     linkedin: "https://www.linkedin.com/in/kathween-vargas-villafuerte-6409941aa/"
    },
    {
      name: "Linet Lima",
      role: "Director of Industry Relations",
-     image: "https://i.ibb.co/ch61HG3R/image.png",
+     image: "https://i.ibb.co/F4f6JFct/image.png",
      linkedin: "https://www.linkedin.com/in/linet-lima-5437a0239/"
    },
    {
      name: "Kelvin Rodriguez",
      role: "Director of Industry Relations",
-     image: "https://i.ibb.co/whjXXfhz/image.png",
+     image: "https://i.ibb.co/hRHdfnpb/image.png",
      linkedin: "https://www.linkedin.com/in/kelvin-rodriguez-a519a0265/"
    },
    {
      name: "Richard Canina Miranda",
      role: "Director of Industry Relations",
-     image: "https://i.ibb.co/Mvm1Fpn/image.png",
+     image: "https://i.ibb.co/CpHkbgh2/image.png",
      linkedin: "https://www.linkedin.com/in/richardcm-info"
    },
    {
      name: "Fritz Bonhomme",
      role: "Director of Technology",
-     image: "https://i.ibb.co/CsTxyC3M/image.png",
+     image: "https://i.ibb.co/Ndrnx4V6/image.png",
      linkedin: ""
    },
    {
      name: "Oliver Martinez Fernandez",
      role: "Director of Technology",
-     image: "https://i.ibb.co/217YhzdL/image.png",
+     image: "https://i.ibb.co/BVSMT9Dm/image.png",
      linkedin: "https://www.linkedin.com/in/oliver-martinez-9a1ba4340/"
    },
    {
@@ -97,13 +98,13 @@ const Team = () => {
        rel="noopener noreferrer"
        className="my-1.5 flex justify-center items-center gap-0 flex-col bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-2 py-1 border-2 border-gray-600 pixel-shadow text-center transition-transform duration-300 hover:animate-[wiggle_2s_ease-in-out_infinite] hover:scale-105 cursor-pointer flex-shrink-0 w-[20vw] h-[20vw]"
      >
-       <div className="h-[20vw]">
+       <div className=" h-[20vw]">
          <img 
            src={member.image} 
            alt={member.name}
            className="w-[12vw] h-[12vw] rounded-full mx-auto mb-0.5 mt-0.5 border border-gray-600"
          />
-         <h3 className="font-bold text-[20px]">{member.name}</h3>
+         <h3 className="font-bold tracking-wide text-[25px]">{member.name}</h3>
          <p className="text-gray-300 relative top-[-10px] text-[20px]">{member.role}</p>
        </div>
      </a>
@@ -112,29 +113,49 @@ const Team = () => {
 
 
  return (
-   <section id="team" className="w-screen h-screen flex flex-col justify-center items-center relative overflow-hidden team-bg">
-    <div className = "flex justify-center">
+   <section id="team" className="w-screen h-screen flex flex-col justify-center items-center relative overflow-hidden team-bg ">
+    <div className = "flex">
         {/* OURTEAM BUTTON */}
-        <button onClick = {() => setShowCarousel(true)}
-        id= "team-button" className=" hover:cursor-pointer hover:bg-none hover:bg-violet-950 mx-10 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-4 py-2 border-3 border-gray-600 pixel-shadow">
+        <button onClick = {() => {
+        setShowCarousel(true)
+        setCMembers(false)}}
+        id= "team-button" className=" hover:cursor-pointer hover:bg-none hover:bg-violet-950 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-4 py-2 border-3 border-gray-600 pixel-shadow">
           <h1 className=" text-[4vw] font-bold text-center">Our Team</h1>
         </button>
         {/*COMMUNITY MEMBERS BUTTON*/}
-        <button onClick = {() => setShowCarousel(false)}
-         id = "community-button" className=" hover:cursor-pointer hover:bg-none hover:bg-violet-950 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-4 py-2 border-3 border-gray-600 pixel-shadow">
-          <div className=" text-[4vw] font-bold text-center">Community Members</div>
+        <button onClick = {() => {
+        setShowCarousel(false) 
+        setCMembers(true)}}
+         id = "community-button" className=" hover:cursor-pointer hover:bg-none hover:bg-violet-950 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-4 py-2 border-3 border-gray-600 pixel-shadow mx-5">
+          <h1 className=" text-[4vw] font-bold text-center">Community Members</h1>
+        </button>
+        {/* FACULTY ADVISORS BUTTON */}
+        <button onClick = {() => {
+        setShowCarousel(false) 
+        setCMembers(false)}}
+        id='advisors-button' className='hover:cursor-pointer hover:bg-none hover:bg-violet-950 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-4 py-2 border-3 border-gray-600 pixel-shadow'>
+          <h1 className=" text-[4vw] font-bold text-center">Faculty Advisors</h1>
         </button>
     </div>
-    {showCarousel == false &&(
+
+    {/*COMMUNITY MEMBERS BOX*/}
+    {showCarousel == false && showCMembers == true &&(
       <div className= "w-8/10 h-screen mx-10 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-4 py-2 border-3 border-gray-600 pixel-shadow"> 
-      
+        Community members section lolololol
+      </div>
+    )}
+
+    {/*FALCULTY ADVISORS BOX*/}
+    {showCarousel == false && showCMembers == false &&(
+      <div className= "w-8/10 h-screen mx-10 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-4 py-2 border-3 border-gray-600 pixel-shadow"> 
+        This is falculty lol
       </div>
     )}
     
     {showCarousel && (
       <>
       {/* DESKTOP TWO-ROW CAROUSEL */}
-      <div className=" max-mobile:hidden relative z-10 border-x-8 border-x-gray-900 w-8/10 overflow-hidden carousel-mask">
+      <div className=" max-tablet:hidden relative z-10 border-x-8 border-x-gray-900 w-8/10 overflow-hidden carousel-mask">
         <div className="flex flex-col">
           {/* TOP ROW */}
           <div className="marquee overflow-hidden">
@@ -154,9 +175,10 @@ const Team = () => {
       </>
     )}
 
-
+    {showCarousel && (
+      <>
      {/* MOBILE TWO-ROW CAROUSEL */}
-     <div className="min-[651px]:hidden relative z-10 w-full overflow-x-auto">
+     <div className="min-tablet:hidden relative z-10 w-full overflow-x-auto">
        <div className="flex flex-col gap-2">
          {/* Top row - First 7 team members */}
          <div className="flex gap-2 px-4" style={{ width: 'max-content' }}>
@@ -172,7 +194,7 @@ const Team = () => {
                 <img 
                   src={member.image} 
                   alt={member.name}
-                  className="w-11 h-11 rounded-full mx-auto mb-0.5 mt-0.5 border border-gray-600"
+                  className="w-[20vw] h-[20vw] rounded-full mx-auto mb-0.5 mt-0.5 border border-gray-600"
                 />
                 <h3 className="font-bold text-[20px]">{member.name}</h3>
                 <p className="text-gray-300 relative top-[-10px] text-[20px]">{member.role}</p>
@@ -194,7 +216,7 @@ const Team = () => {
                 <img 
                   src={member.image} 
                   alt={member.name}
-                  className="w-11 h-11 rounded-full mx-auto mb-0.5 mt-0.5 border border-gray-600"
+                  className="w-[20vw] h-[20vw] rounded-full mx-auto mb-0.5 mt-0.5 border border-gray-600"
                 />
                 <h3 className="font-bold text-[20px]">{member.name}</h3>
                 <p className="text-gray-300 relative top-[-10px] text-[20px]">{member.role}</p>
@@ -204,8 +226,10 @@ const Team = () => {
          </div>
        </div>
      </div>
+     </>
+     )}
      {/* MOBILE SCROLL INDICATOR */}
-     <div className="min-[651px]:hidden mt-8 text-white font-bold text-sm text-center max-[650px]:text-xs max-[500px]:text-[22px] max-[500px]:mt-4">
+     <div className="min-tablet:hidden mt-8 text-white font-bold text-sm text-center max-[650px]:text-xs max-[500px]:text-[22px] max-[500px]:mt-4">
        ← Scroll horizontally →
      </div>
 
