@@ -3,11 +3,12 @@
 import { useState } from 'react'
 
 const FAQ = () => {
-  // Global state to track which question is currently open. 
-  // Null means all are closed.
-  const [openId, setOpenId] = useState(null)
+  // Tier 1 State: Tracks which Category is open
+  const [openCategory, setOpenCategory] = useState(null)
+  
+  // Tier 2 State: Tracks which Question is open
+  const [openQuestion, setOpenQuestion] = useState(null)
 
-  // Structured data based on the provided design plans
   const faqData = [
     {
       category: "General & Eligibility",
@@ -76,9 +77,20 @@ const FAQ = () => {
     }
   ]
 
-  // Toggle function: If the clicked ID is already open, close it. Otherwise, open the new ID.
-  const toggleQuestion = (id) => {
-    setOpenId(openId === id ? null : id)
+  // Safely handles opening/closing categories while resetting nested question states
+  const handleCategoryToggle = (catIndex) => {
+    if (openCategory === catIndex) {
+      setOpenCategory(null)
+      setOpenQuestion(null) // Reset questions when closing
+    } else {
+      setOpenCategory(catIndex)
+      setOpenQuestion(null) // Reset questions when switching to a new category
+    }
+  }
+
+  // Handles individual question toggles
+  const handleQuestionToggle = (qId) => {
+    setOpenQuestion(openQuestion === qId ? null : qId)
   }
 
   return (
@@ -86,94 +98,107 @@ const FAQ = () => {
       
       {/* Title */}
       <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-20 desktop:py-8 mb-16 max-w-[800px] mx-auto z-10">
-        <h1 className="font-bold text-center text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl">
+        <h1 className="font-bold text-center text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl text-white">
           Frequently Asked Questions
         </h1>
       </div>
 
-      {/* Main FAQ Container (Expanded for RPG Layout) */}
-      <div className="w-full max-w-[1200px] flex flex-col gap-16 laptop:gap-24 z-10">
+      {/* Main Single-Column Container */}
+      <div className="w-full max-w-[900px] flex flex-col gap-6 z-10">
         
-        {faqData.map((categoryBlock, catIndex) => (
-          
-          /* RPG Quest Log Layout: 1 column on mobile, 2 columns on laptop */
-          <div key={catIndex} className="grid grid-cols-1 laptop:grid-cols-[300px_1fr] gap-6 laptop:gap-12 items-start w-full border-b border-gray-800/50 pb-16 last:border-0 last:pb-0">
-            
-            {/* LEFT COLUMN: Sticky Category Header */}
-            <div className="laptop:sticky laptop:top-[120px] z-20">
-              <div className="retro-box pixel-shadow bg-gray-900/90 backdrop-blur-sm px-6 py-4 inline-block border-2 border-[#8b5cf6]">
-                <h2 className="text-[#a78bfa] font-bold text-[24px] tablet:text-[28px] laptop:text-[32px] uppercase tracking-wider">
+        {faqData.map((categoryBlock, catIndex) => {
+          const isCategoryOpen = openCategory === catIndex
+
+          return (
+            <div key={catIndex} className="flex flex-col w-full">
+              
+              {/* TIER 1: The Category Button */}
+              <button
+                onClick={() => handleCategoryToggle(catIndex)}
+                className={`retro-box pixel-shadow flex justify-between items-center w-full px-6 py-5 tablet:px-8 tablet:py-6 transition-all duration-300 ease-in-out border-2 cursor-pointer z-20 ${
+                  isCategoryOpen 
+                    ? 'bg-gray-900 border-[#8b5cf6]' 
+                    : 'bg-gray-950 border-gray-600 hover:border-gray-400 hover:bg-gray-900/80'
+                }`}
+              >
+                <h2 className={`font-bold text-[22px] tablet:text-[28px] uppercase tracking-wider transition-colors duration-300 ${
+                  isCategoryOpen ? 'text-[#a78bfa]' : 'text-gray-200'
+                }`}>
                   {categoryBlock.category}
                 </h2>
-              </div>
-            </div>
+                
+                {/* Visual Indicator for Category state */}
+                <span className={`text-[#8b5cf6] font-bold text-[28px] leading-none shrink-0 transition-transform duration-300 ${
+                  isCategoryOpen ? 'rotate-180' : 'rotate-0'
+                }`}>
+                  ▼
+                </span>
+              </button>
 
-            {/* RIGHT COLUMN: Questions Wrapper */}
-            <div className="flex flex-col gap-5">
-              {categoryBlock.questions.map((q) => {
-                const isOpen = openId === q.id
+              {/* 
+                  TIER 2: The Category Body (Holds the Questions)
+                  Nested CSS Grid expansion 
+              */}
+              <div 
+                className={`grid transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                  isCategoryOpen ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 mt-0"
+                }`}
+              >
+                {/* min-h-0 is critical here to prevent nested layout jumping */}
+                <div className="overflow-hidden min-h-0 flex flex-col gap-3 pl-4 tablet:pl-10">
+                  
+                  {categoryBlock.questions.map((q) => {
+                    const isQuestionOpen = openQuestion === q.id
 
-                return (
-                  <div key={q.id} className="group relative">
-                    
-                    {/* 
-                        The Retro Box: Translucent for future backgrounds. 
-                        Includes the Hover Nudge (translate-x-2) and Active Border Glow 
-                    */}
-                    <div 
-                      className={`retro-box pixel-shadow backdrop-blur-md transition-all duration-300 ease-in-out border-2 overflow-hidden ${
-                        isOpen 
-                          ? 'border-[#39ff14] bg-gray-900/95 translate-x-0 tablet:translate-x-2' 
-                          : 'border-gray-600 bg-gray-900/80 group-hover:translate-x-0 tablet:group-hover:translate-x-2 group-hover:border-gray-400'
-                      }`}
-                    >
-                      
-                      {/* The Clickable Button */}
-                      <button
-                        onClick={() => toggleQuestion(q.id)}
-                        className="w-full flex justify-between items-center p-5 tablet:p-8 text-left cursor-pointer"
-                        aria-expanded={isOpen}
-                      >
-                        <span className={`font-bold text-[20px] tablet:text-[24px] laptop:text-[28px] pr-4 transition-colors duration-300 ${isOpen ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
-                          {q.q}
-                        </span>
+                    return (
+                      <div key={q.id} className="w-full">
                         
-                        {/* Animated Action Icon: Rotates 45deg into an 'x' and turns pink when open */}
-                        <span 
-                          className={`font-bold text-[35px] tablet:text-[45px] leading-none shrink-0 w-[40px] text-center transition-all duration-300 ease-[cubic-bezier(0.8,0,0.2,1)] ${
-                            isOpen ? 'rotate-45 text-pink-500 scale-110' : 'rotate-0 text-[#39ff14] scale-100'
+                        {/* The Question Button */}
+                        <button
+                          onClick={() => handleQuestionToggle(q.id)}
+                          className={`w-full flex justify-between items-center p-4 tablet:p-5 text-left transition-all duration-300 border-l-4 ${
+                            isQuestionOpen 
+                              ? 'bg-gray-800/80 border-[#39ff14]' 
+                              : 'bg-gray-900/50 border-gray-700 hover:bg-gray-800/60 hover:border-gray-500'
                           }`}
                         >
-                          +
-                        </span>
-                      </button>
+                          <span className={`font-bold text-[18px] tablet:text-[22px] pr-4 transition-colors duration-300 ${
+                            isQuestionOpen ? 'text-white' : 'text-gray-300'
+                          }`}>
+                            {q.q}
+                          </span>
+                          
+                          <span className={`font-bold text-[28px] leading-none shrink-0 transition-all duration-300 ${
+                            isQuestionOpen ? 'rotate-45 text-pink-500' : 'rotate-0 text-[#39ff14]'
+                          }`}>
+                            +
+                          </span>
+                        </button>
 
-                      {/* 
-                          The Expandable Answer Box 
-                          Uses an inset shadow and darker background to simulate a recessed screen 
-                      */}
-                      <div 
-                        className={`grid transition-all duration-300 ease-[cubic-bezier(0.8,0,0.2,1)] ${
-                          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                        }`}
-                      >
-                        <div className="overflow-hidden">
-                          <div className="p-5 tablet:p-8 pt-6 tablet:pt-6 bg-gray-950/80 shadow-[inset_0_4px_20px_rgba(0,0,0,0.7)] border-t-2 border-gray-800/80">
-                            <p className="text-[18px] tablet:text-[22px] laptop:text-[24px] text-gray-200 leading-relaxed font-medium">
-                              {q.a}
-                            </p>
+                        {/* The Question Answer */}
+                        <div 
+                          className={`grid transition-all duration-300 ease-in-out ${
+                            isQuestionOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                          }`}
+                        >
+                          <div className="overflow-hidden min-h-0">
+                            <div className="p-4 tablet:p-6 bg-gray-950/50 shadow-[inset_0_4px_15px_rgba(0,0,0,0.4)] border-l-4 border-gray-800">
+                              <p className="text-[16px] tablet:text-[20px] text-gray-300 leading-relaxed">
+                                {q.a}
+                              </p>
+                            </div>
                           </div>
                         </div>
+
                       </div>
+                    )
+                  })}
+                </div>
+              </div>
 
-                    </div>
-                  </div>
-                )
-              })}
             </div>
-
-          </div>
-        ))}
+          )
+        })}
 
       </div>
     </section>
