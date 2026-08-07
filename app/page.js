@@ -3,6 +3,7 @@ import Hero from './sections/Hero'
 import Statistics from './sections/Statistics'
 import ComingSoon from './sections/ComingSoon'
 import Sponsors from './sections/Sponsors'
+import FAQ from './sections/FAQ'
 import Socials from './sections/Socials'
 import HorizontalScroll from './components/HorizontalScroll'
 
@@ -34,6 +35,7 @@ export default function Home() {
       </HorizontalScroll>
 
       {/* --- BACK TO VERTICAL SCROLLING --- */}
+      <FAQ />
       <Socials />
 
     </main>
