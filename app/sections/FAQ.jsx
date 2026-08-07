@@ -94,8 +94,8 @@ const FAQ = () => {
   }
 
   return (
-    <section id="faq" className="w-full min-h-svh flex flex-col items-center justify-center relative overflow-hidden bg-gray-950 py-[100px] px-4 tablet:px-8">
-      
+    <section id="faq" className="w-full min-h-svh flex flex-col items-center justify-center relative overflow-hidden socials-bg py-[100px] px-4 tablet:px-8">  
+        
       {/* Title */}
       <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-20 desktop:py-8 mb-16 max-w-[800px] mx-auto z-10">
         <h1 className="font-bold text-center text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl text-white">
