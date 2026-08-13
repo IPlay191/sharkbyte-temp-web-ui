@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-// Simple Auto-Cycling Window Carousel
+// Ranomized Auto-Cycling Window Carousel
 const TrainWindow = ({ images, interval = 3000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (!images || images.length <= 1) return;
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
+      setCurrentIndex(Math.floor(Math.random() * images.length));
     }, interval);
     return () => clearInterval(timer);
   }, [images, interval]);
@@ -50,7 +50,11 @@ const Statistics = () => {
     "https://i.ibb.co/gbjRFhmM/image.png",
     "https://i.ibb.co/PvcKpn4c/image.png",
     "https://i.ibb.co/twkZhD2k/image.png",
-    "https://i.ibb.co/WNJzVzXm/image.png"
+    "https://i.ibb.co/WNJzVzXm/image.png",
+    "https://i.ibb.co/p6yBcbYb/image.png",
+    "https://i.ibb.co/RFW6y6W/image.png",
+    "https://i.ibb.co/vC2RR4jD/image.png",
+    "https://i.ibb.co/MxqdrsNT/image.png"
   ];
 
   const windowCar2 = [...windowCar1];
@@ -131,8 +135,8 @@ const Statistics = () => {
           </div>
 
           {/* 3. WINDOW CAROUSELS */}
-          <TrainWindow images={windowCar1} interval={3500} />
-          <TrainWindow images={windowCar2} interval={4500} />
+          <TrainWindow images={windowCar1} interval={3000} />
+          <TrainWindow images={windowCar2} interval={3000} />
           <TrainWindow images={windowCar3} interval={3000} />
         </div>
       </div>
