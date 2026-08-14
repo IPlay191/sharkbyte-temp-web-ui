@@ -1,6 +1,5 @@
 import Navbar from './components/Navbar'
 import Hero from './sections/Hero'
-import About from './sections/About'
 import Statistics from './sections/Statistics'
 import Location from './sections/Location'
 import Sponsors from './sections/Sponsors'
