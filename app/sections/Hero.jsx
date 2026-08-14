@@ -8,16 +8,16 @@ import { zoomOnScroll } from '../lib/zoomOnScroll'
 export default function Hero() {
   useEffect(() => {
     const hero = document.getElementById('hero')
-    const statistics = document.getElementById('statistics')
+    const about = document.getElementById('about')
 
     // Guard clause to ensure the function doesn't run if the page element is not found. This prevents errors in case the element is missing from the DOM.
-    if (!hero || !statistics) return undefined
+    if (!hero || !about) return undefined
     // Multiply the startAt to make the animation happen earlier, divide it to make it happen later. Multiply the endAt to make the animation faster, divide it to make the transition slower.
     const updateTransition = () => {
       fadeOnScroll({
         page: hero,
         startAt: hero.offsetTop,
-        endAt: statistics.offsetTop,
+        endAt: about.offsetTop,
         startOpacity: 1,
         endOpacity: 0,
       })
@@ -25,7 +25,7 @@ export default function Hero() {
       zoomOnScroll({
         page: hero,
         startAt: hero.offsetTop - window.innerHeight * 0.001,
-        endAt: statistics.offsetTop - window.innerHeight * 0.00001,
+        endAt: about.offsetTop - window.innerHeight * 0.00001,
         startScale: 1,
         endScale: 3.0,
       })
