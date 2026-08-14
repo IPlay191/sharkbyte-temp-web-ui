@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar'
 import Hero from './sections/Hero'
+import About from './sections/About'
 import Statistics from './sections/Statistics'
 import Location from './sections/Location'
 import ComingSoon from './sections/ComingSoon'
@@ -15,6 +16,7 @@ export default function Home() {
 
       {/* --- STANDARD VERTICAL SCROLLING --- */}
       <Hero />
+      <About />
       <Statistics />
       <Location />
 
