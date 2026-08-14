@@ -70,6 +70,22 @@ body {
 }
 
 
+/* glowing text effect */
+@keyframes glow-fade {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(250, 21, 135, 0.8), 0 0 28px rgba(250, 21, 135, 0.8), 0 0 42px rgba(250, 21, 135, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 18px rgba(250, 21, 135, 0.8), 0 0 40px rgba(250, 21, 135, 0.8), 0 0 60px rgba(250, 21, 135, 0.8);
+  }
+}
+
+.glow-text {
+  color: #ffffff;
+  filter: brightness(1.2);
+  animation: glow-fade 2.8s ease-in-out infinite;
+}
+
 /* css backgrounds with images */
 .statistics-bg,
 .hero-bg,
@@ -126,4 +142,3 @@ body {
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
-
