@@ -1,6 +1,8 @@
 import Navbar from './components/Navbar'
 import Hero from './sections/Hero'
+import About from './sections/About'
 import Statistics from './sections/Statistics'
+import Location from './sections/Location'
 import ComingSoon from './sections/ComingSoon'
 import Sponsors from './sections/Sponsors'
 import Socials from './sections/Socials'
@@ -14,21 +16,19 @@ export default function Home() {
 
       {/* --- STANDARD VERTICAL SCROLLING --- */}
       <Hero />
+      <About />
       <Statistics />
+      <Location />
 
       {/* --- MODULAR GSAP HORIZONTAL SCROLLING --- */}
       <HorizontalScroll panels={2}>
 
         <div className="w-[100vw] h-svh flex-shrink-0">
-          
           <ComingSoon />
-
         </div>
 
         <div className="w-[100vw] h-svh flex-shrink-0">
-
           <Sponsors />
-
         </div>
 
       </HorizontalScroll>
