@@ -32,6 +32,21 @@ ex.
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
+/* Glow effect */
+@keyframes glow-fade {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(250, 21, 135, 0.8), 0 0 28px rgba(250, 21, 135, 0.8), 0 0 42px rgba(250, 21, 135, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 18px rgba(250, 21, 135, 0.8), 0 0 40px rgba(250, 21, 135, 0.8), 0 0 60px rgba(250, 21, 135, 0.8);
+  }
+}
+
+.glow-text {
+  color: #ffffff;
+  filter: brightness(1.2);
+  animation: glow-fade 2.8s ease-in-out infinite;
+}
 
 /* pseudo-class, defines highest level element */
 :root {
