@@ -31,7 +31,7 @@ const Navbar = () => {
 
       {/* LOGO */}
       <div className="flex justify-center items-center w-min z-50">
-        <button onClick={() => scrollToSection('hero')} className=" text-[35px] transition-transform duration-300 cursor-pointer pl-4 hover:animate-pulse">poop</button>
+        <button onClick={() => scrollToSection('hero')} className=" text-[35px] transition-transform duration-300 cursor-pointer pl-4 hover:animate-pulse">SharkByte</button>
       </div>
 
       {/* _____ DESKTOP _____ */}
@@ -42,6 +42,7 @@ const Navbar = () => {
           <button onClick={() => scrollToSection('statistics')} className="flex justify-center items-center relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full desktop:text-[30px] hover:text-purple-400 cursor-pointer">Statistics</button>
           <button onClick={() => scrollToSection('sponsors')} className="flex justify-center items-center relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full desktop:text-[30px] hover:text-purple-400 cursor-pointer">Sponsors</button>
           <button onClick={() => scrollToSection('socials')} className="flex justify-center items-center relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full desktop:text-[30px] hover:text-purple-400 cursor-pointer">Socials</button>
+          <button onClick={() => scrollToSection('faq')} className="flex justify-center items-center relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full desktop:text-[30px] hover:text-purple-400 cursor-pointer">FAQ</button>
         </ul>
       </div>
 
@@ -106,6 +107,7 @@ const Navbar = () => {
                    <button onClick={() => { scrollToSection('statistics'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">Statistics</button>
                    <button onClick={() => { scrollToSection('sponsors'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">Sponsors</button>
                    <button onClick={() => { scrollToSection('socials'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">Socials</button>
+                   <button onClick={() => { scrollToSection('faq'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">FAQ</button>
                    </div>
                  
                  {/* Social icons */}

@@ -154,7 +154,7 @@ const Team = () => {
   return (
     <section id="team" className="w-full min-h-screen flex flex-col justify-center items-center relative overflow-hidden team-bg py-10 px-4">
       {/* NAVIGATION BUTTONS */}
-      <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-6 z-10 max-w-full">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-6 mt-10 z-10 max-w-full">
         <button /* TEAM BUTTON */
           onClick={() => { setShowCarousel(true); setCMembers(false); }}
           className={`hover:cursor-pointer transition-colors px-3 py-2 sm:px-5 sm:py-3 border-2 sm:border-3 border-gray-600 pixel-shadow ${
