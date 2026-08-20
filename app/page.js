@@ -1,12 +1,13 @@
 import Navbar from './components/Navbar'
 import Hero from './sections/Hero'
-import About from './sections/About'
 import Statistics from './sections/Statistics'
 import Location from './sections/Location'
-import ComingSoon from './sections/ComingSoon'
 import Sponsors from './sections/Sponsors'
+import FAQ from './sections/FAQ'
 import Socials from './sections/Socials'
 import HorizontalScroll from './components/HorizontalScroll'
+import Team from './sections/Team'
+import About from './sections/About'
 
 export default function Home() {
   return (
@@ -22,18 +23,18 @@ export default function Home() {
 
       {/* --- MODULAR GSAP HORIZONTAL SCROLLING --- */}
       <HorizontalScroll panels={2}>
-
-        <div className="w-[100vw] h-svh flex-shrink-0">
-          <ComingSoon />
-        </div>
-
         <div className="w-[100vw] h-svh flex-shrink-0">
           <Sponsors />
+        </div>
+        
+        <div className="w-[100vw] h-svh flex-shrink-0">
+          <Team />
         </div>
 
       </HorizontalScroll>
 
       {/* --- BACK TO VERTICAL SCROLLING --- */}
+      <FAQ />
       <Socials />
 
     </main>

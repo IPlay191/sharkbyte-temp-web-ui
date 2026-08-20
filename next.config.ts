@@ -5,14 +5,12 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'media3.giphy.com',
-        pathname: '/**', // This allows any image path from this domain
+        hostname: 'i.ibb.co',
       },
       {
         protocol: 'https',
-        hostname: 'i.ibb.co',
-        pathname: '/**', // This allows any image path from this domain
-      },
+        hostname: 'logo.clearbit.com',
+      }
     ],
   },
 };

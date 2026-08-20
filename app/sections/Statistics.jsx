@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-// Simple Auto-Cycling Window Carousel
+// Ranomized Auto-Cycling Window Carousel
 const TrainWindow = ({ images, interval = 3000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (!images || images.length <= 1) return;
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
+      setCurrentIndex(Math.floor(Math.random() * images.length));
     }, interval);
     return () => clearInterval(timer);
   }, [images, interval]);
@@ -39,12 +39,22 @@ const Statistics = () => {
   ];
 
   const windowCar1 = [
-    "https://i.ibb.co/HD2P9nVg/Screenshot-2026-07-23-202537.png",
-    "https://i.ibb.co/ymhXXTwG/Screenshot-2026-07-23-202555.png",
-    "https://i.ibb.co/JwvtQGNS/Screenshot-2026-07-23-202844.png",
-    "https://i.ibb.co/yFf0xK9C/Shark-Byte-picture.png",
-    "https://i.ibb.co/yFCCYxF5/Whats-App-Image-2026-07-01-at-1-05-58-PM.jpg",
-    "https://i.ibb.co/bMjfhQWs/Whats-App-Image-2026-07-18-at-6-02-22-PM.jpg",
+    "https://i.ibb.co/5NYNDdY/image.png",
+    "https://i.ibb.co/rRJpc6PT/image.png",
+    "https://i.ibb.co/fzMbkWGC/image.png",
+    "https://i.ibb.co/kg784D8H/image.png",
+    "https://i.ibb.co/Cs9ht4jd/image.png",
+    "https://i.ibb.co/RG0f1Cp7/image.png",
+    "https://i.ibb.co/B5KV5qcQ/image.png",
+    "https://i.ibb.co/ycXxPmMd/image.png",
+    "https://i.ibb.co/gbjRFhmM/image.png",
+    "https://i.ibb.co/PvcKpn4c/image.png",
+    "https://i.ibb.co/twkZhD2k/image.png",
+    "https://i.ibb.co/WNJzVzXm/image.png",
+    "https://i.ibb.co/p6yBcbYb/image.png",
+    "https://i.ibb.co/RFW6y6W/image.png",
+    "https://i.ibb.co/vC2RR4jD/image.png",
+    "https://i.ibb.co/MxqdrsNT/image.png"
   ];
 
   const windowCar2 = [...windowCar1];
@@ -116,7 +126,7 @@ const Statistics = () => {
               {stats.map((stat, index) => (
                 <h2
                   key={index}
-                  className={`font-bold text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl max-h-[750px]:text-2xl ${stat.hoverColor}`}
+                  className={` hover:cursor-default font-bold text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl max-h-[750px]:text-2xl ${stat.hoverColor}`}
                 >
                   {stat.text}
                 </h2>
@@ -125,8 +135,8 @@ const Statistics = () => {
           </div>
 
           {/* 3. WINDOW CAROUSELS */}
-          <TrainWindow images={windowCar1} interval={2500} />
-          <TrainWindow images={windowCar2} interval={2000} />
+          <TrainWindow images={windowCar1} interval={3000} />
+          <TrainWindow images={windowCar2} interval={3000} />
           <TrainWindow images={windowCar3} interval={3000} />
         </div>
       </div>
