@@ -68,23 +68,9 @@ body {
 }
 
 .glow-text {
-  color: #ffffff;
+  color: #d65858;
   animation: glow-fade 4.2s ease-in-out infinite;
   will-change: opacity, text-shadow;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .glow-text {
-    animation: none;
-    text-shadow: 0 0 8px rgba(250, 21, 135, 0.4);
-  }
-}
-
-@media (max-width: 768px) {
-  .glow-text {
-    animation: none;
-    text-shadow: 0 0 8px rgba(250, 21, 135, 0.4);
-  }
 }
 
 /* css backgrounds with images */
@@ -92,7 +78,9 @@ body {
 .stats-bg,
 .comingsoon-bg,
 .sponsors-bg,
-.socials-bg {
+.socials-bg,
+.about-bg,
+.location-bg {
   background-repeat: no-repeat;
   background-size: cover;
   image-rendering: pixelated;
@@ -122,6 +110,16 @@ body {
 
 .socials-bg {
   background-image: url('https://i.ibb.co/zhVkj2XT/socials-pahir6.png');
+  background-position: center;
+}
+
+.about-bg {
+  background-image: url('https://i.ibb.co/qMTm9gVt/Sharkbyte-Website-Page-2.png');
+  background-position: center;
+}
+
+.location-bg {
+  background-image: url('https://i.ibb.co/9kfFYzWK/Sharkbyte-Website-Page-5.png');
   background-position: center;
 }
 

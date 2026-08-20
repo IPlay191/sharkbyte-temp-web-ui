@@ -75,13 +75,13 @@ const Location = () => {
       referrerPolicy: "no-referrer-when-downgrade"
     }
 
-    const containerHeight = isExpanded ? 'h-[57vh]' : 'h-[363px]'
+    const containerHeight = isExpanded ? 'h-[59vh]' : 'h-[380px]'
 
     switch (activeMap) {
       case 0:
         // MDC Interactive Map
         return (
-          <div className="relative w-full max-w-2xl">
+          <div className="relative w-full max-w-xl max-w-2xl">
             {/* Map container wrapper */}
             <div className="relative overflow-hidden border-4 border-black/70 rounded-1xl">
               {/* Inner container with black background for loading state */}
@@ -150,7 +150,7 @@ const Location = () => {
       case 1:
         // Google Map
         return (
-          <div className="relative w-full max-w-2xl">
+          <div className="relative w-full tablet:max-w-xl max-w-2xl">
             {/* Map container wrapper */}
             <div className="relative overflow-hidden border-4 border-black/70 rounded-1xl">
               {/* Inner container with black background for loading state */}
@@ -230,32 +230,32 @@ const Location = () => {
     <section
       ref={locationRef}
       id="location"
-      className="w-full h-screen flex flex-col justify-start items-center relative overflow-hidden bg-purple-500 bg-center py-4 max-[1350px]:py-4 max-[650px]:py-4"
+      className="w-full h-screen flex flex-col justify-start items-center relative overflow-hidden location-bg bg-center py-4 max-[1350px]:py-4 max-[650px]:py-4 laptop:pl-10 laptop:pr-6"
     >
       {/* TITLE */}
-      <div className="mx-4 mb-4 max-[650px]:mb-4 mt-4 max-[650px]:mt-2">
+      <div className="mx-4 mb-4 max-[650px]:mb-4 mt-2 max-[650px]:mt-2 table:self-start laptop:self-start tablet:translate-x-30 laptop:translate-x-40 -translate-y-4">
         <div className="bg-linear-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-6 py-3 border-3 border-gray-600 pixel-shadow max-[650px]:px-4 max-[650px]:py-2">
-          <h1 className="text-lg font-bold text-center max-[1350px]:text-base max-[650px]:text-xs max-[500px]:text-[22px]">
-            Location
+          <h1 className="text-3xl font-bold tablet:text-left laptop:text-left max-[1350px]:text-xl max-[650px]:text-base max-[500px]:text-[22px]">
+            SharkByte Ave
           </h1>
         </div>
       </div>
 
       {/* LOCATION INFO */}
-      <div className="mx-4 max-[650px]:mx-1 mb-4 text-center py-3 px-5 max-[650px]:px-4 max-[500px]:px-3 max-[300px]:px-2 bg-linear-to-b from-gray-950 via-gray-900 to-gray-950 border-3 border-gray-600 pixel-shadow">
-        <div className="text-white text-sm max-[650px]:text-xs max-[500px]:text-[22px] max-[300px]:text-[20px]">
+      <div className="mx-4 max-[650px]:mx-1 mb-4 text-center py-3 px-5 max-[650px]:px-4 max-[500px]:px-3 max-[300px]:px-2 bg-linear-to-b from-gray-950 via-gray-900 to-gray-950 border-3 border-gray-600 pixel-shadow tablet:translate-x-30 laptop:translate-x-47 -translate-y-4 laptop:-translate-y-22">
+        <div className="text-white text-1xl max-[650px]:text-xs max-[500px]:text-[22px] max-[300px]:text-[20px]">
           School of Justice Building
         </div>
-        <div className="text-white text-sm max-[650px]:text-xs max-[500px]:text-[22px] max-[300px]:text-[20px]">
+        <div className="text-white text-1xl max-[650px]:text-xs max-[500px]:text-[22px] max-[300px]:text-[20px]">
           Miami Dade College, North Campus
         </div>
-        <div className="text-white text-sm max-[650px]:text-xs max-[500px]:text-[22px] max-[300px]:text-[20px]">
+        <div className="text-white text-1xl max-[650px]:text-xs max-[500px]:text-[22px] max-[300px]:text-[20px]">
           11380 NW 27th Ave, Miami, Florida 33167, United States
         </div>
       </div>
 
       {/* TAB NAVIGATION */}
-      <div className="px-4 max-[650px]:px-0 flex flex-wrap justify-center gap-25 max-[650px]:gap-1 mb-4">
+      <div className="px-4 max-[650px]:px-0 flex flex-wrap justify-center gap-25 max-[650px]:gap-1 mb-4 tablet:translate-x-30 laptop:translate-x-47 -translate-y-4 laptop:-translate-y-22">
         {mapOptions.map((option, index) => (
           <button
             key={index}
@@ -272,7 +272,7 @@ const Location = () => {
       </div>
 
       {/* LOCATION CONTENT */}
-      <div className="flex justify-center w-full px-4">
+      <div className="flex justify-center w-full px-4 tablet:translate-x-25 laptop:translate-x-47 -translate-y-4 laptop:-translate-y-22">
         {renderMapContent()}
       </div>
     </section>
