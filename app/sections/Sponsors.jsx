@@ -30,30 +30,29 @@ const sponsorsRow2 = [
 // --------------------------------------------------------
 const SponsorCard = ({ sponsor }) => {
   
-  // Refined styling logic based on importance
   const getTierStyles = (tier) => {
     switch (tier) {
       case 1:
-        // TIER 1: The "Billboard"
-        // Same height as others, but massively wider. Gold border, tighter padding for bigger logo impact.
+        // TIER 1: The "Legendary" Billboard
+        // Metallic white-to-gold gradient, permanent golden aura, massive width.
         return {
-          wrapper: "w-[240px] h-[140px] tablet:w-[300px] tablet:h-[180px] laptop:w-[350px] laptop:h-[200px] border-[#ffd700] border-3 hover:shadow-[0_0_20px_rgba(255,215,0,0.6)]",
-          inner: "inset-3 tablet:inset-4" // Tighter padding = bigger logo
+          wrapper: "w-[240px] h-[140px] tablet:w-[300px] tablet:h-[180px] laptop:w-[350px] laptop:h-[200px] bg-gradient-to-br from-white via-amber-50 to-amber-100 border-[#ffd700] border-3 shadow-[0_0_18px_rgba(255,215,0,0.5)] hover:shadow-[0_0_35px_rgba(255,215,0,0.9)] z-20",
+          inner: "inset-3 tablet:inset-4"
         };
       case 2:
-        // TIER 2: The "Standard Square"
-        // Same height, square aspect ratio. Purple border.
+        // TIER 2: The "Epic" Square
+        // Brighter gray base, permanent purple neon aura, standard square.
         return {
-          wrapper: "w-[140px] h-[140px] tablet:w-[180px] tablet:h-[180px] laptop:w-[200px] laptop:h-[200px] border-[#8b5cf6] border-[2px] hover:shadow-[0_0_15px_rgba(139,92,246,0.6)]",
-          inner: "inset-4 tablet:inset-6" // Standard padding
+          wrapper: "w-[140px] h-[140px] tablet:w-[180px] tablet:h-[180px] laptop:w-[200px] laptop:h-[200px] bg-gray-100 border-[#8b5cf6] border-[2px] shadow-[0_0_12px_rgba(139,92,246,0.4)] hover:shadow-[0_0_25px_rgba(139,92,246,0.8)] z-10",
+          inner: "inset-4 tablet:inset-6"
         };
       case 3:
       default:
-        // TIER 3: The "Compact Square"
-        // Same height, square aspect ratio. Gray border, heaviest padding.
+        // TIER 3: The "Common" Square
+        // Standard flat gray base, no permanent glow, compact square.
         return {
-          wrapper: "w-[140px] h-[140px] tablet:w-[180px] tablet:h-[180px] laptop:w-[200px] laptop:h-[200px] border-gray-500 border-[2px] hover:shadow-[0_0_10px_rgba(156,163,175,0.6)] opacity-90 hover:opacity-100",
-          inner: "inset-6 tablet:inset-8" // Heavy padding forces the logo to appear smaller inside the same size box
+          wrapper: "w-[140px] h-[140px] tablet:w-[180px] tablet:h-[180px] laptop:w-[200px] laptop:h-[200px] bg-gray-200 border-gray-500 border-[2px] hover:shadow-[0_0_15px_rgba(156,163,175,0.6)] opacity-90 hover:opacity-100 z-0",
+          inner: "inset-6 tablet:inset-8"
         };
     }
   };
@@ -65,10 +64,9 @@ const SponsorCard = ({ sponsor }) => {
       href={sponsor.href} 
       target="_blank" 
       rel="noopener noreferrer" 
-      // Unified height achieved by passing the wrapper styles here
-      className={`group relative flex justify-center items-center bg-gray-200 pixel-shadow transition-all duration-300 hover:-translate-y-2 flex-shrink-0 mx-2 overflow-hidden ${styles.wrapper}`}
+      // Removed the hardcoded bg-gray-200 so the dynamic backgrounds can take over
+      className={`group relative flex justify-center items-center pixel-shadow transition-all duration-300 hover:-translate-y-2 flex-shrink-0 mx-2 overflow-hidden ${styles.wrapper}`}
     >
-      {/* The inset padding dictates how large the image can physically render inside the box */}
       <div className={`absolute transition-transform duration-300 group-hover:scale-105 ${styles.inner}`}>
         <Image
           src={sponsor.src}
