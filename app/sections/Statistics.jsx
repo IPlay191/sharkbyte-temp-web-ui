@@ -54,7 +54,17 @@ const Statistics = () => {
     "https://i.ibb.co/p6yBcbYb/image.png",
     "https://i.ibb.co/RFW6y6W/image.png",
     "https://i.ibb.co/vC2RR4jD/image.png",
-    "https://i.ibb.co/MxqdrsNT/image.png"
+    "https://i.ibb.co/MxqdrsNT/image.png",
+    "https://i.ibb.co/1fpWj8Pm/image.png",
+    "https://i.ibb.co/TMvZhkN9/image.png",
+    "https://i.ibb.co/0pXFFKYW/image.png",
+    "https://i.ibb.co/5hkWRj8B/image.png",
+    "https://i.ibb.co/1tPHHnsm/image.png",
+    "https://i.ibb.co/Y7Vf2v35/image.png",
+    "https://i.ibb.co/jv2vMHGT/image.png",
+    "https://i.ibb.co/qLrbcRfM/image.png",
+    "https://i.ibb.co/1c76jK3/image.png",
+    "https://i.ibb.co/LD4xSpxq/image.png"
   ];
 
   const windowCar2 = [...windowCar1];
