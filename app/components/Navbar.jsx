@@ -62,7 +62,10 @@ const Navbar = () => {
 
           <button onClick={() => scrollToSection('about')} className="flex justify-center items-center relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full desktop:text-[30px] hover:text-purple-400 cursor-pointer">About</button>
           <button onClick={() => scrollToSection('location')} className="flex justify-center items-center relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full desktop:text-[30px] hover:text-purple-400 cursor-pointer">Location</button>
-          <button onClick={() => scrollToSection('sponsors')} className="flex justify-center items-center relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full desktop:text-[30px] hover:text-purple-400 cursor-pointer">Sponsors</button>
+          
+          {/* THE FIX: Changed from 'sponsors' to 'sponsors-anchor' */}
+          <button onClick={() => scrollToSection('sponsors-anchor')} className="flex justify-center items-center relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full desktop:text-[30px] hover:text-purple-400 cursor-pointer">Sponsors</button>
+          
           <button onClick={() => scrollToSection('faq')} className="flex justify-center items-center relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full desktop:text-[30px] hover:text-purple-400 cursor-pointer">FAQ</button>
         </ul>
       </div>
@@ -120,8 +123,12 @@ const Navbar = () => {
                  <div className="flex flex-col items-end space-y-14">
                    <button onClick={() => { scrollToSection('about'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">About</button>
                    <button onClick={() => { scrollToSection('location'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">Location</button>
-                   <button onClick={() => { scrollToSection('sponsors'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">Sponsors</button>
+                   
+                   {/* THE FIX: Changed from 'sponsors' to 'sponsors-anchor' */}
+                   <button onClick={() => { scrollToSection('sponsors-anchor'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">Sponsors</button>
+                   
                    <button onClick={() => { scrollToSection('faq'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">FAQ</button>
+                   <button onClick={() => { scrollToSection('socials'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">Socials</button>
                    </div>
                  
                  <div className="flex gap-3 pt-4">
