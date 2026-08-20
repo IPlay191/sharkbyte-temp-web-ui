@@ -96,9 +96,9 @@ body {
 .sponsors-bg,
 .socials-bg,
 .about-bg,
-.location-bg {
+.location-bg, 
 .team-bg
- {
+{
   background-repeat: no-repeat;
   background-size: cover;
   image-rendering: pixelated;
@@ -138,6 +138,8 @@ body {
 
 .location-bg {
   background-image: url('https://i.ibb.co/9kfFYzWK/Sharkbyte-Website-Page-5.png');
+}
+
 .team-bg{
   background-image: url('https://i.ibb.co/zhVkj2XT/socials-pahir6.png');
   background-position: center;
