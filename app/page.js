@@ -22,16 +22,16 @@ export default function Home() {
       <Location />
 
       {/* --- INVISIBLE STATIC ANCHOR --- */}
-      {/* This never moves horizontally, giving GSAP a perfect target to scroll to */}
       <div id="sponsors-anchor"></div>
 
       {/* --- MODULAR GSAP HORIZONTAL SCROLLING --- */}
       <HorizontalScroll panels={2}>
-        <div className="w-[100vw] h-svh flex-shrink-0">
+        {/* THE FIX: Replaced w-[100vw] with w-screen max-w-full to prevent Windows scrollbar bugs */}
+        <div className="w-screen max-w-full h-svh flex-shrink-0 relative overflow-hidden">
           <Sponsors />
         </div>
         
-        <div className="w-[100vw] h-svh flex-shrink-0">
+        <div className="w-screen max-w-full h-svh flex-shrink-0 relative overflow-hidden">
           <Team />
         </div>
       </HorizontalScroll>
