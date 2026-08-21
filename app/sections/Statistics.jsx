@@ -109,7 +109,7 @@ const Statistics = () => {
     <section
       ref={sectionRef}
       id="statistics"
-      className="relative w-full h-[100rem] bg-[url(https://ibb.co/album/ZNfCNx?page=2&seek=cSDqNyGq)] bg-fixed bg-center bg-no-repeat"
+      className="relative w-full h-[100rem] bg-black-900 bg-fixed bg-center bg-no-repeat"
     >
       {/* STICKY CONTAINER */}
       <div className="sticky top-0 h-screen overflow-hidden flex items-center">
