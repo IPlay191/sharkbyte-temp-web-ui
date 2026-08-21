@@ -29,19 +29,20 @@ const SponsorCard = ({ sponsor }) => {
   const getTierStyles = (tier) => {
     switch (tier) {
       case 1:
+        // THE FIX: Preserved Billboard width, but shrank the vertical height back to previous working limits
         return {
-          wrapper: "w-[240px] h-[140px] tablet:w-[300px] tablet:h-[180px] laptop:w-[350px] laptop:h-[200px] bg-gradient-to-br from-white via-amber-50 to-amber-100 border-[#ffd700] border-3 shadow-[0_0_18px_rgba(255,215,0,0.5)] hover:shadow-[0_0_35px_rgba(255,215,0,0.9)] z-20",
+          wrapper: "w-[220px] h-[120px] tablet:w-[280px] tablet:h-[150px] laptop:w-[320px] laptop:h-[180px] bg-gradient-to-br from-white via-amber-50 to-amber-100 border-[#ffd700] border-3 shadow-[0_0_18px_rgba(255,215,0,0.5)] hover:shadow-[0_0_35px_rgba(255,215,0,0.9)] z-20",
           inner: "inset-3 tablet:inset-4"
         };
       case 2:
         return {
-          wrapper: "w-[140px] h-[140px] tablet:w-[180px] tablet:h-[180px] laptop:w-[200px] laptop:h-[200px] bg-gray-100 border-[#8b5cf6] border-[2px] shadow-[0_0_12px_rgba(139,92,246,0.4)] hover:shadow-[0_0_25px_rgba(139,92,246,0.8)] z-10",
+          wrapper: "w-[120px] h-[120px] tablet:w-[150px] tablet:h-[150px] laptop:w-[180px] laptop:h-[180px] bg-gray-100 border-[#8b5cf6] border-[2px] shadow-[0_0_12px_rgba(139,92,246,0.4)] hover:shadow-[0_0_25px_rgba(139,92,246,0.8)] z-10",
           inner: "inset-4 tablet:inset-6"
         };
       case 3:
       default:
         return {
-          wrapper: "w-[140px] h-[140px] tablet:w-[180px] tablet:h-[180px] laptop:w-[200px] laptop:h-[200px] bg-gray-200 border-gray-500 border-[2px] hover:shadow-[0_0_15px_rgba(156,163,175,0.6)] opacity-90 hover:opacity-100 z-0",
+          wrapper: "w-[120px] h-[120px] tablet:w-[150px] tablet:h-[150px] laptop:w-[180px] laptop:h-[180px] bg-gray-200 border-gray-500 border-[2px] hover:shadow-[0_0_15px_rgba(156,163,175,0.6)] opacity-90 hover:opacity-100 z-0",
           inner: "inset-6 tablet:inset-8"
         };
     }
@@ -57,7 +58,6 @@ const SponsorCard = ({ sponsor }) => {
       className={`group relative flex justify-center items-center pixel-shadow transition-all duration-300 hover:-translate-y-2 flex-shrink-0 mx-2 overflow-hidden ${styles.wrapper}`}
     >
       <div className={`absolute transition-transform duration-300 group-hover:scale-105 ${styles.inner}`}>
-        {/* object-contain inherently prevents stretching while keeping it perfectly centered */}
         <Image src={sponsor.src} alt={sponsor.alt} fill sizes="(max-width: 700px) 200px, 350px" className="object-contain" />
       </div>
     </a>
@@ -69,15 +69,15 @@ const SponsorCard = ({ sponsor }) => {
 // --------------------------------------------------------
 const Sponsors = () => {
   return (
-    <section id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-center items-center relative overflow-hidden py-6 px-4">
+    <section id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-center items-center relative overflow-hidden py-4 laptop:py-6 px-4">
       
-      {/* THE FIX: Replaced justify-between with justify-center and gap-10 to prevent elements from crushing into the top/bottom of the screen */}
-      <div className="w-full flex flex-col items-center justify-center gap-10 h-full max-w-[1400px] mx-auto">
+      {/* THE FIX: Reverted to fluid gaps (gap-4 on small screens, gap-8 on large) so it never forces elements off screen */}
+      <div className="w-full flex flex-col items-center justify-center gap-4 laptop:gap-8 h-full max-w-[1400px] mx-auto">
         
         {/* SECTION TITLE */}
         <div className="relative z-10">
-          <div className="bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-6 py-3 border-3 border-gray-600 pixel-shadow">
-            <h1 className="font-bold text-center text-[30px] laptop:text-[40px] desktop:text-[50px]">
+          <div className="bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-6 py-2 laptop:py-3 border-3 border-gray-600 pixel-shadow">
+            <h1 className="font-bold text-center text-[26px] tablet:text-[30px] laptop:text-[40px] desktop:text-[50px]">
               Our Sponsors & Partners
             </h1>
           </div>
@@ -85,8 +85,7 @@ const Sponsors = () => {
 
         {/* DESKTOP TWO-ROW CAROUSEL */}
         <div className="max-laptop:hidden relative w-full overflow-hidden carousel-mask flex flex-col justify-center">
-          {/* THE FIX: Increased gap-6 to gap-12 to ensure the glowing auras do not overlap/bleed into the cards below */}
-          <div className="flex flex-col gap-12 items-center">
+          <div className="flex flex-col gap-6 laptop:gap-10 items-center">
             
             <div className="marquee overflow-hidden w-full flex items-center">
               <div className="marquee__track marquee__left items-center">
@@ -108,7 +107,7 @@ const Sponsors = () => {
         </div>
 
         {/* MOBILE TWO-ROW SCROLL */}
-        <div className="min-laptop:hidden relative w-full overflow-x-auto pb-4 carousel-mask flex-grow flex flex-col justify-center">
+        <div className="min-laptop:hidden relative w-full overflow-x-auto pb-2 carousel-mask flex-grow flex flex-col justify-center">
           <div className="flex flex-col gap-4 items-start w-max px-4">
             <div className="flex items-center">
               {sponsorsRow1.map((sponsor, index) => (
@@ -124,14 +123,14 @@ const Sponsors = () => {
         </div>
 
         {/* MOBILE SCROLL INDICATOR */}
-        <div className="min-laptop:hidden mt-2 text-white font-bold text-sm text-center drop-shadow-md">
+        <div className="min-laptop:hidden text-white font-bold text-sm text-center drop-shadow-md">
           ← Scroll horizontally →
         </div>
           
-        {/* SPONSOR CTA (Command Line Aesthetic) */}
+        {/* SPONSOR CTA */}
         <div className="relative w-[90%] max-w-[850px] z-10">
-          <div className="retro-box pixel-shadow px-4 py-3 tablet:px-6 bg-gray-950/95">
-            <p className="text-left font-mono text-[14px] tablet:text-[18px] laptop:text-[22px] desktop:text-[26px]">
+          <div className="retro-box pixel-shadow px-4 py-2 laptop:py-3 tablet:px-6 bg-gray-950/95">
+            <p className="text-left font-mono text-[13px] tablet:text-[16px] laptop:text-[22px] desktop:text-[26px]">
               <span className="text-[#39ff14] mr-2">{">"}</span> 
               Want to sponsor? Execute:{" "}
               <a href="mailto:industry@weareinit.org" className="text-[#8b5cf6] hover:text-[#a78bfa] hover:underline transition-colors break-all tablet:break-normal">
