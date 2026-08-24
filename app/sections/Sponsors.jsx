@@ -4,6 +4,8 @@ import Image from "next/image"
 
 // --------------------------------------------------------
 // 1. DATA ARCHITECTURE WITH TIERS
+// Synchronized with Master Tracker & New Partners
+// Tier 1: High Cash ($3k+) | Tier 2: Mid Cash/In-Kind/National | Tier 3: Community/Entry Cash
 // --------------------------------------------------------
 const sponsorsRow1 = [
   { href: "https://www.roocapital.com/", src: "https://i.ibb.co/DgTndgYp/roo-capital.png", alt: "roo_capital_logo", tier: 1 },
@@ -12,14 +14,17 @@ const sponsorsRow1 = [
   { href: "https://www.mdc.edu/entec/", src: "https://i.ibb.co/DfLvZNcc/entec.png", alt: "entec_mdc_logo", tier: 3 },
   { href: "https://www.coralgables.com/", src: "https://i.ibb.co/4qsVqHd/Coral-Gables-Logo.jpg", alt: "coral_gables_logo", tier: 3 },
   { href: "https://knightfoundation.org/", src: "https://i.ibb.co/DfGpRjcY/knight-foundation-logo.jpg", alt: "knight_foundation_logo", tier: 1 },
+  { href: "https://www.milamsmarkets.com/", src: "https://i.ibb.co/C5DbxdhF/milams-market-logo.png", alt: "milams_markets_logo", tier: 3 },
 ];
 
 const sponsorsRow2 = [
+  { href: "https://starquix.com/", src: "https://i.ibb.co/5gkw19sf/starquix-logo.jpg", alt: "starquix_logo", tier: 1 },
   { href: "https://www.blackstone.com/", src: "https://i.ibb.co/DH7G9ZmY/blackstone-logo.png", alt: "blackstone_logo", tier: 1 },
   { href: "https://momentum.miami/", src: "https://i.ibb.co/m5s65Wp8/momentum-miami-logo.png", alt: "momentum_miami_logo", tier: 2 },
   { href: "https://www.miamigov.com/", src: "https://i.ibb.co/ksYnj2Sr/city-of-miami-logo.png", alt: "city_of_miami_logo", tier: 2 },
   { href: "https://www.microsoft.com/en-us/", src: "https://i.ibb.co/bRW3gGHy/microsoft.png", alt: "microsoft_logo", tier: 1 },
   { href: "https://www.mdc.edu/magic/", src: "https://i.ibb.co/8CYkRB0/MDC-Magic-Logo.png", alt: "mdc_magic_logo", tier: 3 },
+  { href: "https://weareinit.org/", src: "https://i.ibb.co/7N4sWGLq/init-logo.png", alt: "init_logo", tier: 3 },
 ];
 
 // --------------------------------------------------------
@@ -29,18 +34,20 @@ const SponsorCard = ({ sponsor }) => {
   const getTierStyles = (tier) => {
     switch (tier) {
       case 1:
-        // THE FIX: Preserved Billboard width, but shrank the vertical height back to previous working limits
+        // TIER 1: The "Legendary" Billboard (Starquix, Roo, Blackstone, Microsoft, Knight)
         return {
           wrapper: "w-[220px] h-[120px] tablet:w-[280px] tablet:h-[150px] laptop:w-[320px] laptop:h-[180px] bg-gradient-to-br from-white via-amber-50 to-amber-100 border-[#ffd700] border-3 shadow-[0_0_18px_rgba(255,215,0,0.5)] hover:shadow-[0_0_35px_rgba(255,215,0,0.9)] z-20",
           inner: "inset-3 tablet:inset-4"
         };
       case 2:
+        // TIER 2: The "Epic" Square
         return {
           wrapper: "w-[120px] h-[120px] tablet:w-[150px] tablet:h-[150px] laptop:w-[180px] laptop:h-[180px] bg-gray-100 border-[#8b5cf6] border-[2px] shadow-[0_0_12px_rgba(139,92,246,0.4)] hover:shadow-[0_0_25px_rgba(139,92,246,0.8)] z-10",
           inner: "inset-4 tablet:inset-6"
         };
       case 3:
       default:
+        // TIER 3: The "Common" Square (Milam's, INIT, Community Partners)
         return {
           wrapper: "w-[120px] h-[120px] tablet:w-[150px] tablet:h-[150px] laptop:w-[180px] laptop:h-[180px] bg-gray-200 border-gray-500 border-[2px] hover:shadow-[0_0_15px_rgba(156,163,175,0.6)] opacity-90 hover:opacity-100 z-0",
           inner: "inset-6 tablet:inset-8"
@@ -71,7 +78,6 @@ const Sponsors = () => {
   return (
     <section id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-center items-center relative overflow-hidden py-4 laptop:py-6 px-4">
       
-      {/* THE FIX: Reverted to fluid gaps (gap-4 on small screens, gap-8 on large) so it never forces elements off screen */}
       <div className="w-full flex flex-col items-center justify-center gap-4 laptop:gap-8 h-full max-w-[1400px] mx-auto">
         
         {/* SECTION TITLE */}

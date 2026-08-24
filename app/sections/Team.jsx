@@ -19,7 +19,9 @@ const Team = () => {
     { name: "Oliver Martinez Fernandez", role: "Director of Technology", image: "https://i.ibb.co/BVSMT9Dm/image.png", linkedin: "https://www.linkedin.com/in/oliver-martinez-9a1ba4340/" }
   ];
 
+  // COMMUNITY PARTNERS LIST (Added INIT)
   const communityPartners = [
+    { name: "INIT", logo: "https://i.ibb.co/7N4sWGLq/init-logo.png", website: "https://weareinit.org" },
     { name: "City of Coral Gables", logo: "https://i.ibb.co/8LwsNNcX/image.png", website: "https://www.coralgables.com/department/innovation-and-technology" },
     { name: "MDC Entec", logo: "https://i.ibb.co/ZRGcKBQz/image.png", website: "https://www.mdc.edu/entec/" }, 
     { name: "MDC Magic Lab", logo: "https://i.ibb.co/hRjk6hwb/image.png", website: "https://magic.mdc.edu/" }
@@ -36,11 +38,9 @@ const Team = () => {
   const TeamCard = ({ member }) => (
     <a 
       href={member.linkedin || '#'} target={member.linkedin ? "_blank" : "_self"} rel="noopener noreferrer"
-      // Adjusted the min-heights slightly to accommodate the restored massive image sizes
       className="my-1 flex flex-col justify-start items-center bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white p-3 laptop:p-4 border-2 border-gray-600 pixel-shadow text-center transition-transform duration-300 hover:animate-[wiggle_2s_ease-in-out_infinite] hover:scale-105 cursor-pointer flex-shrink-0 w-40 sm:w-52 lg:w-60 min-h-[200px] sm:min-h-[220px] lg:min-h-[260px]"
     >
       <div className="flex flex-col items-center w-full h-full">
-        {/* THE FIX: Restored large image sizes using perfectly valid Tailwind classes (w-32) */}
         <img src={member.image} alt={member.name} className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 rounded-full mb-3 border-2 border-gray-600 object-cover" />
         <h3 className="font-bold tracking-wide text-xs sm:text-base lg:text-lg leading-tight line-clamp-1 w-full">{member.name}</h3>
         <div className="flex-grow flex items-start justify-center mt-1 w-full">
@@ -55,7 +55,6 @@ const Team = () => {
       href={member.website || '#'} target={member.website ? "_blank" : "_self"} rel="noopener noreferrer"
       className="flex flex-col justify-start items-center bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white p-4 border-2 border-gray-600 pixel-shadow text-center transition-transform duration-300 hover:scale-105 cursor-pointer w-full max-w-[200px] sm:max-w-[220px] lg:max-w-[240px] aspect-square mx-auto min-h-[200px] sm:min-h-[220px]"
     >
-      {/* THE FIX: Restored large sizes here as well (w-32) */}
       <img src={member.logo} alt={member.name} className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 rounded-full mb-3 border-2 border-gray-600 p-2 bg-gray-900 object-contain" />
       <div className="flex-grow flex items-start justify-center w-full">
         <h3 className="font-bold tracking-wide text-xs sm:text-sm lg:text-base line-clamp-2">{member.name}</h3>
