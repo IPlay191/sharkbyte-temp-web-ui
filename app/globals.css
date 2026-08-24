@@ -35,10 +35,10 @@ ex.
 /* Glow effect */
 @keyframes glow-fade {
   0%, 100% {
-    text-shadow: 0 0 10px rgba(250, 21, 135, 0.8), 0 0 28px rgba(250, 21, 135, 0.8), 0 0 42px rgba(250, 21, 135, 0.8);
+    text-shadow: 0 0 5px rgba(250, 21, 135, 0.28), 0 0 12px rgba(250, 21, 135, 0.24), 0 0 20px rgba(250, 21, 135, 0.16);
   }
   50% {
-    text-shadow: 0 0 18px rgba(250, 21, 135, 0.8), 0 0 40px rgba(250, 21, 135, 0.8), 0 0 60px rgba(250, 21, 135, 0.8);
+    text-shadow: 0 0 9px rgba(250, 21, 135, 0.42), 0 0 18px rgba(250, 21, 135, 0.3), 0 0 30px rgba(250, 21, 135, 0.2);
   }
 }
 
@@ -73,12 +73,12 @@ body {
 /* glowing text effect */
 @keyframes glow-fade {
   0%, 100% {
-    opacity: 0.9;
-    text-shadow: 0 0 4px rgba(250, 21, 135, 0.5);
+    opacity: 0.98;
+    text-shadow: 0 0 3px rgba(250, 21, 135, 0.24), 0 0 8px rgba(250, 21, 135, 0.18), 0 0 14px rgba(250, 21, 135, 0.12);
   }
   50% {
     opacity: 1;
-    text-shadow: 0 0 8px rgba(250, 21, 135, 0.9), 0 0 14px rgba(250, 21, 135, 0.5);
+    text-shadow: 0 0 6px rgba(250, 21, 135, 0.36), 0 0 12px rgba(250, 21, 135, 0.24), 0 0 20px rgba(250, 21, 135, 0.16);
   }
 }
 
