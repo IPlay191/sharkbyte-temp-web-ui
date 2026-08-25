@@ -92,7 +92,7 @@ const Sponsors = () => {
         
         {/* TOP ANCHOR: Title */}
         <div className="relative z-10">
-          <div className="bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-6 py-2 laptop:py-3 border-3 border-gray-600 pixel-shadow mt-[2vh]">
+          <div className="bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-6 py-2 laptop:py-3 border-3 border-gray-600 pixel-shadow mt-[5vh]">
             <h1 className="font-bold text-center text-[26px] tablet:text-[30px] laptop:text-[40px] desktop:text-[50px]">
               Our Sponsors
             </h1>

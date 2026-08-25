@@ -100,7 +100,7 @@ const Team = () => {
       <div className="w-full flex flex-col items-center justify-start h-full max-w-[1400px] mx-auto">
 
         {/* TOP ANCHOR: Interactive Navigation Tab */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 z-10 max-w-full mt-[2vh] mb-[2vh] laptop:mb-[4vh]">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 z-10 max-w-full mt-[5vh] mb-[2vh] laptop:mb-[4vh]">
           {/* Active state styling applies conditionally depending on which boolean is true */}
           <button
             onClick={() => { setShowCarousel(true); setCMembers(false); }}
