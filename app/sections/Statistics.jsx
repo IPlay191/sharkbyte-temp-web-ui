@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-// Ranomized Auto-Cycling Window Carousel
+// COMPONENT: Randomized Auto-Cycling Window Carousel
 const TrainWindow = ({ images, interval = 3000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -91,6 +91,7 @@ const Statistics = () => {
 
       const currentScroll = window.scrollY - sectionTop;
 
+      // SCROLL INTERPOLATION: Calculates the precise scroll progress through the sticky container to translate vertical scrolling into horizontal movement.
       const progress = Math.min(
         Math.max(currentScroll / totalScrollableDistance, 0),
         1
@@ -111,7 +112,6 @@ const Statistics = () => {
       id="statistics"
       className="relative w-full h-[100rem] bg-black-900 bg-fixed bg-center bg-no-repeat"
     >
-      {/* STICKY CONTAINER */}
       <div className="sticky top-0 h-screen overflow-hidden flex items-center">
         <div
           ref={trainRef}
@@ -124,7 +124,6 @@ const Statistics = () => {
             backgroundSize: "50% 100%, 50% 100%",
           }}
         >
-          {/* 1. THE TITLE BOX */}
         <div className="retro-box pixel-shadow p-3 relative overflow-hidden w-[22rem] h-[16rem] tablet:w-[28rem] tablet:h-[20rem] desktop:w-[25rem] desktop:h-[23rem] ml-[20vw] shrink-0 flex items-center justify-center bg-black/40">
           <div className="relative w-full h-full border-4 border-amber-100/30 rounded-md overflow-hidden bg-zinc-900 flex items-center justify-center p-4">
             <h1 className="font-bold text-center text-white text-[6vw] tablet:text-[4vw] laptop:text-3xl desktop:text-4xl max-h-[750px]:text-xl">
@@ -133,7 +132,6 @@ const Statistics = () => {
           </div>
         </div>
 
-        {/* 2. THE STATS BOX */}
         <div className="retro-box pixel-shadow p-3 relative overflow-hidden w-[22rem] h-[16rem] tablet:w-[28rem] tablet:h-[20rem] desktop:w-[25rem] desktop:h-[23rem] shrink-0 flex items-center justify-center bg-black/40">
           <div className="relative w-full h-full border-4 border-amber-100/30 rounded-md overflow-hidden bg-zinc-900 flex flex-col justify-center items-center gap-3 tablet:gap-5 laptop:gap-6 p-4">
             {stats.map((stat, index) => (
@@ -147,7 +145,6 @@ const Statistics = () => {
           </div>
         </div>
 
-          {/* 3. WINDOW CAROUSELS */}
           <TrainWindow images={windowCar1} interval={3000} />
           <TrainWindow images={windowCar2} interval={3000} />
         </div>
