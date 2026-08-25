@@ -1,13 +1,12 @@
 @import "tailwindcss";
 
-/* @ syntax defines css directives (at-rules)
-ex.
-@theme - Tells Tailwind v4 to automatically generate utility classes from your custom CSS variables.
-@keyframes - Defines the individual steps and styles to create custom CSS animations.
-@media - Applies CSS rules conditionally based on device features, like screen width or dark mode preferences.
+/* ============================================================================
+   TAILWIND V4 DIRECTIVES & VARIABLES
+============================================================================ */
+/* 
+  @theme automatically generates Tailwind utility classes from these custom CSS variables.
+  This allows us to use classes like 'font-pixel' directly in our React components.
 */
-
-/* tailwindcss v4 unique class creator directive */
 @theme {
   --font-pixel: 'VT323', monospace;
   --breakpoint-mobile: 360px;
@@ -16,79 +15,76 @@ ex.
   --breakpoint-desktop: 1025px;
 }
 
-/* custom utility class for pixelated box style */
+/* ============================================================================
+   GLOBAL UTILITIES
+============================================================================ */
+/* Standardized retro terminal box aesthetic applied across all components */
 .retro-box {
   @apply bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 border-3 border-gray-600 text-white;
 }
 
-/* Creates a seamless fade-out effect on the left and right edges of the carousel */
+/* Creates a seamless fade-to-black effect on the left and right edges of the scrolling carousels */
 .carousel-mask {
   -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
   mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
 
+/* ============================================================================
+   ANIMATION KEYFRAMES
+============================================================================ */
 /* Retro terminal blinking cursor animation */
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
-/* Glow effect */
+
+/* Fluid, multi-layered neon glow effect for premium text highlights */
 @keyframes glow-fade {
   0%, 100% {
-    text-shadow: 0 0 10px rgba(250, 21, 135, 0.8), 0 0 28px rgba(250, 21, 135, 0.8), 0 0 42px rgba(250, 21, 135, 0.8);
+    opacity: 0.98;
+    text-shadow: 0 0 3px rgba(250, 21, 135, 0.24), 0 0 8px rgba(250, 21, 135, 0.18), 0 0 14px rgba(250, 21, 135, 0.12);
   }
   50% {
-    text-shadow: 0 0 18px rgba(250, 21, 135, 0.8), 0 0 40px rgba(250, 21, 135, 0.8), 0 0 60px rgba(250, 21, 135, 0.8);
+    opacity: 1;
+    text-shadow: 0 0 6px rgba(250, 21, 135, 0.36), 0 0 12px rgba(250, 21, 135, 0.24), 0 0 20px rgba(250, 21, 135, 0.16);
   }
 }
 
+/* Base class to apply the neon glow animation */
 .glow-text {
-  color: #ffffff;
-  filter: brightness(1.2);
-  animation: glow-fade 2.8s ease-in-out infinite;
+  color: #d65858;
+  animation: glow-fade 4.2s ease-in-out infinite;
+  /* Hardware acceleration hint for smoother rendering */
+  will-change: opacity, text-shadow; 
 }
 
-/* pseudo-class, defines highest level element */
+/* ============================================================================
+   GLOBAL DOM STYLES
+============================================================================ */
 :root {
   --background: #fff;
   --foreground: #000;
 }
 
-/* global element css */
 body {
-  /* using css variables as values */
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-pixel);
-
   min-height: 100svh;
+  
+  /* Font optimization for clearer pixel art rendering */
   text-rendering: optimizeLegibility;
-
-  /* browser specific css */
-  -webkit-font-smoothing: subpixel-antialiased; /* macintosh */
-  -moz-osx-font-smoothing: grayscale; /* firefox */
+  -webkit-font-smoothing: subpixel-antialiased; /* macOS */
+  -moz-osx-font-smoothing: grayscale; /* Firefox */
 }
 
-
-/* glowing text effect */
-@keyframes glow-fade {
-  0%, 100% {
-    opacity: 0.9;
-    text-shadow: 0 0 4px rgba(250, 21, 135, 0.5);
-  }
-  50% {
-    opacity: 1;
-    text-shadow: 0 0 8px rgba(250, 21, 135, 0.9), 0 0 14px rgba(250, 21, 135, 0.5);
-  }
-}
-
-.glow-text {
-  color: #d65858;
-  animation: glow-fade 4.2s ease-in-out infinite;
-  will-change: opacity, text-shadow;
-}
-
-/* css backgrounds with images */
+/* ============================================================================
+   BACKGROUND IMAGE ASSETS
+============================================================================ */
+/* 
+  Ensures all background assets remain crisp and pixelated when scaled, 
+  preventing modern browsers from automatically blurring/smoothing the pixel art.
+*/
 .statistics-bg,
 .hero-bg,
 .stats-bg,
@@ -97,8 +93,7 @@ body {
 .socials-bg,
 .about-bg,
 .location-bg, 
-.team-bg
-{
+.team-bg {
   background-repeat: no-repeat;
   background-size: cover;
   image-rendering: pixelated;
@@ -106,45 +101,17 @@ body {
   image-rendering: crisp-edges;
 }
 
-.hero-bg {
-  background-image: url('https://i.ibb.co/ynf1hTHY/Website-Page-1.png');
-  background-position: center;
-}
+/* Specific background asset assignments */
+.hero-bg { background-image: url('https://i.ibb.co/ynf1hTHY/Website-Page-1.png'); background-position: center; }
+.stats-bg { background-image: url('https://ibb.co/album/ZNfCNx?page=2&seek=cSDqNyGq'); background-position: center; }
+.comingsoon-bg { background-image: url('https://i.ibb.co/2YMDf26n/Temporary-website-page-4.png'); background-position: center; }
+.sponsors-bg { background-image: url('https://i.ibb.co/Zp1t2mnh/Sharkbyte-Website-Page-6.png'); background-position: center; }
+.socials-bg { background-image: url('https://i.ibb.co/1J6zC76z/Sharkbyte-Website-Page-8.png'); background-position: center; }
+.about-bg { background-image: url('https://i.ibb.co/qMTm9gVt/Sharkbyte-Website-Page-2.png'); background-position: center; }
+.location-bg { background-image: url('https://i.ibb.co/9kfFYzWK/Sharkbyte-Website-Page-5.png'); }
+.team-bg { background-image: url('https://i.ibb.co/N6cwq0Nk/Sharkbyte-Website-Page-7.png'); background-position: center; }
 
-.stats-bg {
-  background-image: url('https://ibb.co/album/ZNfCNx?page=2&seek=cSDqNyGq');
-  background-position: center;
-}
-
-.comingsoon-bg {
-  background-image: url('https://i.ibb.co/2YMDf26n/Temporary-website-page-4.png');
-  background-position: center;
-}
-
-.sponsors-bg {
-  background-image: url('https://i.ibb.co/Zp1t2mnh/Sharkbyte-Website-Page-6.png');
-  background-position: center;
-}
-
-.socials-bg {
-  background-image: url('https://i.ibb.co/1J6zC76z/Sharkbyte-Website-Page-8.png');
-  background-position: center;
-}
-
-.about-bg {
-  background-image: url('https://i.ibb.co/qMTm9gVt/Sharkbyte-Website-Page-2.png');
-  background-position: center;
-}
-
-.location-bg {
-  background-image: url('https://i.ibb.co/9kfFYzWK/Sharkbyte-Website-Page-5.png');
-}
-
-.team-bg{
-  background-image: url('https://i.ibb.co/N6cwq0Nk/Sharkbyte-Website-Page-7.png');
-  background-position: center;
-}
-
+/* Utility animation used in Team/Sponsor cards */
 @keyframes bounce-high {
   0%, 100% {
     transform: translateY(100%);

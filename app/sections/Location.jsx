@@ -11,23 +11,22 @@ const Location = () => {
     1: Google Map
   */
 
-  // Auto-collapse map when scrolling away from the location section
+  // INTERSECTION OBSERVER: Automatically retracts the expanded map view when the user scrolls away from the section, preserving vertical layout stability.
   useEffect(() => {
     if (!isExpanded || !locationRef.current) return
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // If the location section is not intersecting (scrolled away) and map is expanded
           if (!entry.isIntersecting && isExpanded) {
             setIsExpanded(false)
           }
         })
       },
       {
-        // Trigger when 30% or less of the element is visible
+        // THRESHOLD: Fires the callback when 30% or less of the element is currently visible.
         threshold: 0.3,
-        // Add some margin to trigger slightly before completely out of view
+        // ROOT MARGIN: Pre-emptively triggers the observer 50px before the element completely leaves the viewport.
         rootMargin: '-50px'
       }
     )
@@ -65,9 +64,9 @@ const Location = () => {
     const commonIframeProps = {
       style: { 
         border: 0,
-        transform: 'scale(0.8)', // Zoom out effect
+        transform: 'scale(0.8)', 
         transformOrigin: 'top left',
-        width: '125%', // Compensate for scale
+        width: '125%', 
         height: '125%'
       },
       allowFullScreen: true,
@@ -79,12 +78,9 @@ const Location = () => {
 
     switch (activeMap) {
       case 0:
-        // MDC Interactive Map
         return (
           <div className="relative w-full max-w-xl max-w-2xl">
-            {/* Map container wrapper */}
             <div className="relative overflow-hidden border-4 border-black/70 rounded-1xl">
-              {/* Inner container with black background for loading state */}
               <div className={`relative ${containerHeight} transition-all duration-300 ease-in-out bg-black`}>
                 <iframe
                   src='https://clients.mapsindoors.com/miamidadecollege/cd5ee2abc27c4ea8876a331a/search'
@@ -92,7 +88,6 @@ const Location = () => {
                   {...commonIframeProps}
                 />
                 
-                {/* Overlay Controls */}
                 <div className="absolute top-0 right-0 flex gap-0 z-5">
                   <button
                     onClick={openInNewTab}
@@ -124,7 +119,6 @@ const Location = () => {
               </div>
             </div>
             
-            {/* Expand/Collapse Button - Outside the container with black background */}
             <div className="flex justify-start relative z-5">
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
@@ -148,12 +142,9 @@ const Location = () => {
         )
 
       case 1:
-        // Google Map
         return (
           <div className="relative w-full tablet:max-w-xl max-w-2xl">
-            {/* Map container wrapper */}
             <div className="relative overflow-hidden border-4 border-black/70 rounded-1xl">
-              {/* Inner container with black background for loading state */}
               <div className={`relative ${containerHeight} transition-all duration-300 ease-in-out bg-black`}>
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3029.033039379458!2d-80.24827804517018!3d25.879864182976842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b0391b7d8ae9%3A0x412412fc3d70a127!2sJohn%20F.%20Kennedy%20Center%2C%20Kennedy%20Dr%2C%20Miami%2C%20FL%2033167!5e0!3m2!1sen!2sus!4v1757597869517!5m2!1sen!2sus"
@@ -164,7 +155,6 @@ const Location = () => {
                   referrerPolicy="no-referrer-when-downgrade"
                 />
                 
-                {/* Overlay Controls */}
                 <div className="absolute top-0 right-0 flex gap-0 z-5">
                   <button
                     onClick={openInNewTab}
@@ -196,7 +186,6 @@ const Location = () => {
               </div>
             </div>
             
-            {/* Expand/Collapse Button - Outside the container with black background */}
             <div className="flex justify-start relative z-5">
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
@@ -219,8 +208,6 @@ const Location = () => {
           </div>
         )
 
-
-
       default:
         return null
     }
@@ -232,7 +219,6 @@ const Location = () => {
       id="location"
       className="w-full h-screen flex flex-col justify-start items-center relative overflow-hidden location-bg bg-center py-4 max-[1350px]:py-4 max-[650px]:py-4 laptop:pl-10 laptop:pr-6"
     >
-      {/* TITLE */}
       <div className="mx-4 mb-4 max-[650px]:mb-4 mt-2 max-[650px]:mt-2 table:self-start laptop:self-start tablet:translate-x-30 laptop:translate-x-40 -translate-y-4">
         <div className="bg-linear-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-6 py-3 border-3 border-gray-600 pixel-shadow max-[650px]:px-4 max-[650px]:py-2">
           <h1 className="text-3xl font-bold tablet:text-left laptop:text-left max-[1350px]:text-xl max-[650px]:text-base max-[500px]:text-[22px]">
@@ -241,7 +227,6 @@ const Location = () => {
         </div>
       </div>
 
-      {/* LOCATION INFO */}
       <div className="mx-4 max-[650px]:mx-1 mb-4 text-center py-3 px-5 max-[650px]:px-4 max-[500px]:px-3 max-[300px]:px-2 bg-linear-to-b from-gray-950 via-gray-900 to-gray-950 border-3 border-gray-600 pixel-shadow tablet:translate-x-30 laptop:translate-x-47 -translate-y-4 laptop:-translate-y-22">
         <div className="text-white text-1xl max-[650px]:text-xs max-[500px]:text-[22px] max-[300px]:text-[20px]">
           School of Justice Building
@@ -254,7 +239,6 @@ const Location = () => {
         </div>
       </div>
 
-      {/* TAB NAVIGATION */}
       <div className="px-4 max-[650px]:px-0 flex flex-wrap justify-center gap-25 max-[650px]:gap-1 mb-4 tablet:translate-x-30 laptop:translate-x-47 -translate-y-4 laptop:-translate-y-22">
         {mapOptions.map((option, index) => (
           <button
@@ -271,7 +255,6 @@ const Location = () => {
         ))}
       </div>
 
-      {/* LOCATION CONTENT */}
       <div className="flex justify-center w-full px-4 tablet:translate-x-25 laptop:translate-x-47 -translate-y-4 laptop:-translate-y-22">
         {renderMapContent()}
       </div>

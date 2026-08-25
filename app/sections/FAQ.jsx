@@ -91,7 +91,7 @@ const FAQ = () => {
   return (
     <section id="faq" className="w-full min-h-svh flex flex-col items-center justify-center relative overflow-hidden socials-bg py-[100px] px-4 tablet:px-8">  
         
-      {/* Title */}
+      {/* HEADER SECTION */}
       <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-20 desktop:py-8 mb-16 max-w-[800px] mx-auto z-10">
         <h1 className="font-bold text-center text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl text-white">
           Frequently Asked Questions
@@ -106,8 +106,8 @@ const FAQ = () => {
           return (
             <div key={catIndex} className="flex flex-col w-full">
               
-              {/* TIER 1: The Category Button */}
-              {/* Added massive glowing purple shadow and dynamic border thickness */}
+              {/* TIER 1: CATEGORY CONTROLLER */}
+              {/* INTERACTIVE STATE: Applies a premium glowing box-shadow and thickens the border when active to simulate an illuminated arcade cabinet. */}
               <button
                 onClick={() => handleCategoryToggle(catIndex)}
                 className={`retro-box flex justify-between items-center w-full px-6 py-5 tablet:px-8 tablet:py-6 transition-all duration-300 ease-in-out cursor-pointer z-20 ${
@@ -116,7 +116,7 @@ const FAQ = () => {
                     : 'bg-gray-950 border-2 border-[#8b5cf6]/30 hover:border-[#8b5cf6]/70 hover:bg-gray-900/80 pixel-shadow'
                 }`}
               >
-                {/* Dynamically injects the .glow-text class when active */}
+                {/* TYPOGRAPHY STATE: Injects the custom .glow-text CSS keyframe for active categories to create a pulsing neon effect. */}
                 <h2 className={`font-bold text-[22px] tablet:text-[28px] uppercase tracking-wider transition-colors duration-300 ${
                   isCategoryOpen ? 'text-[#a78bfa] glow-text' : 'text-gray-200'
                 }`}>
@@ -130,7 +130,7 @@ const FAQ = () => {
                 </span>
               </button>
 
-              {/* TIER 2: The Category Body (Holds the Questions) */}
+              {/* TIER 2: ACCORDION CONTENT WRAPPER */}
               <div 
                 className={`grid transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
                   isCategoryOpen ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 mt-0"
@@ -144,8 +144,8 @@ const FAQ = () => {
                     return (
                       <div key={q.id} className="w-full">
                         
-                        {/* The Question Button */}
-                        {/* Explodes with a neon green shadow on the left edge when opened */}
+                        {/* THE QUESTION BUTTON */}
+                        {/* INTERACTIVE STATE: Generates an intense neon edge-glow to signify selection and focus within the sub-menu. */}
                         <button
                           onClick={() => handleQuestionToggle(q.id)}
                           className={`w-full flex justify-between items-center p-4 tablet:p-5 text-left transition-all duration-300 border-l-4 ${
@@ -167,8 +167,8 @@ const FAQ = () => {
                           </span>
                         </button>
 
-                        {/* The Question Answer */}
-                        {/* Added a deep black inset shadow to make it look like a recessed monitor */}
+                        {/* THE QUESTION ANSWER */}
+                        {/* DEPTH ILLUSION: Employs a deep inset shadow to simulate a physically recessed monitor screen. */}
                         <div 
                           className={`grid transition-all duration-300 ease-in-out ${
                             isQuestionOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
