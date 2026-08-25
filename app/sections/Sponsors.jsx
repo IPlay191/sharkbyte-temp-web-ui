@@ -4,8 +4,6 @@ import Image from "next/image"
 
 // --------------------------------------------------------
 // 1. DATA ARCHITECTURE WITH TIERS
-// Synchronized with Master Tracker & New Partners
-// Tier 1: High Cash ($3k+) | Tier 2: Mid Cash/In-Kind/National | Tier 3: Community/Entry Cash
 // --------------------------------------------------------
 const sponsorsRow1 = [
   { href: "https://www.roocapital.com/", src: "https://i.ibb.co/DgTndgYp/roo-capital.png", alt: "roo_capital_logo", tier: 1 },
@@ -34,22 +32,20 @@ const SponsorCard = ({ sponsor }) => {
   const getTierStyles = (tier) => {
     switch (tier) {
       case 1:
-        // TIER 1: The "Legendary" Billboard (Starquix, Roo, Blackstone, Microsoft, Knight)
+        // THE FIX: Heights dynamically clamp based on viewport height (vh)
         return {
-          wrapper: "w-[220px] h-[120px] tablet:w-[280px] tablet:h-[150px] laptop:w-[320px] laptop:h-[180px] bg-gradient-to-br from-white via-amber-50 to-amber-100 border-[#ffd700] border-3 shadow-[0_0_18px_rgba(255,215,0,0.5)] hover:shadow-[0_0_35px_rgba(255,215,0,0.9)] z-20",
+          wrapper: "w-[220px] h-[clamp(100px,18vh,140px)] tablet:w-[280px] tablet:h-[clamp(120px,20vh,160px)] laptop:w-[320px] laptop:h-[clamp(140px,25vh,200px)] bg-gradient-to-br from-white via-amber-50 to-amber-100 border-[#ffd700] border-3 shadow-[0_0_18px_rgba(255,215,0,0.5)] hover:shadow-[0_0_35px_rgba(255,215,0,0.9)] z-20",
           inner: "inset-3 tablet:inset-4"
         };
       case 2:
-        // TIER 2: The "Epic" Square
         return {
-          wrapper: "w-[120px] h-[120px] tablet:w-[150px] tablet:h-[150px] laptop:w-[180px] laptop:h-[180px] bg-gray-100 border-[#8b5cf6] border-[2px] shadow-[0_0_12px_rgba(139,92,246,0.4)] hover:shadow-[0_0_25px_rgba(139,92,246,0.8)] z-10",
+          wrapper: "w-[120px] h-[clamp(100px,18vh,140px)] tablet:w-[150px] tablet:h-[clamp(120px,20vh,160px)] laptop:w-[180px] laptop:h-[clamp(140px,25vh,200px)] bg-gray-100 border-[#8b5cf6] border-[2px] shadow-[0_0_12px_rgba(139,92,246,0.4)] hover:shadow-[0_0_25px_rgba(139,92,246,0.8)] z-10",
           inner: "inset-4 tablet:inset-6"
         };
       case 3:
       default:
-        // TIER 3: The "Common" Square (Milam's, INIT, Community Partners)
         return {
-          wrapper: "w-[120px] h-[120px] tablet:w-[150px] tablet:h-[150px] laptop:w-[180px] laptop:h-[180px] bg-gray-200 border-gray-500 border-[2px] hover:shadow-[0_0_15px_rgba(156,163,175,0.6)] opacity-90 hover:opacity-100 z-0",
+          wrapper: "w-[120px] h-[clamp(100px,18vh,140px)] tablet:w-[150px] tablet:h-[clamp(120px,20vh,160px)] laptop:w-[180px] laptop:h-[clamp(140px,25vh,200px)] bg-gray-200 border-gray-500 border-[2px] hover:shadow-[0_0_15px_rgba(156,163,175,0.6)] opacity-90 hover:opacity-100 z-0",
           inner: "inset-6 tablet:inset-8"
         };
     }
@@ -76,22 +72,24 @@ const SponsorCard = ({ sponsor }) => {
 // --------------------------------------------------------
 const Sponsors = () => {
   return (
-    <section id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-center items-center relative overflow-hidden py-4 laptop:py-6 px-4">
+    <section id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-center items-center relative overflow-hidden py-[4vh] px-4">
       
-      <div className="w-full flex flex-col items-center justify-center gap-4 laptop:gap-8 h-full max-w-[1400px] mx-auto">
+      {/* THE FIX: justify-between guarantees the Title and Terminal box stay locked to the absolute top and bottom */}
+      <div className="w-full flex flex-col items-center justify-between h-full max-w-[1400px] mx-auto">
         
-        {/* SECTION TITLE */}
+        {/* TOP ANCHOR */}
         <div className="relative z-10">
-          <div className="bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-6 py-2 laptop:py-3 border-3 border-gray-600 pixel-shadow">
+          <div className="bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-6 py-2 laptop:py-3 border-3 border-gray-600 pixel-shadow mt-[2vh]">
             <h1 className="font-bold text-center text-[26px] tablet:text-[30px] laptop:text-[40px] desktop:text-[50px]">
               Our Sponsors & Partners
             </h1>
           </div>
         </div>
 
-        {/* DESKTOP TWO-ROW CAROUSEL */}
-        <div className="max-laptop:hidden relative w-full overflow-hidden carousel-mask flex flex-col justify-center">
-          <div className="flex flex-col gap-6 laptop:gap-10 items-center">
+        {/* MIDDLE CONTENT: Dynamically grows to fill space */}
+        <div className="max-laptop:hidden relative w-full overflow-hidden carousel-mask flex-grow flex flex-col justify-center">
+          {/* THE FIX: gap scales relative to screen height using vh */}
+          <div className="flex flex-col gap-[3vh] laptop:gap-[5vh] items-center">
             
             <div className="marquee overflow-hidden w-full flex items-center">
               <div className="marquee__track marquee__left items-center">
@@ -112,9 +110,9 @@ const Sponsors = () => {
           </div>
         </div>
 
-        {/* MOBILE TWO-ROW SCROLL */}
-        <div className="min-laptop:hidden relative w-full overflow-x-auto pb-2 carousel-mask flex-grow flex flex-col justify-center">
-          <div className="flex flex-col gap-4 items-start w-max px-4">
+        {/* MOBILE CAROUSEL */}
+        <div className="min-laptop:hidden relative w-full overflow-x-auto carousel-mask flex-grow flex flex-col justify-center">
+          <div className="flex flex-col gap-[3vh] items-start w-max px-4">
             <div className="flex items-center">
               {sponsorsRow1.map((sponsor, index) => (
                 <SponsorCard key={`mob-top-${index}`} sponsor={sponsor} />
@@ -126,15 +124,13 @@ const Sponsors = () => {
               ))}
             </div>
           </div>
-        </div>
-
-        {/* MOBILE SCROLL INDICATOR */}
-        <div className="min-laptop:hidden text-white font-bold text-sm text-center drop-shadow-md">
-          ← Scroll horizontally →
+          <div className="text-white font-bold text-sm text-center drop-shadow-md mt-4">
+            ← Scroll horizontally →
+          </div>
         </div>
           
-        {/* SPONSOR CTA */}
-        <div className="relative w-[90%] max-w-[850px] z-10">
+        {/* BOTTOM ANCHOR */}
+        <div className="relative w-[90%] max-w-[850px] z-10 mb-[2vh]">
           <div className="retro-box pixel-shadow px-4 py-2 laptop:py-3 tablet:px-6 bg-gray-950/95">
             <p className="text-left font-mono text-[13px] tablet:text-[16px] laptop:text-[22px] desktop:text-[26px]">
               <span className="text-[#39ff14] mr-2">{">"}</span> 

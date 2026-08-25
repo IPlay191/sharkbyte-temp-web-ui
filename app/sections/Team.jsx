@@ -19,7 +19,6 @@ const Team = () => {
     { name: "Oliver Martinez Fernandez", role: "Director of Technology", image: "https://i.ibb.co/BVSMT9Dm/image.png", linkedin: "https://www.linkedin.com/in/oliver-martinez-9a1ba4340/" }
   ];
 
-  // COMMUNITY PARTNERS LIST (Added INIT)
   const communityPartners = [
     { name: "INIT", logo: "https://i.ibb.co/7N4sWGLq/init-logo.png", website: "https://weareinit.org" },
     { name: "City of Coral Gables", logo: "https://i.ibb.co/8LwsNNcX/image.png", website: "https://www.coralgables.com/department/innovation-and-technology" },
@@ -38,10 +37,12 @@ const Team = () => {
   const TeamCard = ({ member }) => (
     <a 
       href={member.linkedin || '#'} target={member.linkedin ? "_blank" : "_self"} rel="noopener noreferrer"
-      className="my-1 flex flex-col justify-start items-center bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white p-3 laptop:p-4 border-2 border-gray-600 pixel-shadow text-center transition-transform duration-300 hover:animate-[wiggle_2s_ease-in-out_infinite] hover:scale-105 cursor-pointer flex-shrink-0 w-40 sm:w-52 lg:w-60 min-h-[200px] sm:min-h-[220px] lg:min-h-[260px]"
+      // THE FIX: min-height uses clamp() mapped to vertical height (vh)
+      className="my-1 flex flex-col justify-start items-center bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white p-3 laptop:p-4 border-2 border-gray-600 pixel-shadow text-center transition-transform duration-300 hover:animate-[wiggle_2s_ease-in-out_infinite] hover:scale-105 cursor-pointer flex-shrink-0 w-40 sm:w-52 lg:w-60 min-h-[clamp(160px,25vh,220px)] lg:min-h-[clamp(200px,30vh,280px)]"
     >
       <div className="flex flex-col items-center w-full h-full">
-        <img src={member.image} alt={member.name} className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 rounded-full mb-3 border-2 border-gray-600 object-cover" />
+        {/* THE FIX: Images dynamically shrink if the screen height gets dangerously low */}
+        <img src={member.image} alt={member.name} className="w-[clamp(4rem,10vh,6rem)] h-[clamp(4rem,10vh,6rem)] lg:w-[clamp(5rem,14vh,8rem)] lg:h-[clamp(5rem,14vh,8rem)] rounded-full mb-3 border-2 border-gray-600 object-cover" />
         <h3 className="font-bold tracking-wide text-xs sm:text-base lg:text-lg leading-tight line-clamp-1 w-full">{member.name}</h3>
         <div className="flex-grow flex items-start justify-center mt-1 w-full">
           <p className="text-gray-400 text-[10px] sm:text-sm lg:text-sm line-clamp-2 leading-snug">{member.role}</p>
@@ -53,9 +54,9 @@ const Team = () => {
   const CommunityPartnerCard = ({ member }) => (
     <a 
       href={member.website || '#'} target={member.website ? "_blank" : "_self"} rel="noopener noreferrer"
-      className="flex flex-col justify-start items-center bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white p-4 border-2 border-gray-600 pixel-shadow text-center transition-transform duration-300 hover:scale-105 cursor-pointer w-full max-w-[200px] sm:max-w-[220px] lg:max-w-[240px] aspect-square mx-auto min-h-[200px] sm:min-h-[220px]"
+      className="flex flex-col justify-start items-center bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white p-4 border-2 border-gray-600 pixel-shadow text-center transition-transform duration-300 hover:scale-105 cursor-pointer w-full max-w-[200px] sm:max-w-[220px] lg:max-w-[240px] aspect-square mx-auto min-h-[clamp(160px,25vh,220px)] lg:min-h-[clamp(200px,30vh,280px)]"
     >
-      <img src={member.logo} alt={member.name} className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 rounded-full mb-3 border-2 border-gray-600 p-2 bg-gray-900 object-contain" />
+      <img src={member.logo} alt={member.name} className="w-[clamp(4rem,10vh,6rem)] h-[clamp(4rem,10vh,6rem)] lg:w-[clamp(5rem,14vh,8rem)] lg:h-[clamp(5rem,14vh,8rem)] rounded-full mb-3 border-2 border-gray-600 p-2 bg-gray-900 object-contain" />
       <div className="flex-grow flex items-start justify-center w-full">
         <h3 className="font-bold tracking-wide text-xs sm:text-sm lg:text-base line-clamp-2">{member.name}</h3>
       </div>
@@ -69,12 +70,13 @@ const Team = () => {
   );
 
   return (
-    <section id="team" className="isolate z-0 w-full h-full flex flex-col justify-center items-center relative overflow-hidden team-bg py-4 laptop:py-6 px-4">
+    <section id="team" className="isolate z-0 w-full h-full flex flex-col justify-start items-center relative overflow-hidden team-bg py-[4vh] px-4">
       
-      <div className="w-full flex flex-col items-center justify-center gap-4 laptop:gap-6 h-full max-w-[1400px] mx-auto">
+      {/* THE FIX: Replaced justify-center with justify-start so everything builds downward from the ceiling */}
+      <div className="w-full flex flex-col items-center justify-start h-full max-w-[1400px] mx-auto">
 
-        {/* NAVIGATION BUTTONS */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 z-10 max-w-full mt-2">
+        {/* NAVIGATION BUTTONS (TOP ANCHOR) */}
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 z-10 max-w-full mt-[2vh] mb-[2vh] laptop:mb-[4vh]">
           <button
             onClick={() => { setShowCarousel(true); setCMembers(false); }}
             className={`hover:cursor-pointer transition-colors px-3 py-1.5 sm:px-5 sm:py-2 border-2 sm:border-3 border-gray-600 pixel-shadow ${showCarousel ? 'bg-violet-950 text-white' : 'bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white hover:bg-violet-950'}`}
@@ -97,8 +99,9 @@ const Team = () => {
           </button>
         </div>
 
-        {/* CAROUSEL / VIEWS WRAPPER */}
-        <div className="flex flex-col justify-center w-full">
+        {/* CAROUSEL / VIEWS WRAPPER (MIDDLE/BOTTOM ANCHOR) */}
+        {/* flex-grow naturally absorbs all remaining vertical space to perfectly center the arrays */}
+        <div className="flex-grow flex flex-col justify-center w-full">
           
           {!showCarousel && showCMembers && (
             <div className="w-full max-w-5xl max-h-[60vh] overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4 sm:p-6 md:p-8 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white border-2 sm:border-3 border-gray-600 pixel-shadow items-center mx-auto"> 
@@ -115,7 +118,8 @@ const Team = () => {
           {/* DESKTOP TWO-ROW MARQUEE */}
           {showCarousel && (
             <div className="hidden md:flex relative z-10 border-x-4 md:border-x-8 border-x-gray-900 w-full max-w-6xl mx-auto overflow-hidden carousel-mask flex-col justify-center">
-              <div className="flex flex-col gap-4 laptop:gap-8 py-2">
+              {/* THE FIX: Vertical spacing is purely tied to Viewport Height */}
+              <div className="flex flex-col gap-[3vh] laptop:gap-[5vh] py-2">
                 <div className="marquee overflow-hidden">
                   <div className="marquee__track marquee__left items-center">
                     {[...firstHalf, ...firstHalf, ...firstHalf].map((member, i) => <TeamCard key={`top-${i}`} member={member} />)}
@@ -134,13 +138,16 @@ const Team = () => {
           {/* MOBILE SCROLLABLE CAROUSEL */}
           {showCarousel && (
             <div className="md:hidden relative z-10 w-full overflow-x-auto carousel-mask pb-2">
-              <div className="flex flex-col gap-3 py-2 w-max px-4">
-                <div className="flex gap-3">
+              <div className="flex flex-col gap-[3vh] py-2 w-max px-4">
+                <div className="flex gap-4">
                   {firstHalf.map((member, index) => <TeamCard key={`mobile-top-${index}`} member={member} />)}
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-4">
                   {secondHalf.map((member, index) => <TeamCard key={`mobile-bottom-${index}`} member={member} />)}
                 </div>
+              </div>
+              <div className="text-white font-bold text-sm text-center drop-shadow-md mt-4">
+                ← Scroll horizontally →
               </div>
             </div>
           )}
