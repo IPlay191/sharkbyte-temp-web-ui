@@ -31,11 +31,12 @@ const About = () => {
    <section id="about" className="w-full h-svh flex justify-center items-center relative overflow-hidden about-bg px-4">
      
      {/* 
-        LAYOUT CONSTRAINT: 
+        LAYOUT CONSTRAINT & OPTICAL ALIGNMENT: 
         - Strict max-w-[750px] establishes a safe bounding box to prevent horizontal overflow on ultra-wide monitors.
-        - Gentle negative translation aligns the text vertically into the visual center of the background asset.
+        - Gentle negative Y translation aligns the text vertically into the white space.
+        - Subtle negative X translation (-translate-x) optically centers the text to compensate for the asymmetrical 3D perspective of the background pixel-art billboard.
      */}
-     <div className="w-[90%] max-w-[750px] flex justify-center items-center -translate-y-6 tablet:-translate-y-8 laptop:-translate-y-10">
+     <div className="w-[90%] max-w-[750px] flex justify-center items-center -translate-y-6 tablet:-translate-y-8 laptop:-translate-y-10 -translate-x-8 tablet:-translate-x-9 laptop:-translate-x-10">
        
        {/* 
           TYPOGRAPHY ARCHITECTURE:
