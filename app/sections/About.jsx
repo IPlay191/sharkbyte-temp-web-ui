@@ -4,11 +4,16 @@ import { useEffect } from 'react'
 import { fadeOnScroll } from '../lib/fadeOnScroll'
 
 const About = () => {
+  // ============================================================================
+  // SCROLL ANIMATION EFFECT
+  // ============================================================================
   useEffect(() => {
     const about = document.getElementById('about')
 
+    // Guard clause prevents execution if component unmounts or DOM is missing
     if (!about) return undefined
 
+    // Calculates opacity based on scroll depth to create a smooth fade-in reveal
     const updateTransition = () => {
       fadeOnScroll({
         page: about,
@@ -19,9 +24,11 @@ const About = () => {
       })
     }
 
+    // Passive listener improves browser scrolling performance by bypassing default checks
     updateTransition()
     window.addEventListener('scroll', updateTransition, { passive: true })
 
+    // Cleanup prevents memory leaks
     return () => {
       window.removeEventListener('scroll', updateTransition)
     }
@@ -33,10 +40,10 @@ const About = () => {
      {/* 
         LAYOUT CONSTRAINT & OPTICAL ALIGNMENT: 
         - Strict max-w-[750px] establishes a safe bounding box to prevent horizontal overflow on ultra-wide monitors.
-        - Gentle negative Y translation aligns the text vertically into the white space.
-        - Subtle negative X translation (-translate-x) optically centers the text to compensate for the asymmetrical 3D perspective of the background pixel-art billboard.
+        - Gentle negative Y translation aligns the text vertically into the visual center of the background asset.
+        - Subtle positive X translation (translate-x) perfectly centers the text optically, compensating for the billboard's left-sided 3D shadow without over-correcting.
      */}
-     <div className="w-[90%] max-w-[750px] flex justify-center items-center -translate-y-6 tablet:-translate-y-8 laptop:-translate-y-10 -translate-x-8 tablet:-translate-x-9 laptop:-translate-x-10">
+     <div className="w-[90%] max-w-[750px] flex justify-center items-center -translate-y-6 tablet:-translate-y-8 laptop:-translate-y-10 translate-x-2 tablet:translate-x-3 laptop:translate-x-4 desktop:translate-x-5">
        
        {/* 
           TYPOGRAPHY ARCHITECTURE:
