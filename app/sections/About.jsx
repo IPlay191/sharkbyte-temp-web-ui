@@ -47,10 +47,12 @@ const About = () => {
        
        {/* 
           TYPOGRAPHY ARCHITECTURE:
-          Utilizes fluid responsive sizing via standard Tailwind breakpoints. 
-          Tracking-wide enhances legibility and contrast against the complex background.
+          - Fluid responsive sizing via standard Tailwind breakpoints. 
+          - 'subtle-glow-text' utilizes a Deep Crimson base to ensure high-contrast readability 
+            on the bright white billboard, while emitting a tightly constrained pulsing aura 
+            to satisfy the retro-neon aesthetic without causing visual smudging.
        */}
-       <p className="glow-text font-bold text-center text-[18px] mobile:text-[20px] tablet:text-[24px] laptop:text-[28px] desktop:text-[32px] leading-relaxed tracking-wide px-2">
+       <p className="subtle-glow-text font-bold text-center text-[18px] mobile:text-[20px] tablet:text-[24px] laptop:text-[28px] desktop:text-[32px] leading-relaxed tracking-wide px-2">
          SharkByte is a weekend-long tech sprint where innovation meets caffeine. Whether you're building your first project or aiming to disrupt the status quo, this is your space to code, create, and connect. Stay tuned for more details!
        </p>
        
