@@ -126,7 +126,7 @@ const Statistics = () => {
         >
         <div className="retro-box pixel-shadow p-3 relative overflow-hidden w-[22rem] h-[16rem] tablet:w-[28rem] tablet:h-[20rem] desktop:w-[25rem] desktop:h-[23rem] ml-[20vw] shrink-0 flex items-center justify-center bg-black/40">
           <div className="relative w-full h-full border-4 border-amber-100/30 rounded-md overflow-hidden bg-zinc-900 flex items-center justify-center p-4">
-            <h1 className="font-bold text-center text-white text-[6vw] tablet:text-[4vw] laptop:text-3xl desktop:text-4xl max-h-[750px]:text-xl">
+            <h1 className="font-bold text-center text-white text-[10vw] tablet:text-[5vw] laptop:text-3xl desktop:text-4xl max-h-[750px]:text-xl">
               Last Year We Had...
             </h1>
           </div>
@@ -137,7 +137,7 @@ const Statistics = () => {
             {stats.map((stat, index) => (
               <h2
                 key={index}
-                className={`hover:cursor-default font-bold text-center text-[4.5vw] tablet:text-[3vw] laptop:text-xl desktop:text-2xl max-h-[750px]:text-base ${stat.hoverColor}`}
+                className={`hover:cursor-default font-bold text-center text-[8vw] tablet:text-[5vw] laptop:text-[2vw] desktop:text-[3vw] max-h-[750px]:text-base ${stat.hoverColor}`}
               >
                 {stat.text}
               </h2>

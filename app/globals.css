@@ -93,7 +93,9 @@ body {
 .socials-bg,
 .about-bg,
 .location-bg, 
-.team-bg {
+.team-bg,
+.faq-bg
+ {
   background-repeat: no-repeat;
   background-size: cover;
   image-rendering: pixelated;
@@ -106,10 +108,11 @@ body {
 .stats-bg { background-image: url('https://ibb.co/album/ZNfCNx?page=2&seek=cSDqNyGq'); background-position: center; }
 .comingsoon-bg { background-image: url('https://i.ibb.co/2YMDf26n/Temporary-website-page-4.png'); background-position: center; }
 .sponsors-bg { background-image: url('https://i.ibb.co/Zp1t2mnh/Sharkbyte-Website-Page-6.png'); background-position: center; }
-.socials-bg { background-image: url('https://i.ibb.co/1J6zC76z/Sharkbyte-Website-Page-8.png'); background-position: center; }
+.socials-bg { background-image: url('https://i.ibb.co/wZhcDMcr/Sharkbyte-Website-Page-9.png'); background-position: center; }
 .about-bg { background-image: url('https://i.ibb.co/qMTm9gVt/Sharkbyte-Website-Page-2.png'); background-position: center; }
 .location-bg { background-image: url('https://i.ibb.co/9kfFYzWK/Sharkbyte-Website-Page-5.png'); }
 .team-bg { background-image: url('https://i.ibb.co/N6cwq0Nk/Sharkbyte-Website-Page-7.png'); background-position: center; }
+.faq-bg { background-image: url('https://i.ibb.co/bRJb4QJb/Sharkbyte-Website-Page-8.png'); background-position: center; }
 
 /* Utility animation used in Team/Sponsor cards */
 @keyframes bounce-high {

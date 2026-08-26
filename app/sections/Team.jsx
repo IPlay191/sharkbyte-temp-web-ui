@@ -10,8 +10,8 @@ const Team = () => {
   const [showCMembers, setCMembers] = useState(false);
 
   const teamMembers = [
-    { name: "Jimmy Jean Baptiste", role: "Hack Project Manager", image: "https://i.ibb.co/7NvZRmZt/Jimmy-Photo.png", linkedin: "https://www.linkedin.com/in/jimmy-jean-baptiste-01679436a/" },
-    { name: "Erick Gonzalez", role: "President of INIT", image: "https://i.ibb.co/B5Xf6bv9/Erick-Headshot.jpg", linkedin: "https://www.linkedin.com/in/erick-gonzalez-888b7a377/" },
+    { name: "Jimmy Jean Baptiste", role: "Hack Project Manager", image: "https://i.ibb.co/HDC5L03D/image.png", linkedin: "https://www.linkedin.com/in/jimmy-jean-baptiste-01679436a/" },
+    { name: "Erick Gonzalez", role: "President of INIT", image: "https://i.ibb.co/jPgN9P4Y/image.png", linkedin: "https://www.linkedin.com/in/erick-gonzalez-888b7a377/" },
     { name: "Elias Estrada", role: "Vice President of INIT", image: "https://i.ibb.co/jZHvT0T1/image.png", linkedin: "https://www.linkedin.com/in/elias-estrada-1445ab2b5/" },
     { name: "Dannia Dupotey", role: "Director of Marketing", image: "https://i.ibb.co/5Pkw1tg/image.png", linkedin: "https://www.linkedin.com/in/dannia-dupotey-1169193b5/" },
     { name: "Kathween Vargas", role: "Director of Marketing", image: "https://i.ibb.co/hFH9PFjv/image.png", linkedin: "" },
@@ -20,7 +20,7 @@ const Team = () => {
     { name: "Kelvin Rodriguez", role: "Director of Industry Relations", image: "https://i.ibb.co/hRHdfnpb/image.png", linkedin: "https://www.linkedin.com/in/kelvin-rodriguez-a519a0265/" },
     { name: "Richard Canina Miranda", role: "Director of Industry Relations", image: "https://i.ibb.co/CpHkbgh2/image.png", linkedin: "https://www.linkedin.com/in/richardcm-info" },
     { name: "Fritz Bonhomme", role: "Director of Technology", image: "https://i.ibb.co/Ndrnx4V6/image.png", linkedin: "" },
-    { name: "Oliver Martinez Fernandez", role: "Director of Technology", image: "https://i.ibb.co/BVSMT9Dm/image.png", linkedin: "https://www.linkedin.com/in/oliver-martinez-9a1ba4340/" }
+    { name: "Oliver Martinez Fernandez", role: "Web Development", image: "https://i.ibb.co/BVSMT9Dm/image.png", linkedin: "https://www.linkedin.com/in/oliver-martinez-9a1ba4340/" }
   ];
 
   // ORGANIZATIONAL PARTNERS (Non-Monetary Logistics & Promotion)
@@ -50,18 +50,18 @@ const Team = () => {
       // HEIGHT CLAMP: min-h-[clamp(...)] maps physical boundaries to viewport height (vh).
       // This guarantees the card remains mathematically consistent, preventing jagged "bouncing" 
       // in the carousel track regardless of how the text wraps inside.
-      className="my-1 flex flex-col justify-start items-center bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white p-3 laptop:p-4 border-2 border-gray-600 pixel-shadow text-center transition-transform duration-300 hover:animate-[wiggle_2s_ease-in-out_infinite] hover:scale-105 cursor-pointer flex-shrink-0 w-40 sm:w-52 lg:w-60 min-h-[clamp(160px,25vh,220px)] lg:min-h-[clamp(200px,30vh,280px)]"
+      className="my-1 flex flex-col justify-start items-center bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white p-3 laptop:p-4 border-2 border-gray-600 pixel-shadow text-center transition-transform duration-300 hover:animate-[wiggle_2s_ease-in-out_infinite] hover:scale-105 cursor-pointer flex-shrink-0 w-40 sm:w-52 lg:w-80 min-h-[clamp(160px,25vh,220px)] lg:min-h-[clamp(200px,30vh,280px)]"
     >
       <div className="flex flex-col items-center w-full h-full">
         {/* object-cover ensures standard headshots fill the circle beautifully without stretching */}
-        <img src={member.image} alt={member.name} className="w-[clamp(4rem,10vh,6rem)] h-[clamp(4rem,10vh,6rem)] lg:w-[clamp(5rem,14vh,8rem)] lg:h-[clamp(5rem,14vh,8rem)] rounded-full mb-3 border-2 border-gray-600 object-cover" />
+        <img src={member.image} alt={member.name} className="w-[clamp(4rem,10vh,6rem)] h-[clamp(4rem,10vh,6rem)] lg:w-[clamp(7rem,14vh,8rem)] lg:h-[clamp(7rem,14vh,8rem)] rounded-full mb-3 border-2 border-gray-600 object-cover" />
         
         {/* line-clamp-1 forces names to stay on a single horizontal line, truncating with '...' if needed */}
-        <h3 className="font-bold tracking-wide text-xs sm:text-base lg:text-lg leading-tight line-clamp-1 w-full">{member.name}</h3>
+        <h3 className="font-bold tracking-wide text-xs sm:text-base lg:text-xl leading-tight line-clamp-1 w-full">{member.name}</h3>
         
         <div className="flex-grow flex items-start justify-center mt-1 w-full">
           {/* line-clamp-2 grants long titles (e.g. Director of Industry Relations) permission to wrap to a safe second line */}
-          <p className="text-gray-400 text-[10px] sm:text-sm lg:text-sm line-clamp-2 leading-snug">{member.role}</p>
+          <p className="text-gray-400 text-[10px] sm:text-sm lg:text-lg line-clamp-2 leading-snug">{member.role}</p>
         </div>
       </div>
     </a>

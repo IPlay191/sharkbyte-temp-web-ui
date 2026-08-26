@@ -89,7 +89,7 @@ const FAQ = () => {
   }
 
   return (
-    <section id="faq" className="w-full min-h-svh flex flex-col items-center justify-center relative overflow-hidden socials-bg py-[100px] px-4 tablet:px-8">  
+    <section id="faq" className="w-full min-h-svh flex flex-col items-center justify-center relative overflow-hidden faq-bg py-[100px] px-4 tablet:px-8">  
         
       {/* HEADER SECTION */}
       <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-20 desktop:py-8 mb-16 max-w-[800px] mx-auto z-10">
