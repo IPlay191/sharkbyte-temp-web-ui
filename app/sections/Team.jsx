@@ -14,10 +14,10 @@ const Team = () => {
     { name: "Erick Gonzalez", role: "President of INIT", image: "https://i.ibb.co/jPgN9P4Y/image.png", linkedin: "https://www.linkedin.com/in/erick-gonzalez-888b7a377/" },
     { name: "Elias Estrada", role: "Vice President of INIT", image: "https://i.ibb.co/jZHvT0T1/image.png", linkedin: "https://www.linkedin.com/in/elias-estrada-1445ab2b5/" },
     { name: "Dannia Dupotey", role: "Director of Marketing", image: "https://i.ibb.co/5Pkw1tg/image.png", linkedin: "https://www.linkedin.com/in/dannia-dupotey-1169193b5/" },
-    { name: "Kathween Vargas", role: "Director of Marketing", image: "https://i.ibb.co/hFH9PFjv/image.png", linkedin: "" },
+    { name: "Kathween Vargas", role: "Director of Marketing", image: "https://i.ibb.co/hFH9PFjv/image.png", linkedin: "https://www.linkedin.com/in/kathween-vargas-villafuerte-6409941aa/" },
     { name: "Mikhail Guevara", role: "Marketing", image: "https://i.ibb.co/hR4j6K5L/image.png", linkedin: "https://www.linkedin.com/in/mikhail-guevara-a425a6231/" },
     { name: "Linet Lima", role: "Director of Industry Relations", image: "https://i.ibb.co/F4f6JFct/image.png", linkedin: "https://www.linkedin.com/in/linet-lima-5437a0239/" },
-    { name: "Kelvin Rodriguez", role: "Director of Industry Relations", image: "https://i.ibb.co/hRHdfnpb/image.png", linkedin: "https://www.linkedin.com/in/kelvin-rodriguez-a519a0265/" },
+    { name: "Kelvin Rodriguez", role: "Director of Industry Relations", image: "https://i.ibb.co/V0WgDZQm/image.png", linkedin: "https://www.linkedin.com/in/kelvin-rodriguez-a519a0265/" },
     { name: "Richard Canina Miranda", role: "Director of Industry Relations", image: "https://i.ibb.co/CpHkbgh2/image.png", linkedin: "https://www.linkedin.com/in/richardcm-info" },
     { name: "Fritz Bonhomme", role: "Director of Technology", image: "https://i.ibb.co/Ndrnx4V6/image.png", linkedin: "" },
     { name: "Oliver Martinez Fernandez", role: "Web Development", image: "https://i.ibb.co/BVSMT9Dm/image.png", linkedin: "https://www.linkedin.com/in/oliver-martinez-9a1ba4340/" }
