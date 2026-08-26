@@ -1,59 +1,156 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
+
+// COMPONENT: Randomized Auto-Cycling Window Carousel
+const TrainWindow = ({ images, interval = 3000 }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (!images || images.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrentIndex(Math.floor(Math.random() * images.length));
+    }, interval);
+    return () => clearInterval(timer);
+  }, [images, interval]);
+
+  return ( 
+    <div className="retro-box pixel-shadow p-3 relative overflow-hidden w-[22rem] h-[16rem] tablet:w-[28rem] tablet:h-[20rem] desktop:w-[30rem] desktop:h-[23rem] shrink-0 flex items-center justify-center bg-black/40">
+      <div className="relative w-full h-full border-4 border-amber-100/30 rounded-md overflow-hidden bg-zinc-900">
+        {images.map((imgUrl, idx) => (
+          <img
+            key={idx}
+            src={imgUrl}
+            alt={`Window ${idx + 1}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
+              idx === currentIndex ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Statistics = () => {
+  const stats = [
+    { text: "200+ Attendees", hoverColor: "hover:text-blue-700" },
+    { text: "130 Participants", hoverColor: "hover:text-pink-400" },
+    { text: "52 Completed Projects", hoverColor: "hover:text-yellow-400" },
+  ];
 
-    const stats = [
-        { text: "200+ Attendees", hoverColor: "hover:text-blue-700" },
-        { text: "130 Participants", hoverColor: "hover:text-pink-400" },
-        { text: "52 Completed Projects", hoverColor: "hover:text-yellow-400" },
-    ];
+  const windowCar1 = [
+    "https://i.ibb.co/5NYNDdY/image.png",
+    "https://i.ibb.co/rRJpc6PT/image.png",
+    "https://i.ibb.co/fzMbkWGC/image.png",
+    "https://i.ibb.co/kg784D8H/image.png",
+    "https://i.ibb.co/Cs9ht4jd/image.png",
+    "https://i.ibb.co/RG0f1Cp7/image.png",
+    "https://i.ibb.co/B5KV5qcQ/image.png",
+    "https://i.ibb.co/ycXxPmMd/image.png",
+    "https://i.ibb.co/gbjRFhmM/image.png",
+    "https://i.ibb.co/PvcKpn4c/image.png",
+    "https://i.ibb.co/twkZhD2k/image.png",
+    "https://i.ibb.co/WNJzVzXm/image.png",
+    "https://i.ibb.co/p6yBcbYb/image.png",
+    "https://i.ibb.co/RFW6y6W/image.png",
+    "https://i.ibb.co/vC2RR4jD/image.png",
+    "https://i.ibb.co/MxqdrsNT/image.png",
+    "https://i.ibb.co/1fpWj8Pm/image.png",
+    "https://i.ibb.co/TMvZhkN9/image.png",
+    "https://i.ibb.co/0pXFFKYW/image.png",
+    "https://i.ibb.co/5hkWRj8B/image.png",
+    "https://i.ibb.co/1tPHHnsm/image.png",
+    "https://i.ibb.co/Y7Vf2v35/image.png",
+    "https://i.ibb.co/jv2vMHGT/image.png",
+    "https://i.ibb.co/qLrbcRfM/image.png",
+    "https://i.ibb.co/1c76jK3/image.png",
+    "https://i.ibb.co/LD4xSpxq/image.png"
+  ];
 
-    return (
-        <section id="statistics" className="w-full min-h-svh flex items-center justify-center relative overflow-hidden stats-bg pt-[80px] pb-8">
+  const windowCar2 = [...windowCar1];
+  const windowCar3 = [...windowCar1];
 
-            {/* LEFT SIDE BIRDS */}
-            <img className="absolute max-laptop:hidden w-[160px] h-[160px] left-[5%] top-[15%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-15" src='/Pixel Bird.png' alt="Bird1" />
-            <img className="absolute w-[80px] h-[80px] tablet:w-[120px] tablet:h-[120px] left-[2%] tablet:left-[8%] top-[55%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-15" src='/Pixel Bird.png' alt="Bird2" /> 
+  const sectionRef = useRef(null);
+  const trainRef = useRef(null);
 
-            {/* MAIN Wrapper: Stacks the title above the statistics card */}
-            <div className=" relative flex flex-col items-center gap-[4vw] tablet:gap-8 max-h-[750px]:gap-4 z-10 flex-shrink-0">
-            
-                {/* THE TITLE */}
-                <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-20 desktop:py-8 max-h-[750px]:px-8 max-h-[750px]:py-3">
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current || !trainRef.current) return;
 
-                    <h1 className="font-bold text-center text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl max-h-[750px]:text-2xl">
+      const section = sectionRef.current;
+      const train = trainRef.current;
 
-                        Last Year We Had...
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const viewportHeight = window.innerHeight;
 
-                    </h1>
+      const totalScrollableDistance = sectionHeight - viewportHeight;
+      const maxHorizontalScroll = train.scrollWidth - window.innerWidth;
 
-                </div>
+      if (totalScrollableDistance <= 0 || maxHorizontalScroll <= 0) return;
 
-                {/* THE BOX */}
-                <div className="retro-box pixel-shadow p-8 tablet:p-12 laptop:p-16 desktop:p-18 max-h-[750px]:p-6">
+      const currentScroll = window.scrollY - sectionTop;
 
-                    <div className="flex flex-col gap-6 tablet:gap-8 laptop:gap-10 desktop:gap-12 max-h-[750px]:gap-4">
+      // SCROLL INTERPOLATION: Calculates the precise scroll progress through the sticky container to translate vertical scrolling into horizontal movement.
+      const progress = Math.min(
+        Math.max(currentScroll / totalScrollableDistance, 0),
+        1
+      );
 
-                        {stats.map((stat, index) => (
+      train.style.transform = `translateX(-${progress * maxHorizontalScroll}px)`;
+    };
 
-                            <h2 key={index} className={`font-bold text-2xl tablet:text-4xl laptop:text-5xl desktop:text-6xl max-h-[750px]:text-xl ${stat.hoverColor}`}>
-                                
-                                {stat.text}
-                            
-                            </h2>
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
 
-                        ))}
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-                    </div>
+  return (
+    <section
+      ref={sectionRef}
+      id="statistics"
+      className="relative w-full h-[100rem] bg-black-900 bg-fixed bg-center bg-no-repeat"
+    >
+      <div className="sticky top-0 h-screen overflow-hidden flex items-center">
+        <div
+          ref={trainRef}
+          id="train-wrapper"
+          className="flex flex-row items-center gap-[4vw] px-[6vw] w-max h-[50rem] z-10 shrink-0 transition-transform duration-75 ease-out"
+          style={{
+            backgroundImage: `url('https://i.ibb.co/VRWRBSH/Pixel-Train-Second-Half-Page-4.png'), url('https://i.ibb.co/pvLry1fW/Pixel-Train-First-Half-Page-3.png')`,
+            backgroundPosition: "left center, right center",
+            backgroundRepeat: "no-repeat, no-repeat",
+            backgroundSize: "50% 100%, 50% 100%",
+          }}
+        >
+        <div className="retro-box pixel-shadow p-3 relative overflow-hidden w-[22rem] h-[16rem] tablet:w-[28rem] tablet:h-[20rem] desktop:w-[25rem] desktop:h-[23rem] ml-[20vw] shrink-0 flex items-center justify-center bg-black/40">
+          <div className="relative w-full h-full border-4 border-amber-100/30 rounded-md overflow-hidden bg-zinc-900 flex items-center justify-center p-4">
+            <h1 className="font-bold text-center text-white text-[10vw] tablet:text-[5vw] laptop:text-3xl desktop:text-4xl max-h-[750px]:text-xl">
+              Last Year We Had...
+            </h1>
+          </div>
+        </div>
 
-                </div>
+        <div className="retro-box pixel-shadow p-3 relative overflow-hidden w-[22rem] h-[16rem] tablet:w-[28rem] tablet:h-[20rem] desktop:w-[25rem] desktop:h-[23rem] shrink-0 flex items-center justify-center bg-black/40">
+          <div className="relative w-full h-full border-4 border-amber-100/30 rounded-md overflow-hidden bg-zinc-900 flex flex-col justify-center items-center gap-3 tablet:gap-5 laptop:gap-6 p-4">
+            {stats.map((stat, index) => (
+              <h2
+                key={index}
+                className={`hover:cursor-default font-bold text-center text-[8vw] tablet:text-[5vw] laptop:text-[2vw] desktop:text-[3vw] max-h-[750px]:text-base ${stat.hoverColor}`}
+              >
+                {stat.text}
+              </h2>
+            ))}
+          </div>
+        </div>
 
-            </div>
+          <TrainWindow images={windowCar1} interval={3000} />
+          <TrainWindow images={windowCar2} interval={3000} />
+        </div>
+      </div>
+    </section>
+  );
+};
 
-            {/* RIGHT SIDE BIRDS */}
-            <img className="absolute w-[80px] h-[80px] tablet:w-[120px] tablet:h-[120px] right-[2%] tablet:right-[8%] top-[30%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-15" src='/Pixel Bird.png' alt="Bird3" /> 
-            <img className="absolute max-laptop:hidden w-[160px] h-[160px] right-[5%] top-[70%] animate-[bounce-high_6s_ease-in-out_infinite] pointer-events-none select-none z-15" src='/Pixel Bird.png' alt="Bird4" /> 
-
-        </section>
-    )
-}
-
-export default Statistics
+export default Statistics;
