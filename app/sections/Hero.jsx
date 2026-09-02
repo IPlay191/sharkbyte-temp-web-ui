@@ -107,12 +107,9 @@ export default function Hero() {
           <p className="text-sm font-bold sm:text-base tablet:text-lg">
             Have Questions? Contact Us!
           </p>
-          <a 
-            href="mailto:Mdc-north@weareinit.org" 
-            className="mt-2 break-all text-sm text-purple-400 hover:text-purple-300 hover:underline transition-colors tablet:text-base"
-          >
+          <span className="mt-2 break-all text-sm text-purple-400 tablet:text-base">
             Mdc-north@weareinit.org
-          </a>
+          </span>
         </div>
         
       </div>

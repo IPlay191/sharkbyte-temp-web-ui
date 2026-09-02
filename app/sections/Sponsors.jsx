@@ -179,9 +179,9 @@ const Sponsors = () => {
             <p className="text-left font-mono text-[13px] tablet:text-[16px] laptop:text-[22px] desktop:text-[26px]">
               <span className="text-[#39ff14] mr-2">{">"}</span> 
               Want to sponsor? Execute:{" "}
-              <a href="mailto:industry@weareinit.org" className="text-[#8b5cf6] hover:text-[#a78bfa] hover:underline transition-colors break-all tablet:break-normal">
+              <span className="text-[#8b5cf6] break-all tablet:break-normal">
                 industry@weareinit.org
-              </a>
+              </span>
               <span className="animate-blink text-[#39ff14] ml-1">_</span>
             </p>
           </div>
