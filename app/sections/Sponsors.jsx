@@ -1,6 +1,8 @@
 'use client'
 
 import Image from "next/image"
+import { useEffect } from 'react'
+import { fadeOnScroll } from '../lib/fadeOnScroll'
 
 // ============================================================================
 // 1. DATA ARCHITECTURE: OFFICIAL SPONSORS & NATIONAL PARTNERS
@@ -80,6 +82,34 @@ const SponsorCard = ({ sponsor }) => {
 // 3. LAYOUT: MAIN SPONSORS VIEW
 // ============================================================================
 const Sponsors = () => {
+  useEffect(() => {
+    const sponsors = document.getElementById('sponsors')
+    const location = document.getElementById('location')
+
+    if (!sponsors || !location) return undefined
+
+    const updateTransition = () => {
+      const locationEnd = location.offsetTop + location.offsetHeight
+
+      fadeOnScroll({
+        page: sponsors,
+        startAt: locationEnd - window.innerHeight * 0.25,
+        endAt: locationEnd + sponsors.offsetHeight * 0.1,
+        startOpacity: 0,
+        endOpacity: 1,
+      })
+    }
+
+    updateTransition()
+    window.addEventListener('scroll', updateTransition, { passive: true })
+    window.addEventListener('resize', updateTransition)
+
+    return () => {
+      window.removeEventListener('scroll', updateTransition)
+      window.removeEventListener('resize', updateTransition)
+    }
+  }, [])
+
   return (
     // ISOLATION: 'isolate z-0' builds a strict stacking context. It acts as an 
     // invisible wall preventing the glowing box-shadows from bleeding off this page.

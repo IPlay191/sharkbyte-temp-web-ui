@@ -95,7 +95,24 @@ export default function Hero() {
           <div className="font-bold absolute text-nowrap justify-self-center text-white text-[1rem] tablet:text-[1.25rem] laptop:text-[1.5rem] desktop:text-[2.2rem] text-shadow-lg/100 text-shadow-white-900"> 
             Miami Dade College's Signature Hackathon 
           </div>
-        
+        </div>
+
+        {/* 
+          CONTACT US WIDGET
+          Using 'absolute' instead of 'fixed' binds this to the sticky hero container. 
+          This ensures it stays visible during the Hero section, but fades and scrolls away 
+          perfectly with the rest of the logo and text when moving to the About page.
+        */}
+        <div className="absolute bottom-4 left-4 right-4 z-20 flex flex-col items-center justify-center p-4 text-center text-white retro-box pixel-shadow sm:bottom-6 sm:left-auto sm:right-6 sm:w-[18rem] sm:p-5">
+          <p className="text-sm font-bold sm:text-base tablet:text-lg">
+            Have Questions? Contact Us!
+          </p>
+          <a 
+            href="mailto:Mdc-north@weareinit.org" 
+            className="mt-2 break-all text-sm text-purple-400 hover:text-purple-300 hover:underline transition-colors tablet:text-base"
+          >
+            Mdc-north@weareinit.org
+          </a>
         </div>
         
       </div>
