@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { fadeOnScroll } from '../lib/fadeOnScroll'
 
 const Location = () => {
   const [activeMap, setActiveMap] = useState(1)
@@ -10,6 +11,32 @@ const Location = () => {
     0: MDC Map 
     1: Google Map
   */
+
+  useEffect(() => {
+    const location = document.getElementById('location')
+
+    if (!location) return undefined
+
+    const updateTransition = () => {
+
+      fadeOnScroll({
+        page: location,
+        startAt: location.offsetTop - window.innerHeight * 0.05,
+        endAt: location.offsetTop + location.offsetHeight * 0.8,
+        startOpacity: 1,
+        endOpacity: 0,
+      })
+    }
+
+    updateTransition()
+    window.addEventListener('scroll', updateTransition, { passive: true })
+    window.addEventListener('resize', updateTransition)
+
+    return () => {
+      window.removeEventListener('scroll', updateTransition)
+      window.removeEventListener('resize', updateTransition)
+    }
+  }, [])
 
   // Auto-collapse map when scrolling away from the location section
   useEffect(() => {

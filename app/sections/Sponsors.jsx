@@ -1,6 +1,8 @@
 'use client'
 
 import Image from "next/image"
+import { useEffect } from 'react'
+import { fadeOnScroll } from '../lib/fadeOnScroll'
 
 // --------------------------------------------------------
 // 1. DATA ARCHITECTURE WITH TIERS
@@ -86,6 +88,34 @@ const SponsorCard = ({ sponsor }) => {
 // 3. MAIN COMPONENT RENDER
 // --------------------------------------------------------
 const Sponsors = () => {
+  useEffect(() => {
+    const sponsors = document.getElementById('sponsors')
+    const location = document.getElementById('location')
+
+    if (!sponsors || !location) return undefined
+
+    const updateTransition = () => {
+      const locationEnd = location.offsetTop + location.offsetHeight
+
+      fadeOnScroll({
+        page: sponsors,
+        startAt: locationEnd - window.innerHeight * 0.25,
+        endAt: locationEnd + sponsors.offsetHeight * 0.1,
+        startOpacity: 0,
+        endOpacity: 1,
+      })
+    }
+
+    updateTransition()
+    window.addEventListener('scroll', updateTransition, { passive: true })
+    window.addEventListener('resize', updateTransition)
+
+    return () => {
+      window.removeEventListener('scroll', updateTransition)
+      window.removeEventListener('resize', updateTransition)
+    }
+  }, [])
+
   return (
     <section id="sponsors" className="z-9 sponsors-bg w-full min-h-svh flex flex-col justify-center items-center relative overflow-hidden py-10 max-h-svh">
       
