@@ -9,14 +9,14 @@ export function zoomOnScroll({
   easing = 'easeOutCubic',
 }) {
   if (!page) return { progress: 0, scale: startScale }
-// Calculate the range of the scroll and the current scroll position. The range is the distance over which the zoom effect will occur, and current is the user's current scroll position.
+  // Calculate the range of the scroll and the current scroll position. The range is the distance over which the zoom effect will occur, and current is the user's scroll position.
   const range = endAt - startAt
   const current = window.scrollY
   const resetZone = window.innerHeight * 0.5 // Distance over which to reset scale back to normal
   let scale = startScale
   let translateY = 0
   let easedProgress = 0
-// Determine the scale and translateY based on the current scroll position relative to the start and end points of the zoom effect. The easing function is applied to create a smooth transition.
+  // Determine the scale and translateY based on the current scroll position relative to the start and end points of the zoom effect. The easing function creates a smooth effect.
   if (current < startAt) {
     // Before transition starts
     scale = startScale
@@ -41,7 +41,7 @@ export function zoomOnScroll({
     translateY = Math.round(easeFunc * -(window.innerHeight * 0.15))
     easedProgress = 1 - resetProgress
   }
-// Apply the calculated scale and translateY to the page element's style. The transform origin is set to the center of the element to ensure it scales uniformly from the center.
+  // Apply the calculated scale and translateY to the page element's style. The transform origin is set to the center of the element to ensure it scales uniformly.
   page.style.transformOrigin = 'center center'
   page.style.transform = `translateY(${translateY}px) scale(${scale.toFixed(3)})`
   page.style.willChange = 'transform'

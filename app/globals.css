@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
-/* @ syntax defines css directives (at-rules)
-ex.
-@theme - Tells Tailwind v4 to automatically generate utility classes from your custom CSS variables.
-@keyframes - Defines the individual steps and styles to create custom CSS animations.
-@media - Applies CSS rules conditionally based on device features, like screen width or dark mode preferences.
+/* ============================================================================
+   1. TAILWIND V4 DIRECTIVES & DESIGN SYSTEM
+============================================================================ */
+/* 
+  @theme injects custom CSS variables directly into Tailwind's utility engine.
+  This allows developers to use custom classes (e.g., 'font-pixel' or 'laptop:flex')
+  natively inside React components without writing manual media queries.
+  Note: VS Code may flag '@theme' as an unknown rule; this is a known linter limitation, not a bug.
 */
-
-/* tailwindcss v4 unique class creator directive */
 @theme {
   --font-pixel: 'VT323', monospace;
   --breakpoint-mobile: 360px;
@@ -16,133 +17,80 @@ ex.
   --breakpoint-desktop: 1025px;
 }
 
-/* custom utility class for pixelated box style */
+/* ============================================================================
+   2. GLOBAL UTILITY CLASSES
+============================================================================ */
+/* 
+  .retro-box applies the standardized retro arcade cabinet aesthetic across 
+  all UI components. '@apply' dynamically injects Tailwind utility classes.
+  Note: VS Code may flag '@apply' as an unknown rule; this is normal for Tailwind.
+*/
 .retro-box {
   @apply bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 border-3 border-gray-600 text-white;
 }
 
-/* Creates a seamless fade-out effect on the left and right edges of the carousel */
+/* 
+  .carousel-mask uses webkit-mask-image to create a seamless alpha-gradient fade 
+  on the left and right edges of the scrolling marquees. This prevents UI elements 
+  from jarringly snapping in and out of existence at the screen edges.
+*/
 .carousel-mask {
   -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
   mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
 
-/* Retro terminal blinking cursor animation */
+/* ============================================================================
+   3. TYPOGRAPHY EFFECTS & KEYFRAME ANIMATIONS
+============================================================================ */
+/* Standard retro terminal blinking cursor animation */
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
-/* Glow effect */
+
+/* 
+  1. HEAVY NEON GLOW (For Dark Backgrounds Only)
+  Creates a fluid, multi-layered text-shadow that simulates physical light emission.
+*/
 @keyframes glow-fade {
   0%, 100% {
-    text-shadow: 0 0 10px rgba(250, 21, 135, 0.8), 0 0 28px rgba(250, 21, 135, 0.8), 0 0 42px rgba(250, 21, 135, 0.8);
-  }
-  50% {
-    text-shadow: 0 0 18px rgba(250, 21, 135, 0.8), 0 0 40px rgba(250, 21, 135, 0.8), 0 0 60px rgba(250, 21, 135, 0.8);
-  }
-}
-
-.glow-text {
-  color: #ffffff;
-  filter: brightness(1.2);
-  animation: glow-fade 2.8s ease-in-out infinite;
-}
-
-/* pseudo-class, defines highest level element */
-:root {
-  --background: #fff;
-  --foreground: #000;
-}
-
-/* global element css */
-body {
-  /* using css variables as values */
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-pixel);
-
-  min-height: 100svh;
-  text-rendering: optimizeLegibility;
-
-  /* browser specific css */
-  -webkit-font-smoothing: subpixel-antialiased; /* macintosh */
-  -moz-osx-font-smoothing: grayscale; /* firefox */
-}
-
-
-/* glowing text effect */
-@keyframes glow-fade {
-  0%, 100% {
-    opacity: 0.9;
-    text-shadow: 0 0 4px rgba(250, 21, 135, 0.5);
+    opacity: 0.98;
+    text-shadow: 0 0 3px rgba(250, 21, 135, 0.24), 0 0 8px rgba(250, 21, 135, 0.18), 0 0 14px rgba(250, 21, 135, 0.12);
   }
   50% {
     opacity: 1;
-    text-shadow: 0 0 8px rgba(250, 21, 135, 0.9), 0 0 14px rgba(250, 21, 135, 0.5);
+    text-shadow: 0 0 6px rgba(250, 21, 135, 0.36), 0 0 12px rgba(250, 21, 135, 0.24), 0 0 20px rgba(250, 21, 135, 0.16);
   }
 }
 
 .glow-text {
   color: #d65858;
   animation: glow-fade 4.2s ease-in-out infinite;
-  will-change: opacity, text-shadow;
+  will-change: opacity, text-shadow; 
 }
 
-/* css backgrounds with images */
-.statistics-bg,
-.hero-bg,
-.stats-bg,
-.comingsoon-bg,
-.sponsors-bg,
-.socials-bg,
-.about-bg,
-.location-bg {
-.team-bg
- {
-  background-repeat: no-repeat;
-  background-size: cover;
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
+/* 
+  2. SUBTLE AURA GLOW (For Light/White Backgrounds)
+  Uses a Deep Crimson/Rose base (#9F1239) for mathematically flawless 7:1 contrast on white.
+  The glow radius is heavily constrained to prevent visual smudging, providing a premium, 
+  highly readable retro pulse that doesn't cause eye strain.
+*/
+@keyframes subtle-glow {
+  0%, 100% {
+    text-shadow: 0 0 2px rgba(159, 18, 57, 0.3), 0 0 6px rgba(159, 18, 57, 0.1);
+  }
+  50% {
+    text-shadow: 0 0 4px rgba(159, 18, 57, 0.6), 0 0 10px rgba(159, 18, 57, 0.2);
+  }
 }
 
-.hero-bg {
-  background-image: url('https://i.ibb.co/wNPWzc7J/Skyscrapers-Hero-Page.png');
-  background-position: center;
+.subtle-glow-text {
+  color: #9F1239; 
+  animation: subtle-glow 4s ease-in-out infinite;
+  will-change: text-shadow; 
 }
 
-.stats-bg {
-  background-image: url('https://i.ibb.co/LhD9g6sk/Clouds-Stats-Page.png');
-  background-position: center;
-}
-
-.comingsoon-bg {
-  background-image: url('https://i.ibb.co/2YMDf26n/Temporary-website-page-4.png');
-  background-position: center;
-}
-
-.sponsors-bg {
-  background-image: url('https://i.ibb.co/rKcRScGt/section-team.png');
-  background-position: center;
-}
-
-.socials-bg {
-  background-image: url('https://i.ibb.co/zhVkj2XT/socials-pahir6.png');
-  background-position: center;
-}
-
-.about-bg {
-  background-image: url('https://i.ibb.co/qMTm9gVt/Sharkbyte-Website-Page-2.png');
-  background-position: center;
-}
-
-.location-bg {
-  background-image: url('https://i.ibb.co/9kfFYzWK/Sharkbyte-Website-Page-5.png');
-.team-bg{
-  background-image: url('https://i.ibb.co/zhVkj2XT/socials-pahir6.png');
-  background-position: center;
-}
-
+/* Utility animation used for floating cards and elements */
 @keyframes bounce-high {
   0%, 100% {
     transform: translateY(100%);
@@ -153,3 +101,59 @@ body {
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
+
+/* ============================================================================
+   4. GLOBAL DOM ARCHITECTURE
+============================================================================ */
+:root {
+  --background: #fff;
+  --foreground: #000;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-pixel);
+  min-height: 100svh;
+  
+  /* System-level font optimization for clearer, sharper pixel art rendering */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: subpixel-antialiased; /* macOS optimization */
+  -moz-osx-font-smoothing: grayscale; /* Firefox optimization */
+}
+
+/* ============================================================================
+   5. BACKGROUND IMAGE ASSET ROUTING
+============================================================================ */
+/* 
+  Ensures all designated background elements strictly render as sharp pixel art.
+  Prevents modern browser engines from automatically applying anti-aliasing/blurring 
+  to scaled raster graphics.
+*/
+.statistics-bg,
+.hero-bg,
+.stats-bg,
+.comingsoon-bg,
+.sponsors-bg,
+.socials-bg,
+.about-bg,
+.location-bg, 
+.team-bg,
+.faq-bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Explicit routing mapping CSS classes to their respective hosted assets */
+.hero-bg { background-image: url('https://i.ibb.co/ynf1hTHY/Website-Page-1.png'); background-position: center; }
+.stats-bg { background-image: url('https://ibb.co/album/ZNfCNx?page=2&seek=cSDqNyGq'); background-position: center; }
+.comingsoon-bg { background-image: url('https://i.ibb.co/2YMDf26n/Temporary-website-page-4.png'); background-position: center; }
+.sponsors-bg { background-image: url('https://i.ibb.co/Zp1t2mnh/Sharkbyte-Website-Page-6.png'); background-position: center; }
+.socials-bg { background-image: url('https://i.ibb.co/wZhcDMcr/Sharkbyte-Website-Page-9.png'); background-position: center; }
+.about-bg { background-image: url('https://i.ibb.co/qMTm9gVt/Sharkbyte-Website-Page-2.png'); background-position: center; }
+.location-bg { background-image: url('https://i.ibb.co/9kfFYzWK/Sharkbyte-Website-Page-5.png'); }
+.team-bg { background-image: url('https://i.ibb.co/N6cwq0Nk/Sharkbyte-Website-Page-7.png'); background-position: center; }
+.faq-bg { background-image: url('https://i.ibb.co/bRJb4QJb/Sharkbyte-Website-Page-8.png'); background-position: center; }
