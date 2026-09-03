@@ -6,39 +6,44 @@ import { fadeOnScroll } from '../lib/fadeOnScroll'
 import { zoomOnScroll } from '../lib/zoomOnScroll'
 
 export default function Hero() {
+  // ============================================================================
+  // PARALLAX & FADE SCROLL ENGINE
+  // ============================================================================
   useEffect(() => {
-    const hero = document.getElementById('hero')
-    const about = document.getElementById('about')
+    // We separate the physical scroll "track" from the visual "content"
+    const track = document.getElementById('hero-track')
+    const content = document.getElementById('hero-content')
 
-    // GUARD CLAUSE: Ensures the scroll-listener logic does not execute if the target DOM nodes are unmounted or missing.
-    if (!hero || !about) return undefined
+    if (!track || !content) return undefined
     
-    // ANIMATION CONFIGURATION: fadeOnScroll dictates the opacity transition between the Hero and About sections.
     const updateTransition = () => {
+      // Mathematical boundaries perfectly mapped to the artificial scroll track
+      const start = track.offsetTop
+      const end = track.offsetTop + track.offsetHeight - window.innerHeight
+
       fadeOnScroll({
-        page: hero,
-        startAt: hero.offsetTop,
-        endAt: about.offsetTop,
+        page: content,
+        startAt: start,
+        endAt: end,
         startOpacity: 1,
         endOpacity: 0,
       })
       
-      // ZOOM CONFIGURATION: zoomOnScroll creates the parallax depth effect. Scale values determine the intensity of the zoom.
       zoomOnScroll({
-        page: hero,
-        startAt: hero.offsetTop - window.innerHeight * 0.001,
-        endAt: about.offsetTop - window.innerHeight * 0.00001,
+        page: content,
+        startAt: start,
+        endAt: end,
         startScale: 1,
-        endScale: 3.0,
+        endScale: 1.8, // Reduced from 3.0 to prevent an extreme "fly-by" effect
       })
     }
     
-    // PERFORMANCE OPTIMIZATION: Passive event listeners prevent scroll jank by explicitly bypassing preventDefault() checks.
+    // PERF-OPTIMIZATION: Passive listeners prevent scroll jank by explicitly bypassing preventDefault() checks.
     updateTransition()
     window.addEventListener('scroll', updateTransition, { passive: true })
     window.addEventListener('resize', updateTransition)
     
-    // LIFECYCLE MANAGEMENT: Cleans up event listeners on component unmount to prevent memory leaks and ghost calculations.
+    // MEMORY MANAGEMENT: Cleans up listeners on unmount.
     return () => {
       window.removeEventListener('scroll', updateTransition)
       window.removeEventListener('resize', updateTransition)
@@ -46,39 +51,68 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id='hero' className="h-svh w-full hero-bg flex justify-center items-center flex-row max-[700px]:flex-col relative overflow-hidden">
+    <section id='hero-track' className="w-full h-[200vh] relative">
+      {/* 
+        ARTIFICIAL SCROLL TRACK: 
+        Using 'h-[200vh]' gives the user an extra 100% of viewport height to scroll through.
+        This physically forces the transition to take longer, solving the "easily skippable" issue 
+        without relying on artificial delays or blocking the user's scroll wheel.
+      */}
 
-      <div className='relative flex-column justify-center items-center'>
+      {/* 
+        STICKY CONTAINER: 
+        Pins the visual content to the screen while the user scrolls through the 200vh track.
+        Once the track finishes, this container unpins and scrolls away naturally into the About page.
+      */}
+      <div id='hero-content' className="sticky top-0 h-svh w-full hero-bg flex justify-center items-center flex-row max-[700px]:flex-col overflow-hidden will-change-transform">
 
-        <div className="flex absolute left-[-3rem] top-[-1rem] desktop:left-[-10rem] -rotate-[15deg] z-9 animate-bounce">
+        <div className='relative flex-column justify-center items-center'>
 
-          <Image className="w-[100px] h-auto desktop:w-[200px]"
-            src="https://i.ibb.co/Q7tQMWqH/image.png"
-            alt="text-bubble for feedback form"
-            width={300}
-            height={300}
-            priority
-          />
+          {/* ABSOLUTE POSITIONING: Anchors the floating text bubble relative to the main logo. */}
+          <div className="flex absolute left-[-3rem] top-[-1rem] desktop:left-[-10rem] -rotate-[15deg] z-9 animate-bounce">
+            <Image className="w-[100px] h-auto desktop:w-[200px]"
+              src="https://i.ibb.co/Q7tQMWqH/image.png"
+              alt="text-bubble for feedback form"
+              width={300}
+              height={300}
+              priority
+            />
+          </div>
 
+          {/* MAIN LOGO */}
+          <div className="z-2">
+            <Image
+              src="/svgs/logo.svg"
+              alt="SharkByte Logo"
+              width={100}
+              height={100}
+              priority
+              className="w-[300px] h-[300px] tablet:w-[350px] tablet:h-[350px] laptop:w-[400px] laptop:w-[400px] desktop:w-full desktop:h-full"
+            />
+          </div>
+
+          {/* ABSOLUTE POSITIONING: Centers the sub-title directly underneath the main logo graphic. */}
+          <div className="font-bold absolute text-nowrap justify-self-center text-white text-[1rem] tablet:text-[1.25rem] laptop:text-[1.5rem] desktop:text-[2.2rem] text-shadow-lg/100 text-shadow-white-900"> 
+            Miami Dade College's Signature Hackathon 
+          </div>
         </div>
 
-        <div className="z-2 ">
-
-          <Image
-            src="/svgs/logo.svg"
-            alt="SharkByte Logo"
-            width={100}
-            height={100}
-            priority
-            className="w-[300px] h-[300px] tablet:w-[350px] tablet:h-[350px] laptop:w-[400px] laptop:w-[400px] desktop:w-full desktop:h-full"
-          />
-
+        {/* 
+          CONTACT US WIDGET
+          Using 'absolute' instead of 'fixed' binds this to the sticky hero container. 
+          This ensures it stays visible during the Hero section, but fades and scrolls away 
+          perfectly with the rest of the logo and text when moving to the About page.
+        */}
+        <div className="absolute bottom-4 left-4 right-4 z-20 flex flex-col items-center justify-center p-4 text-center text-white retro-box pixel-shadow sm:bottom-6 sm:left-auto sm:right-6 sm:w-[18rem] sm:p-5">
+          <p className="text-sm font-bold sm:text-base tablet:text-lg">
+            Have Questions? Contact Us!
+          </p>
+          <span className="mt-2 break-all text-sm text-purple-400 tablet:text-base">
+            Mdc-north@weareinit.org
+          </span>
         </div>
-
-        <div className=" font-bold absolute text-nowrap justify-self-center text-white text-[1rem] tablet:text-[1.25rem] laptop:text-[1.5rem] desktop:text-[2.2rem] text-shadow-lg/100 text-shadow-white-900 "> Miami Dade College's Signature Hackathon </div>
-      
+        
       </div>
-      
     </section>
   )
 }

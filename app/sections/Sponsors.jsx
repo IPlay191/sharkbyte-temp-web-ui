@@ -1,6 +1,8 @@
 'use client'
 
 import Image from "next/image"
+import { useEffect } from 'react'
+import { fadeOnScroll } from '../lib/fadeOnScroll'
 
 // ============================================================================
 // 1. DATA ARCHITECTURE: OFFICIAL SPONSORS & NATIONAL PARTNERS
@@ -16,6 +18,7 @@ import Image from "next/image"
 const sponsorsRow1 = [
   { href: "https://www.roocapital.com/", src: "https://i.ibb.co/DgTndgYp/roo-capital.png", alt: "roo_capital_logo", tier: 1 },
   { href: "https://knightfoundation.org/", src: "https://i.ibb.co/DfGpRjcY/knight-foundation-logo.jpg", alt: "knight_foundation_logo", tier: 1 },
+  { href: "https://www.wix.com/", src: "https://i.ibb.co/RWpYv6K/wix-logo.png", alt: "wix_logo", tier: 1 },
   { href: "https://www.celsius.com/", src: "https://i.ibb.co/XfVsrq93/Celcius-logo.webp", alt: "celsius_logo", tier: 2 },
   { href: "https://www.lab22c.com/", src: "https://i.ibb.co/4wQ52k3p/lab22c-logo.jpg", alt: "lab22c_logo", tier: 2 },
   { href: "https://www.milamsmarkets.com/", src: "https://i.ibb.co/C5DbxdhF/milams-market-logo.png", alt: "milams_markets_logo", tier: 3 },
@@ -79,6 +82,34 @@ const SponsorCard = ({ sponsor }) => {
 // 3. LAYOUT: MAIN SPONSORS VIEW
 // ============================================================================
 const Sponsors = () => {
+  useEffect(() => {
+    const sponsors = document.getElementById('sponsors')
+    const location = document.getElementById('location')
+
+    if (!sponsors || !location) return undefined
+
+    const updateTransition = () => {
+      const locationEnd = location.offsetTop + location.offsetHeight
+
+      fadeOnScroll({
+        page: sponsors,
+        startAt: locationEnd - window.innerHeight * 0.25,
+        endAt: locationEnd + sponsors.offsetHeight * 0.1,
+        startOpacity: 0,
+        endOpacity: 1,
+      })
+    }
+
+    updateTransition()
+    window.addEventListener('scroll', updateTransition, { passive: true })
+    window.addEventListener('resize', updateTransition)
+
+    return () => {
+      window.removeEventListener('scroll', updateTransition)
+      window.removeEventListener('resize', updateTransition)
+    }
+  }, [])
+
   return (
     // ISOLATION: 'isolate z-0' builds a strict stacking context. It acts as an 
     // invisible wall preventing the glowing box-shadows from bleeding off this page.
@@ -148,9 +179,9 @@ const Sponsors = () => {
             <p className="text-left font-mono text-[13px] tablet:text-[16px] laptop:text-[22px] desktop:text-[26px]">
               <span className="text-[#39ff14] mr-2">{">"}</span> 
               Want to sponsor? Execute:{" "}
-              <a href="mailto:industry@weareinit.org" className="text-[#8b5cf6] hover:text-[#a78bfa] hover:underline transition-colors break-all tablet:break-normal">
+              <span className="text-[#8b5cf6] break-all tablet:break-normal">
                 industry@weareinit.org
-              </a>
+              </span>
               <span className="animate-blink text-[#39ff14] ml-1">_</span>
             </p>
           </div>
