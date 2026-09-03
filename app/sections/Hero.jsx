@@ -10,8 +10,8 @@ export default function Hero() {
   // PARALLAX & FADE SCROLL ENGINE
   // ============================================================================
   useEffect(() => {
-    // Separates the physical scroll "track" from the visual "content"
-    const track = document.getElementById('hero-track')
+    // BUG FIX: Reverted the observer to target 'hero' so it matches the Navbar's router
+    const track = document.getElementById('hero')
     const content = document.getElementById('hero-content')
 
     if (!track || !content) return undefined
@@ -51,7 +51,12 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id='hero-track' className="w-full h-[200vh] relative">
+    <section id='hero' className="w-full h-[200vh] relative">
+      {/* 
+        RESTORED ID: Changed back to 'hero'.
+        The Navbar uses document.getElementById('hero') to calculate where to auto-scroll.
+      */}
+
       {/* 
         ARTIFICIAL SCROLL TRACK: 
         Using 'h-[200vh]' provides an extra 100% of viewport height to scroll through.
