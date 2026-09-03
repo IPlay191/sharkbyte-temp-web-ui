@@ -37,9 +37,9 @@ const sponsorsRow2 = [
 // ============================================================================
 const SponsorCard = ({ sponsor }) => {
   
-  // SCALING LOGIC: We use the CSS clamp(MIN, IDEAL, MAX) function mapped to 
+  // SCALING LOGIC: Uses the CSS clamp(MIN, IDEAL, MAX) function mapped to 
   // Viewport Height (vh). This ensures cards shrink gracefully on short laptop 
-  // screens to prevent clipping, while expanding beautifully on massive monitors.
+  // screens to prevent clipping, while expanding dynamically on massive monitors.
   const getTierStyles = (tier) => {
     switch (tier) {
       case 1:
@@ -71,7 +71,7 @@ const SponsorCard = ({ sponsor }) => {
       className={`group relative flex justify-center items-center pixel-shadow transition-all duration-300 hover:-translate-y-2 flex-shrink-0 mx-2 overflow-hidden ${styles.wrapper}`}
     >
       <div className={`absolute transition-transform duration-300 group-hover:scale-105 ${styles.inner}`}>
-        {/* object-contain protects brand integrity by preventing logo distortion or cropping */}
+        {/* object-contain protects brand integrity by preventing logo distortion or cropping. */}
         <Image src={sponsor.src} alt={sponsor.alt} fill sizes="(max-width: 700px) 200px, 350px" className="object-contain" />
       </div>
     </a>
@@ -112,7 +112,7 @@ const Sponsors = () => {
 
   return (
     // ISOLATION: 'isolate z-0' builds a strict stacking context. It acts as an 
-    // invisible wall preventing the glowing box-shadows from bleeding off this page.
+    // invisible wall preventing glowing box-shadows from bleeding off this section.
     <section id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-center items-center relative overflow-hidden py-[4vh] px-4">
       
       {/* 
@@ -136,7 +136,7 @@ const Sponsors = () => {
             
             <div className="marquee overflow-hidden w-full flex items-center">
               <div className="marquee__track marquee__left items-center">
-                {/* Triplicating the array guarantees a seamless infinite loop on ultra-wide 4K monitors */}
+                {/* Triplicating the array guarantees a seamless infinite loop on ultra-wide 4K monitors. */}
                 {[...sponsorsRow1, ...sponsorsRow1, ...sponsorsRow1].map((sponsor, i) => (
                   <SponsorCard key={`top-${i}`} sponsor={sponsor} />
                 ))}
@@ -179,9 +179,18 @@ const Sponsors = () => {
             <p className="text-left font-mono text-[13px] tablet:text-[16px] laptop:text-[22px] desktop:text-[26px]">
               <span className="text-[#39ff14] mr-2">{">"}</span> 
               Want to sponsor? Execute:{" "}
-              <span className="text-[#8b5cf6] break-all tablet:break-normal">
+              {/* 
+                INTERACTIVE EMAIL LINK:
+                Opens the default email client with a pre-filled sponsorship subject line. 
+                Hover effects apply a neon drop-shadow, underline, and color brighten to clearly indicate interactivity.
+                'inline-block' prevents the drop-shadow from clipping at the element's edges.
+              */}
+              <a 
+                href="mailto:industry@weareinit.org?subject=SharkByte%20Sponsorship%20Inquiry"
+                className="text-[#8b5cf6] break-all tablet:break-normal hover:text-[#a78bfa] hover:underline hover:drop-shadow-[0_0_10px_rgba(139,92,246,0.9)] transition-all duration-300 inline-block"
+              >
                 industry@weareinit.org
-              </span>
+              </a>
               <span className="animate-blink text-[#39ff14] ml-1">_</span>
             </p>
           </div>
@@ -191,8 +200,8 @@ const Sponsors = () => {
 
       {/* 
         ANIMATION ENGINE:
-        By animating exactly -33.33%, the view shifts perfectly by the width of one original array.
-        Because we triplicated the array in the render, this creates an imperceptible infinite reset.
+        Animating exactly -33.33% shifts the view perfectly by the width of one original array.
+        Because the array is triplicated in the render, this creates an imperceptible infinite reset.
       */}
       <style jsx>{`
         .marquee { position: relative; width: 100%; }
