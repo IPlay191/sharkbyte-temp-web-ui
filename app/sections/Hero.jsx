@@ -10,14 +10,14 @@ export default function Hero() {
   // PARALLAX & FADE SCROLL ENGINE
   // ============================================================================
   useEffect(() => {
-    // We separate the physical scroll "track" from the visual "content"
+    // Separates the physical scroll "track" from the visual "content"
     const track = document.getElementById('hero-track')
     const content = document.getElementById('hero-content')
 
     if (!track || !content) return undefined
     
     const updateTransition = () => {
-      // Mathematical boundaries perfectly mapped to the artificial scroll track
+      // Mathematical boundaries mapped perfectly to the artificial scroll track
       const start = track.offsetTop
       const end = track.offsetTop + track.offsetHeight - window.innerHeight
 
@@ -34,7 +34,7 @@ export default function Hero() {
         startAt: start,
         endAt: end,
         startScale: 1,
-        endScale: 1.8, // Reduced from 3.0 to prevent an extreme "fly-by" effect
+        endScale: 1.8, // Limits scale to 1.8 to prevent an extreme fly-by effect
       })
     }
     
@@ -54,15 +54,15 @@ export default function Hero() {
     <section id='hero-track' className="w-full h-[200vh] relative">
       {/* 
         ARTIFICIAL SCROLL TRACK: 
-        Using 'h-[200vh]' gives the user an extra 100% of viewport height to scroll through.
-        This physically forces the transition to take longer, solving the "easily skippable" issue 
-        without relying on artificial delays or blocking the user's scroll wheel.
+        Using 'h-[200vh]' provides an extra 100% of viewport height to scroll through.
+        This extends the transition duration, solving the "easily skippable" issue 
+        without relying on artificial delays or scroll locking.
       */}
 
       {/* 
         STICKY CONTAINER: 
-        Pins the visual content to the screen while the user scrolls through the 200vh track.
-        Once the track finishes, this container unpins and scrolls away naturally into the About page.
+        Pins the visual content to the screen while scrolling through the 200vh track.
+        Once the track finishes, this container unpins and scrolls away naturally.
       */}
       <div id='hero-content' className="sticky top-0 h-svh w-full hero-bg flex justify-center items-center flex-row max-[700px]:flex-col overflow-hidden will-change-transform">
 
@@ -99,17 +99,26 @@ export default function Hero() {
 
         {/* 
           CONTACT US WIDGET
-          Using 'absolute' instead of 'fixed' binds this to the sticky hero container. 
+          Using 'absolute' binds this widget to the sticky hero container. 
           This ensures it stays visible during the Hero section, but fades and scrolls away 
-          perfectly with the rest of the logo and text when moving to the About page.
+          perfectly with the rest of the content when moving to the next page.
         */}
         <div className="absolute bottom-4 left-4 right-4 z-20 flex flex-col items-center justify-center p-4 text-center text-white retro-box pixel-shadow sm:bottom-6 sm:left-auto sm:right-6 sm:w-[18rem] sm:p-5">
           <p className="text-sm font-bold sm:text-base tablet:text-lg">
             Have Questions? Contact Us!
           </p>
-          <span className="mt-2 break-all text-sm text-purple-400 tablet:text-base">
+          {/* 
+            INTERACTIVE EMAIL LINK:
+            Opens the default email client with a pre-filled subject line. 
+            Hover effects apply a neon drop-shadow, underline, and color brighten to clearly indicate interactivity.
+            'inline-block' prevents the drop-shadow from clipping at the element's edges.
+          */}
+          <a 
+            href="mailto:Mdc-north@weareinit.org?subject=SharkByte%20Hackathon%20Inquiry" 
+            className="mt-2 break-all text-sm text-purple-400 tablet:text-base hover:text-purple-300 hover:underline hover:drop-shadow-[0_0_10px_rgba(168,85,247,0.9)] transition-all duration-300 inline-block"
+          >
             Mdc-north@weareinit.org
-          </span>
+          </a>
         </div>
         
       </div>
