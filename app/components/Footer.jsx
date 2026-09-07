@@ -28,7 +28,7 @@ const Footer = () => {
           >
             SharkByte TOS
           </a>
-          <a
+         {/* <a
             href="https://github.com/MLH/mlh-policies/blob/main/code-of-conduct.md"
             target="_blank"
             rel="noopener noreferrer"
@@ -51,7 +51,7 @@ const Footer = () => {
             className="hover:text-[#8b5cf6] transition-colors duration-300 text-center flex items-center justify-center"
           >
             MLH Privacy Policy
-          </a>
+          </a> */}
         </div>
 
       </div>
