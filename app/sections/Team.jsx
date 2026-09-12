@@ -8,8 +8,6 @@ const Team = () => {
   // --------------------------------------------------------------------------
   // 1. STATE MANAGEMENT (View Controllers)
   // --------------------------------------------------------------------------
-  // React State conditionally mounts views. This prevents thousands of DOM nodes 
-  // from rendering simultaneously, saving massive amounts of memory (RAM) on low-end devices.
   const [showCarousel, setShowCarousel] = useState(true);
   const [showCMembers, setCMembers] = useState(false);
 
@@ -55,46 +53,30 @@ const Team = () => {
 // ============================================================================
 
   // --------------------------------------------------------------------------
-  // COMPONENT 1: The Team Roster Card (GPU Optimized)
+  // COMPONENT 1: The Team Roster Card
   // --------------------------------------------------------------------------
   const TeamCard = ({ member }) => (
     <a 
       href={member.linkedin || '#'} 
       target={member.linkedin ? "_blank" : "_self"} 
       rel="noopener noreferrer"
-      /* 
-        [ PERFORMANCE & SCALING ENGINE ]
-        - LAG FIX (GPU): Removed 'backdrop-blur' from this component. Moving blurry objects destroys 
-          low-end graphics cards. Replaced with 'bg-gray-950/95', which is highly opaque but extremely fast to render.
-        - ULTRA-CURVE SCALING (Widths): 
-          - Standard Laptop (laptop:w-[190px]): Keeps cards compact and readable for 13" screens.
-          - Wide Monitor (xl:w-[220px]): Expands to fill modern 1440p displays.
-          - Massive Screen (2xl:w-[260px]): Unlocks the massive size specifically for 4K/Ultra-wides.
-      */
-      className="group relative z-0 hover:z-50 flex flex-col justify-start items-center bg-gray-950/95 border-2 border-gray-700/50 hover:border-[#8b5cf6] rounded-xl p-3 tablet:p-4 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)] cursor-pointer flex-shrink-0 w-[130px] mobile:w-[150px] tablet:w-[170px] laptop:w-[190px] xl:w-[220px] 2xl:w-[260px] min-h-[170px] mobile:min-h-[190px] tablet:min-h-[220px] laptop:min-h-[240px] xl:min-h-[260px] 2xl:min-h-[280px]"
+      className="group relative z-0 hover:z-50 flex flex-col justify-start items-center bg-gray-950/95 border-2 border-gray-700/50 hover:border-[#8b5cf6] rounded-xl p-3 tablet:p-4 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)] cursor-pointer flex-shrink-0 w-[120px] mobile:w-[140px] tablet:w-[150px] laptop:w-[170px] xl:w-[190px] 2xl:w-[220px] min-h-[160px] mobile:min-h-[180px] tablet:min-h-[190px] laptop:min-h-[210px] xl:min-h-[230px] 2xl:min-h-[250px]"
     >
       <div className="flex flex-col items-center w-full h-full">
-        {/* 
-          [ AVATAR RENDERER ]
-          - LAG FIX (Memory): Added loading="lazy" and decoding="async" to prevent off-screen images 
-            from consuming RAM before they enter the viewport.
-          - ULTRA-CURVE SCALING (Images): Standard laptops max at w-24 (96px). Only massive monitors hit w-32 (128px).
-        */}
         <img 
           src={member.image} 
           alt={member.name} 
           loading="lazy"
           decoding="async"
-          className="w-14 h-14 mobile:w-16 mobile:h-16 tablet:w-20 tablet:h-20 laptop:w-24 laptop:h-24 xl:w-28 xl:h-28 2xl:w-32 2xl:h-32 rounded-full mb-3 border-2 border-gray-500 group-hover:border-[#8b5cf6] transition-colors duration-300 object-cover shadow-lg" 
+          className="w-14 h-14 mobile:w-16 mobile:h-16 tablet:w-16 tablet:h-16 laptop:w-20 laptop:h-20 xl:w-24 xl:h-24 2xl:w-28 2xl:h-28 rounded-full mb-2 tablet:mb-3 border-2 border-gray-500 group-hover:border-[#8b5cf6] transition-colors duration-300 object-cover shadow-lg" 
         />
         
-        {/* FLUID TYPOGRAPHY: Line-clamp protects the grid structure from text-wrapping overflow. */}
-        <h3 className="font-bold tracking-wide text-[12px] mobile:text-[14px] tablet:text-[15px] laptop:text-[16px] xl:text-[18px] 2xl:text-[20px] text-gray-200 group-hover:text-white transition-colors duration-300 leading-tight line-clamp-1 w-full">
+        <h3 className="font-bold tracking-wide text-[11px] mobile:text-[13px] tablet:text-[14px] laptop:text-[15px] xl:text-[17px] 2xl:text-[19px] text-gray-200 group-hover:text-white transition-colors duration-300 leading-tight line-clamp-1 w-full">
           {member.name}
         </h3>
         
         <div className="flex-grow flex items-start justify-center mt-1 tablet:mt-2 w-full">
-          <p className="text-gray-400 text-[10px] mobile:text-[11px] tablet:text-[12px] laptop:text-[13px] xl:text-[14px] line-clamp-2 leading-snug">
+          <p className="text-gray-400 text-[9px] mobile:text-[11px] tablet:text-[12px] laptop:text-[13px] xl:text-[14px] line-clamp-2 leading-snug">
             {member.role}
           </p>
         </div>
@@ -110,16 +92,9 @@ const Team = () => {
       href={member.website || '#'} 
       target={member.website ? "_blank" : "_self"} 
       rel="noopener noreferrer"
-      /* 
-        [ STATIC UI OPTIMIZATION ]
-        Because this grid does NOT animate horizontally, it is perfectly safe to use 
-        heavy glassmorphism ('bg-gray-900/40 backdrop-blur-sm'). The GPU only calculates it once.
-        Heights strictly controlled (h-[160px] to 180px) to prevent vertical layout takeover.
-      */
-      className="group relative z-0 hover:z-50 flex flex-col justify-center items-center bg-gray-900/40 backdrop-blur-sm border-2 border-gray-700/50 hover:border-[#8b5cf6] hover:bg-gray-900/80 rounded-xl p-4 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)] cursor-pointer w-full h-[120px] tablet:h-[140px] laptop:h-[160px] xl:h-[180px]"
+      className="group relative z-0 hover:z-50 flex flex-col justify-center items-center bg-gray-950/95 border-2 border-gray-700/50 hover:border-[#8b5cf6] hover:bg-gray-900/80 rounded-xl p-4 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)] cursor-pointer w-full h-[120px] tablet:h-[130px] laptop:h-[140px] xl:h-[160px]"
     >
       <div className="w-14 h-14 tablet:w-16 tablet:h-16 laptop:w-20 laptop:h-20 xl:w-24 xl:h-24 mb-2 relative flex justify-center items-center">
-        {/* 'object-contain' is strictly required here to prevent corporate logos from clipping. */}
         <img 
           src={member.logo} 
           alt={member.name} 
@@ -129,7 +104,7 @@ const Team = () => {
       </div>
       
       <div className="flex items-start justify-center w-full">
-        <h3 className="font-bold tracking-wide text-[11px] mobile:text-[12px] tablet:text-[14px] laptop:text-[16px] text-gray-400 group-hover:text-white transition-colors duration-300 text-center line-clamp-1">
+        <h3 className="font-bold tracking-wide text-[11px] mobile:text-[12px] tablet:text-[13px] laptop:text-[15px] text-gray-400 group-hover:text-white transition-colors duration-300 text-center line-clamp-1">
           {member.name}
         </h3>
       </div>
@@ -140,7 +115,7 @@ const Team = () => {
   // COMPONENT 3: The Faculty Advisor Card
   // --------------------------------------------------------------------------
   const FacultyAdvisorCard = ({ member }) => (
-    <div className="group relative z-0 hover:z-50 flex justify-center items-center bg-gray-900/40 backdrop-blur-sm border-2 border-gray-700/50 hover:border-[#8b5cf6] hover:bg-gray-900/80 rounded-xl text-white p-6 text-center w-full max-w-[350px] h-[100px] tablet:h-[140px] mx-auto transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)]">
+    <div className="group relative z-0 hover:z-50 flex justify-center items-center bg-gray-950/95 border-2 border-gray-700/50 hover:border-[#8b5cf6] hover:bg-gray-900/80 rounded-xl text-white p-6 text-center w-full max-w-[350px] h-[100px] tablet:h-[120px] mx-auto transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)]">
       <h3 className="font-bold tracking-wide text-lg tablet:text-xl laptop:text-2xl text-gray-300 group-hover:text-white transition-colors duration-300">
         {member.name}
       </h3>
@@ -153,30 +128,29 @@ const Team = () => {
   return (
     <section id="team" className="isolate z-0 w-full h-full flex flex-col justify-start items-center relative overflow-hidden team-bg py-[4vh] px-4">
       
-      {/* Container caps at 1400px to maintain consistent layout rails with Hero and Sponsors pages */}
       <div className="w-full flex flex-col items-center justify-start h-full max-w-[1400px] mx-auto">
 
         {/* ---------------------------------------------------------------------- */}
         {/* INTERACTIVE STATE NAVIGATION TABS */}
         {/* ---------------------------------------------------------------------- */}
-        <div className="flex flex-wrap justify-center gap-3 tablet:gap-6 z-10 max-w-full mt-[5vh] mb-[4vh] laptop:mb-[6vh]">
+        <div className="flex flex-wrap justify-center gap-3 tablet:gap-6 z-10 max-w-full mt-[5vh] mb-2 tablet:mb-4 laptop:mb-6">
           <button
             onClick={() => { setShowCarousel(true); setCMembers(false); }}
-            className={`hover:cursor-pointer transition-colors px-4 py-2 tablet:px-6 tablet:py-3 border-2 sm:border-3 border-gray-600 rounded-lg shadow-lg ${showCarousel ? 'bg-violet-950 text-white border-[#8b5cf6]' : 'bg-gray-950/80 backdrop-blur-sm text-gray-300 hover:bg-gray-900'}`}
+            className={`hover:cursor-pointer transition-colors px-4 py-2 tablet:px-6 tablet:py-3 border-2 sm:border-3 border-gray-600 rounded-lg shadow-lg ${showCarousel ? 'bg-violet-950 text-white border-[#8b5cf6]' : 'bg-gray-950/95 text-gray-300 hover:bg-gray-900'}`}
           >
             <h2 className="text-sm tablet:text-lg laptop:text-xl desktop:text-2xl font-bold text-center">Our Team</h2>
           </button>
 
           <button
             onClick={() => { setShowCarousel(false); setCMembers(true); }}
-            className={`hover:cursor-pointer transition-colors px-4 py-2 tablet:px-6 tablet:py-3 border-2 sm:border-3 border-gray-600 rounded-lg shadow-lg ${!showCarousel && showCMembers ? 'bg-violet-950 text-white border-[#8b5cf6]' : 'bg-gray-950/80 backdrop-blur-sm text-gray-300 hover:bg-gray-900'}`}
+            className={`hover:cursor-pointer transition-colors px-4 py-2 tablet:px-6 tablet:py-3 border-2 sm:border-3 border-gray-600 rounded-lg shadow-lg ${!showCarousel && showCMembers ? 'bg-violet-950 text-white border-[#8b5cf6]' : 'bg-gray-950/95 text-gray-300 hover:bg-gray-900'}`}
           >
             <h2 className="text-sm tablet:text-lg laptop:text-xl desktop:text-2xl font-bold text-center">Community Partners</h2>
           </button>
 
           <button
             onClick={() => { setShowCarousel(false); setCMembers(false); }}
-            className={`hover:cursor-pointer transition-colors px-4 py-2 tablet:px-6 tablet:py-3 border-2 sm:border-3 border-gray-600 rounded-lg shadow-lg ${!showCarousel && !showCMembers ? 'bg-violet-950 text-white border-[#8b5cf6]' : 'bg-gray-950/80 backdrop-blur-sm text-gray-300 hover:bg-gray-900'}`}
+            className={`hover:cursor-pointer transition-colors px-4 py-2 tablet:px-6 tablet:py-3 border-2 sm:border-3 border-gray-600 rounded-lg shadow-lg ${!showCarousel && !showCMembers ? 'bg-violet-950 text-white border-[#8b5cf6]' : 'bg-gray-950/95 text-gray-300 hover:bg-gray-900'}`}
           >
             <h2 className="text-sm tablet:text-lg laptop:text-xl desktop:text-2xl font-bold text-center">Faculty Advisors</h2>
           </button>
@@ -185,27 +159,35 @@ const Team = () => {
         {/* ---------------------------------------------------------------------- */}
         {/* DYNAMIC CONTENT INJECTION MOUNTS */}
         {/* ---------------------------------------------------------------------- */}
-        <div className="flex-grow flex flex-col justify-center w-full">
+        <div className="flex-grow flex flex-col justify-start items-center w-full">
           
-          {/* [ VIEW 1: COMMUNITY PARTNERS ] (Static Grid) */}
+          {/* 
+            [ VIEW 1: COMMUNITY PARTNERS ] (Static Grid) 
+            THE CENTERING FIX: Replaced 'mt-4' with 'my-auto'.
+            This dynamic CSS spring calculates the leftover viewport height and 
+            pushes equally from the top and bottom, centering the grid perfectly 
+            on any monitor size.
+          */}
           {!showCarousel && showCMembers && (
-            <div className="custom-retro-scrollbar w-full max-w-[1000px] max-h-[65vh] overflow-y-auto grid grid-cols-2 md:grid-cols-3 gap-4 tablet:gap-6 p-4 tablet:p-8 bg-gray-950/40 backdrop-blur-md border border-gray-700/50 shadow-2xl items-stretch mx-auto rounded-2xl"> 
+            <div className="custom-retro-scrollbar w-full max-w-[1000px] max-h-[65vh] overflow-y-auto grid grid-cols-2 md:grid-cols-3 gap-4 tablet:gap-6 p-4 tablet:p-8 bg-gray-950/95 border border-gray-700/50 shadow-2xl items-stretch mx-auto rounded-2xl my-auto"> 
               {communityPartners.map((member, index) => <CommunityPartnerCard key={index} member={member} />)}
             </div>
           )}
 
-          {/* [ VIEW 2: FACULTY ADVISORS ] (Static Grid) */}
+          {/* 
+            [ VIEW 2: FACULTY ADVISORS ] (Static Grid) 
+            THE CENTERING FIX: Applies the exact same 'my-auto' spring logic 
+            to ensure visual consistency when switching tabs.
+          */}
           {!showCarousel && !showCMembers && (
-            <div className="custom-retro-scrollbar w-full max-w-[800px] max-h-[65vh] overflow-y-auto grid grid-cols-1 sm:grid-cols-2 gap-4 tablet:gap-6 p-4 tablet:p-8 bg-gray-950/40 backdrop-blur-md border border-gray-700/50 shadow-2xl items-center justify-items-center mx-auto rounded-2xl"> 
+            <div className="custom-retro-scrollbar w-full max-w-[800px] max-h-[65vh] overflow-y-auto grid grid-cols-1 sm:grid-cols-2 gap-4 tablet:gap-6 p-4 tablet:p-8 bg-gray-950/95 border border-gray-700/50 shadow-2xl items-center justify-items-center mx-auto rounded-2xl my-auto"> 
               {facultyAdvisors.map((member, index) => <FacultyAdvisorCard key={index} member={member} />)}
             </div>
           )}
 
           {/* [ VIEW 3: DESKTOP TEAM ROSTER ] (Animated Dual-Direction Marquee) */}
           {showCarousel && (
-            // The massive 'py-10' padding creates an invisible vertical buffer, allowing 
-            // the cards inside to jump upwards (-translate-y-2) without hitting an overflow boundary.
-            <div className="hidden md:flex relative z-10 w-full max-w-[1400px] mx-auto overflow-hidden carousel-mask flex-col justify-center py-10">
+            <div className="hidden md:flex relative z-10 w-full max-w-[1400px] mx-auto overflow-hidden carousel-mask flex-col justify-center pt-6 pb-12">
               <div className="flex flex-col gap-[3vh] laptop:gap-[4vh] px-2">
                 
                 <div className="marquee">
@@ -244,19 +226,8 @@ const Team = () => {
         </div>
       </div>
 
-      {/* 
-        =======================================================================
-        [ LOCAL CSS ENGINE: ANIMATIONS & HARDWARE ACCELERATION ]
-        =======================================================================
-      */}
       <style jsx>{`
-        /* [ MARQUEE PHYSICS ] */
         .marquee { position: relative; width: 100%; }
-        /* 
-          HARDWARE ACCELERATION (will-change: transform):
-          This property forces the browser to delegate the sliding animation directly to 
-          the GPU, bypassing the main CPU thread entirely. This is mandatory for smooth 60fps scrolling.
-        */
         .marquee__track { display: flex; gap: 1.5rem; width: max-content; will-change: transform; transform: translateZ(0); }
         .marquee__left { animation: marquee-left 35s linear infinite; }
         .marquee__right { animation: marquee-right 35s linear infinite; }
@@ -264,10 +235,8 @@ const Team = () => {
         @keyframes marquee-left { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-33.33%, 0, 0); } }
         @keyframes marquee-right { 0% { transform: translate3d(-33.33%, 0, 0); } 100% { transform: translate3d(0, 0, 0); } }
         
-        /* Halts the animation mathematically when the user's cursor engages the element */
         .marquee:hover .marquee__track { animation-play-state: paused; }
 
-        /* [ WEBKIT SCROLLBAR OVERRIDE ] */
         .custom-retro-scrollbar::-webkit-scrollbar {
           width: 8px;
           height: 8px;
