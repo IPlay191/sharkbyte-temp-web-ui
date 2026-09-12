@@ -8,16 +8,14 @@ const Team = () => {
   // --------------------------------------------------------------------------
   // 1. STATE MANAGEMENT (View Controllers)
   // --------------------------------------------------------------------------
-  // We use React's useState hook to strictly control the DOM rendering lifecycle.
-  // Instead of navigating to entirely new web pages, we mount and unmount specific 
-  // grid layouts in real-time. This guarantees zero-latency tab switching.
+  // React State conditionally mounts views. This prevents thousands of DOM nodes 
+  // from rendering simultaneously, saving massive amounts of memory (RAM) on low-end devices.
   const [showCarousel, setShowCarousel] = useState(true);
   const [showCMembers, setCMembers] = useState(false);
 
   // --------------------------------------------------------------------------
   // 2. PRIMARY DATASETS (Schema Definitions)
   // --------------------------------------------------------------------------
-  // TEAM ROSTER: Contains the primary student/organizer profiles.
   const teamMembers = [
     { name: "Jimmy Jean Baptiste", role: "Hack Project Manager", image: "https://i.ibb.co/HDC5L03D/image.png", linkedin: "https://www.linkedin.com/in/jimmy-jean-baptiste-01679436a/" },
     { name: "Erick Gonzalez", role: "President of INIT", image: "https://i.ibb.co/PzTTyGRY/image.png", linkedin: "https://www.linkedin.com/in/erick-gonzalez-888b7a377/" },
@@ -32,8 +30,6 @@ const Team = () => {
     { name: "Oliver Martinez Fernandez", role: "Web Development", image: "https://i.ibb.co/LhkWsVTT/image.png", linkedin: "https://www.linkedin.com/in/oliver-martinez-9a1ba4340/" }
   ];
 
-  // COMMUNITY PARTNERS: Non-monetary organizational backers. 
-  // Schema strictly requires 'logo' and 'website' keys to map to the Component render logic.
   const communityPartners = [
     { name: "INIT", logo: "https://i.ibb.co/jvPsQy3z/init-logo.jpg", website: "https://weareinit.org" },
     { name: "City of Coral Gables", logo: "https://i.ibb.co/8LwsNNcX/image.png", website: "https://www.coralgables.com/department/innovation-and-technology" },
@@ -49,22 +45,17 @@ const Team = () => {
   ];
 
   // --------------------------------------------------------------------------
-  // 3. ARRAY BISECTION ALGORITHM (Marquee Preparation)
+  // 3. MARQUEE BISECTION ALGORITHM
   // --------------------------------------------------------------------------
-  // To create the opposing left/right scroll effect on the desktop marquee, we must 
-  // mathematically divide the single array into a top track and a bottom track. 
-  // Math.ceil() acts as a failsafe: if the array length is an odd number (e.g., 11), 
-  // it forces the extra card into the top row to prevent rendering errors.
   const firstHalf = teamMembers.slice(0, Math.ceil(teamMembers.length / 2));
   const secondHalf = teamMembers.slice(Math.ceil(teamMembers.length / 2));
 
-
 // ============================================================================
-// [ COMPONENT ARCHITECTURE: THE "SMOKED GLASS" UI ENGINE ]
+// [ COMPONENT ARCHITECTURE: THE RESPONSIVE UI ENGINE ]
 // ============================================================================
 
   // --------------------------------------------------------------------------
-  // COMPONENT 1: The Team Roster Card
+  // COMPONENT 1: The Team Roster Card (GPU Optimized)
   // --------------------------------------------------------------------------
   const TeamCard = ({ member }) => (
     <a 
@@ -72,46 +63,38 @@ const Team = () => {
       target={member.linkedin ? "_blank" : "_self"} 
       rel="noopener noreferrer"
       /* 
-        [ CSS BOX MODEL & PHYSICS ]
-        - The Context Fix (relative z-0 hover:z-50): This solves the stacking bug. By default, 
-          all cards sit at z-index 0. When hovered, the specific card promotes itself to z-50. 
-          This grants the card permission to mathematically overlap its neighbors.
-        - The Tactile Lift (hover:-translate-y-2): Reduced from -y-4. This creates a gentle, 
-          subtle physical "pop" that keeps the card firmly grounded within its row rather than flying away.
-        - The Smoked Glass (bg-gray-900/40 backdrop-blur-sm): Creates translucency, allowing 
-          the pixel-art background to bleed through the card.
-        - The Dimensions (w-[140px] to laptop:w-[240px]): Aggressively scaled down. The maximum 
-          width is strictly locked at 240px on widescreen monitors. This flawlessly synchronizes 
-          the visual weight of this section with the Tier 1 / Tier 2 cards on the Sponsors page.
+        [ PERFORMANCE & SCALING ENGINE ]
+        - LAG FIX (GPU): Removed 'backdrop-blur' from this component. Moving blurry objects destroys 
+          low-end graphics cards. Replaced with 'bg-gray-950/95', which is highly opaque but extremely fast to render.
+        - ULTRA-CURVE SCALING (Widths): 
+          - Standard Laptop (laptop:w-[190px]): Keeps cards compact and readable for 13" screens.
+          - Wide Monitor (xl:w-[220px]): Expands to fill modern 1440p displays.
+          - Massive Screen (2xl:w-[260px]): Unlocks the massive size specifically for 4K/Ultra-wides.
       */
-      className="group relative z-0 hover:z-50 flex flex-col justify-start items-center bg-gray-900/40 backdrop-blur-sm border-2 border-gray-700/50 hover:border-[#8b5cf6] hover:bg-gray-900/80 rounded-xl p-3 tablet:p-5 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)] cursor-pointer flex-shrink-0 w-[140px] mobile:w-[160px] tablet:w-[200px] laptop:w-[240px] min-h-[180px] tablet:min-h-[220px] laptop:min-h-[260px]"
+      className="group relative z-0 hover:z-50 flex flex-col justify-start items-center bg-gray-950/95 border-2 border-gray-700/50 hover:border-[#8b5cf6] rounded-xl p-3 tablet:p-4 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)] cursor-pointer flex-shrink-0 w-[130px] mobile:w-[150px] tablet:w-[170px] laptop:w-[190px] xl:w-[220px] 2xl:w-[260px] min-h-[170px] mobile:min-h-[190px] tablet:min-h-[220px] laptop:min-h-[240px] xl:min-h-[260px] 2xl:min-h-[280px]"
     >
       <div className="flex flex-col items-center w-full h-full">
         {/* 
-          [ AVATAR RENDERING ENGINE ]
-          - Scaled down max dimensions (w-28 h-28 = 112px max). This prevents the "Jumbo" effect 
-            where avatars were taking over the entire screen on desktop viewports.
-          - 'object-cover' forces non-square source images to crop perfectly into the rounded-full border.
-          - 'group-hover:border-[#8b5cf6]': Links the border color state of the image to the parent anchor tag.
+          [ AVATAR RENDERER ]
+          - LAG FIX (Memory): Added loading="lazy" and decoding="async" to prevent off-screen images 
+            from consuming RAM before they enter the viewport.
+          - ULTRA-CURVE SCALING (Images): Standard laptops max at w-24 (96px). Only massive monitors hit w-32 (128px).
         */}
         <img 
           src={member.image} 
           alt={member.name} 
-          className="w-14 h-14 mobile:w-16 mobile:h-16 tablet:w-20 tablet:h-20 laptop:w-28 laptop:h-28 rounded-full mb-3 tablet:mb-4 border-2 border-gray-500 group-hover:border-[#8b5cf6] transition-colors duration-300 object-cover shadow-lg" 
+          loading="lazy"
+          decoding="async"
+          className="w-14 h-14 mobile:w-16 mobile:h-16 tablet:w-20 tablet:h-20 laptop:w-24 laptop:h-24 xl:w-28 xl:h-28 2xl:w-32 2xl:h-32 rounded-full mb-3 border-2 border-gray-500 group-hover:border-[#8b5cf6] transition-colors duration-300 object-cover shadow-lg" 
         />
         
-        {/* 
-          [ FLUID TYPOGRAPHY ]
-          - 'line-clamp-1': A critical layout defender. If a name is too long, the browser automatically 
-            truncates it with an ellipsis (...) instead of forcing a line-break that would shatter the grid height.
-          - Text size has been proportionately scaled down to match the new card dimensions.
-        */}
-        <h3 className="font-bold tracking-wide text-[12px] mobile:text-[14px] tablet:text-[16px] laptop:text-[20px] text-gray-200 group-hover:text-white transition-colors duration-300 leading-tight line-clamp-1 w-full">
+        {/* FLUID TYPOGRAPHY: Line-clamp protects the grid structure from text-wrapping overflow. */}
+        <h3 className="font-bold tracking-wide text-[12px] mobile:text-[14px] tablet:text-[15px] laptop:text-[16px] xl:text-[18px] 2xl:text-[20px] text-gray-200 group-hover:text-white transition-colors duration-300 leading-tight line-clamp-1 w-full">
           {member.name}
         </h3>
         
         <div className="flex-grow flex items-start justify-center mt-1 tablet:mt-2 w-full">
-          <p className="text-gray-400 text-[10px] mobile:text-[12px] tablet:text-[13px] laptop:text-[15px] line-clamp-2 leading-snug">
+          <p className="text-gray-400 text-[10px] mobile:text-[11px] tablet:text-[12px] laptop:text-[13px] xl:text-[14px] line-clamp-2 leading-snug">
             {member.role}
           </p>
         </div>
@@ -128,28 +111,25 @@ const Team = () => {
       target={member.website ? "_blank" : "_self"} 
       rel="noopener noreferrer"
       /* 
-        [ STRUCTURAL INTEGRITY ]
-        - Heights strictly capped (laptop:h-[180px]). By removing minimum dynamic clamps, we eliminate 
-          the "Massive Screen Takeover" bug. These now mirror the exact visual volume of Sponsor Tier 2 cards.
+        [ STATIC UI OPTIMIZATION ]
+        Because this grid does NOT animate horizontally, it is perfectly safe to use 
+        heavy glassmorphism ('bg-gray-900/40 backdrop-blur-sm'). The GPU only calculates it once.
+        Heights strictly controlled (h-[160px] to 180px) to prevent vertical layout takeover.
       */
-      className="group relative z-0 hover:z-50 flex flex-col justify-center items-center bg-gray-900/40 backdrop-blur-sm border-2 border-gray-700/50 hover:border-[#8b5cf6] hover:bg-gray-900/80 rounded-xl p-4 sm:p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)] cursor-pointer w-full h-[120px] tablet:h-[160px] laptop:h-[180px]"
+      className="group relative z-0 hover:z-50 flex flex-col justify-center items-center bg-gray-900/40 backdrop-blur-sm border-2 border-gray-700/50 hover:border-[#8b5cf6] hover:bg-gray-900/80 rounded-xl p-4 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)] cursor-pointer w-full h-[120px] tablet:h-[140px] laptop:h-[160px] xl:h-[180px]"
     >
-      {/* 
-        [ LOGO RENDERING ENGINE ]
-        - 'object-contain' is strictly enforced. Unlike human headshots, corporate brand logos 
-          (like Major League Hacking) cannot be cropped. This CSS property forces the browser to 
-          shrink the logo mathematically until the entire graphic fits cleanly inside the bounding box.
-      */}
-      <div className="w-14 h-14 tablet:w-20 tablet:h-20 laptop:w-24 laptop:h-24 mb-2 tablet:mb-3 relative flex justify-center items-center">
+      <div className="w-14 h-14 tablet:w-16 tablet:h-16 laptop:w-20 laptop:h-20 xl:w-24 xl:h-24 mb-2 relative flex justify-center items-center">
+        {/* 'object-contain' is strictly required here to prevent corporate logos from clipping. */}
         <img 
           src={member.logo} 
           alt={member.name} 
+          loading="lazy"
           className="w-full h-full object-contain filter drop-shadow-md group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] transition-all duration-300" 
         />
       </div>
       
       <div className="flex items-start justify-center w-full">
-        <h3 className="font-bold tracking-wide text-[11px] mobile:text-[13px] tablet:text-[16px] laptop:text-[18px] text-gray-400 group-hover:text-white transition-colors duration-300 text-center line-clamp-1">
+        <h3 className="font-bold tracking-wide text-[11px] mobile:text-[12px] tablet:text-[14px] laptop:text-[16px] text-gray-400 group-hover:text-white transition-colors duration-300 text-center line-clamp-1">
           {member.name}
         </h3>
       </div>
@@ -160,7 +140,7 @@ const Team = () => {
   // COMPONENT 3: The Faculty Advisor Card
   // --------------------------------------------------------------------------
   const FacultyAdvisorCard = ({ member }) => (
-    <div className="group relative z-0 hover:z-50 flex justify-center items-center bg-gray-900/40 backdrop-blur-sm border-2 border-gray-700/50 hover:border-[#8b5cf6] hover:bg-gray-900/80 rounded-xl text-white p-6 text-center w-full max-w-[350px] h-[120px] tablet:h-[160px] mx-auto transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)]">
+    <div className="group relative z-0 hover:z-50 flex justify-center items-center bg-gray-900/40 backdrop-blur-sm border-2 border-gray-700/50 hover:border-[#8b5cf6] hover:bg-gray-900/80 rounded-xl text-white p-6 text-center w-full max-w-[350px] h-[100px] tablet:h-[140px] mx-auto transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)]">
       <h3 className="font-bold tracking-wide text-lg tablet:text-xl laptop:text-2xl text-gray-300 group-hover:text-white transition-colors duration-300">
         {member.name}
       </h3>
@@ -173,24 +153,13 @@ const Team = () => {
   return (
     <section id="team" className="isolate z-0 w-full h-full flex flex-col justify-start items-center relative overflow-hidden team-bg py-[4vh] px-4">
       
-      {/* 
-        [ ALIGNMENT ENGINE ]
-        'justify-start' forces the DOM to construct from the top-down. 
-        This critical constraint prevents the Navigation Buttons from being shoved 
-        off the top of the monitor on devices with very short vertical viewports.
-      */}
+      {/* Container caps at 1400px to maintain consistent layout rails with Hero and Sponsors pages */}
       <div className="w-full flex flex-col items-center justify-start h-full max-w-[1400px] mx-auto">
 
         {/* ---------------------------------------------------------------------- */}
         {/* INTERACTIVE STATE NAVIGATION TABS */}
         {/* ---------------------------------------------------------------------- */}
         <div className="flex flex-wrap justify-center gap-3 tablet:gap-6 z-10 max-w-full mt-[5vh] mb-[4vh] laptop:mb-[6vh]">
-          {/* 
-            [ STATE LOGIC ] 
-            onClick triggers React state changes. The inline ternary operator (?) evaluates 
-            the current state to instantly apply the illuminated violet/neon-purple styling 
-            if the tab is actively selected.
-          */}
           <button
             onClick={() => { setShowCarousel(true); setCMembers(false); }}
             className={`hover:cursor-pointer transition-colors px-4 py-2 tablet:px-6 tablet:py-3 border-2 sm:border-3 border-gray-600 rounded-lg shadow-lg ${showCarousel ? 'bg-violet-950 text-white border-[#8b5cf6]' : 'bg-gray-950/80 backdrop-blur-sm text-gray-300 hover:bg-gray-900'}`}
@@ -220,9 +189,6 @@ const Team = () => {
           
           {/* [ VIEW 1: COMMUNITY PARTNERS ] (Static Grid) */}
           {!showCarousel && showCMembers && (
-            // [ UI FRAMEWORK ] 
-            // The outer container utilizes heavy glassmorphism (bg-gray-950/40 backdrop-blur-md) 
-            // to create an ultra-premium transparent chassis that houses the internal cards.
             <div className="custom-retro-scrollbar w-full max-w-[1000px] max-h-[65vh] overflow-y-auto grid grid-cols-2 md:grid-cols-3 gap-4 tablet:gap-6 p-4 tablet:p-8 bg-gray-950/40 backdrop-blur-md border border-gray-700/50 shadow-2xl items-stretch mx-auto rounded-2xl"> 
               {communityPartners.map((member, index) => <CommunityPartnerCard key={index} member={member} />)}
             </div>
@@ -237,26 +203,17 @@ const Team = () => {
 
           {/* [ VIEW 3: DESKTOP TEAM ROSTER ] (Animated Dual-Direction Marquee) */}
           {showCarousel && (
-            /* 
-              [ THE INVISIBLE BUFFER FIX ]
-              This master wrapper controls the left-to-right fade out mask ('carousel-mask').
-              Because it has 'overflow-hidden', we inject massive vertical padding (py-10).
-              This artificially expands the physical height of the bounding box. Now, when a 
-              TeamCard translates upwards on hover, it safely enters the padding space instead 
-              of being cleanly decapitated by the overflow border constraint.
-            */
+            // The massive 'py-10' padding creates an invisible vertical buffer, allowing 
+            // the cards inside to jump upwards (-translate-y-2) without hitting an overflow boundary.
             <div className="hidden md:flex relative z-10 w-full max-w-[1400px] mx-auto overflow-hidden carousel-mask flex-col justify-center py-10">
               <div className="flex flex-col gap-[3vh] laptop:gap-[4vh] px-2">
                 
-                {/* TOP TRACK: Scans Left */}
-                {/* Note: The 'overflow-hidden' class was purged from these child div tracks to prevent micro-clipping. */}
                 <div className="marquee">
                   <div className="marquee__track marquee__left items-center">
                     {[...firstHalf, ...firstHalf, ...firstHalf].map((member, i) => <TeamCard key={`top-${i}`} member={member} />)}
                   </div>
                 </div>
 
-                {/* BOTTOM TRACK: Scans Right */}
                 <div className="marquee">
                   <div className="marquee__track marquee__right items-center">
                     {[...secondHalf, ...secondHalf, ...secondHalf].map((member, i) => <TeamCard key={`bottom-${i}`} member={member} />)}
@@ -268,7 +225,6 @@ const Team = () => {
           )}
 
           {/* [ VIEW 4: MOBILE TEAM ROSTER ] (Manual Touch Scroll) */}
-          {/* Disables complex CSS animations on mobile devices to prevent extreme battery drain and scroll jank. */}
           {showCarousel && (
             <div className="custom-retro-scrollbar md:hidden relative z-10 w-full overflow-x-auto carousel-mask pb-6 pt-4">
               <div className="flex flex-col gap-[3vh] w-max px-4">
@@ -290,39 +246,28 @@ const Team = () => {
 
       {/* 
         =======================================================================
-        [ LOCAL CSS ENGINE: ANIMATIONS & SCROLLBAR OVERRIDES ]
+        [ LOCAL CSS ENGINE: ANIMATIONS & HARDWARE ACCELERATION ]
         =======================================================================
-        '<style jsx>' isolates this CSS specifically to the Team.jsx component, 
-        preventing these classes from bleeding out and breaking the rest of the site.
       */}
       <style jsx>{`
         /* [ MARQUEE PHYSICS ] */
         .marquee { position: relative; width: 100%; }
-        /* gap: 1.5rem maintains strict physical separation between the translucent cards */
-        .marquee__track { display: flex; gap: 1.5rem; width: max-content; will-change: transform; }
+        /* 
+          HARDWARE ACCELERATION (will-change: transform):
+          This property forces the browser to delegate the sliding animation directly to 
+          the GPU, bypassing the main CPU thread entirely. This is mandatory for smooth 60fps scrolling.
+        */
+        .marquee__track { display: flex; gap: 1.5rem; width: max-content; will-change: transform; transform: translateZ(0); }
         .marquee__left { animation: marquee-left 35s linear infinite; }
         .marquee__right { animation: marquee-right 35s linear infinite; }
         
-        /* 
-          [ THE INFINITE LOOP ALGORITHM ] 
-          Because we triplicated the arrays inside the React map function (e.g. [...firstHalf, ...firstHalf, ...firstHalf]),
-          the browser renders 3 identical blocks of data. Translating the track backwards by exactly -33.33% 
-          moves the track by exactly the width of ONE array block. Once it hits -33.33%, the animation 
-          violently snaps back to 0%. Because block 1 and block 2 look identical, the human eye cannot perceive the snap, 
-          resulting in a flawlessly smooth infinite loop.
-        */
-        @keyframes marquee-left { 0% { transform: translateX(0); } 100% { transform: translateX(-33.33%); } }
-        @keyframes marquee-right { 0% { transform: translateX(-33.33%); } 100% { transform: translateX(0); } }
+        @keyframes marquee-left { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-33.33%, 0, 0); } }
+        @keyframes marquee-right { 0% { transform: translate3d(-33.33%, 0, 0); } 100% { transform: translate3d(0, 0, 0); } }
         
-        /* UX Enhancement: Halts the physics engine if the user's mouse enters the track area */
+        /* Halts the animation mathematically when the user's cursor engages the element */
         .marquee:hover .marquee__track { animation-play-state: paused; }
 
-        /* 
-          [ WEBKIT SCROLLBAR OVERRIDE ]
-          Native browser scrollbars inject a massive, solid-white block that instantly shatters 
-          dark-mode immersion. This overrides the WebKit engine to render a sleek, translucent track 
-          with an interactive Neon Purple thumb.
-        */
+        /* [ WEBKIT SCROLLBAR OVERRIDE ] */
         .custom-retro-scrollbar::-webkit-scrollbar {
           width: 8px;
           height: 8px;
