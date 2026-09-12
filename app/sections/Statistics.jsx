@@ -112,7 +112,7 @@ const Statistics = () => {
       id="statistics"
       className="relative w-full h-[100rem] bg-black-900 bg-fixed bg-center bg-no-repeat"
     >
-      <div className="sticky top-0 h-screen overflow-hidden flex items-center">
+      <div className="sticky top-0 h-screen overflow-hidden stats-bg bg-fixed flex items-center">
         <div
           ref={trainRef}
           id="train-wrapper"
