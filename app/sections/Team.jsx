@@ -30,7 +30,7 @@ const Team = () => {
     { name: "MDC Entec", logo: "https://i.ibb.co/ZRGcKBQz/image.png", website: "https://www.mdc.edu/entec/" }, 
     { name: "MDC Magic Lab", logo: "https://i.ibb.co/hRjk6hwb/image.png", website: "https://magic.mdc.edu/" },
     { name: "Major League Hacking", logo: "https://i.ibb.co/39dNcD2q/mlh-logo-white.jpg", website: "https://mlh.io/" },
-    { name: "ManaTech", logo: "/path/to/manatech-white-logo.png", website: "https://manatech.com/" }
+    { name: "ManaTech", logo: "https://i.ibb.co/F4KzC836/Mana-Tech-logo.png", website: "https://manatech.com/" }
   ];
 
   const facultyAdvisors = [
