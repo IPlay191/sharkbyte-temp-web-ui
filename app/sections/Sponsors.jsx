@@ -7,13 +7,10 @@ import { fadeOnScroll } from '../lib/fadeOnScroll'
 // ============================================================================
 // 1. DATA ARCHITECTURE: OFFICIAL SPONSORS & NATIONAL PARTNERS
 // ============================================================================
-// Organizations listed here provide monetary, high-value in-kind, or national 
-// partnership backing. Community (non-monetary) partners belong in Team.jsx.
-// 
-// VISUAL TIERS:
-// Tier 1 (Legendary): High Cash ($3k+) - Large cards, permanent gold aura.
-// Tier 2 (Epic): Mid Cash/In-Kind/National - Medium cards, permanent purple aura.
-// Tier 3 (Common): Entry Cash - Standard cards, glow on hover only.
+// VISUAL DESIGN LANGUAGE: "The Concrete Billboards"
+// Unlike the 'Smoked Glass' of the Team page, Sponsors are rendered as massive, 
+// fully opaque blocks. They are designed to block the background and demand 
+// maximum visual attention, reflecting their financial contribution.
 
 const sponsorsRow1 = [
   { href: "https://www.roocapital.com/", src: "https://i.ibb.co/DgTndgYp/roo-capital.png", alt: "roo_capital_logo", tier: 1 },
@@ -36,10 +33,9 @@ const sponsorsRow2 = [
 // 2. COMPONENT: DYNAMIC SPONSOR CARD
 // ============================================================================
 const SponsorCard = ({ sponsor }) => {
-  
-  // SCALING LOGIC: Uses the CSS clamp(MIN, IDEAL, MAX) function mapped to 
-  // Viewport Height (vh). This ensures cards shrink gracefully on short laptop 
-  // screens to prevent clipping, while expanding dynamically on massive monitors.
+  // SCALING LOGIC: Employs CSS clamp() mapped to Viewport Height (vh). 
+  // Ensures cards shrink gracefully on short displays while expanding dynamically 
+  // on massive monitors without breaking the grid.
   const getTierStyles = (tier) => {
     switch (tier) {
       case 1:
@@ -68,10 +64,11 @@ const SponsorCard = ({ sponsor }) => {
       href={sponsor.href} 
       target="_blank" 
       rel="noopener noreferrer" 
-      className={`group relative flex justify-center items-center pixel-shadow transition-all duration-300 hover:-translate-y-2 flex-shrink-0 mx-2 overflow-hidden ${styles.wrapper}`}
+      // UI UPGRADE: Stripped arbitrary 'mx-2' margins. Spacing is now handled cleanly 
+      // by the parent Flexbox gap, synchronizing the physics with the Team carousel.
+      className={`group relative flex justify-center items-center pixel-shadow transition-all duration-300 hover:-translate-y-2 flex-shrink-0 overflow-hidden ${styles.wrapper}`}
     >
       <div className={`absolute transition-transform duration-300 group-hover:scale-105 ${styles.inner}`}>
-        {/* object-contain protects brand integrity by preventing logo distortion or cropping. */}
         <Image src={sponsor.src} alt={sponsor.alt} fill sizes="(max-width: 700px) 200px, 350px" className="object-contain" />
       </div>
     </a>
@@ -111,17 +108,10 @@ const Sponsors = () => {
   }, [])
 
   return (
-    // ISOLATION: 'isolate z-0' builds a strict stacking context. It acts as an 
-    // invisible wall preventing glowing box-shadows from bleeding off this section.
     <section id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-center items-center relative overflow-hidden py-[4vh] px-4">
       
-      {/* 
-        ANCHOR LOGIC: 'justify-between' forces the Title to the absolute ceiling 
-        and the Terminal Box to the absolute floor. The marquee naturally suspends in the middle.
-      */}
       <div className="w-full flex flex-col items-center justify-between h-full max-w-[1400px] mx-auto">
         
-        {/* TOP ANCHOR: Title */}
         <div className="relative z-10">
           <div className="bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white px-6 py-2 laptop:py-3 border-3 border-gray-600 pixel-shadow mt-[5vh]">
             <h1 className="font-bold text-center text-[26px] tablet:text-[30px] laptop:text-[40px] desktop:text-[50px]">
@@ -130,13 +120,12 @@ const Sponsors = () => {
           </div>
         </div>
 
-        {/* MIDDLE CONTENT: Desktop Marquee */}
+        {/* DESKTOP MARQUEE */}
         <div className="max-laptop:hidden relative w-full overflow-hidden carousel-mask flex-grow flex flex-col justify-center">
           <div className="flex flex-col gap-[3vh] laptop:gap-[5vh] items-center">
             
             <div className="marquee overflow-hidden w-full flex items-center">
               <div className="marquee__track marquee__left items-center">
-                {/* Triplicating the array guarantees a seamless infinite loop on ultra-wide 4K monitors. */}
                 {[...sponsorsRow1, ...sponsorsRow1, ...sponsorsRow1].map((sponsor, i) => (
                   <SponsorCard key={`top-${i}`} sponsor={sponsor} />
                 ))}
@@ -154,15 +143,15 @@ const Sponsors = () => {
           </div>
         </div>
 
-        {/* MIDDLE CONTENT: Mobile Scrollable View */}
+        {/* MOBILE MARQUEE (Manual Scroll) */}
         <div className="min-laptop:hidden relative w-full overflow-x-auto carousel-mask flex-grow flex flex-col justify-center">
           <div className="flex flex-col gap-[3vh] items-start w-max px-4">
-            <div className="flex items-center">
+            <div className="flex items-center gap-4">
               {sponsorsRow1.map((sponsor, index) => (
                 <SponsorCard key={`mob-top-${index}`} sponsor={sponsor} />
               ))}
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center gap-4">
               {sponsorsRow2.map((sponsor, index) => (
                 <SponsorCard key={`mob-bot-${index}`} sponsor={sponsor} />
               ))}
@@ -173,18 +162,12 @@ const Sponsors = () => {
           </div>
         </div>
           
-        {/* BOTTOM ANCHOR: Call to Action */}
+        {/* BOTTOM CTA */}
         <div className="relative w-[90%] max-w-[850px] z-10 mb-[2vh]">
           <div className="retro-box pixel-shadow px-4 py-2 laptop:py-3 tablet:px-6 bg-gray-950/95">
             <p className="text-left font-mono text-[13px] tablet:text-[16px] laptop:text-[22px] desktop:text-[26px]">
               <span className="text-[#39ff14] mr-2">{">"}</span> 
               Want to sponsor? Execute:{" "}
-              {/* 
-                INTERACTIVE EMAIL LINK:
-                Opens the default email client with a pre-filled sponsorship subject line. 
-                Hover effects apply a neon drop-shadow, underline, and color brighten to clearly indicate interactivity.
-                'inline-block' prevents the drop-shadow from clipping at the element's edges.
-              */}
               <a 
                 href="mailto:industry@weareinit.org?subject=SharkByte%20Sponsorship%20Inquiry"
                 className="text-[#8b5cf6] break-all tablet:break-normal hover:text-[#a78bfa] hover:underline hover:drop-shadow-[0_0_10px_rgba(139,92,246,0.9)] transition-all duration-300 inline-block"
@@ -198,14 +181,10 @@ const Sponsors = () => {
 
       </div>
 
-      {/* 
-        ANIMATION ENGINE:
-        Animating exactly -33.33% shifts the view perfectly by the width of one original array.
-        Because the array is triplicated in the render, this creates an imperceptible infinite reset.
-      */}
       <style jsx>{`
         .marquee { position: relative; width: 100%; }
-        .marquee__track { display: flex; width: max-content; will-change: transform; }
+        /* UI UPGRADE: Added strict 1.5rem gap to perfectly space the concrete billboards */
+        .marquee__track { display: flex; gap: 1.5rem; width: max-content; will-change: transform; }
         .marquee__left { animation: marquee-left 35s linear infinite; }
         .marquee__right { animation: marquee-right 35s linear infinite; }
         @keyframes marquee-left { 0% { transform: translateX(0); } 100% { transform: translateX(-33.33%); } }

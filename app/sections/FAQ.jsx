@@ -6,7 +6,6 @@ const FAQ = () => {
   // ============================================================================
   // STATE MANAGEMENT
   // ============================================================================
-  // Manages the accordion states. Ensures only one category/question can be open at a time.
   const [openCategory, setOpenCategory] = useState(null)
   const [openQuestion, setOpenQuestion] = useState(null)
 
@@ -39,7 +38,6 @@ const FAQ = () => {
     }
   ]
 
-  // Toggles categories. Opening a new category automatically closes all active questions to prevent layout bloat.
   const handleCategoryToggle = (catIndex) => {
     if (openCategory === catIndex) {
       setOpenCategory(null)
@@ -60,8 +58,7 @@ const FAQ = () => {
   return (
     <section id="faq" className="w-full min-h-svh flex flex-col items-center justify-center relative overflow-hidden faq-bg py-[100px] px-4 tablet:px-8">  
         
-      {/* SECTION HEADER */}
-      <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-20 desktop:py-8 mb-16 max-w-[800px] mx-auto z-10">
+      <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-20 desktop:py-8 mb-16 max-w-[800px] mx-auto z-10 shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
         <h1 className="font-bold text-center text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl text-white">
           Frequently Asked Questions
         </h1>
@@ -73,19 +70,23 @@ const FAQ = () => {
           const isCategoryOpen = openCategory === catIndex
 
           return (
-            <div key={catIndex} className="flex flex-col w-full">
+            // UI UPGRADE: Applied a deep shadow to the container to give it physical 
+            // "hardware" volume off the background wall.
+            <div key={catIndex} className="flex flex-col w-full shadow-[0_10px_30px_rgba(0,0,0,0.8)] rounded-sm">
               
-              {/* TIER 1: CATEGORY CONTROLLER */}
-              {/* STYLING: Applies premium glowing box-shadow and thickens the border when active to simulate an illuminated arcade console. */}
+              {/* 
+                VISUAL DESIGN LANGUAGE: "The Tactile Arcade Console"
+                Unlike the floating glass of the Team page, the FAQ buttons emulate physical hardware.
+                Added hover:-translate-y-1 so the button lifts slightly before being pressed.
+              */}
               <button
                 onClick={() => handleCategoryToggle(catIndex)}
-                className={`retro-box flex justify-between items-center w-full px-6 py-5 tablet:px-8 tablet:py-6 transition-all duration-300 ease-in-out cursor-pointer z-20 ${
+                className={`retro-box flex justify-between items-center w-full px-6 py-5 tablet:px-8 tablet:py-6 transition-all duration-300 ease-in-out cursor-pointer z-20 hover:-translate-y-1 ${
                   isCategoryOpen 
-                    ? 'bg-gray-900 border-4 border-[#8b5cf6] shadow-[0_0_25px_rgba(139,92,246,0.6)]' 
+                    ? 'bg-gray-900 border-4 border-[#8b5cf6] shadow-[0_0_25px_rgba(139,92,246,0.6)] translate-y-0' 
                     : 'bg-gray-950 border-2 border-[#8b5cf6]/30 hover:border-[#8b5cf6]/70 hover:bg-gray-900/80 pixel-shadow'
                 }`}
               >
-                {/* Dynamically injects the custom .glow-text CSS keyframe for active categories to create a pulsing neon effect. */}
                 <h2 className={`font-bold text-[22px] tablet:text-[28px] uppercase tracking-wider transition-colors duration-300 ${
                   isCategoryOpen ? 'text-[#a78bfa] glow-text' : 'text-gray-200'
                 }`}>
@@ -99,8 +100,6 @@ const FAQ = () => {
                 </span>
               </button>
 
-              {/* TIER 2: ACCORDION CONTENT WRAPPER */}
-              {/* ANIMATION: Uses CSS grid tricks (grid-rows-[0fr] to grid-rows-[1fr]) to cleanly animate heights without hardcoding pixel values. */}
               <div 
                 className={`grid transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
                   isCategoryOpen ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 mt-0"
@@ -114,11 +113,9 @@ const FAQ = () => {
                     return (
                       <div key={q.id} className="w-full">
                         
-                        {/* THE QUESTION BUTTON */}
-                        {/* STYLING: Generates a neon edge-glow on the left border to signify focus within the sub-menu. */}
                         <button
                           onClick={() => handleQuestionToggle(q.id)}
-                          className={`w-full flex justify-between items-center p-4 tablet:p-5 text-left transition-all duration-300 border-l-4 ${
+                          className={`w-full flex justify-between items-center p-4 tablet:p-5 text-left transition-all duration-300 border-l-4 hover:-translate-y-0.5 ${
                             isQuestionOpen 
                               ? 'bg-gray-800/80 border-[#39ff14] shadow-[-5px_0_20px_rgba(57,255,20,0.4)] z-10 relative' 
                               : 'bg-gray-900/50 border-gray-700 hover:bg-gray-800/80 hover:border-gray-500'
@@ -137,14 +134,12 @@ const FAQ = () => {
                           </span>
                         </button>
 
-                        {/* THE QUESTION ANSWER */}
                         <div 
                           className={`grid transition-all duration-300 ease-in-out ${
                             isQuestionOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                           }`}
                         >
                           <div className="overflow-hidden min-h-0">
-                            {/* DEPTH ILLUSION: Employs an inset shadow to simulate a physically recessed monitor screen rendering text. */}
                             <div className="p-4 tablet:p-6 bg-gray-950/90 shadow-[inset_0_8px_25px_rgba(0,0,0,0.9)] border-l-4 border-[#39ff14]/30">
                               <p className="text-[16px] tablet:text-[20px] text-gray-300 leading-relaxed">
                                 {q.a}

@@ -157,3 +157,22 @@ body {
 .location-bg { background-image: url('https://i.ibb.co/9kfFYzWK/Sharkbyte-Website-Page-5.png'); }
 .team-bg { background-image: url('https://i.ibb.co/N6cwq0Nk/Sharkbyte-Website-Page-7.png'); background-position: center; }
 .faq-bg { background-image: url('https://i.ibb.co/bRJb4QJb/Sharkbyte-Website-Page-8.png'); background-position: center; }
+
+/* ============================================================================
+   6. CUSTOM COMPONENT ANIMATIONS
+============================================================================ */
+/* 
+  MLH BADGE DROP-IN ANIMATION 
+  Simulates gravity and pendulum physics on initial page load. 
+  The badge falls from behind the navbar, swings past its resting point, and settles.
+*/
+@keyframes badge-drop {
+  0% { transform: translateY(-100%) rotate(0deg); opacity: 0; }
+  50% { transform: translateY(5%) rotate(8deg); opacity: 1; }
+  75% { transform: translateY(-2%) rotate(-4deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+.animate-badge-drop {
+  animation: badge-drop 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
