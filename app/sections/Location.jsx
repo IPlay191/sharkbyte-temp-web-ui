@@ -17,8 +17,8 @@ const Location = () => {
     const updateTransition = () => {
       fadeOnScroll({
         page: location,
-        startAt: location.offsetTop - window.innerHeight * 0.05,
-        endAt: location.offsetTop + location.offsetHeight * 0.8,
+        startAt: location.offsetTop - window.innerHeight * 0.4,
+        endAt: location.offsetTop + location.offsetHeight* 0.1,
         startOpacity: 0, 
         endOpacity: 1,
       })
