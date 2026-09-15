@@ -10,7 +10,6 @@ const Location = () => {
 
   // ============================================================================
   // [ FLAWLESS TRADITIONAL FADE ENGINE ]
-  // Fades Location in natively as the GSAP track pulls it into the viewport.
   // ============================================================================
   useEffect(() => {
     const updateTransition = () => {
@@ -109,52 +108,64 @@ const Location = () => {
   }
 
   return (
+    // [ ECOSYSTEM SHIFT: PART 1 ]
+    // Removed `bg-center` class. Injected a dynamic inline style to physically drag the 
+    // background image exactly 120px down the screen, pulling the building out from under the Navbar.
     <section 
       ref={locationRef} 
       id="location" 
-      className="w-full h-screen flex flex-col justify-start items-center relative overflow-hidden location-bg bg-center py-4 max-[1350px]:py-4 max-[650px]:py-4 laptop:pl-10 laptop:pr-6 will-change-[opacity] opacity-0"
+      className="w-full h-screen flex flex-col justify-start items-center relative overflow-hidden location-bg py-4 max-[1350px]:py-4 max-[650px]:py-4 laptop:pl-10 laptop:pr-6 will-change-[opacity] opacity-0"
+      style={{ backgroundPosition: 'center calc(50% + 120px)' }}
     >
       
-      {/* 1. TITLE EMBLEM */}
-      <div className="mx-4 mb-4 mt-2 max-[650px]:mt-2 max-[650px]:mb-4 table:self-start laptop:self-start tablet:translate-x-[20px] laptop:translate-x-[150px] xl:translate-x-[190px] -translate-y-10 laptop:-translate-y-[32px]">
-        <div className="bg-gray-950/95 border-2 border-gray-700 text-white px-6 py-2.5 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
-          <h1 className="text-2xl font-bold tablet:text-3xl laptop:text-3xl xl:text-4xl max-[1350px]:text-xl max-[650px]:text-base max-[500px]:text-[22px]">
-            SharkByte Ave
-          </h1>
+      {/* 
+        [ ECOSYSTEM SHIFT: PART 2 ]
+        By wrapping the UI and translating it down by the identical 120px, the 
+        relationship between the UI and the pixel art remains perfectly locked.
+      */}
+      <div className="w-full flex flex-col items-center translate-y-[120px]">
+
+        {/* 1. TITLE EMBLEM: Exact Original Offsets Untouched */}
+        <div className="mx-4 mb-4 mt-2 max-[650px]:mt-2 max-[650px]:mb-4 table:self-start laptop:self-start tablet:translate-x-[20px] laptop:translate-x-[150px] xl:translate-x-[190px] -translate-y-10 laptop:-translate-y-[32px]">
+          <div className="bg-gray-950/95 border-2 border-gray-700 text-white px-6 py-2.5 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
+            <h1 className="text-2xl font-bold tablet:text-3xl laptop:text-3xl xl:text-4xl max-[1350px]:text-xl max-[650px]:text-base max-[500px]:text-[22px]">
+              SharkByte Ave
+            </h1>
+          </div>
         </div>
-      </div>
 
-      {/* 2. ADDRESS / DETAILS BLOCK */}
-      <div className="mx-4 max-[650px]:mx-1 mb-4 text-center py-3.5 px-6 max-[650px]:px-4 max-[500px]:px-3 bg-gray-950/95 border-2 border-gray-700 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)] tablet:translate-x-[20px] laptop:translate-x-[170px] xl:translate-x-[210px] -translate-y-10 laptop:-translate-y-[64px]">
-        <div className="flex flex-col gap-1 text-gray-300 font-mono text-[12px] mobile:text-[14px] tablet:text-[15px] text-left">
-          <p><span className="text-[#8b5cf6] font-bold mr-2">{">"}</span>School of Justice Building</p>
-          <p><span className="text-[#8b5cf6] font-bold mr-2">{">"}</span>Miami Dade College, North Campus</p>
-          <p className="text-gray-400 mt-2 text-[10px] mobile:text-[12px]">11380 NW 27th Ave, Miami, Florida 33167</p>
+        {/* 2. ADDRESS / DETAILS BLOCK: Exact Original Offsets Untouched */}
+        <div className="mx-4 max-[650px]:mx-1 mb-4 text-center py-3.5 px-6 max-[650px]:px-4 max-[500px]:px-3 bg-gray-950/95 border-2 border-gray-700 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)] tablet:translate-x-[20px] laptop:translate-x-[170px] xl:translate-x-[210px] -translate-y-10 laptop:-translate-y-[64px]">
+          <div className="flex flex-col gap-1 text-gray-300 font-mono text-[12px] mobile:text-[14px] tablet:text-[15px] text-left">
+            <p><span className="text-[#8b5cf6] font-bold mr-2">{">"}</span>School of Justice Building</p>
+            <p><span className="text-[#8b5cf6] font-bold mr-2">{">"}</span>Miami Dade College, North Campus</p>
+            <p className="text-gray-400 mt-2 text-[10px] mobile:text-[12px]">11380 NW 27th Ave, Miami, Florida 33167</p>
+          </div>
         </div>
-      </div>
 
-      {/* 3. MAP SELECTION CONTROLS */}
-      <div className="px-4 max-[650px]:px-0 flex flex-wrap justify-center gap-4 max-[650px]:gap-2 mb-4 tablet:translate-x-[20px] laptop:translate-x-[170px] xl:translate-x-[210px] -translate-y-10 laptop:-translate-y-[64px]">
-        {mapOptions.map((option, index) => (
-          <button
-            key={index}
-            onClick={() => setActiveMap(option.value)}
-            className={`px-5 py-2 rounded-md font-bold text-sm tablet:text-[15px] tracking-wide transition-all duration-300 border-2 ${
-              activeMap === option.value
-                ? 'bg-gray-950 text-white border-[#8b5cf6] shadow-[inset_0_4px_10px_rgba(0,0,0,0.8),0_0_15px_rgba(139,92,246,0.4)] translate-y-[2px]'
-                : 'bg-gray-800 text-gray-400 border-gray-600 hover:border-gray-400 hover:text-white hover:-translate-y-1 hover:shadow-lg'
-            }`}
-          >
-            {option.name}
-          </button>
-        ))}
-      </div>
+        {/* 3. MAP SELECTION CONTROLS: Exact Original Offsets Untouched */}
+        <div className="px-4 max-[650px]:px-0 flex flex-wrap justify-center gap-4 max-[650px]:gap-2 mb-4 tablet:translate-x-[20px] laptop:translate-x-[170px] xl:translate-x-[210px] -translate-y-10 laptop:-translate-y-[64px]">
+          {mapOptions.map((option, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveMap(option.value)}
+              className={`px-5 py-2 rounded-md font-bold text-sm tablet:text-[15px] tracking-wide transition-all duration-300 border-2 ${
+                activeMap === option.value
+                  ? 'bg-gray-950 text-white border-[#8b5cf6] shadow-[inset_0_4px_10px_rgba(0,0,0,0.8),0_0_15px_rgba(139,92,246,0.4)] translate-y-[2px]'
+                  : 'bg-gray-800 text-gray-400 border-gray-600 hover:border-gray-400 hover:text-white hover:-translate-y-1 hover:shadow-lg'
+              }`}
+            >
+              {option.name}
+            </button>
+          ))}
+        </div>
 
-      {/* 4. MAP FRAME TERMINAL */}
-      <div className="flex justify-center w-full px-4 tablet:translate-x-[30px] laptop:translate-x-[180px] xl:translate-x-[220px] -translate-y-10 laptop:-translate-y-[56px]">
-        {renderMapContent()}
-      </div>
+        {/* 4. MAP FRAME TERMINAL: Exact Original Offsets Untouched */}
+        <div className="flex justify-center w-full px-4 tablet:translate-x-[30px] laptop:translate-x-[180px] xl:translate-x-[220px] -translate-y-10 laptop:-translate-y-[56px]">
+          {renderMapContent()}
+        </div>
 
+      </div>
     </section>
   )
 }
