@@ -35,7 +35,7 @@ const Footer = () => {
           className="grid grid-cols-1 mobile:grid-cols-2 laptop:flex laptop:flex-row flex-wrap justify-center laptop:justify-end gap-4 tablet:gap-x-10 tablet:gap-y-6 laptop:gap-10 items-center"
         >
           <a
-            href="https://weareinit.notion.site/Terms-and-Conditions-SharkByte-2025-2629f4e8ae4e80329c36f65620006db9"
+            href="https://app.notion.com/p/weareinitold/Terms-and-Conditions-SharkByte-2026-2629f4e8ae4e80329c36f65620006db9"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-200 font-medium hover:text-[#a78bfa] hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] transition-all duration-300 text-center laptop:text-right text-[18px] tablet:text-[22px] laptop:text-[26px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded"
