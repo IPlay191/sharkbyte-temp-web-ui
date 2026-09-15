@@ -7,7 +7,7 @@ import { zoomOnScroll } from '../lib/zoomOnScroll'
 
 export default function Hero() {
   // ============================================================================
-  // PARALLAX & FADE SCROLL ENGINE
+  // [ PARALLAX & FADE SCROLL ENGINE ]
   // ============================================================================
   useEffect(() => {
     const track = document.getElementById('hero')
@@ -22,7 +22,6 @@ export default function Hero() {
       const current = window.scrollY
 
       // 1. FLASHY BADGE ANIMATION (Pre-Transition)
-      // Calculates progress specifically for the first 15% of the user's scroll.
       if (badge) {
         const badgeScrollRange = window.innerHeight * 0.15;
         const badgeRawProgress = Math.max(0, Math.min(1, (current - start) / badgeScrollRange));
@@ -32,111 +31,120 @@ export default function Hero() {
           ? 4 * badgeRawProgress * badgeRawProgress * badgeRawProgress 
           : 1 - Math.pow(-2 * badgeRawProgress + 2, 3) / 2;
 
-        // Slides UP behind the navbar (-150px) and tilts left (-15deg) before fading out
         const badgeY = -(badgeEase * 150);
         const badgeRotate = -(badgeEase * 15);
         const badgeOpacity = 1 - (badgeRawProgress * 1.2);
 
-        badge.style.transform = `translateY(${badgeY}px) rotate(${badgeRotate}deg)`;
+        badge.style.transform = `translate3d(0, ${badgeY}px, 0) rotate(${badgeRotate}deg)`;
         badge.style.opacity = Math.max(0, badgeOpacity).toFixed(3);
       }
 
       // 2. DELAYED HERO TRANSITION
-      // By adding a 10% offset to the startAt, we guarantee the Hero doesn't begin 
-      // zooming or fading until the MLH badge is already animating out of the way.
       const heroTransitionStart = start + (window.innerHeight * 0.10);
 
-      fadeOnScroll({
-        page: content,
-        startAt: heroTransitionStart,
-        endAt: end,
-        startOpacity: 1,
-        endOpacity: 0,
-      })
-      
-      zoomOnScroll({
-        page: content,
-        startAt: heroTransitionStart,
-        endAt: end,
-        startScale: 1,
-        endScale: 1.8,
-      })
+      fadeOnScroll({ page: content, startAt: heroTransitionStart, endAt: end, startOpacity: 1, endOpacity: 0 })
+      zoomOnScroll({ page: content, startAt: heroTransitionStart, endAt: end, startScale: 1, endScale: 1.8 })
     }
     
     updateTransition()
     window.addEventListener('scroll', updateTransition, { passive: true })
-    window.addEventListener('resize', updateTransition)
-    
-    return () => {
-      window.removeEventListener('scroll', updateTransition)
-      window.removeEventListener('resize', updateTransition)
-    }
+    return () => window.removeEventListener('scroll', updateTransition)
   }, [])
 
   return (
-    <section id='hero' className="w-full h-[200vh] relative">
+    <section id='hero' className="w-full h-[200vh] relative z-0">
       <div id='hero-content' className="sticky top-0 h-svh w-full hero-bg flex justify-center items-center flex-row max-[700px]:flex-col overflow-hidden will-change-transform">
 
-        {/* 
-          MLH EVENT TRUST BADGE (2027 SEASON - YELLOW)
-          z-40: Forces it underneath the z-50 Navbar.
-          top-[60px]: Hangs it perfectly flush to the bottom lip of the Navbar.
-          animate-badge-drop: Triggers the CSS keyframe load animation.
-        */}
+        {/* [ MLH EVENT TRUST BADGE ] */}
         <a 
           id="mlh-trust-badge" 
-          className="absolute top-[60px] left-4 tablet:left-12 w-[10%] min-w-[60px] max-w-[100px] z-40 origin-top animate-badge-drop" 
+          className="absolute top-[60px] left-4 tablet:left-12 w-[10%] min-w-[60px] max-w-[100px] z-40 origin-top animate-badge-drop will-change-transform" 
           href="https://mlh.io/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2026-season&utm_content=yellow" 
           target="_blank" 
           rel="noopener noreferrer"
         >
-          <img 
-            src="https://s3.amazonaws.com/logged-assets/trust-badge/2027/mlh-trust-badge-2027-yellow.svg" 
-            alt="Major League Hacking 2027 Hackathon Season" 
-            className="w-full drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]"
-          />
+          <img src="https://s3.amazonaws.com/logged-assets/trust-badge/2027/mlh-trust-badge-2027-yellow.svg" alt="Major League Hacking 2027" className="w-full drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]" />
         </a>
 
-        <div className='relative flex-column justify-center items-center'>
-          <div className="flex absolute left-[-3rem] top-[-1rem] desktop:left-[-10rem] -rotate-[15deg] z-9 animate-bounce">
-            <Image className="w-[100px] h-auto desktop:w-[200px]"
-              src="https://i.ibb.co/Q7tQMWqH/image.png"
-              alt="text-bubble for feedback form"
-              width={300}
-              height={300}
-              priority
+        {/* [ MAIN HERO CLUSTER ] */}
+        <div className='relative flex flex-col justify-center items-center z-10'>
+          
+          <div className="absolute -top-4 -left-12 tablet:-top-2 tablet:-left-24 laptop:-top-4 laptop:-left-32 desktop:-top-6 desktop:-left-40 z-20 animate-smooth-levitate pointer-events-none">
+            <Image 
+              src="https://i.ibb.co/Q7tQMWqH/image.png" 
+              alt="Date Bubble" 
+              width={300} 
+              height={300} 
+              priority 
+              className="w-[110px] tablet:w-[140px] laptop:w-[160px] desktop:w-[200px] h-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.4)]" 
             />
           </div>
 
-          <div className="z-2">
-            <Image
-              src="/svgs/logo.svg"
-              alt="SharkByte Logo"
-              width={100}
-              height={100}
-              priority
-              className="w-[300px] h-[300px] tablet:w-[350px] tablet:h-[350px] laptop:w-[400px] laptop:w-[400px] desktop:w-full desktop:h-full"
+          <div className="flex flex-col items-center justify-center animate-subtle-levitate">
+            
+            <Image 
+              src="/svgs/logo.svg" 
+              alt="SharkByte Logo" 
+              width={100} 
+              height={100} 
+              priority 
+              className="w-[260px] h-auto tablet:w-[320px] laptop:w-[380px] desktop:w-[460px] drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)]" 
             />
-          </div>
 
-          <div className="font-bold absolute text-nowrap justify-self-center text-white text-[1rem] tablet:text-[1.25rem] laptop:text-[1.5rem] desktop:text-[2.2rem] text-shadow-lg/100 text-shadow-white-900"> 
-            Miami Dade College's Signature Hackathon 
+            <div className="mt-4 tablet:mt-6 laptop:mt-8 font-bold text-center text-white text-[1rem] tablet:text-[1.25rem] laptop:text-[1.5rem] desktop:text-[2.2rem] drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] z-20 tracking-wide px-4"> 
+              Miami Dade College's Signature Hackathon 
+            </div>
+            
           </div>
         </div>
 
-        <div className="absolute bottom-4 left-4 right-4 z-20 flex flex-col items-center justify-center p-4 text-center text-white retro-box pixel-shadow sm:bottom-6 sm:left-auto sm:right-6 sm:w-[18rem] sm:p-5">
-          <p className="text-sm font-bold sm:text-base tablet:text-lg">
-            Have Questions? Contact Us!
-          </p>
-          <a 
-            href="mailto:Mdc-north@weareinit.org?subject=SharkByte%20Hackathon%20Inquiry" 
-            className="mt-2 break-all text-sm text-purple-400 tablet:text-base hover:text-purple-300 hover:underline hover:drop-shadow-[0_0_10px_rgba(168,85,247,0.9)] transition-all duration-300 inline-block"
-          >
-            Mdc-north@weareinit.org
-          </a>
+        {/* [ THE COMMAND TERMINAL ] */}
+        <div className="absolute bottom-6 right-6 tablet:bottom-10 tablet:right-10 z-30 transition-transform duration-300 hover:-translate-y-2">
+          <div className="bg-gray-950/90 backdrop-blur-md border-2 border-gray-700/80 shadow-[0_15px_35px_rgba(0,0,0,0.6)] rounded-xl p-5 tablet:p-6 w-full max-w-[260px] tablet:max-w-[320px] text-center hover:border-[#8b5cf6]/80 transition-colors duration-300">
+            <p className="text-sm tablet:text-base font-bold text-gray-200 tracking-wide uppercase">
+              Have Questions?
+            </p>
+            <a 
+              href="mailto:Mdc-north@weareinit.org?subject=SharkByte%20Hackathon%20Inquiry" 
+              className="mt-2 block break-all text-[14px] tablet:text-[17px] font-mono font-bold text-[#8b5cf6] hover:text-white hover:drop-shadow-[0_0_12px_rgba(139,92,246,1)] transition-all duration-300"
+            >
+              {/* [ RETRO CURSOR ]: High-voltage green with a strict step-end blink to mimic a true CLI prompt */}
+              Contact Us<span className="animate-blink text-[#39ff14] ml-1 drop-shadow-[0_0_8px_rgba(57,255,20,0.8)]">_</span>
+            </a>
+          </div>
         </div>
         
       </div>
+
+      <style jsx>{`
+        /* [ LEVITATION PHYSICS ] */
+        @keyframes smooth-levitate {
+          0%, 100% { transform: translate3d(0, 0, 0) rotate(-15deg); }
+          50% { transform: translate3d(0, -15px, 0) rotate(-15deg); }
+        }
+        @keyframes subtle-levitate {
+          0%, 100% { transform: translate3d(0, 0, 0); }
+          50% { transform: translate3d(0, -10px, 0); }
+        }
+        .animate-smooth-levitate {
+          animation: smooth-levitate 4s ease-in-out infinite;
+          will-change: transform;
+        }
+        .animate-subtle-levitate {
+          animation: subtle-levitate 5s ease-in-out infinite reverse;
+          will-change: transform;
+        }
+        
+        /* [ RETRO TERMINAL CURSOR PHYSICS ] */
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+        .animate-blink {
+          /* step-end forces a harsh snap between 1 and 0 opacity, avoiding smooth fades */
+          animation: blink 1s step-end infinite; 
+        }
+      `}</style>
     </section>
   )
 }

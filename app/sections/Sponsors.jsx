@@ -76,25 +76,16 @@ const Sponsors = () => {
   }, [])
 
   return (
-    // Purged 'px-4' from the master section. The section must reach the raw edges of the monitor.
     <section id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-between items-center relative overflow-hidden py-[4vh]">
       
-      {/* 
-        [ HEADER DOM BREAKOUT ] 
-        Safely constrained to max-w-[1400px] and restored px-4 so the title doesn't hit the screen edges.
-      */}
+      {/* [ HEADER DOM BREAKOUT ] */}
       <div className="w-full max-w-[1400px] mx-auto px-4 mt-[5vh] flex justify-center relative z-10">
         <div className="bg-gray-950/95 text-white px-8 py-3 border-2 border-gray-700 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
           <h1 className="font-bold text-center text-3xl laptop:text-4xl tracking-wider">Our Sponsors</h1>
         </div>
       </div>
 
-      {/* 
-        [ THE STADIUM WRAPAROUND: FULL-BLEED EXECUTION ] 
-        - max-w-[100vw]: Forces the marquee to span the entire physical width of the monitor.
-        - Because it hits the physical edges, the CSS mask-image gradient will fade the cards out 
-          naturally into the peripheral darkness, fixing the ghosting effect.
-      */}
+      {/* [ THE STADIUM WRAPAROUND: FULL-BLEED EXECUTION ] */}
       <div className="max-laptop:hidden relative w-full max-w-[100vw] overflow-hidden carousel-mask flex-grow flex flex-col justify-center my-[4vh]">
         <div className="flex flex-col gap-[3vh] laptop:gap-[5vh] items-center">
           
@@ -122,10 +113,7 @@ const Sponsors = () => {
         <div className="text-gray-400 font-bold text-sm text-center drop-shadow-md mt-6 animate-pulse">← Swipe horizontally →</div>
       </div>
         
-      {/* 
-        [ CYBERPUNK COMMAND PROMPT DOM BREAKOUT ] 
-        Constrained safely back to max-w-[1400px].
-      */}
+      {/* [ CYBERPUNK COMMAND PROMPT DOM BREAKOUT ] */}
       <div className="w-full max-w-[1400px] mx-auto px-4 mb-[4vh] flex justify-center relative z-10 transition-transform duration-300 hover:-translate-y-2">
         <div className="bg-gray-950/95 border-2 border-gray-700 shadow-[0_15px_30px_rgba(0,0,0,0.6)] rounded-lg px-6 py-4 laptop:py-5 w-[90%] max-w-[850px]">
           <p className="text-left font-mono text-[14px] tablet:text-[18px] laptop:text-[24px] text-gray-300">
@@ -137,17 +125,14 @@ const Sponsors = () => {
             >
               industry@weareinit.org
             </a>
+            {/* [ RETRO CURSOR ]: High-voltage green with a strict step-end blink to mimic a true CLI prompt */}
             <span className="animate-blink text-[#39ff14] ml-1">_</span>
           </p>
         </div>
       </div>
 
       <style jsx>{`
-        /* 
-          [ THE MASK GRADIENT UPGRADE ]
-          Increased the gradient boundary from 10% to 15%. This creates a much smoother, 
-          more gradual fade into the darkness, enhancing the 3D depth of the cylinder.
-        */
+        /* [ THE MASK GRADIENT UPGRADE ] */
         .carousel-mask {
           mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
           -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
@@ -160,6 +145,16 @@ const Sponsors = () => {
         @keyframes marquee-left { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-33.33%, 0, 0); } }
         @keyframes marquee-right { 0% { transform: translate3d(-33.33%, 0, 0); } 100% { transform: translate3d(0, 0, 0); } }
         .marquee:hover .marquee__track { animation-play-state: paused; }
+
+        /* [ RETRO TERMINAL CURSOR PHYSICS ] */
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+        .animate-blink {
+          /* step-end forces a harsh snap between 1 and 0 opacity, avoiding smooth fades */
+          animation: blink 1s step-end infinite; 
+        }
       `}</style>
     </section>
   )
