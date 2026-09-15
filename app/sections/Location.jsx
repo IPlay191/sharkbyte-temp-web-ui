@@ -19,8 +19,8 @@ const Location = () => {
         page: location,
         startAt: location.offsetTop - window.innerHeight * 0.05,
         endAt: location.offsetTop + location.offsetHeight * 0.8,
-        startOpacity: 1,
-        endOpacity: 0,
+        startOpacity: 0, 
+        endOpacity: 1,
       })
     }
 
