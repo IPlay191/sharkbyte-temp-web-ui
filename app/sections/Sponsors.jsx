@@ -4,6 +4,9 @@ import Image from "next/image"
 import { useEffect } from 'react'
 import { fadeOnScroll } from '../lib/fadeOnScroll'
 
+// ============================================================================
+// 1. DATA ARCHITECTURE: OFFICIAL SPONSORS & NATIONAL PARTNERS
+// ============================================================================
 const sponsorsRow1 = [
   { href: "https://www.roocapital.com/", src: "https://i.ibb.co/DgTndgYp/roo-capital.png", alt: "roo_capital_logo", tier: 1 },
   { href: "https://knightfoundation.org/", src: "https://i.ibb.co/DfGpRjcY/knight-foundation-logo.jpg", alt: "knight_foundation_logo", tier: 1 },
@@ -21,6 +24,9 @@ const sponsorsRow2 = [
   { href: "https://www.miamigov.com/", src: "https://i.ibb.co/ksYnj2Sr/city-of-miami-logo.png", alt: "city_of_miami_logo", tier: 2 },
 ];
 
+// ============================================================================
+// 2. COMPONENT: DYNAMIC SPONSOR CARD
+// ============================================================================
 const SponsorCard = ({ sponsor }) => {
   const getTierStyles = (tier) => {
     switch (tier) {
@@ -45,6 +51,9 @@ const SponsorCard = ({ sponsor }) => {
   );
 };
 
+// ============================================================================
+// 3. LAYOUT: MAIN SPONSORS VIEW
+// ============================================================================
 const Sponsors = () => {
   useEffect(() => {
     const sponsors = document.getElementById('sponsors')
@@ -52,7 +61,13 @@ const Sponsors = () => {
     if (!sponsors || !location) return undefined
 
     const updateTransition = () => {
-      fadeOnScroll({ page: sponsors, startAt: location.offsetTop + location.offsetHeight - window.innerHeight * 0.25, endAt: location.offsetTop + location.offsetHeight + sponsors.offsetHeight * 0.1, startOpacity: 0, endOpacity: 1 })
+      fadeOnScroll({ 
+        page: sponsors, 
+        startAt: location.offsetTop + location.offsetHeight - window.innerHeight * 0.25, 
+        endAt: location.offsetTop + location.offsetHeight + sponsors.offsetHeight * 0.1, 
+        startOpacity: 0, 
+        endOpacity: 1 
+      })
     }
 
     updateTransition()
@@ -61,70 +76,84 @@ const Sponsors = () => {
   }, [])
 
   return (
-    <section id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-center items-center relative overflow-hidden py-[4vh] px-4">
+    // Purged 'px-4' from the master section. The section must reach the raw edges of the monitor.
+    <section id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-between items-center relative overflow-hidden py-[4vh]">
       
-      <div className="w-full flex flex-col items-center justify-between h-full max-w-[1400px] mx-auto">
-        
-        <div className="relative z-10 mt-[5vh]">
-          <div className="bg-gray-950/95 text-white px-8 py-3 border-2 border-gray-700 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
-            <h1 className="font-bold text-center text-3xl laptop:text-4xl tracking-wider">Our Sponsors</h1>
-          </div>
+      {/* 
+        [ HEADER DOM BREAKOUT ] 
+        Safely constrained to max-w-[1400px] and restored px-4 so the title doesn't hit the screen edges.
+      */}
+      <div className="w-full max-w-[1400px] mx-auto px-4 mt-[5vh] flex justify-center relative z-10">
+        <div className="bg-gray-950/95 text-white px-8 py-3 border-2 border-gray-700 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
+          <h1 className="font-bold text-center text-3xl laptop:text-4xl tracking-wider">Our Sponsors</h1>
         </div>
+      </div>
 
-        {/* [ THEMATIC UPGRADE: STADIUM WRAPAROUND ] Added 'carousel-mask' gradient to fade edges smoothly into the background. */}
-        <div className="max-laptop:hidden relative w-full overflow-hidden carousel-mask flex-grow flex flex-col justify-center">
-          <div className="flex flex-col gap-[3vh] laptop:gap-[5vh] items-center">
-            
-            <div className="marquee overflow-hidden w-full flex items-center">
-              <div className="marquee__track marquee__left items-center">
-                {[...sponsorsRow1, ...sponsorsRow1, ...sponsorsRow1].map((sponsor, i) => <SponsorCard key={`top-${i}`} sponsor={sponsor} />)}
-              </div>
-            </div>
-
-            <div className="marquee overflow-hidden w-full flex items-center">
-              <div className="marquee__track marquee__right items-center">
-                {[...sponsorsRow2, ...sponsorsRow2, ...sponsorsRow2].map((sponsor, i) => <SponsorCard key={`bottom-${i}`} sponsor={sponsor} />)}
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div className="min-laptop:hidden relative w-full overflow-x-auto carousel-mask flex-grow flex flex-col justify-center">
-          <div className="flex flex-col gap-[3vh] items-start w-max px-4">
-            <div className="flex items-center gap-4">{sponsorsRow1.map((sponsor, index) => <SponsorCard key={`mob-top-${index}`} sponsor={sponsor} />)}</div>
-            <div className="flex items-center gap-4">{sponsorsRow2.map((sponsor, index) => <SponsorCard key={`mob-bot-${index}`} sponsor={sponsor} />)}</div>
-          </div>
-          <div className="text-gray-400 font-bold text-sm text-center drop-shadow-md mt-6 animate-pulse">← Swipe horizontally →</div>
-        </div>
+      {/* 
+        [ THE STADIUM WRAPAROUND: FULL-BLEED EXECUTION ] 
+        - max-w-[100vw]: Forces the marquee to span the entire physical width of the monitor.
+        - Because it hits the physical edges, the CSS mask-image gradient will fade the cards out 
+          naturally into the peripheral darkness, fixing the ghosting effect.
+      */}
+      <div className="max-laptop:hidden relative w-full max-w-[100vw] overflow-hidden carousel-mask flex-grow flex flex-col justify-center my-[4vh]">
+        <div className="flex flex-col gap-[3vh] laptop:gap-[5vh] items-center">
           
-        {/* [ THEMATIC UPGRADE: CYBERPUNK COMMAND PROMPT ] */}
-        <div className="relative w-[90%] max-w-[850px] z-10 mb-[4vh] transition-transform duration-300 hover:-translate-y-2">
-          <div className="bg-gray-950/95 border-2 border-gray-700 shadow-[0_15px_30px_rgba(0,0,0,0.6)] rounded-lg px-6 py-4 laptop:py-5">
-            <p className="text-left font-mono text-[14px] tablet:text-[18px] laptop:text-[24px] text-gray-300">
-              <span className="text-[#39ff14] font-bold mr-3 drop-shadow-[0_0_8px_rgba(57,255,20,0.8)]">{">"}</span> 
-              Want to sponsor? Execute:{" "}
-              <a 
-                href="mailto:industry@weareinit.org?subject=SharkByte%20Sponsorship%20Inquiry"
-                className="text-[#8b5cf6] break-all tablet:break-normal hover:text-white hover:drop-shadow-[0_0_12px_rgba(139,92,246,1)] transition-all duration-300 inline-block font-bold"
-              >
-                industry@weareinit.org
-              </a>
-              <span className="animate-blink text-[#39ff14] ml-1">_</span>
-            </p>
+          <div className="marquee overflow-hidden w-full flex items-center">
+            <div className="marquee__track marquee__left items-center">
+              {[...sponsorsRow1, ...sponsorsRow1, ...sponsorsRow1].map((sponsor, i) => <SponsorCard key={`top-${i}`} sponsor={sponsor} />)}
+            </div>
           </div>
-        </div>
 
+          <div className="marquee overflow-hidden w-full flex items-center">
+            <div className="marquee__track marquee__right items-center">
+              {[...sponsorsRow2, ...sponsorsRow2, ...sponsorsRow2].map((sponsor, i) => <SponsorCard key={`bottom-${i}`} sponsor={sponsor} />)}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* MOBILE MARQUEE (Full-Bleed for natural swiping) */}
+      <div className="min-laptop:hidden relative w-full max-w-[100vw] overflow-x-auto carousel-mask flex-grow flex flex-col justify-center my-[4vh]">
+        <div className="flex flex-col gap-[3vh] items-start w-max px-6">
+          <div className="flex items-center gap-4">{sponsorsRow1.map((sponsor, index) => <SponsorCard key={`mob-top-${index}`} sponsor={sponsor} />)}</div>
+          <div className="flex items-center gap-4">{sponsorsRow2.map((sponsor, index) => <SponsorCard key={`mob-bot-${index}`} sponsor={sponsor} />)}</div>
+        </div>
+        <div className="text-gray-400 font-bold text-sm text-center drop-shadow-md mt-6 animate-pulse">← Swipe horizontally →</div>
+      </div>
+        
+      {/* 
+        [ CYBERPUNK COMMAND PROMPT DOM BREAKOUT ] 
+        Constrained safely back to max-w-[1400px].
+      */}
+      <div className="w-full max-w-[1400px] mx-auto px-4 mb-[4vh] flex justify-center relative z-10 transition-transform duration-300 hover:-translate-y-2">
+        <div className="bg-gray-950/95 border-2 border-gray-700 shadow-[0_15px_30px_rgba(0,0,0,0.6)] rounded-lg px-6 py-4 laptop:py-5 w-[90%] max-w-[850px]">
+          <p className="text-left font-mono text-[14px] tablet:text-[18px] laptop:text-[24px] text-gray-300">
+            <span className="text-[#39ff14] font-bold mr-3 drop-shadow-[0_0_8px_rgba(57,255,20,0.8)]">{">"}</span> 
+            Want to sponsor? Execute:{" "}
+            <a 
+              href="mailto:industry@weareinit.org?subject=SharkByte%20Sponsorship%20Inquiry"
+              className="text-[#8b5cf6] break-all tablet:break-normal hover:text-white hover:drop-shadow-[0_0_12px_rgba(139,92,246,1)] transition-all duration-300 inline-block font-bold"
+            >
+              industry@weareinit.org
+            </a>
+            <span className="animate-blink text-[#39ff14] ml-1">_</span>
+          </p>
+        </div>
       </div>
 
       <style jsx>{`
-        /* The Mask creates a gradient fade on the left and right borders of the track container */
+        /* 
+          [ THE MASK GRADIENT UPGRADE ]
+          Increased the gradient boundary from 10% to 15%. This creates a much smoother, 
+          more gradual fade into the darkness, enhancing the 3D depth of the cylinder.
+        */
         .carousel-mask {
-          mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-          -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+          mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+          -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
         }
         .marquee { position: relative; width: 100%; }
-        /* GPU Accelerated */
+        
         .marquee__track { display: flex; gap: 1.5rem; width: max-content; will-change: transform; transform: translateZ(0); }
         .marquee__left { animation: marquee-left 35s linear infinite; }
         .marquee__right { animation: marquee-right 35s linear infinite; }
