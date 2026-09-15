@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 const FAQ = () => {
   // ============================================================================
-  // STATE MANAGEMENT
+  // [ STATE MANAGEMENT (View Controllers) ]
   // ============================================================================
   const [openCategory, setOpenCategory] = useState(null)
   const [openQuestion, setOpenQuestion] = useState(null)
@@ -53,13 +53,18 @@ const FAQ = () => {
   }
 
   // ============================================================================
-  // RENDER COMPONENT
+  // [ MASTER DOM RENDERER ]
   // ============================================================================
   return (
     <section id="faq" className="w-full min-h-svh flex flex-col items-center justify-center relative overflow-hidden faq-bg py-[100px] px-4 tablet:px-8">  
         
-      <div className="retro-box pixel-shadow px-[6vw] py-[3vw] tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-20 desktop:py-8 mb-16 max-w-[800px] mx-auto z-10 shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
-        <h1 className="font-bold text-center text-[7vw] tablet:text-[5vw] laptop:text-4xl desktop:text-5xl text-white">
+      {/* 
+        [ HEADER OPTIMIZATION ]
+        Purged the volatile 'vw' sizing values. Standardized to strict breakpoints 
+        to ensure the header maintains a consistent, commanding scale across all displays.
+      */}
+      <div className="retro-box pixel-shadow px-6 py-4 tablet:px-12 tablet:py-5 laptop:px-16 laptop:py-6 desktop:px-20 desktop:py-8 mb-12 tablet:mb-16 max-w-[800px] mx-auto z-10 shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
+        <h1 className="font-bold text-center text-3xl mobile:text-4xl tablet:text-5xl laptop:text-6xl text-white">
           Frequently Asked Questions
         </h1>
       </div>
@@ -70,30 +75,29 @@ const FAQ = () => {
           const isCategoryOpen = openCategory === catIndex
 
           return (
-            // UI UPGRADE: Applied a deep shadow to the container to give it physical 
-            // "hardware" volume off the background wall.
             <div key={catIndex} className="flex flex-col w-full shadow-[0_10px_30px_rgba(0,0,0,0.8)] rounded-sm">
               
               {/* 
-                VISUAL DESIGN LANGUAGE: "The Tactile Arcade Console"
-                Unlike the floating glass of the Team page, the FAQ buttons emulate physical hardware.
-                Added hover:-translate-y-1 so the button lifts slightly before being pressed.
+                [ VISUAL DESIGN: THE TACTILE ARCADE CONSOLE ]
+                - hover:-translate-y-1: The button visually raises up to meet the user's cursor.
+                - active:translate-y-0: The critical 'bottom-out' physics. Clicking forces the button down, 
+                  mimicking a high-end mechanical switch actuation.
               */}
               <button
                 onClick={() => handleCategoryToggle(catIndex)}
-                className={`retro-box flex justify-between items-center w-full px-6 py-5 tablet:px-8 tablet:py-6 transition-all duration-300 ease-in-out cursor-pointer z-20 hover:-translate-y-1 ${
+                className={`retro-box flex justify-between items-center w-full px-6 py-5 tablet:px-8 tablet:py-6 transition-all duration-300 ease-in-out cursor-pointer z-20 hover:-translate-y-1 active:translate-y-0 ${
                   isCategoryOpen 
                     ? 'bg-gray-900 border-4 border-[#8b5cf6] shadow-[0_0_25px_rgba(139,92,246,0.6)] translate-y-0' 
                     : 'bg-gray-950 border-2 border-[#8b5cf6]/30 hover:border-[#8b5cf6]/70 hover:bg-gray-900/80 pixel-shadow'
                 }`}
               >
-                <h2 className={`font-bold text-[22px] tablet:text-[28px] uppercase tracking-wider transition-colors duration-300 ${
+                <h2 className={`font-bold text-[18px] mobile:text-[22px] tablet:text-[28px] uppercase tracking-wider transition-colors duration-300 text-left pr-4 ${
                   isCategoryOpen ? 'text-[#a78bfa] glow-text' : 'text-gray-200'
                 }`}>
                   {categoryBlock.category}
                 </h2>
                 
-                <span className={`text-[#8b5cf6] font-bold text-[28px] leading-none shrink-0 transition-transform duration-300 ${
+                <span className={`text-[#8b5cf6] font-bold text-[24px] tablet:text-[28px] leading-none shrink-0 transition-transform duration-300 ${
                   isCategoryOpen ? 'rotate-180' : 'rotate-0'
                 }`}>
                   ▼
@@ -105,7 +109,7 @@ const FAQ = () => {
                   isCategoryOpen ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 mt-0"
                 }`}
               >
-                <div className="overflow-hidden min-h-0 flex flex-col gap-3 pl-4 tablet:pl-10">
+                <div className="overflow-hidden min-h-0 flex flex-col gap-3 pl-4 tablet:pl-10 pr-2 tablet:pr-4">
                   
                   {categoryBlock.questions.map((q) => {
                     const isQuestionOpen = openQuestion === q.id
@@ -113,21 +117,26 @@ const FAQ = () => {
                     return (
                       <div key={q.id} className="w-full">
                         
+                        {/* 
+                          [ VISUAL DESIGN: THE SERVER BLADE ]
+                          - hover:translate-x-2: Hovering physically "pulls" the question slightly out of the rack.
+                          - hover:border-l-[#39ff14]: Ignites the left edge with a neon green active state.
+                        */}
                         <button
                           onClick={() => handleQuestionToggle(q.id)}
-                          className={`w-full flex justify-between items-center p-4 tablet:p-5 text-left transition-all duration-300 border-l-4 hover:-translate-y-0.5 ${
+                          className={`w-full flex justify-between items-center p-4 tablet:p-5 text-left transition-all duration-300 border-l-4 border-b-2 hover:translate-x-2 active:translate-y-[1px] ${
                             isQuestionOpen 
-                              ? 'bg-gray-800/80 border-[#39ff14] shadow-[-5px_0_20px_rgba(57,255,20,0.4)] z-10 relative' 
-                              : 'bg-gray-900/50 border-gray-700 hover:bg-gray-800/80 hover:border-gray-500'
+                              ? 'bg-gray-800/80 border-l-[#39ff14] border-b-transparent shadow-[-5px_0_20px_rgba(57,255,20,0.4)] z-10 relative' 
+                              : 'bg-gray-900/50 border-l-gray-700 border-b-gray-800/50 hover:bg-gray-800/80 hover:border-l-[#39ff14]/70'
                           }`}
                         >
-                          <span className={`font-bold text-[18px] tablet:text-[22px] pr-4 transition-colors duration-300 ${
+                          <span className={`font-bold text-[15px] mobile:text-[18px] tablet:text-[22px] pr-4 transition-colors duration-300 ${
                             isQuestionOpen ? 'text-white' : 'text-gray-300'
                           }`}>
                             {q.q}
                           </span>
                           
-                          <span className={`font-bold text-[28px] leading-none shrink-0 transition-all duration-300 ${
+                          <span className={`font-bold text-[24px] tablet:text-[28px] leading-none shrink-0 transition-all duration-300 ${
                             isQuestionOpen ? 'rotate-45 text-pink-500' : 'rotate-0 text-[#39ff14]'
                           }`}>
                             +
@@ -140,8 +149,9 @@ const FAQ = () => {
                           }`}
                         >
                           <div className="overflow-hidden min-h-0">
-                            <div className="p-4 tablet:p-6 bg-gray-950/90 shadow-[inset_0_8px_25px_rgba(0,0,0,0.9)] border-l-4 border-[#39ff14]/30">
-                              <p className="text-[16px] tablet:text-[20px] text-gray-300 leading-relaxed">
+                            {/* [ DEPTH ILLUSION ] Inset shadow simulates a physically recessed monitor screen rendering text. */}
+                            <div className="p-4 tablet:p-6 bg-gray-950/90 shadow-[inset_0_8px_25px_rgba(0,0,0,0.9)] border-l-4 border-[#39ff14]/30 mb-2">
+                              <p className="text-[14px] mobile:text-[16px] tablet:text-[20px] text-gray-300 leading-relaxed">
                                 {q.a}
                               </p>
                             </div>
