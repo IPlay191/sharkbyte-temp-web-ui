@@ -4,12 +4,11 @@ import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Register the plugin safely outside the component lifecycle
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const HorizontalScroll = ({ children, panels = 1 }) => {
+const HorizontalScroll = ({ children }) => {
   const trackRef = useRef(null);
   const railRef = useRef(null);
 
@@ -18,49 +17,48 @@ const HorizontalScroll = ({ children, panels = 1 }) => {
     const rail = railRef.current;
     if (!track || !rail) return;
 
-    // gsap.context handles all cleanup automatically in modern React
     let ctx = gsap.context(() => {
       const screenWidth = window.innerWidth;
       const isMobile = screenWidth < 768;
       
-      // Faster scroll speed on mobile
-      const scrollFactor = isMobile ? 2 : 1.25; 
+      // [ SPEED CALIBRATION ] 
+      // Adjusted from 3.0 down to 1.5. This removes the restrictive, muddy feeling 
+      // while keeping the scroll smooth and cinematic.
+      const scrollFactor = isMobile ? 2 : 1.5; 
 
-      // Set the initial width of the film strip
+      // Allows the rail to natively expand to the size of the giant train
       gsap.set(rail, {
-        width: `${panels * 100}vw`,
+        width: 'max-content',
         display: 'flex',
         height: '100svh',
         flexWrap: 'nowrap',
       });
 
-      // Create the horizontal scroll tween
       gsap.to(rail, {
-        x: () => -(rail.scrollWidth - window.innerWidth), // Move exactly the width of the hidden panels
+        x: () => -(rail.scrollWidth - window.innerWidth), 
         ease: 'none',
         scrollTrigger: {
           trigger: track,
           start: 'top top',
-          end: () => `+=${window.innerWidth * scrollFactor * (panels - 1)}`, // Dynamic scroll duration
-          scrub: 0.35,
+          // Dynamically calculates the exact end point based on the physical width of the train + pages
+          end: () => `+=${(rail.scrollWidth - window.innerWidth) * scrollFactor}`, 
+          scrub: 0.8, // Slightly smoothed scrub for a premium feel
           pin: true,
           anticipatePin: 1,
-          invalidateOnRefresh: true, // Recalculates perfectly if the user resizes the window
+          invalidateOnRefresh: true,
         },
       });
     }, trackRef);
 
-    return () => ctx.revert(); // Instantly kills the animation on unmount to prevent bugs
-  }, [panels]);
+    return () => ctx.revert(); 
+  }, []);
 
   return (
     <section ref={trackRef} className="relative h-svh overflow-hidden bg-gray-950">
-      
-      {/* The Rail containing your slides */}
-      <div ref={railRef} className="flex h-full w-max">
+      {/* Added id="horizontal-rail" so child components can reference it for math */}
+      <div id="horizontal-rail" ref={railRef} className="flex h-full w-max will-change-transform">
         {children}
       </div>
-      
     </section>
   );
 };

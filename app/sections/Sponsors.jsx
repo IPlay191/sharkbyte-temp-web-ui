@@ -1,12 +1,9 @@
 'use client'
 
 import Image from "next/image"
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { fadeOnScroll } from '../lib/fadeOnScroll'
 
-// ============================================================================
-// 1. DATA ARCHITECTURE: OFFICIAL SPONSORS & NATIONAL PARTNERS
-// ============================================================================
 const sponsorsRow1 = [
   { href: "https://www.roocapital.com/", src: "https://i.ibb.co/DgTndgYp/roo-capital.png", alt: "roo_capital_logo", tier: 1 },
   { href: "https://knightfoundation.org/", src: "https://i.ibb.co/DfGpRjcY/knight-foundation-logo.jpg", alt: "knight_foundation_logo", tier: 1 },
@@ -24,9 +21,6 @@ const sponsorsRow2 = [
   { href: "https://www.miamigov.com/", src: "https://i.ibb.co/ksYnj2Sr/city-of-miami-logo.png", alt: "city_of_miami_logo", tier: 2 },
 ];
 
-// ============================================================================
-// 2. COMPONENT: DYNAMIC SPONSOR CARD
-// ============================================================================
 const SponsorCard = ({ sponsor }) => {
   const getTierStyles = (tier) => {
     switch (tier) {
@@ -51,41 +45,56 @@ const SponsorCard = ({ sponsor }) => {
   );
 };
 
-// ============================================================================
-// 3. LAYOUT: MAIN SPONSORS VIEW
-// ============================================================================
 const Sponsors = () => {
+  const sponsorsRef = useRef(null);
+
   useEffect(() => {
-    const sponsors = document.getElementById('sponsors')
-    const location = document.getElementById('location')
-    if (!sponsors || !location) return undefined
-
     const updateTransition = () => {
-      fadeOnScroll({ 
-        page: sponsors, 
-        startAt: location.offsetTop + location.offsetHeight - window.innerHeight * 0.25, 
-        endAt: location.offsetTop + location.offsetHeight + sponsors.offsetHeight * 0.1, 
-        startOpacity: 0, 
-        endOpacity: 1 
-      })
-    }
+      const el = sponsorsRef.current;
+      const anchor = document.getElementById('horizontal-anchor');
+      const wrapper = el?.closest('.horizontal-panel');
+      
+      if (!el || !anchor || !wrapper) return;
 
-    updateTransition()
-    window.addEventListener('scroll', updateTransition, { passive: true })
-    return () => window.removeEventListener('scroll', updateTransition)
-  }, [])
+      const startScroll = anchor.offsetTop;
+      const isMobile = window.innerWidth < 768;
+      const scrollFactor = isMobile ? 2 : 1.5;
+
+      const initialX = wrapper.offsetLeft;
+      const current = window.scrollY;
+
+      const fadeInStart = startScroll + ((initialX - window.innerWidth * 0.8) * scrollFactor);
+      const fadeInEnd = startScroll + ((initialX - window.innerWidth * 0.1) * scrollFactor);
+      
+      const fadeOutStart = startScroll + ((initialX + window.innerWidth * 0.2) * scrollFactor);
+      const fadeOutEnd = startScroll + ((initialX + window.innerWidth * 0.8) * scrollFactor);
+
+      if (current < startScroll + (initialX * scrollFactor)) {
+        fadeOnScroll({ page: el, startAt: fadeInStart, endAt: fadeInEnd, startOpacity: 0, endOpacity: 1 });
+      } else {
+        fadeOnScroll({ page: el, startAt: fadeOutStart, endAt: fadeOutEnd, startOpacity: 1, endOpacity: 0 });
+      }
+    };
+
+    updateTransition();
+    window.addEventListener('scroll', updateTransition, { passive: true });
+    window.addEventListener('resize', updateTransition);
+
+    return () => {
+      window.removeEventListener('scroll', updateTransition);
+      window.removeEventListener('resize', updateTransition);
+    };
+  }, []);
 
   return (
-    <section id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-between items-center relative overflow-hidden py-[4vh]">
+    <section ref={sponsorsRef} id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-between items-center relative overflow-hidden py-[4vh] will-change-[opacity] opacity-0">
       
-      {/* [ HEADER DOM BREAKOUT ] */}
       <div className="w-full max-w-[1400px] mx-auto px-4 mt-[5vh] flex justify-center relative z-10">
         <div className="bg-gray-950/95 text-white px-8 py-3 border-2 border-gray-700 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
           <h1 className="font-bold text-center text-3xl laptop:text-4xl tracking-wider">Our Sponsors</h1>
         </div>
       </div>
 
-      {/* [ THE STADIUM WRAPAROUND: FULL-BLEED EXECUTION ] */}
       <div className="max-laptop:hidden relative w-full max-w-[100vw] overflow-hidden carousel-mask flex-grow flex flex-col justify-center my-[4vh]">
         <div className="flex flex-col gap-[3vh] laptop:gap-[5vh] items-center">
           
@@ -104,7 +113,6 @@ const Sponsors = () => {
         </div>
       </div>
 
-      {/* MOBILE MARQUEE (Full-Bleed for natural swiping) */}
       <div className="min-laptop:hidden relative w-full max-w-[100vw] overflow-x-auto carousel-mask flex-grow flex flex-col justify-center my-[4vh]">
         <div className="flex flex-col gap-[3vh] items-start w-max px-6">
           <div className="flex items-center gap-4">{sponsorsRow1.map((sponsor, index) => <SponsorCard key={`mob-top-${index}`} sponsor={sponsor} />)}</div>
@@ -113,7 +121,6 @@ const Sponsors = () => {
         <div className="text-gray-400 font-bold text-sm text-center drop-shadow-md mt-6 animate-pulse">← Swipe horizontally →</div>
       </div>
         
-      {/* [ CYBERPUNK COMMAND PROMPT DOM BREAKOUT ] */}
       <div className="w-full max-w-[1400px] mx-auto px-4 mb-[4vh] flex justify-center relative z-10 transition-transform duration-300 hover:-translate-y-2">
         <div className="bg-gray-950/95 border-2 border-gray-700 shadow-[0_15px_30px_rgba(0,0,0,0.6)] rounded-lg px-6 py-4 laptop:py-5 w-[90%] max-w-[850px]">
           <p className="text-left font-mono text-[14px] tablet:text-[18px] laptop:text-[24px] text-gray-300">
@@ -125,14 +132,12 @@ const Sponsors = () => {
             >
               industry@weareinit.org
             </a>
-            {/* [ RETRO CURSOR ]: High-voltage green with a strict step-end blink to mimic a true CLI prompt */}
             <span className="animate-blink text-[#39ff14] ml-1">_</span>
           </p>
         </div>
       </div>
 
       <style jsx>{`
-        /* [ THE MASK GRADIENT UPGRADE ] */
         .carousel-mask {
           mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
           -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
@@ -146,13 +151,11 @@ const Sponsors = () => {
         @keyframes marquee-right { 0% { transform: translate3d(-33.33%, 0, 0); } 100% { transform: translate3d(0, 0, 0); } }
         .marquee:hover .marquee__track { animation-play-state: paused; }
 
-        /* [ RETRO TERMINAL CURSOR PHYSICS ] */
         @keyframes blink {
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
         }
         .animate-blink {
-          /* step-end forces a harsh snap between 1 and 0 opacity, avoiding smooth fades */
           animation: blink 1s step-end infinite; 
         }
       `}</style>

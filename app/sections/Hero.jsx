@@ -6,9 +6,6 @@ import { fadeOnScroll } from '../lib/fadeOnScroll'
 import { zoomOnScroll } from '../lib/zoomOnScroll'
 
 export default function Hero() {
-  // ============================================================================
-  // [ PARALLAX & FADE SCROLL ENGINE ]
-  // ============================================================================
   useEffect(() => {
     const track = document.getElementById('hero')
     const content = document.getElementById('hero-content')
@@ -21,12 +18,10 @@ export default function Hero() {
       const end = track.offsetTop + track.offsetHeight - window.innerHeight
       const current = window.scrollY
 
-      // 1. FLASHY BADGE ANIMATION (Pre-Transition)
       if (badge) {
         const badgeScrollRange = window.innerHeight * 0.15;
         const badgeRawProgress = Math.max(0, Math.min(1, (current - start) / badgeScrollRange));
         
-        // Easing curve creates a "snap" effect as it gets pulled upwards.
         const badgeEase = badgeRawProgress < 0.5 
           ? 4 * badgeRawProgress * badgeRawProgress * badgeRawProgress 
           : 1 - Math.pow(-2 * badgeRawProgress + 2, 3) / 2;
@@ -39,7 +34,6 @@ export default function Hero() {
         badge.style.opacity = Math.max(0, badgeOpacity).toFixed(3);
       }
 
-      // 2. DELAYED HERO TRANSITION
       const heroTransitionStart = start + (window.innerHeight * 0.10);
 
       fadeOnScroll({ page: content, startAt: heroTransitionStart, endAt: end, startOpacity: 1, endOpacity: 0 })
@@ -55,7 +49,6 @@ export default function Hero() {
     <section id='hero' className="w-full h-[200vh] relative z-0">
       <div id='hero-content' className="sticky top-0 h-svh w-full hero-bg flex justify-center items-center flex-row max-[700px]:flex-col overflow-hidden will-change-transform">
 
-        {/* [ MLH EVENT TRUST BADGE ] */}
         <a 
           id="mlh-trust-badge" 
           className="absolute top-[60px] left-4 tablet:left-12 w-[10%] min-w-[60px] max-w-[100px] z-40 origin-top animate-badge-drop will-change-transform" 
@@ -66,39 +59,43 @@ export default function Hero() {
           <img src="https://s3.amazonaws.com/logged-assets/trust-badge/2027/mlh-trust-badge-2027-yellow.svg" alt="Major League Hacking 2027" className="w-full drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]" />
         </a>
 
-        {/* [ MAIN HERO CLUSTER ] */}
-        <div className='relative flex flex-col justify-center items-center z-10'>
+        {/* 
+          [ THE GRAVITATIONAL LOCK ]
+          The Bubble, Logo, and Text are now housed in a single, unified flex-container.
+          This ensures they levitate together perfectly, eliminating responsive collision bugs.
+        */}
+        <div className='relative flex flex-col justify-center items-center z-10 animate-smooth-levitate'>
           
-          <div className="absolute -top-4 -left-12 tablet:-top-2 tablet:-left-24 laptop:-top-4 laptop:-left-32 desktop:-top-6 desktop:-left-40 z-20 animate-smooth-levitate pointer-events-none">
+          <div className="absolute -top-4 -left-12 tablet:-top-8 tablet:-left-20 laptop:-top-8 laptop:-left-28 desktop:-top-12 desktop:-left-32 z-20 pointer-events-none">
             <Image 
               src="https://i.ibb.co/Q7tQMWqH/image.png" 
               alt="Date Bubble" 
               width={300} 
               height={300} 
               priority 
-              className="w-[110px] tablet:w-[140px] laptop:w-[160px] desktop:w-[200px] h-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.4)]" 
+              className="w-[100px] tablet:w-[130px] laptop:w-[150px] desktop:w-[180px] h-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.4)]" 
             />
           </div>
 
-          <div className="flex flex-col items-center justify-center animate-subtle-levitate">
-            
-            <Image 
-              src="/svgs/logo.svg" 
-              alt="SharkByte Logo" 
-              width={100} 
-              height={100} 
-              priority 
-              className="w-[260px] h-auto tablet:w-[320px] laptop:w-[380px] desktop:w-[460px] drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)]" 
-            />
+          {/* 
+            [ CALIBRATION: SCALE REDUCTION ]
+            Maximum widths aggressively stepped down across all viewports to restore background visibility.
+          */}
+          <Image 
+            src="/svgs/logo.svg" 
+            alt="SharkByte Logo" 
+            width={100} 
+            height={100} 
+            priority 
+            className="w-[220px] tablet:w-[280px] laptop:w-[320px] desktop:w-[380px] h-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)] relative z-10" 
+          />
 
-            <div className="mt-4 tablet:mt-6 laptop:mt-8 font-bold text-center text-white text-[1rem] tablet:text-[1.25rem] laptop:text-[1.5rem] desktop:text-[2.2rem] drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] z-20 tracking-wide px-4"> 
-              Miami Dade College's Signature Hackathon 
-            </div>
-            
+          <div className="mt-4 tablet:mt-6 laptop:mt-8 font-bold text-center text-white text-[1rem] tablet:text-[1.25rem] laptop:text-[1.5rem] desktop:text-[2.2rem] drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] z-20 tracking-wide px-4"> 
+            Miami Dade College's Signature Hackathon 
           </div>
+          
         </div>
 
-        {/* [ THE COMMAND TERMINAL ] */}
         <div className="absolute bottom-6 right-6 tablet:bottom-10 tablet:right-10 z-30 transition-transform duration-300 hover:-translate-y-2">
           <div className="bg-gray-950/90 backdrop-blur-md border-2 border-gray-700/80 shadow-[0_15px_35px_rgba(0,0,0,0.6)] rounded-xl p-5 tablet:p-6 w-full max-w-[260px] tablet:max-w-[320px] text-center hover:border-[#8b5cf6]/80 transition-colors duration-300">
             <p className="text-sm tablet:text-base font-bold text-gray-200 tracking-wide uppercase">
@@ -108,7 +105,6 @@ export default function Hero() {
               href="mailto:Mdc-north@weareinit.org?subject=SharkByte%20Hackathon%20Inquiry" 
               className="mt-2 block break-all text-[14px] tablet:text-[17px] font-mono font-bold text-[#8b5cf6] hover:text-white hover:drop-shadow-[0_0_12px_rgba(139,92,246,1)] transition-all duration-300"
             >
-              {/* [ RETRO CURSOR ]: High-voltage green with a strict step-end blink to mimic a true CLI prompt */}
               Contact Us<span className="animate-blink text-[#39ff14] ml-1 drop-shadow-[0_0_8px_rgba(57,255,20,0.8)]">_</span>
             </a>
           </div>
@@ -117,31 +113,19 @@ export default function Hero() {
       </div>
 
       <style jsx>{`
-        /* [ LEVITATION PHYSICS ] */
         @keyframes smooth-levitate {
-          0%, 100% { transform: translate3d(0, 0, 0) rotate(-15deg); }
-          50% { transform: translate3d(0, -15px, 0) rotate(-15deg); }
-        }
-        @keyframes subtle-levitate {
-          0%, 100% { transform: translate3d(0, 0, 0); }
-          50% { transform: translate3d(0, -10px, 0); }
+          0%, 100% { transform: translate3d(0, 0, 0) rotate(-2deg); }
+          50% { transform: translate3d(0, -15px, 0) rotate(-2deg); }
         }
         .animate-smooth-levitate {
-          animation: smooth-levitate 4s ease-in-out infinite;
+          animation: smooth-levitate 5s ease-in-out infinite;
           will-change: transform;
         }
-        .animate-subtle-levitate {
-          animation: subtle-levitate 5s ease-in-out infinite reverse;
-          will-change: transform;
-        }
-        
-        /* [ RETRO TERMINAL CURSOR PHYSICS ] */
         @keyframes blink {
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
         }
         .animate-blink {
-          /* step-end forces a harsh snap between 1 and 0 opacity, avoiding smooth fades */
           animation: blink 1s step-end infinite; 
         }
       `}</style>
