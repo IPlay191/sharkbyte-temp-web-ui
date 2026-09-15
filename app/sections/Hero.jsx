@@ -113,9 +113,10 @@ export default function Hero() {
       </div>
 
       <style jsx>{`
+        /* [ SLANT PURGED ]: Removed rotate(-2deg) so the entire block remains perfectly level */
         @keyframes smooth-levitate {
-          0%, 100% { transform: translate3d(0, 0, 0) rotate(-2deg); }
-          50% { transform: translate3d(0, -15px, 0) rotate(-2deg); }
+          0%, 100% { transform: translate3d(0, 0, 0); }
+          50% { transform: translate3d(0, -15px, 0); }
         }
         .animate-smooth-levitate {
           animation: smooth-levitate 5s ease-in-out infinite;
