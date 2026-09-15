@@ -3,6 +3,7 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { getScrollFactor } from '../lib/scrollConfig';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -18,13 +19,9 @@ const HorizontalScroll = ({ children }) => {
     if (!track || !rail) return;
 
     let ctx = gsap.context(() => {
-      const screenWidth = window.innerWidth;
-      const isMobile = screenWidth < 768;
-      
-      // [ SPEED CALIBRATION ] 
-      // Adjusted from 3.0 down to 1.5. This removes the restrictive, muddy feeling 
-      // while keeping the scroll smooth and cinematic.
-      const scrollFactor = isMobile ? 2 : 1.5; 
+      // [ SPEED CALIBRATION IMPORTED ] 
+      // Retrieves the single source of truth from the physics configuration.
+      const scrollFactor = getScrollFactor(window.innerWidth); 
 
       // Allows the rail to natively expand to the size of the giant train
       gsap.set(rail, {

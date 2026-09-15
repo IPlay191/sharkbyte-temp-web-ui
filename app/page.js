@@ -19,15 +19,13 @@ export default function Home() {
       <Hero />
       <About />
 
-      {/* --- GLOBAL GSAP & FADE ANCHOR --- */}
-      <div id="horizontal-anchor"></div>
-
-      {/* --- MODULAR GSAP HORIZONTAL SCROLLING --- */}
-      {/* Train, Location, and Sponsors are now one seamless horizontal world */}
-      <HorizontalScroll>
+      {/* --- TRACK 1: STATISTICS & LOCATION (HORIZONTAL) --- */}
+      <div id="horizontal-anchor-1"></div>
+      <HorizontalScroll panels={2}>
         
         {/* PANEL 1: STATISTICS (The Train & Tunnel) */}
-        <div className="horizontal-panel h-svh flex-shrink-0 relative overflow-hidden">
+        {/* [ BUG FIX ]: Added w-max so GSAP scales the track to the massive train length */}
+        <div className="horizontal-panel w-max h-svh flex-shrink-0 relative overflow-hidden">
           <Statistics />
         </div>
 
@@ -35,17 +33,26 @@ export default function Home() {
         <div className="horizontal-panel w-screen max-w-full h-svh flex-shrink-0 relative overflow-hidden">
           <Location />
         </div>
+
+      </HorizontalScroll>
+
+      {/* --- TRACK 2: SPONSORS & TEAM (HORIZONTAL) --- */}
+      <div id="horizontal-anchor-2"></div>
+      <HorizontalScroll panels={2}>
         
-        {/* PANEL 3: SPONSORS */}
+        {/* PANEL 1: SPONSORS */}
         <div className="horizontal-panel w-screen max-w-full h-svh flex-shrink-0 relative overflow-hidden">
           <Sponsors />
+        </div>
+
+        {/* PANEL 2: TEAM */}
+        <div className="horizontal-panel w-screen max-w-full h-svh flex-shrink-0 relative overflow-hidden">
+          <Team />
         </div>
 
       </HorizontalScroll>
 
       {/* --- BACK TO VERTICAL SCROLLING SECTIONS --- */}
-      {/* Team perfectly restores the vertical flow */}
-      <Team />
       <FAQ />
       <Socials />
 

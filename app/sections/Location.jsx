@@ -2,45 +2,46 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { fadeOnScroll } from '../lib/fadeOnScroll'
+import { getScrollFactor } from '../lib/scrollConfig'
 
 const Location = () => {
   const [activeMap, setActiveMap] = useState(1) 
   const locationRef = useRef(null)
 
   // ============================================================================
-  // [ GSAP-SYNCHRONIZED FADE ENGINE ]
-  // Maps GSAP's horizontal movement back into native vertical scroll coordinates 
-  // so fadeOnScroll can perfectly black out the pages between transitions.
+  // [ FLAWLESS TRADITIONAL FADE ENGINE ]
+  // Fades Location in natively as the GSAP track pulls it into the viewport.
   // ============================================================================
   useEffect(() => {
     const updateTransition = () => {
       const el = locationRef.current;
-      const anchor = document.getElementById('horizontal-anchor');
+      const anchor = document.getElementById('horizontal-anchor-1');
       const wrapper = el?.closest('.horizontal-panel');
       
       if (!el || !anchor || !wrapper) return;
 
       const startScroll = anchor.offsetTop;
-      const isMobile = window.innerWidth < 768;
-      const scrollFactor = isMobile ? 2 : 1.5;
+      // [ THE MATH FIX ]
+      // Directly imports the master scrolling multiplier to calculate the exact fade-in boundaries.
+      const scrollFactor = getScrollFactor(window.innerWidth);
 
-      // The exact starting offset of this panel within the GSAP track
       const initialX = wrapper.offsetLeft;
       const current = window.scrollY;
 
-      // Math for fading IN as it slides onto the screen
-      const fadeInStart = startScroll + ((initialX - window.innerWidth * 0.8) * scrollFactor);
-      const fadeInEnd = startScroll + ((initialX - window.innerWidth * 0.1) * scrollFactor);
-      
-      // Math for fading OUT as it slides off the screen
-      const fadeOutStart = startScroll + ((initialX + window.innerWidth * 0.2) * scrollFactor);
-      const fadeOutEnd = startScroll + ((initialX + window.innerWidth * 0.8) * scrollFactor);
+      // Enter screen starts when the panel reaches the viewport
+      const fadeInStartX = initialX - window.innerWidth;
+      const fadeInEndX = initialX;
 
-      // Determine phase: Are we approaching the panel, or leaving it?
-      if (current < startScroll + (initialX * scrollFactor)) {
-        fadeOnScroll({ page: el, startAt: fadeInStart, endAt: fadeInEnd, startOpacity: 0, endOpacity: 1 });
+      // Translate X-Coordinates into actual Y-Scroll triggers
+      const fadeInStart = startScroll + (fadeInStartX * scrollFactor);
+      const fadeInEnd = startScroll + (fadeInEndX * scrollFactor);
+
+      if (current < fadeInStart) {
+        el.style.opacity = 0;
+      } else if (current > fadeInEnd) {
+        el.style.opacity = 1;
       } else {
-        fadeOnScroll({ page: el, startAt: fadeOutStart, endAt: fadeOutEnd, startOpacity: 1, endOpacity: 0 });
+        fadeOnScroll({ page: el, startAt: fadeInStart, endAt: fadeInEnd, startOpacity: 0, endOpacity: 1 });
       }
     };
 
@@ -110,9 +111,9 @@ const Location = () => {
   }
 
   return (
-    <section ref={locationRef} id="location" className="w-full h-screen flex flex-col justify-start items-center relative overflow-hidden location-bg bg-center py-4 max-[1350px]:py-4 max-[650px]:py-4 laptop:pl-10 laptop:pr-6 will-change-[opacity] opacity-0">
+    <section ref={locationRef} id="location" className="w-full h-full flex flex-col justify-center items-center relative overflow-hidden location-bg bg-center py-[60px] laptop:pl-10 laptop:pr-6 will-change-[opacity] opacity-0">
       
-      <div className="mx-4 mb-4 mt-2 max-[650px]:mt-2 max-[650px]:mb-4 table:self-start laptop:self-start tablet:translate-x-[20px] laptop:translate-x-[150px] xl:translate-x-[190px] -translate-y-10 laptop:-translate-y-[32px]">
+      <div className="mx-4 mb-4 mt-2 max-[650px]:mt-2 max-[650px]:mb-4 table:self-start laptop:self-start tablet:translate-x-[20px] laptop:translate-x-[150px] xl:translate-x-[190px]">
         <div className="bg-gray-950/95 border-2 border-gray-700 text-white px-6 py-2.5 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
           <h1 className="text-2xl font-bold tablet:text-3xl laptop:text-3xl xl:text-4xl max-[1350px]:text-xl max-[650px]:text-base max-[500px]:text-[22px]">
             SharkByte Ave
@@ -120,7 +121,7 @@ const Location = () => {
         </div>
       </div>
 
-      <div className="mx-4 max-[650px]:mx-1 mb-4 text-center py-3.5 px-6 max-[650px]:px-4 max-[500px]:px-3 bg-gray-950/95 border-2 border-gray-700 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)] tablet:translate-x-[20px] laptop:translate-x-[170px] xl:translate-x-[210px] -translate-y-10 laptop:-translate-y-[64px]">
+      <div className="mx-4 max-[650px]:mx-1 mb-4 text-center py-3.5 px-6 max-[650px]:px-4 max-[500px]:px-3 bg-gray-950/95 border-2 border-gray-700 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)] tablet:translate-x-[20px] laptop:translate-x-[170px] xl:translate-x-[210px]">
         <div className="flex flex-col gap-1 text-gray-300 font-mono text-[12px] mobile:text-[14px] tablet:text-[15px] text-left">
           <p><span className="text-[#8b5cf6] font-bold mr-2">{">"}</span>School of Justice Building</p>
           <p><span className="text-[#8b5cf6] font-bold mr-2">{">"}</span>Miami Dade College, North Campus</p>
@@ -128,7 +129,7 @@ const Location = () => {
         </div>
       </div>
 
-      <div className="px-4 max-[650px]:px-0 flex flex-wrap justify-center gap-4 max-[650px]:gap-2 mb-4 tablet:translate-x-[20px] laptop:translate-x-[170px] xl:translate-x-[210px] -translate-y-10 laptop:-translate-y-[64px]">
+      <div className="px-4 max-[650px]:px-0 flex flex-wrap justify-center gap-4 max-[650px]:gap-2 mb-4 tablet:translate-x-[20px] laptop:translate-x-[170px] xl:translate-x-[210px]">
         {mapOptions.map((option, index) => (
           <button
             key={index}
@@ -144,7 +145,7 @@ const Location = () => {
         ))}
       </div>
 
-      <div className="flex justify-center w-full px-4 tablet:translate-x-[30px] laptop:translate-x-[180px] xl:translate-x-[220px] -translate-y-10 laptop:-translate-y-[56px]">
+      <div className="flex justify-center w-full px-4 tablet:translate-x-[30px] laptop:translate-x-[180px] xl:translate-x-[220px]">
         {renderMapContent()}
       </div>
 

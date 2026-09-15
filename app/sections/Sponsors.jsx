@@ -1,8 +1,6 @@
 'use client'
 
 import Image from "next/image"
-import { useEffect, useRef } from 'react'
-import { fadeOnScroll } from '../lib/fadeOnScroll'
 
 const sponsorsRow1 = [
   { href: "https://www.roocapital.com/", src: "https://i.ibb.co/DgTndgYp/roo-capital.png", alt: "roo_capital_logo", tier: 1 },
@@ -46,48 +44,9 @@ const SponsorCard = ({ sponsor }) => {
 };
 
 const Sponsors = () => {
-  const sponsorsRef = useRef(null);
-
-  useEffect(() => {
-    const updateTransition = () => {
-      const el = sponsorsRef.current;
-      const anchor = document.getElementById('horizontal-anchor');
-      const wrapper = el?.closest('.horizontal-panel');
-      
-      if (!el || !anchor || !wrapper) return;
-
-      const startScroll = anchor.offsetTop;
-      const isMobile = window.innerWidth < 768;
-      const scrollFactor = isMobile ? 2 : 1.5;
-
-      const initialX = wrapper.offsetLeft;
-      const current = window.scrollY;
-
-      const fadeInStart = startScroll + ((initialX - window.innerWidth * 0.8) * scrollFactor);
-      const fadeInEnd = startScroll + ((initialX - window.innerWidth * 0.1) * scrollFactor);
-      
-      const fadeOutStart = startScroll + ((initialX + window.innerWidth * 0.2) * scrollFactor);
-      const fadeOutEnd = startScroll + ((initialX + window.innerWidth * 0.8) * scrollFactor);
-
-      if (current < startScroll + (initialX * scrollFactor)) {
-        fadeOnScroll({ page: el, startAt: fadeInStart, endAt: fadeInEnd, startOpacity: 0, endOpacity: 1 });
-      } else {
-        fadeOnScroll({ page: el, startAt: fadeOutStart, endAt: fadeOutEnd, startOpacity: 1, endOpacity: 0 });
-      }
-    };
-
-    updateTransition();
-    window.addEventListener('scroll', updateTransition, { passive: true });
-    window.addEventListener('resize', updateTransition);
-
-    return () => {
-      window.removeEventListener('scroll', updateTransition);
-      window.removeEventListener('resize', updateTransition);
-    };
-  }, []);
-
   return (
-    <section ref={sponsorsRef} id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-between items-center relative overflow-hidden py-[4vh] will-change-[opacity] opacity-0">
+    // [ FADE PURGE ]: Removed opacity-0 and will-change-opacity so it defaults to fully visible.
+    <section id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-between items-center relative overflow-hidden py-[4vh]">
       
       <div className="w-full max-w-[1400px] mx-auto px-4 mt-[5vh] flex justify-center relative z-10">
         <div className="bg-gray-950/95 text-white px-8 py-3 border-2 border-gray-700 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
@@ -97,19 +56,16 @@ const Sponsors = () => {
 
       <div className="max-laptop:hidden relative w-full max-w-[100vw] overflow-hidden carousel-mask flex-grow flex flex-col justify-center my-[4vh]">
         <div className="flex flex-col gap-[3vh] laptop:gap-[5vh] items-center">
-          
           <div className="marquee overflow-hidden w-full flex items-center">
             <div className="marquee__track marquee__left items-center">
               {[...sponsorsRow1, ...sponsorsRow1, ...sponsorsRow1].map((sponsor, i) => <SponsorCard key={`top-${i}`} sponsor={sponsor} />)}
             </div>
           </div>
-
           <div className="marquee overflow-hidden w-full flex items-center">
             <div className="marquee__track marquee__right items-center">
               {[...sponsorsRow2, ...sponsorsRow2, ...sponsorsRow2].map((sponsor, i) => <SponsorCard key={`bottom-${i}`} sponsor={sponsor} />)}
             </div>
           </div>
-
         </div>
       </div>
 
@@ -143,21 +99,14 @@ const Sponsors = () => {
           -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
         }
         .marquee { position: relative; width: 100%; }
-        
         .marquee__track { display: flex; gap: 1.5rem; width: max-content; will-change: transform; transform: translateZ(0); }
         .marquee__left { animation: marquee-left 35s linear infinite; }
         .marquee__right { animation: marquee-right 35s linear infinite; }
         @keyframes marquee-left { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-33.33%, 0, 0); } }
         @keyframes marquee-right { 0% { transform: translate3d(-33.33%, 0, 0); } 100% { transform: translate3d(0, 0, 0); } }
         .marquee:hover .marquee__track { animation-play-state: paused; }
-
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-        .animate-blink {
-          animation: blink 1s step-end infinite; 
-        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .animate-blink { animation: blink 1s step-end infinite; }
       `}</style>
     </section>
   )

@@ -5,12 +5,10 @@ import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { useMobileMenu } from '../context/MobileMenuContext'
 import { useEffect } from 'react'
-
-// 1. Import GSAP and the ScrollToPlugin
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import { getScrollFactor } from '../lib/scrollConfig'
 
-// 2. Register the plugin safely on the client side
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollToPlugin)
 }
@@ -24,22 +22,46 @@ const Navbar = () => {
 
   const scrollToSection = (sectionId) => {
     const navigateAndScroll = () => {
-      const element = document.getElementById(sectionId)
-      if (element) {
-        // 3. The GSAP Scroll Engine
-        // Smoothly glides to the section and offsets precisely 60px for your fixed navbar
+      let targetY = null;
+
+      if (sectionId === 'hero') {
+        targetY = 0;
+      } 
+      else if (sectionId === 'location' || sectionId === 'sponsors') {
+        const anchorId = sectionId === 'location' ? 'horizontal-anchor-1' : 'horizontal-anchor-2';
+        const anchor = document.getElementById(anchorId);
+        const targetElement = document.getElementById(sectionId);
+        const targetPanel = targetElement?.closest('.horizontal-panel');
+        
+        if (anchor && targetPanel) {
+          // [ THE MATH FIX ]
+          // Directly imports the master scrolling multiplier to prevent overshooting.
+          const scrollFactor = getScrollFactor(window.innerWidth);
+          
+          // We take the physical horizontal distance of the panel and multiply it by the scrollFactor
+          // to find the EXACT vertical scroll pixel required to reach it.
+          const targetX = targetPanel.offsetLeft;
+          targetY = anchor.offsetTop + (targetX * scrollFactor);
+        }
+      } 
+      else {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          targetY = element.offsetTop - 60;
+        }
+      }
+
+      if (targetY !== null) {
         gsap.to(window, {
           duration: 1, 
-          scrollTo: { y: element, offsetY: 60 },
+          scrollTo: { y: targetY },
           ease: "power3.inOut" 
-        })
+        });
       }
     }
 
-    // Handles cross-page routing
     if (pathname !== '/') {
       router.push('/')
-      // Slight delay allows the homepage DOM to paint before GSAP calculates the layout
       setTimeout(navigateAndScroll, 300) 
     } else {
       navigateAndScroll()
@@ -50,27 +72,19 @@ const Navbar = () => {
    <nav className="bg-gradient-to-b from-gray-950 via-gray-950 to-gray-900 fixed top-0 z-50 h-[60px] w-full text-white pixel-shadow-2">
      <div className="flex justify-between h-full relative px-4 max-laptop:px-0">
 
-      {/* LOGO */}
       <div className="flex justify-center items-center w-min z-50">
         <button onClick={() => scrollToSection('hero')} className=" text-[35px] transition-transform duration-300 cursor-pointer pl-4 hover:animate-pulse">SharkByte</button>
       </div>
 
-      {/* _____ DESKTOP _____ */}
       <div className= 'flex items-center max-desktop:hidden px-4 desktop:px-2'>
-        {/* Nav Links */}
         <ul className="flex justify-center items-center w-full desktop:gap-10">
-
           <button onClick={() => scrollToSection('about')} className="flex justify-center items-center relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full desktop:text-[30px] hover:text-purple-400 cursor-pointer">About</button>
           <button onClick={() => scrollToSection('location')} className="flex justify-center items-center relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full desktop:text-[30px] hover:text-purple-400 cursor-pointer">Location</button>
-          
-          {/* THE FIX: Changed from 'sponsors' to 'sponsors-anchor' */}
-          <button onClick={() => scrollToSection('sponsors-anchor')} className="flex justify-center items-center relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full desktop:text-[30px] hover:text-purple-400 cursor-pointer">Sponsors</button>
-          
+          <button onClick={() => scrollToSection('sponsors')} className="flex justify-center items-center relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full desktop:text-[30px] hover:text-purple-400 cursor-pointer">Sponsors</button>
           <button onClick={() => scrollToSection('faq')} className="flex justify-center items-center relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:transition-all after:duration-300 hover:after:w-full desktop:text-[30px] hover:text-purple-400 cursor-pointer">FAQ</button>
         </ul>
       </div>
 
-      {/* _____ DESKTOP SOCIALS _____ */}
       <div className='max-desktop:hidden flex items-center justify-end relative'>
         <div className="flex items-center">
           <div className='flex gap-5 pr-2 laptop:text-[25px]'>
@@ -87,7 +101,6 @@ const Navbar = () => {
         </div>
       </div>
 
-       {/* _____ MOBILE _____ */}
        <div className="min-desktop:hidden flex w-full">
          <div className="flex justify-end items-center w-full pr-4">
            <Image
@@ -123,10 +136,7 @@ const Navbar = () => {
                  <div className="flex flex-col items-end space-y-14">
                    <button onClick={() => { scrollToSection('about'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">About</button>
                    <button onClick={() => { scrollToSection('location'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">Location</button>
-                   
-                   {/* THE FIX: Changed from 'sponsors' to 'sponsors-anchor' */}
-                   <button onClick={() => { scrollToSection('sponsors-anchor'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">Sponsors</button>
-                   
+                   <button onClick={() => { scrollToSection('sponsors'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">Sponsors</button>
                    <button onClick={() => { scrollToSection('faq'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">FAQ</button>
                    <button onClick={() => { scrollToSection('socials'); setIsMobileMenuOpen(false); }} className="text-right relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full text-[30px]">Socials</button>
                    </div>
