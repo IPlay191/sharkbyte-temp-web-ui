@@ -9,12 +9,8 @@ import FAQ from './sections/FAQ'
 import Socials from './sections/Socials'
 import Team from './sections/Team'
 
-// ============================================================================
-// MAIN APPLICATION LAYOUT
-// ============================================================================
 export default function Home() {
   return (
-    // overflow-x-clip strictly prevents horizontal scrolling bugs on mobile devices
     <main className="overflow-x-clip bg-gray-950">
 
       <Navbar />
@@ -22,38 +18,38 @@ export default function Home() {
       {/* --- STANDARD VERTICAL SCROLLING SECTIONS --- */}
       <Hero />
       <About />
-      <Statistics />
-      <Location />
 
-      {/* --- GSAP STATIC ANCHOR --- */}
-      {/* 
-        This invisible div solves the "moving target" bug. Because the Sponsors 
-        section slides horizontally, targeting it directly with a smooth-scroll 
-        breaks the math. By targeting this static anchor instead, the page scrolls 
-        perfectly to the top of the horizontal container every time.
-      */}
-      <div id="sponsors-anchor"></div>
-
-      {/* --- MODULAR GSAP HORIZONTAL SCROLLING --- */}
-      {/* 
-        The HorizontalScroll wrapper pins the screen and translates vertical 
-        mouse wheel movement into horizontal X-axis movement.
-      */}
+      {/* --- TRACK 1: STATISTICS & LOCATION (HORIZONTAL) --- */}
+      <div id="horizontal-anchor-1"></div>
       <HorizontalScroll panels={2}>
         
-        {/* 
-          SCROLLBAR DEFENSE: 
-          Using 'w-[100vw]' causes bugs on Windows because it includes the width of 
-          the physical scrollbar, pushing content off-center. 'w-screen max-w-full' 
-          forces the browser to safely calculate 100% of the visible space minus the scrollbar.
-        */}
-        <div className="w-screen max-w-full h-svh flex-shrink-0 relative overflow-hidden">
+        {/* PANEL 1: STATISTICS (The Train & Tunnel) */}
+        {/* [ BUG FIX ]: Added w-max so GSAP scales the track to the massive train length */}
+        <div className="horizontal-panel w-max h-svh flex-shrink-0 relative overflow-hidden">
+          <Statistics />
+        </div>
+
+        {/* PANEL 2: LOCATION */}
+        <div className="horizontal-panel w-screen max-w-full h-svh flex-shrink-0 relative overflow-hidden">
+          <Location />
+        </div>
+
+      </HorizontalScroll>
+
+      {/* --- TRACK 2: SPONSORS & TEAM (HORIZONTAL) --- */}
+      <div id="horizontal-anchor-2"></div>
+      <HorizontalScroll panels={2}>
+        
+        {/* PANEL 1: SPONSORS */}
+        <div className="horizontal-panel w-screen max-w-full h-svh flex-shrink-0 relative overflow-hidden">
           <Sponsors />
         </div>
-        
-        <div className="w-screen max-w-full h-svh flex-shrink-0 relative overflow-hidden">
+
+        {/* PANEL 2: TEAM */}
+        <div className="horizontal-panel w-screen max-w-full h-svh flex-shrink-0 relative overflow-hidden">
           <Team />
         </div>
+
       </HorizontalScroll>
 
       {/* --- BACK TO VERTICAL SCROLLING SECTIONS --- */}

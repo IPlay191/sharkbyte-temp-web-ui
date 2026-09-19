@@ -4,7 +4,6 @@ import Footer from './components/Footer'
 import "./globals.css"
 import { MobileMenuProvider } from './context/MobileMenuContext'
 
-// define a custom font
 export const VT323 = localFont({
   src: [
     {
@@ -23,8 +22,6 @@ export const VT323 = localFont({
   preload: true,
 })
 
-// define metadata, this is used by the browser
-// to show additional information for your site
 export const metadata = {
   title: 'SharkByte 2026 | Miami Dade College Hackathon',
   description: 'Join SharkByte, Miami Dade College\'s official hackathon! A free 3-day tech sprint November 6-8, 2026 in Miami, FL. Build innovative projects, learn new skills, and connect with fellow developers. Open to anyone 18+.',
@@ -42,8 +39,8 @@ export const metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  }
-  ,openGraph: {
+  },
+  openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://shark-byte.io',
@@ -64,11 +61,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className={VT323.variable}>
         <MobileMenuProvider>
-          {<Navbar /> }
+          <Navbar />
           {children}
-          <Footer/>
+          <Footer />
         </MobileMenuProvider>
       </body>
     </html>

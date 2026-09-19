@@ -1,154 +1,172 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-// COMPONENT: Randomized Auto-Cycling Window Carousel
+// ============================================================================
+// [ COMPONENT: CLEAN 2D GLASS CAROUSEL ]
+// ============================================================================
 const TrainWindow = ({ images, interval = 3000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (!images || images.length <= 1) return;
     const timer = setInterval(() => {
-      setCurrentIndex(Math.floor(Math.random() * images.length));
+      setCurrentIndex((prev) => (prev + 1) % images.length);
     }, interval);
     return () => clearInterval(timer);
   }, [images, interval]);
 
   return ( 
-    <div className="retro-box pixel-shadow p-3 relative overflow-hidden w-[22rem] h-[16rem] tablet:w-[28rem] tablet:h-[20rem] desktop:w-[30rem] desktop:h-[23rem] shrink-0 flex items-center justify-center bg-black/40">
-      <div className="relative w-full h-full border-4 border-amber-100/30 rounded-md overflow-hidden bg-zinc-900">
-        {images.map((imgUrl, idx) => (
-          <img
-            key={idx}
-            src={imgUrl}
-            alt={`Window ${idx + 1}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
-              idx === currentIndex ? "opacity-100" : "opacity-0"
-            }`}
-          />
-        ))}
+    <div className="retro-box pixel-shadow p-2 relative overflow-hidden w-[24rem] h-[18rem] tablet:w-[32rem] tablet:h-[24rem] desktop:w-[36rem] desktop:h-[26rem] shrink-0 flex items-center justify-center bg-[#060411] border-2 border-[#1e153b]">
+      <div className="relative w-full h-full border-[3px] border-[#0a071a] rounded-sm overflow-hidden bg-black shadow-[inset_0_10px_40px_rgba(0,0,0,1)]">
+        
+        {/* Raw, full-color images with smooth fade transitions */}
+        <img
+          key={currentIndex}
+          src={images[currentIndex]}
+          alt="Hackathon Memory"
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover animate-fade-in"
+        />
+        
+        {/* 2D Glass Reflection (Restored) */}
+        <div className="absolute top-0 right-0 w-[150%] h-[150%] bg-gradient-to-bl from-white/10 via-white/5 to-transparent -translate-y-1/2 translate-x-1/4 -rotate-45 pointer-events-none z-20"></div>
+        
       </div>
     </div>
   );
 };
 
+// ============================================================================
+// [ MASTER DOM RENDERER ]
+// ============================================================================
 const Statistics = () => {
-  const stats = [
-    { text: "200+ Attendees", hoverColor: "hover:text-blue-700" },
-    { text: "130 Participants", hoverColor: "hover:text-pink-400" },
-    { text: "52 Completed Projects", hoverColor: "hover:text-yellow-400" },
-  ];
-
   const windowCar1 = [
-    "https://i.ibb.co/5NYNDdY/image.png",
-    "https://i.ibb.co/rRJpc6PT/image.png",
-    "https://i.ibb.co/fzMbkWGC/image.png",
-    "https://i.ibb.co/kg784D8H/image.png",
-    "https://i.ibb.co/Cs9ht4jd/image.png",
-    "https://i.ibb.co/RG0f1Cp7/image.png",
-    "https://i.ibb.co/B5KV5qcQ/image.png",
-    "https://i.ibb.co/ycXxPmMd/image.png",
-    "https://i.ibb.co/gbjRFhmM/image.png",
-    "https://i.ibb.co/PvcKpn4c/image.png",
-    "https://i.ibb.co/twkZhD2k/image.png",
-    "https://i.ibb.co/WNJzVzXm/image.png",
-    "https://i.ibb.co/p6yBcbYb/image.png",
-    "https://i.ibb.co/RFW6y6W/image.png",
-    "https://i.ibb.co/vC2RR4jD/image.png",
-    "https://i.ibb.co/MxqdrsNT/image.png",
-    "https://i.ibb.co/1fpWj8Pm/image.png",
-    "https://i.ibb.co/TMvZhkN9/image.png",
-    "https://i.ibb.co/0pXFFKYW/image.png",
-    "https://i.ibb.co/5hkWRj8B/image.png",
-    "https://i.ibb.co/1tPHHnsm/image.png",
-    "https://i.ibb.co/Y7Vf2v35/image.png",
-    "https://i.ibb.co/jv2vMHGT/image.png",
-    "https://i.ibb.co/qLrbcRfM/image.png",
-    "https://i.ibb.co/1c76jK3/image.png",
-    "https://i.ibb.co/LD4xSpxq/image.png"
+    "https://i.ibb.co/5NYNDdY/image.png", "https://i.ibb.co/rRJpc6PT/image.png", "https://i.ibb.co/fzMbkWGC/image.png",
+    "https://i.ibb.co/kg784D8H/image.png", "https://i.ibb.co/Cs9ht4jd/image.png", "https://i.ibb.co/RG0f1Cp7/image.png",
   ];
 
-  const windowCar2 = [...windowCar1];
-  const windowCar3 = [...windowCar1];
-
-  const sectionRef = useRef(null);
-  const trainRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current || !trainRef.current) return;
-
-      const section = sectionRef.current;
-      const train = trainRef.current;
-
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      const viewportHeight = window.innerHeight;
-
-      const totalScrollableDistance = sectionHeight - viewportHeight;
-      const maxHorizontalScroll = train.scrollWidth - window.innerWidth;
-
-      if (totalScrollableDistance <= 0 || maxHorizontalScroll <= 0) return;
-
-      const currentScroll = window.scrollY - sectionTop;
-
-      // SCROLL INTERPOLATION: Calculates the precise scroll progress through the sticky container to translate vertical scrolling into horizontal movement.
-      const progress = Math.min(
-        Math.max(currentScroll / totalScrollableDistance, 0),
-        1
-      );
-
-      train.style.transform = `translateX(-${progress * maxHorizontalScroll}px)`;
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const windowCar2 = [...windowCar1].reverse();
 
   return (
-    <section
-      ref={sectionRef}
-      id="statistics"
-      className="relative w-full h-[100rem] bg-black-900 bg-fixed bg-center bg-no-repeat"
-    >
-      <div className="sticky top-0 h-screen overflow-hidden flex items-center">
+    <section id="statistics" className="relative w-max h-svh bg-[#020106] bg-center bg-no-repeat">
+      <div className="h-full overflow-hidden stats-bg flex items-end">
         <div
-          ref={trainRef}
           id="train-wrapper"
-          className="flex flex-row items-center gap-[4vw] px-[6vw] w-max h-[50rem] z-10 shrink-0 transition-transform duration-75 ease-out"
+          className="flex flex-row items-center gap-[4vw] pl-[6vw] w-max h-[95vh] min-h-[450px] max-h-[1200px] z-10 shrink-0"
           style={{
             backgroundImage: `url('https://i.ibb.co/VRWRBSH/Pixel-Train-Second-Half-Page-4.png'), url('https://i.ibb.co/pvLry1fW/Pixel-Train-First-Half-Page-3.png')`,
-            backgroundPosition: "left center, right center",
+            backgroundPosition: "left bottom, right bottom",
             backgroundRepeat: "no-repeat, no-repeat",
             backgroundSize: "50% 100%, 50% 100%",
           }}
         >
-        <div className="retro-box pixel-shadow p-3 relative overflow-hidden w-[22rem] h-[16rem] tablet:w-[28rem] tablet:h-[20rem] desktop:w-[25rem] desktop:h-[23rem] ml-[20vw] shrink-0 flex items-center justify-center bg-black/40">
-          <div className="relative w-full h-full border-4 border-amber-100/30 rounded-md overflow-hidden bg-zinc-900 flex items-center justify-center p-4">
-            <h1 className="font-bold text-center text-white text-[10vw] tablet:text-[5vw] laptop:text-3xl desktop:text-4xl max-h-[750px]:text-xl">
-              Last Year We Had...
-            </h1>
-          </div>
-        </div>
-
-        <div className="retro-box pixel-shadow p-3 relative overflow-hidden w-[22rem] h-[16rem] tablet:w-[28rem] tablet:h-[20rem] desktop:w-[25rem] desktop:h-[23rem] shrink-0 flex items-center justify-center bg-black/40">
-          <div className="relative w-full h-full border-4 border-amber-100/30 rounded-md overflow-hidden bg-zinc-900 flex flex-col justify-center items-center gap-3 tablet:gap-5 laptop:gap-6 p-4">
-            {stats.map((stat, index) => (
-              <h2
-                key={index}
-                className={`hover:cursor-default font-bold text-center text-[8vw] tablet:text-[5vw] laptop:text-[2vw] desktop:text-[2.5vw] max-h-[750px]:text-base ${stat.hoverColor}`}
-              >
-                {stat.text}
+          
+          {/* ========================================================================= */}
+          {/* ARCADE LIGHTBOARD 1: THE PROMPT                                           */}
+          {/* ========================================================================= */}
+          <div className="retro-box pixel-shadow p-2 relative overflow-hidden w-[22rem] h-[16rem] tablet:w-[28rem] tablet:h-[20rem] desktop:w-[25rem] desktop:h-[23rem] ml-[15vw] shrink-0 bg-[#060411] border-2 border-[#1e153b]">
+            <div className="relative w-full h-full border-[3px] border-[#0a071a] rounded-sm overflow-hidden bg-[#030208] shadow-[inset_0_0_50px_rgba(0,0,0,1)] flex flex-col items-center justify-center p-6">
+              
+              {/* Subtle Screen Overlay */}
+              <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,243,255,0.03)_1px,transparent_1px)] bg-[size:100%_4px] z-10"></div>
+              
+              {/* [ THE ARCADE TYPOGRAPHY ] 
+                  Matches the exact Neon Pink and Yellow from the data box next to it. */}
+              <h1 className="font-mono font-bold text-center text-[#ff003c] text-4xl tablet:text-6xl uppercase tracking-widest drop-shadow-[0_0_15px_rgba(255,0,60,0.6)] z-20">
+                Last Year
+              </h1>
+              <h2 className="font-mono font-bold text-center text-yellow-400 text-2xl tablet:text-4xl uppercase tracking-widest drop-shadow-[0_0_15px_rgba(250,204,21,0.6)] z-20 mt-1">
+                We Had
               </h2>
-            ))}
-          </div>
-        </div>
 
-          <TrainWindow images={windowCar1} interval={3000} />
-          <TrainWindow images={windowCar2} interval={3000} />
+              {/* [ RETRO DIRECTIONAL INDICATOR ] 
+                  Replaces the terminal cursor. Physically guides the eye to the right. 
+                  Matches the Cyan from the "SYS.ATTENDEES" bar. */}
+              <div className="mt-6 flex gap-3 z-20">
+                <span className="text-[#00f3ff] text-xl tablet:text-2xl animate-pulse drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]" style={{ animationDelay: "0ms" }}>►</span>
+                <span className="text-[#00f3ff] text-xl tablet:text-2xl animate-pulse drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]" style={{ animationDelay: "150ms" }}>►</span>
+                <span className="text-[#00f3ff] text-xl tablet:text-2xl animate-pulse drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]" style={{ animationDelay: "300ms" }}>►</span>
+              </div>
+
+            </div>
+          </div>
+
+          {/* ========================================================================= */}
+          {/* TACTICAL HUD 2: DATA READOUT                                                */}
+          {/* ========================================================================= */}
+          <div className="retro-box pixel-shadow p-2 relative overflow-hidden w-[24rem] h-[18rem] tablet:w-[32rem] tablet:h-[24rem] desktop:w-[28rem] desktop:h-[26rem] shrink-0 bg-[#060411] border-2 border-[#1e153b]">
+            <div className="relative w-full h-full border-[3px] border-[#0a071a] rounded-sm overflow-hidden bg-[#030208] shadow-[inset_0_0_50px_rgba(0,0,0,1)] flex flex-col justify-center gap-6 p-6 tablet:p-8">
+              <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100%_4px] z-10"></div>
+              
+              <div className="relative z-20 group">
+                <div className="flex justify-between items-end pb-1">
+                  <span className="font-mono text-gray-500 text-[11px] tablet:text-[13px] tracking-widest">SYS.ATTENDEES</span>
+                  <span className="font-mono font-bold text-[#00f3ff] text-xl tablet:text-3xl drop-shadow-[0_0_10px_rgba(0,243,255,0.8)]">200+</span>
+                </div>
+                <div className="w-full bg-gray-900 h-1.5 rounded-full overflow-hidden"><div className="bg-[#00f3ff] h-full w-[85%] shadow-[0_0_8px_rgba(0,243,255,1)]"></div></div>
+              </div>
+
+              <div className="relative z-20 group">
+                <div className="flex justify-between items-end pb-1">
+                  <span className="font-mono text-gray-500 text-[11px] tablet:text-[13px] tracking-widest">SYS.PARTICIPANTS</span>
+                  <span className="font-mono font-bold text-[#ff003c] text-xl tablet:text-3xl drop-shadow-[0_0_10px_rgba(255,0,60,0.8)]">130</span>
+                </div>
+                <div className="w-full bg-gray-900 h-1.5 rounded-full overflow-hidden"><div className="bg-[#ff003c] h-full w-[65%] shadow-[0_0_8px_rgba(255,0,60,1)]"></div></div>
+              </div>
+
+              <div className="relative z-20 group">
+                <div className="flex justify-between items-end pb-1">
+                  <span className="font-mono text-gray-500 text-[11px] tablet:text-[13px] tracking-widest">SYS.PROJECTS</span>
+                  <span className="font-mono font-bold text-yellow-400 text-xl tablet:text-3xl drop-shadow-[0_0_10px_rgba(250,204,21,0.8)]">52</span>
+                </div>
+                <div className="w-full bg-gray-900 h-1.5 rounded-full overflow-hidden"><div className="bg-yellow-400 h-full w-[25%] shadow-[0_0_8px_rgba(250,204,21,1)]"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <TrainWindow images={windowCar1} interval={3500} />
+          <TrainWindow images={windowCar2} interval={4000} />
+
+          {/* ========================================================================= */}
+          {/* THE VOID TUNNEL RESTORED                                                  */}
+          {/* ========================================================================= */}
+          <div className="w-[200vw] h-full flex flex-row relative z-20">
+            {/* The Gradient Entry */}
+            <div className="w-[100vw] h-full bg-gradient-to-r from-transparent via-[#030208] via-60% to-[#030208]"></div>
+            
+            {/* The Clamped Terminal Zone */}
+            <div className="w-[100vw] h-full bg-[#030208] flex flex-col justify-center items-center">
+              <div className="flex flex-col items-center justify-center p-8 tablet:p-12 bg-[#060411]/80 border-2 border-[#1e153b] shadow-[0_0_50px_rgba(0,0,0,0.9)] rounded-xl backdrop-blur-md -translate-x-[50vw]">
+                
+                <h2 className="text-[#00f3ff] font-mono font-bold text-xl tablet:text-3xl laptop:text-5xl animate-pulse tracking-widest drop-shadow-[0_0_15px_rgba(0,243,255,0.6)] text-center">
+                  &gt;&gt; ROUTING TO: SHARKBYTE AVE &lt;&lt;
+                </h2>
+                
+                <p className="text-gray-400 font-mono mt-4 tablet:mt-6 text-xs tablet:text-sm laptop:text-lg tracking-widest uppercase text-center">
+                  Prepare for Disembarkation
+                </p>
+                
+                <div className="mt-6 tablet:mt-8 flex gap-3">
+                  <div className="w-5 h-1.5 bg-[#00f3ff] animate-pulse shadow-[0_0_8px_rgba(0,243,255,0.8)]"></div>
+                  <div className="w-5 h-1.5 bg-[#00f3ff] animate-pulse shadow-[0_0_8px_rgba(0,243,255,0.8)]" style={{ animationDelay: "150ms" }}></div>
+                  <div className="w-5 h-1.5 bg-[#00f3ff] animate-pulse shadow-[0_0_8px_rgba(0,243,255,0.8)]" style={{ animationDelay: "300ms" }}></div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0.5; filter: contrast(1.5); }
+          to { opacity: 1; filter: contrast(1); }
+        }
+        .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+      `}</style>
     </section>
   );
 };

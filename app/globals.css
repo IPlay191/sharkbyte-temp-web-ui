@@ -149,11 +149,30 @@ body {
 
 /* Explicit routing mapping CSS classes to their respective hosted assets */
 .hero-bg { background-image: url('https://i.ibb.co/ynf1hTHY/Website-Page-1.png'); background-position: center; }
-.stats-bg { background-image: url('https://ibb.co/album/ZNfCNx?page=2&seek=cSDqNyGq'); background-position: center; }
+.stats-bg { background-image: url('https://i.ibb.co/mVhT2QDG/New-Train-page-background.png'); background-position: center; }
 .comingsoon-bg { background-image: url('https://i.ibb.co/2YMDf26n/Temporary-website-page-4.png'); background-position: center; }
 .sponsors-bg { background-image: url('https://i.ibb.co/Zp1t2mnh/Sharkbyte-Website-Page-6.png'); background-position: center; }
-.socials-bg { background-image: url('https://i.ibb.co/wZhcDMcr/Sharkbyte-Website-Page-9.png'); background-position: center; }
-.about-bg { background-image: url('https://i.ibb.co/qMTm9gVt/Sharkbyte-Website-Page-2.png'); background-position: center; }
-.location-bg { background-image: url('https://i.ibb.co/9kfFYzWK/Sharkbyte-Website-Page-5.png'); }
+.socials-bg { background-image: url('https://i.ibb.co/7d1NKhGW/New-Website-Page-9.png'); background-position: center; }
+.about-bg { background-image: url('https://i.ibb.co/jvQdP3kJ/New-Website-Page-2-option-2.png'); background-position: center; }
+.location-bg { background-image: url('https://i.ibb.co/9kfFYzWK/Sharkbyte-Website-Page-5.png'); background-position: center; }
 .team-bg { background-image: url('https://i.ibb.co/N6cwq0Nk/Sharkbyte-Website-Page-7.png'); background-position: center; }
 .faq-bg { background-image: url('https://i.ibb.co/bRJb4QJb/Sharkbyte-Website-Page-8.png'); background-position: center; }
+
+/* ============================================================================
+   6. CUSTOM COMPONENT ANIMATIONS
+============================================================================ */
+/* 
+  MLH BADGE DROP-IN ANIMATION 
+  Simulates gravity and pendulum physics on initial page load. 
+  The badge falls from behind the navbar, swings past its resting point, and settles.
+*/
+@keyframes badge-drop {
+  0% { transform: translateY(-100%) rotate(0deg); opacity: 0; }
+  50% { transform: translateY(5%) rotate(8deg); opacity: 1; }
+  75% { transform: translateY(-2%) rotate(-4deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+.animate-badge-drop {
+  animation: badge-drop 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
