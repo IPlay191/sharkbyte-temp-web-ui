@@ -8,9 +8,6 @@ const Location = () => {
   const [activeMap, setActiveMap] = useState(1) 
   const locationRef = useRef(null)
 
-  // ============================================================================
-  // [ FLAWLESS TRADITIONAL FADE ENGINE ]
-  // ============================================================================
   useEffect(() => {
     const updateTransition = () => {
       const el = locationRef.current;
@@ -25,11 +22,9 @@ const Location = () => {
       const initialX = wrapper.offsetLeft;
       const current = window.scrollY;
 
-      // Enter screen starts when the panel reaches the viewport
       const fadeInStartX = initialX - window.innerWidth;
       const fadeInEndX = initialX;
 
-      // Translate X-Coordinates into actual Y-Scroll triggers
       const fadeInStart = startScroll + (fadeInStartX * scrollFactor);
       const fadeInEnd = startScroll + (fadeInEndX * scrollFactor);
 
@@ -70,17 +65,25 @@ const Location = () => {
       referrerPolicy: "no-referrer-when-downgrade"
     }
 
-    const containerHeight = 'h-[240px] tablet:h-[280px] laptop:h-[330px] xl:h-[380px]'
+    // [ LAPTOP CLIPPING FIX ]
+    // Replaced rigid laptop:h-[330px] with responsive Viewport Height bounds (h-[35vh]).
+    // This allows the map to dynamically shrink vertically on short laptop screens, 
+    // ensuring the bottom of the UI cluster never bleeds off the page.
+    const containerHeight = 'h-[240px] tablet:h-[280px] laptop:h-[35vh] laptop:min-h-[240px] laptop:max-h-[300px] xl:h-[380px]'
 
     const MapFrame = ({ src }) => (
       <div className="relative w-full max-w-[95%] tablet:max-w-[580px] laptop:max-w-[700px] xl:max-w-[800px]">
         <div className="relative overflow-hidden border-[4px] border-gray-800 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.7)] bg-gray-950">
           
           <div className="flex justify-between items-center px-4 py-2 bg-gradient-to-r from-gray-950 to-gray-900 border-b-2 border-gray-800">
+            
+            {/* [ ARCADE VIBE FIX ] 
+                Swapped the generic red terminal dot for a cyan pixel square, 
+                and updated the text to match the train's retro-transit theme. */}
             <div className="flex items-center gap-3">
-              <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]"></div>
-              <span className="text-gray-400 font-mono text-[10px] tablet:text-[12px] tracking-widest uppercase select-none">
-                Live Terminal Routing
+              <div className="w-2.5 h-2.5 bg-[#00f3ff] animate-pulse shadow-[0_0_8px_rgba(0,243,255,0.8)]"></div>
+              <span className="text-[#00f3ff] font-mono font-bold text-[10px] tablet:text-[12px] tracking-widest uppercase select-none drop-shadow-[0_0_5px_rgba(0,243,255,0.4)]">
+                NAV-SYS // LOCAL TRANSIT
               </span>
             </div>
 
@@ -108,24 +111,14 @@ const Location = () => {
   }
 
   return (
-    // [ ECOSYSTEM SHIFT: PART 1 ]
-    // Removed `bg-center` class. Injected a dynamic inline style to physically drag the 
-    // background image exactly 120px down the screen, pulling the building out from under the Navbar.
     <section 
       ref={locationRef} 
       id="location" 
       className="w-full h-screen flex flex-col justify-start items-center relative overflow-hidden location-bg py-4 max-[1350px]:py-4 max-[650px]:py-4 laptop:pl-10 laptop:pr-6 will-change-[opacity] opacity-0"
       style={{ backgroundPosition: 'center calc(50% + 120px)' }}
     >
-      
-      {/* 
-        [ ECOSYSTEM SHIFT: PART 2 ]
-        By wrapping the UI and translating it down by the identical 120px, the 
-        relationship between the UI and the pixel art remains perfectly locked.
-      */}
       <div className="w-full flex flex-col items-center translate-y-[120px]">
 
-        {/* 1. TITLE EMBLEM: Exact Original Offsets Untouched */}
         <div className="mx-4 mb-4 mt-2 max-[650px]:mt-2 max-[650px]:mb-4 table:self-start laptop:self-start tablet:translate-x-[20px] laptop:translate-x-[150px] xl:translate-x-[190px] -translate-y-10 laptop:-translate-y-[32px]">
           <div className="bg-gray-950/95 border-2 border-gray-700 text-white px-6 py-2.5 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
             <h1 className="text-2xl font-bold tablet:text-3xl laptop:text-3xl xl:text-4xl max-[1350px]:text-xl max-[650px]:text-base max-[500px]:text-[22px]">
@@ -134,7 +127,6 @@ const Location = () => {
           </div>
         </div>
 
-        {/* 2. ADDRESS / DETAILS BLOCK: Exact Original Offsets Untouched */}
         <div className="mx-4 max-[650px]:mx-1 mb-4 text-center py-3.5 px-6 max-[650px]:px-4 max-[500px]:px-3 bg-gray-950/95 border-2 border-gray-700 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)] tablet:translate-x-[20px] laptop:translate-x-[170px] xl:translate-x-[210px] -translate-y-10 laptop:-translate-y-[64px]">
           <div className="flex flex-col gap-1 text-gray-300 font-mono text-[12px] mobile:text-[14px] tablet:text-[15px] text-left">
             <p><span className="text-[#8b5cf6] font-bold mr-2">{">"}</span>School of Justice Building</p>
@@ -143,7 +135,6 @@ const Location = () => {
           </div>
         </div>
 
-        {/* 3. MAP SELECTION CONTROLS: Exact Original Offsets Untouched */}
         <div className="px-4 max-[650px]:px-0 flex flex-wrap justify-center gap-4 max-[650px]:gap-2 mb-4 tablet:translate-x-[20px] laptop:translate-x-[170px] xl:translate-x-[210px] -translate-y-10 laptop:-translate-y-[64px]">
           {mapOptions.map((option, index) => (
             <button
@@ -160,7 +151,6 @@ const Location = () => {
           ))}
         </div>
 
-        {/* 4. MAP FRAME TERMINAL: Exact Original Offsets Untouched */}
         <div className="flex justify-center w-full px-4 tablet:translate-x-[30px] laptop:translate-x-[180px] xl:translate-x-[220px] -translate-y-10 laptop:-translate-y-[56px]">
           {renderMapContent()}
         </div>

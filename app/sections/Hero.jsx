@@ -61,25 +61,29 @@ export default function Hero() {
 
         {/* 
           [ THE GRAVITATIONAL LOCK ]
-          The Bubble, Logo, and Text are now housed in a single, unified flex-container.
-          This ensures they levitate together perfectly, eliminating responsive collision bugs.
+          The Bubble, Logo, and Text are housed in a single, unified flex-container.
         */}
         <div className='relative flex flex-col justify-center items-center z-10 animate-smooth-levitate'>
           
-          <div className="absolute -top-4 -left-12 tablet:-top-8 tablet:-left-20 laptop:-top-8 laptop:-left-28 desktop:-top-12 desktop:-left-32 z-20 pointer-events-none">
+          {/* 
+            [ MID-SIZE SCALING: BUBBLE ]
+            Widths pulled back (130px -> 115px, 150px -> 130px).
+            Top/Left offsets tightly re-calibrated so it still perfectly hugs the top-left of the "S".
+          */}
+          <div className="absolute -top-4 -left-12 tablet:-top-6 tablet:-left-16 laptop:-top-8 laptop:-left-20 desktop:-top-12 desktop:-left-32 z-20 pointer-events-none">
             <Image 
               src="https://i.ibb.co/Q7tQMWqH/image.png" 
               alt="Date Bubble" 
               width={300} 
               height={300} 
               priority 
-              className="w-[100px] tablet:w-[130px] laptop:w-[150px] desktop:w-[180px] h-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.4)]" 
+              className="w-[100px] tablet:w-[115px] laptop:w-[130px] desktop:w-[180px] h-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.4)]" 
             />
           </div>
 
           {/* 
-            [ CALIBRATION: SCALE REDUCTION ]
-            Maximum widths aggressively stepped down across all viewports to restore background visibility.
+            [ MID-SIZE SCALING: LOGO ]
+            Tablet steps down from 280px -> 250px. Laptop steps down from 320px -> 280px.
           */}
           <Image 
             src="/svgs/logo.svg" 
@@ -87,10 +91,14 @@ export default function Hero() {
             width={100} 
             height={100} 
             priority 
-            className="w-[220px] tablet:w-[280px] laptop:w-[320px] desktop:w-[380px] h-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)] relative z-10" 
+            className="w-[220px] tablet:w-[250px] laptop:w-[280px] desktop:w-[380px] h-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)] relative z-10" 
           />
 
-          <div className="mt-4 tablet:mt-6 laptop:mt-8 font-bold text-center text-white text-[1rem] tablet:text-[1.25rem] laptop:text-[1.5rem] desktop:text-[2.2rem] drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] z-20 tracking-wide px-4"> 
+          {/* 
+            [ MID-SIZE SCALING: TYPOGRAPHY & GAP ]
+            Text sizes reduced slightly. Top margin pulled in from mt-6/8 to mt-4/6 to compress vertical height.
+          */}
+          <div className="mt-4 tablet:mt-4 laptop:mt-6 font-bold text-center text-white text-[1rem] tablet:text-[1.1rem] laptop:text-[1.3rem] desktop:text-[2.2rem] drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] z-20 tracking-wide px-4"> 
             Miami Dade College's Signature Hackathon 
           </div>
           
@@ -113,7 +121,7 @@ export default function Hero() {
       </div>
 
       <style jsx>{`
-        /* [ SLANT PURGED ]: Removed rotate(-2deg) so the entire block remains perfectly level */
+        /* [ SLANT PURGED ]: The entire block remains perfectly level */
         @keyframes smooth-levitate {
           0%, 100% { transform: translate3d(0, 0, 0); }
           50% { transform: translate3d(0, -15px, 0); }
