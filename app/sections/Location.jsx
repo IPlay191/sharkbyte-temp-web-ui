@@ -65,21 +65,18 @@ const Location = () => {
       referrerPolicy: "no-referrer-when-downgrade"
     }
 
-    // [ LAPTOP CLIPPING FIX ]
-    // Replaced rigid laptop:h-[330px] with responsive Viewport Height bounds (h-[35vh]).
-    // This allows the map to dynamically shrink vertically on short laptop screens, 
-    // ensuring the bottom of the UI cluster never bleeds off the page.
-    const containerHeight = 'h-[240px] tablet:h-[280px] laptop:h-[35vh] laptop:min-h-[240px] laptop:max-h-[300px] xl:h-[380px]'
+    // [ ZENBOOK CLIPPING FIX ]
+    // Replaced the rogue `xl:h-[380px]` with fluid constraints.
+    // The map will now dynamically calculate its height to strictly be 35% of the viewport (35vh).
+    // On a 720px tall Zenbook, 35vh is ~252px, perfectly fitting the screen without bleeding off the edge.
+    // It will only expand to larger sizes if the screen explicitly allows it (min-h/max-h logic).
+    const containerHeight = 'h-[240px] tablet:h-[280px] laptop:h-[35vh] laptop:min-h-[220px] laptop:max-h-[300px] min-[1440px]:max-h-[380px]'
 
     const MapFrame = ({ src }) => (
       <div className="relative w-full max-w-[95%] tablet:max-w-[580px] laptop:max-w-[700px] xl:max-w-[800px]">
         <div className="relative overflow-hidden border-[4px] border-gray-800 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.7)] bg-gray-950">
           
           <div className="flex justify-between items-center px-4 py-2 bg-gradient-to-r from-gray-950 to-gray-900 border-b-2 border-gray-800">
-            
-            {/* [ ARCADE VIBE FIX ] 
-                Swapped the generic red terminal dot for a cyan pixel square, 
-                and updated the text to match the train's retro-transit theme. */}
             <div className="flex items-center gap-3">
               <div className="w-2.5 h-2.5 bg-[#00f3ff] animate-pulse shadow-[0_0_8px_rgba(0,243,255,0.8)]"></div>
               <span className="text-[#00f3ff] font-mono font-bold text-[10px] tablet:text-[12px] tracking-widest uppercase select-none drop-shadow-[0_0_5px_rgba(0,243,255,0.4)]">
