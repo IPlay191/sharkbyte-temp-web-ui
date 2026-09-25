@@ -61,11 +61,6 @@ export default function Hero() {
 
         <div className='relative flex flex-col justify-center items-center z-10 animate-smooth-levitate'>
           
-          {/* 
-            [ BUBBLE ALIGNMENT FIX ]
-            Drastically reduced all negative -top and -left classes across all viewports.
-            This pulls the bubble out of the sky and tucks it closely above the shark's nose. 
-          */}
           <div className="absolute top-0 -left-4 tablet:-top-2 tablet:-left-6 laptop:-top-2 laptop:-left-8 desktop:-top-4 desktop:-left-12 min-[1440px]:-top-4 min-[1440px]:-left-16 z-30 pointer-events-none">
             <Image 
               src="https://i.ibb.co/Q7tQMWqH/image.png" 
@@ -92,22 +87,22 @@ export default function Hero() {
           
         </div>
 
-        {/* 
-          [ FLOATING UI CLUSTER ]
-          A flex-col container anchored to the bottom right that neatly stacks the cards 
-          while keeping them aligned to the right edge (items-end).
-        */}
         <div className="absolute bottom-6 right-6 tablet:bottom-10 tablet:right-10 z-30 flex flex-col items-end gap-4 tablet:gap-5">
           
-          {/* REGISTRATION STATUS BOX */}
+          {/* REGISTRATION ACTION BOX */}
           <div className="transition-transform duration-300 hover:-translate-y-2">
-            <div className="bg-gray-950/90 backdrop-blur-md border-2 border-[#8b5cf6]/50 shadow-[0_15px_35px_rgba(139,92,246,0.15)] rounded-xl p-5 tablet:p-6 w-[280px] tablet:w-[340px] text-center hover:border-[#00f3ff]/80 transition-colors duration-300">
-              <p className="text-sm tablet:text-base font-bold text-gray-200 tracking-wide uppercase">
+            <div className="bg-gray-950/90 backdrop-blur-md border-2 border-[#00f3ff]/40 shadow-[0_15px_35px_rgba(0,243,255,0.15)] rounded-xl p-5 tablet:p-6 w-[280px] tablet:w-[340px] text-center hover:bg-gray-900/90 hover:border-[#00f3ff] hover:shadow-[0_0_25px_rgba(0,243,255,0.4)] transition-all duration-300">
+              <p className="text-sm tablet:text-base font-bold text-gray-200 tracking-wide uppercase transition-colors duration-300">
                 Ready to dive in?
               </p>
-              <div className="mt-2 block text-[15px] tablet:text-[19px] font-mono font-bold text-[#00f3ff] drop-shadow-[0_0_8px_rgba(0,243,255,0.6)] uppercase tracking-widest">
-                Registration Soon<span className="animate-blink text-white ml-1">_</span>
-              </div>
+              <a 
+                href="https://airtable.com/appY1e4YbYhqNWdpE/shr5bPimkY7ck4v88"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 block text-[16px] tablet:text-[20px] font-mono font-bold text-[#00f3ff] drop-shadow-[0_0_8px_rgba(0,243,255,0.6)] hover:drop-shadow-[0_0_15px_rgba(0,243,255,1)] hover:text-white uppercase tracking-widest transition-all duration-300"
+              >
+                Register Now<span className="animate-blink text-white ml-1">_</span>
+              </a>
             </div>
           </div>
 
