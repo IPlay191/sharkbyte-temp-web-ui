@@ -46,7 +46,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id='hero' className="w-full h-[135vh] tablet:h-[140vh] laptop:h-[150vh] relative z-0">
+    <section id='hero' className="w-full h-[125vh] tablet:h-[130vh] laptop:h-[140vh] relative z-0">
       <div id='hero-content' className="sticky top-0 h-svh w-full hero-bg flex justify-center items-center flex-row max-[700px]:flex-col overflow-hidden will-change-transform">
 
         <a 
