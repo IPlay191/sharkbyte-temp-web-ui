@@ -101,7 +101,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="mt-2 block text-[16px] tablet:text-[20px] font-mono font-bold text-[#00f3ff] drop-shadow-[0_0_8px_rgba(0,243,255,0.6)] hover:drop-shadow-[0_0_15px_rgba(0,243,255,1)] hover:text-white uppercase tracking-widest transition-all duration-300"
               >
-                Register Now<span className="animate-blink text-white ml-1">_</span>
+                Register Here<span className="animate-blink text-white ml-1">_</span>
               </a>
             </div>
           </div>
