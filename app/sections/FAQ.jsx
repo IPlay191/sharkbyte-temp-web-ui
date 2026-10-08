@@ -33,7 +33,8 @@ const FAQ = () => {
         { id: "q8", q: "What should I bring?", a: "Bring a valid student/government ID, your laptop, a charger, any hardware you plan to use, comfortable clothes, and toiletries. If you plan on staying overnight, sleeping accommodations are provided, but it can get very chilly! We highly recommend bringing a pillow, warm attire, and blankets." },
         { id: "q9", q: "Is this event in-person, virtual, or hybrid?", a: "SharkByte is fully in-person! We believe the best hackathon experience comes from the energy of being on-site, collaborating, and networking face-to-face." },
         { id: "q10", q: "Will there be vegan or vegetarian options?", a: "Absolutely! We will provide proper food accommodations for both vegans and vegetarians to ensure everyone stays fully fueled throughout the entire weekend." },
-        { id: "q11", q: "How does judging work?", a: "Projects are submitted via Devpost and judged by a panel of industry experts and sponsors. Judging criteria typically include technical complexity, innovation, UI/UX design, and practical utility." }
+        { id: "q11", q: "How does judging work?", a: "Projects are submitted via Devpost and judged by a panel of industry experts and sponsors. Judging criteria typically include technical complexity, innovation, UI/UX design, and practical utility." },
+        { id: "q12", q: "When are check-in and the opening ceremony?", a: "Check-in begins on Friday, November 6th at 4:00 PM, and the opening ceremony will follow later that same day at 6:30 PM." }
       ]
     }
   ]
