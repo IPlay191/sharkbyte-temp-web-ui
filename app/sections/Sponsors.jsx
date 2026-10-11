@@ -17,6 +17,7 @@ const sponsorsRow2 = [
   { href: "https://starquix.com/", src: "https://i.ibb.co/5gkw19sf/starquix-logo.jpg", alt: "starquix_logo", tier: 1 },
   { href: "https://momentum.miami/", src: "https://i.ibb.co/m5s65Wp8/momentum-miami-logo.png", alt: "momentum_miami_logo", tier: 2 },
   { href: "https://www.miamigov.com/", src: "https://i.ibb.co/ksYnj2Sr/city-of-miami-logo.png", alt: "city_of_miami_logo", tier: 2 },
+  { href: "https://www.redbull.com/", src: "https://i.ibb.co/sdF99cYw/Red-Bull-Logo.png", alt: "redbull_logo", tier: 3 },
 ];
 
 const SponsorCard = ({ sponsor }) => {
