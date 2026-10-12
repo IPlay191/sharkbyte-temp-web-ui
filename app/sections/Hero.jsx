@@ -98,27 +98,27 @@ export default function Hero() {
           </div>
 
           {/* 
-            [ INSTITUTIONAL ANCHOR ]
-            Replaced expensive backdrop-blur with highly optimized bg-gray-950/95.
-            Yields 0 GPU strain during the levitation animation loop.
+            [ INSTITUTIONAL ANCHOR (DOWNSCALED) ]
+            Strictly constrained widths and padding applied to prevent clipping into 
+            action boxes on 13/14-inch laptops.
           */}
-          <div className="mt-5 tablet:mt-8 flex items-center justify-center gap-5 tablet:gap-8 bg-gray-950/95 border border-gray-600/50 px-6 py-3 tablet:px-8 tablet:py-4 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.8)] z-20 transition-transform duration-300 hover:scale-[1.02]">
+          <div className="mt-4 tablet:mt-6 flex items-center justify-center gap-4 tablet:gap-6 bg-gray-950/95 border border-gray-600/50 px-5 py-2.5 tablet:px-6 tablet:py-3 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.8)] z-20 transition-transform duration-300 hover:scale-[1.02]">
             <Image 
               src="https://i.ibb.co/jvPsQy3z/init-logo.jpg" 
               alt="INIT Logo" 
               width={150} 
               height={75} 
-              className="w-[70px] tablet:w-[90px] laptop:w-[110px] desktop:w-[130px] h-auto object-contain rounded-lg drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" 
+              className="w-[60px] tablet:w-[75px] laptop:w-[90px] desktop:w-[110px] h-auto object-contain rounded-lg drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" 
             />
             
-            <div className="w-[2px] h-[35px] tablet:h-[45px] bg-gray-700 rounded-full"></div>
+            <div className="w-[2px] h-[30px] tablet:h-[40px] bg-gray-700 rounded-full"></div>
             
             <Image 
               src="https://i.ibb.co/z96LThT/Miami-Dade-College-logo-svg.webp" 
               alt="Miami Dade College Logo" 
               width={150} 
               height={75} 
-              className="w-[85px] tablet:w-[110px] laptop:w-[130px] desktop:w-[150px] h-auto object-contain drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" 
+              className="w-[75px] tablet:w-[95px] laptop:w-[110px] desktop:w-[130px] h-auto object-contain drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" 
             />
           </div>
           

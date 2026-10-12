@@ -29,7 +29,6 @@ const Team = () => {
   ];
 
   const communityPartners = [
-    { name: "INIT", logo: "https://i.ibb.co/jvPsQy3z/init-logo.jpg", website: "https://weareinit.org" },
     { name: "City of Coral Gables", logo: "https://i.ibb.co/8LwsNNcX/image.png", website: "https://www.coralgables.com/department/innovation-and-technology" },
     { name: "MDC Entec", logo: "https://i.ibb.co/ZRGcKBQz/image.png", website: "https://www.mdc.edu/entec/" }, 
     { name: "MDC Magic Lab", logo: "https://i.ibb.co/hRjk6hwb/image.png", website: "https://magic.mdc.edu/" },
