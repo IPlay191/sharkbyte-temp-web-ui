@@ -97,11 +97,7 @@ export default function Hero() {
             Miami Dade College's Signature Hackathon 
           </div>
 
-          {/* 
-            [ INSTITUTIONAL ANCHOR (DOWNSCALED) ]
-            Strictly constrained widths and padding applied to prevent clipping into 
-            action boxes on 13/14-inch laptops.
-          */}
+          {/* [ INSTITUTIONAL ANCHOR (DOWNSCALED) ] */}
           <div className="mt-4 tablet:mt-6 flex items-center justify-center gap-4 tablet:gap-6 bg-gray-950/95 border border-gray-600/50 px-5 py-2.5 tablet:px-6 tablet:py-3 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.8)] z-20 transition-transform duration-300 hover:scale-[1.02]">
             <Image 
               src="https://i.ibb.co/jvPsQy3z/init-logo.jpg" 
@@ -125,36 +121,46 @@ export default function Hero() {
         </div>
 
         {/* 
-          [ ACTION UI ZONE ] 
-          Added transform-gpu and will-change-transform for optimized hover states.
+          ========================================================================
+          [ ACTION UI ZONE : RESPONSIVE FLOW SWITCH & COMPRESSION ] 
+          ========================================================================
+          STUDIO ARCHITECTURE NOTE: 
+          - max-[700px]: Replaces absolute positioning with a relative vertical stack. 
+          - Mobile margin `mt-6` ensures clearance from the levitating logos above.
+          - Mobile gap compressed to `gap-3` to lift the bottom box out of the city skyline.
+          - min-[701px]: Restores the absolute bottom-right HUD anchor for PC and tablets.
         */}
-        <div className="absolute bottom-6 right-6 tablet:bottom-10 tablet:right-10 z-30 flex flex-col items-end gap-4 tablet:gap-5">
+        <div className="z-30 flex flex-col gap-3 tablet:gap-5 w-full max-[700px]:relative max-[700px]:items-center max-[700px]:mt-6 min-[701px]:w-auto min-[701px]:absolute min-[701px]:bottom-6 min-[701px]:right-6 tablet:bottom-10 tablet:right-10 min-[701px]:items-end px-4 min-[701px]:px-0">
           
+          {/* REGISTRATION ACTION BOX */}
           <a 
             href="https://airtable.com/appY1e4YbYhqNWdpE/shr5bPimkY7ck4v88"
             target="_blank"
             rel="noopener noreferrer"
-            className="group block transition-all duration-300 hover:-translate-y-2 active:translate-y-0 cursor-pointer will-change-transform transform-gpu"
+            className="group block transition-all duration-300 hover:-translate-y-2 active:translate-y-0 cursor-pointer will-change-transform transform-gpu max-[700px]:w-full max-[700px]:max-w-[280px]"
           >
-            <div className="bg-gray-950/95 border-2 border-[#00f3ff]/40 shadow-[0_15px_35px_rgba(0,243,255,0.15)] rounded-xl p-5 tablet:p-6 w-[280px] tablet:w-[360px] text-center group-hover:bg-gray-900/95 group-hover:border-[#00f3ff] group-hover:shadow-[0_0_25px_rgba(0,243,255,0.4)] transition-all duration-300">
-              <p className="text-sm tablet:text-base font-bold text-gray-300 tracking-wide uppercase group-hover:text-white transition-colors duration-300">
+            {/* Height Compression: Mobile uses `p-3.5`, tablet restores `p-6` */}
+            <div className="bg-gray-950/95 border-2 border-[#00f3ff]/40 shadow-[0_15px_35px_rgba(0,243,255,0.15)] rounded-xl p-3.5 tablet:p-6 w-full min-[701px]:w-[280px] tablet:w-[360px] text-center group-hover:bg-gray-900/95 group-hover:border-[#00f3ff] group-hover:shadow-[0_0_25px_rgba(0,243,255,0.4)] transition-all duration-300">
+              {/* Typography Downscaling */}
+              <p className="text-[11px] mobile:text-[12px] tablet:text-base font-bold text-gray-300 tracking-wide uppercase group-hover:text-white transition-colors duration-300">
                 Ready to dive in?
               </p>
-              <span className="mt-2 block text-[16px] tablet:text-[22px] font-mono font-bold text-[#00f3ff] drop-shadow-[0_0_8px_rgba(0,243,255,0.6)] group-hover:drop-shadow-[0_0_15px_rgba(0,243,255,1)] group-hover:text-white uppercase tracking-widest transition-all duration-300">
+              <span className="mt-1.5 tablet:mt-2 block text-[15px] tablet:text-[22px] font-mono font-bold text-[#00f3ff] drop-shadow-[0_0_8px_rgba(0,243,255,0.6)] group-hover:drop-shadow-[0_0_15px_rgba(0,243,255,1)] group-hover:text-white uppercase tracking-widest transition-all duration-300">
                 Register Here<span className="animate-blink text-white ml-1">_</span>
               </span>
             </div>
           </a>
 
+          {/* CONTACT US BOX */}
           <a 
             href="mailto:Mdc-north@weareinit.org?subject=SharkByte%20Hackathon%20Inquiry" 
-            className="group block transition-all duration-300 hover:-translate-y-2 active:translate-y-0 cursor-pointer will-change-transform transform-gpu"
+            className="group block transition-all duration-300 hover:-translate-y-2 active:translate-y-0 cursor-pointer will-change-transform transform-gpu max-[700px]:w-full max-[700px]:max-w-[260px]"
           >
-            <div className="bg-gray-950/95 border-2 border-gray-700/80 shadow-[0_15px_35px_rgba(0,0,0,0.6)] rounded-xl p-5 tablet:p-6 w-[260px] tablet:w-[340px] text-center group-hover:border-[#8b5cf6] group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all duration-300">
-              <p className="text-sm tablet:text-base font-bold text-gray-300 tracking-wide uppercase group-hover:text-white transition-colors duration-300">
+            <div className="bg-gray-950/95 border-2 border-gray-700/80 shadow-[0_15px_35px_rgba(0,0,0,0.6)] rounded-xl p-3.5 tablet:p-6 w-full min-[701px]:w-[260px] tablet:w-[340px] text-center group-hover:border-[#8b5cf6] group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all duration-300">
+              <p className="text-[11px] mobile:text-[12px] tablet:text-base font-bold text-gray-300 tracking-wide uppercase group-hover:text-white transition-colors duration-300">
                 Have Questions?
               </p>
-              <span className="mt-2 block break-all text-[14px] tablet:text-[18px] font-mono font-bold text-[#8b5cf6] group-hover:text-white group-hover:drop-shadow-[0_0_12px_rgba(139,92,246,1)] transition-all duration-300 uppercase tracking-widest">
+              <span className="mt-1.5 tablet:mt-2 block break-all text-[13px] mobile:text-[14px] tablet:text-[18px] font-mono font-bold text-[#8b5cf6] group-hover:text-white group-hover:drop-shadow-[0_0_12px_rgba(139,92,246,1)] transition-all duration-300 uppercase tracking-widest">
                 Contact Us<span className="animate-blink text-[#39ff14] ml-1 drop-shadow-[0_0_8px_rgba(57,255,20,0.8)]">_</span>
               </span>
             </div>
