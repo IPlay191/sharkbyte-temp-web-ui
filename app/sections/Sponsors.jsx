@@ -9,6 +9,7 @@ const sponsorsRow1 = [
   { href: "https://www.celsius.com/", src: "https://i.ibb.co/XfVsrq93/Celcius-logo.webp", alt: "celsius_logo", tier: 2 },
   { href: "https://www.lab22c.com/", src: "https://i.ibb.co/4wQ52k3p/lab22c-logo.jpg", alt: "lab22c_logo", tier: 2 },
   { href: "https://www.milamsmarkets.com/", src: "https://i.ibb.co/C5DbxdhF/milams-market-logo.png", alt: "milams_markets_logo", tier: 3 },
+  { href: "https://weareinit.org", src: "https://i.ibb.co/jvPsQy3z/init-logo.jpg", alt: "init_logo", tier: 3 }
 ];
 
 const sponsorsRow2 = [
@@ -17,6 +18,7 @@ const sponsorsRow2 = [
   { href: "https://starquix.com/", src: "https://i.ibb.co/5gkw19sf/starquix-logo.jpg", alt: "starquix_logo", tier: 1 },
   { href: "https://momentum.miami/", src: "https://i.ibb.co/m5s65Wp8/momentum-miami-logo.png", alt: "momentum_miami_logo", tier: 2 },
   { href: "https://www.miamigov.com/", src: "https://i.ibb.co/ksYnj2Sr/city-of-miami-logo.png", alt: "city_of_miami_logo", tier: 2 },
+  { href: "https://www.redbull.com/", src: "https://i.ibb.co/sdF99cYw/Red-Bull-Logo.png", alt: "redbull_logo", tier: 3 }
 ];
 
 const SponsorCard = ({ sponsor }) => {
@@ -45,7 +47,6 @@ const SponsorCard = ({ sponsor }) => {
 
 const Sponsors = () => {
   return (
-    // [ FADE PURGE ]: Removed opacity-0 and will-change-opacity so it defaults to fully visible.
     <section id="sponsors" className="isolate z-0 sponsors-bg w-full h-full flex flex-col justify-between items-center relative overflow-hidden py-[4vh]">
       
       <div className="w-full max-w-[1400px] mx-auto px-4 mt-[5vh] flex justify-center relative z-10">

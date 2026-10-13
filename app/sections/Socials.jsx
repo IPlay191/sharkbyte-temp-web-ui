@@ -28,7 +28,7 @@ const Socials = () => {
           
           {/* DISCORD: Ignites Indigo */}
           <a 
-            href="https://discord.com/invite/init" 
+            href="https://discord.gg/298kAHQy9" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="group relative flex justify-center items-center bg-gray-900/50 backdrop-blur-md border-2 border-gray-700 rounded-2xl p-5 tablet:p-8 laptop:p-10 transition-all duration-300 hover:-translate-y-3 hover:border-[#5865F2] hover:bg-gray-900/80 hover:shadow-[0_15px_35px_rgba(88,101,242,0.4)] active:translate-y-0"

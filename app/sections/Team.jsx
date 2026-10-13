@@ -24,12 +24,11 @@ const Team = () => {
     { name: "Linet Lima", role: "Director of Industry Relations", image: "https://i.ibb.co/bRmj9dnn/image.png", linkedin: "https://www.linkedin.com/in/linet-lima-5437a0239/" },
     { name: "Kelvin Rodriguez", role: "Director of Industry Relations", image: "https://i.ibb.co/3yv4J59B/image.png", linkedin: "https://www.linkedin.com/in/kelvin-rodriguez-a519a0265/" },
     { name: "Richard Canina Miranda", role: "Director of Industry Relations", image: "https://i.ibb.co/JjxZyh6Q/image.png", linkedin: "https://www.linkedin.com/in/richardcm-info" },
-    { name: "Fritz Bonhomme", role: "Director of Technology", image: "https://i.ibb.co/8gsb8gdq/image.png", linkedin: "" },
+    { name: "Fritz Bonhomme", role: "Director of Technology", image: "https://i.ibb.co/CKSgyH64/Fritz-Headshot.jpg", linkedin: "" },
     { name: "Oliver Martinez Fernandez", role: "Web Development", image: "https://i.ibb.co/LhkWsVTT/image.png", linkedin: "https://www.linkedin.com/in/oliver-martinez-9a1ba4340/" }
   ];
 
   const communityPartners = [
-    { name: "INIT", logo: "https://i.ibb.co/jvPsQy3z/init-logo.jpg", website: "https://weareinit.org" },
     { name: "City of Coral Gables", logo: "https://i.ibb.co/8LwsNNcX/image.png", website: "https://www.coralgables.com/department/innovation-and-technology" },
     { name: "MDC Entec", logo: "https://i.ibb.co/ZRGcKBQz/image.png", website: "https://www.mdc.edu/entec/" }, 
     { name: "MDC Magic Lab", logo: "https://i.ibb.co/hRjk6hwb/image.png", website: "https://magic.mdc.edu/" },
@@ -87,12 +86,25 @@ const Team = () => {
   // --------------------------------------------------------------------------
   // COMPONENT 2: The Community Partner Card
   // --------------------------------------------------------------------------
+  /* 
+    [ STUDIO ARCHITECTURE NOTE: THE AUTO-CENTERING MATH ]
+    To allow orphaned bottom-row items (like the 5th item) to automatically slide into the center,
+    we CANNOT use CSS Grid. Grid forces rigid columns. Instead, we use Flexbox combined with exact width math:
+    
+    - Mobile Math (gap-4 = 1rem gap): 
+      We want 2 items per row. The 1 gap between them takes up 1rem. 1rem / 2 items = 0.5rem each. 
+      Width = calc(50% - 0.5rem).
+    
+    - Tablet/Desktop Math (gap-6 = 1.5rem gap): 
+      We want 3 items per row. The 2 gaps between them take up 3rem total. 3rem / 3 items = 1rem each.
+      Width = calc(33.333% - 1rem).
+  */
   const CommunityPartnerCard = ({ member }) => (
     <a 
       href={member.website || '#'} 
       target={member.website ? "_blank" : "_self"} 
       rel="noopener noreferrer"
-      className="group relative z-0 hover:z-50 flex flex-col justify-center items-center bg-gray-950/95 border-2 border-gray-700/50 hover:border-[#8b5cf6] hover:bg-gray-900/80 rounded-xl p-4 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)] cursor-pointer w-full h-[120px] tablet:h-[130px] laptop:h-[140px] xl:h-[160px]"
+      className="group relative z-0 hover:z-50 flex flex-col justify-center items-center bg-gray-950/95 border-2 border-gray-700/50 hover:border-[#8b5cf6] hover:bg-gray-900/80 rounded-xl p-4 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)] cursor-pointer h-[120px] tablet:h-[130px] laptop:h-[140px] xl:h-[160px] w-[calc(50%-0.5rem)] md:w-[calc(33.333%-1rem)] max-w-[320px]"
     >
       <div className="w-14 h-14 tablet:w-16 tablet:h-16 laptop:w-20 laptop:h-20 xl:w-24 xl:h-24 mb-2 relative flex justify-center items-center">
         <img 
@@ -114,8 +126,9 @@ const Team = () => {
   // --------------------------------------------------------------------------
   // COMPONENT 3: The Faculty Advisor Card
   // --------------------------------------------------------------------------
+  // Re-architected with similar calc() logic so it behaves cohesively with the partner cards.
   const FacultyAdvisorCard = ({ member }) => (
-    <div className="group relative z-0 hover:z-50 flex justify-center items-center bg-gray-950/95 border-2 border-gray-700/50 hover:border-[#8b5cf6] hover:bg-gray-900/80 rounded-xl text-white p-6 text-center w-full max-w-[350px] h-[100px] tablet:h-[120px] mx-auto transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)]">
+    <div className="group relative z-0 hover:z-50 flex justify-center items-center bg-gray-950/95 border-2 border-gray-700/50 hover:border-[#8b5cf6] hover:bg-gray-900/80 rounded-xl text-white p-6 text-center h-[100px] tablet:h-[120px] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)] w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(50%-0.75rem)] max-w-[350px]">
       <h3 className="font-bold tracking-wide text-lg tablet:text-xl laptop:text-2xl text-gray-300 group-hover:text-white transition-colors duration-300">
         {member.name}
       </h3>
@@ -162,25 +175,23 @@ const Team = () => {
         <div className="flex-grow flex flex-col justify-start items-center w-full">
           
           {/* 
-            [ VIEW 1: COMMUNITY PARTNERS ] (Static Grid) 
-            THE CENTERING FIX: Replaced 'mt-4' with 'my-auto'.
-            This dynamic CSS spring calculates the leftover viewport height and 
-            pushes equally from the top and bottom, centering the grid perfectly 
-            on any monitor size.
+            [ VIEW 1: COMMUNITY PARTNERS ] (Auto-Centering Flex Engine) 
+            STUDIO ARCHITECTURE NOTE: Replaced static 'grid' with 'flex flex-wrap justify-center'.
+            This dynamically anchors the array and automatically slides orphan elements 
+            on the final row directly into the center, preventing dead space.
           */}
           {!showCarousel && showCMembers && (
-            <div className="custom-retro-scrollbar w-full max-w-[1000px] max-h-[65vh] overflow-y-auto grid grid-cols-2 md:grid-cols-3 gap-4 tablet:gap-6 p-4 tablet:p-8 bg-gray-950/95 border border-gray-700/50 shadow-2xl items-stretch mx-auto rounded-2xl my-auto"> 
+            <div className="custom-retro-scrollbar w-full max-w-[1000px] max-h-[65vh] overflow-y-auto flex flex-wrap justify-center gap-4 tablet:gap-6 p-4 tablet:p-8 bg-gray-950/95 border border-gray-700/50 shadow-2xl mx-auto rounded-2xl my-auto"> 
               {communityPartners.map((member, index) => <CommunityPartnerCard key={index} member={member} />)}
             </div>
           )}
 
           {/* 
-            [ VIEW 2: FACULTY ADVISORS ] (Static Grid) 
-            THE CENTERING FIX: Applies the exact same 'my-auto' spring logic 
-            to ensure visual consistency when switching tabs.
+            [ VIEW 2: FACULTY ADVISORS ] (Auto-Centering Flex Engine) 
+            Applies the exact same flex physics for architectural consistency.
           */}
           {!showCarousel && !showCMembers && (
-            <div className="custom-retro-scrollbar w-full max-w-[800px] max-h-[65vh] overflow-y-auto grid grid-cols-1 sm:grid-cols-2 gap-4 tablet:gap-6 p-4 tablet:p-8 bg-gray-950/95 border border-gray-700/50 shadow-2xl items-center justify-items-center mx-auto rounded-2xl my-auto"> 
+            <div className="custom-retro-scrollbar w-full max-w-[800px] max-h-[65vh] overflow-y-auto flex flex-wrap justify-center gap-4 tablet:gap-6 p-4 tablet:p-8 bg-gray-950/95 border border-gray-700/50 shadow-2xl mx-auto rounded-2xl my-auto"> 
               {facultyAdvisors.map((member, index) => <FacultyAdvisorCard key={index} member={member} />)}
             </div>
           )}
