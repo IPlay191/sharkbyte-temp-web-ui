@@ -144,7 +144,7 @@ export default function Hero() {
               alt="INIT Logo" 
               width={150} 
               height={75} 
-              className="w-[60px] tablet:w-[75px] laptop:w-[90px] desktop:w-[90px] h-auto object-contain rounded-lg drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" 
+              className="w-[75px] tablet:w-[95px] laptop:w-[110x] desktop:w-[90px] h-auto object-contain rounded-lg drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" 
             />
             
             <div className="w-[2px] h-[30px] tablet:h-[40px] bg-gray-700 rounded-full"></div>
