@@ -107,7 +107,7 @@ export default function Hero() {
           {/* 
             [ DATE BUBBLE: RIGHT-SHIFT & DOWN-SHIFT POSITIONAL FIX ]
           */}
-          <div className="absolute -top-2 left-20 mobile:-top-2 mobile:-left-4 tablet:-top-2 tablet:-left-6 laptop:-top-2 laptop:-left-8 desktop:-top-4 desktop:-left-12 min-[1440px]:-top-4 min-[1440px]:-left-16 z-30 pointer-events-none">
+          <div className="absolute -top-2 left-20 mobile:top-2 mobile:-left-4 tablet:-top-2 tablet:-left-6 laptop:-top-2 laptop:-left-8 desktop:-top-4 desktop:-left-12 min-[1440px]:-top-4 min-[1440px]:-left-16 z-30 pointer-events-none">
             <Image 
               src="/svgs/date-bubble.png"
               alt="Date Bubble" 
