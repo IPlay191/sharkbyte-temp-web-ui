@@ -110,7 +110,7 @@ export default function Hero() {
           */}
           <div className="absolute -top-2 left-20 mobile:top-4 mobile:-left-4 tablet:-top-2 tablet:-left-6 laptop:-top-2 laptop:-left-8 desktop:-top-4 desktop:-left-12 min-[1440px]:-top-4 min-[1440px]:-left-16 z-30 pointer-events-none">
             <Image 
-              src="https://i.ibb.co/Q7tQMWqH/image.png" 
+              src="/svgs/date-bubble.png"
               alt="Date Bubble" 
               width={300} 
               height={300} 
@@ -140,7 +140,7 @@ export default function Hero() {
           {/* [ INSTITUTIONAL ANCHOR: RESTORED SCALE ] */}
           <div className="mt-4 tablet:mt-6 flex items-center justify-center gap-4 tablet:gap-6 bg-gray-950/95 border border-gray-600/50 px-5 py-2.5 tablet:px-6 tablet:py-3 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.8)] z-20 transition-transform duration-300 hover:scale-[1.02]">
             <Image 
-              src="https://i.ibb.co/jvPsQy3z/init-logo.jpg" 
+              src="/svgs/init-logo.jpg"
               alt="INIT Logo" 
               width={150} 
               height={75} 
@@ -150,7 +150,7 @@ export default function Hero() {
             <div className="w-[2px] h-[30px] tablet:h-[40px] bg-gray-700 rounded-full"></div>
             
             <Image 
-              src="https://i.ibb.co/z96LThT/Miami-Dade-College-logo-svg.webp" 
+              src="/svgs/miami-dade-college-logo.webp"
               alt="Miami Dade College Logo" 
               width={150} 
               height={75} 

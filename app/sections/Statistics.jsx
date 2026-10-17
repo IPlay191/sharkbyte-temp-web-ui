@@ -42,8 +42,8 @@ const TrainWindow = ({ images, interval = 3000 }) => {
 // ============================================================================
 const Statistics = () => {
   const windowCar1 = [
-    "https://i.ibb.co/5NYNDdY/image.png", "https://i.ibb.co/rRJpc6PT/image.png", "https://i.ibb.co/fzMbkWGC/image.png",
-    "https://i.ibb.co/kg784D8H/image.png", "https://i.ibb.co/Cs9ht4jd/image.png", "https://i.ibb.co/RG0f1Cp7/image.png",
+    "/backgrounds/statistics-memory-1-bg.png", "/backgrounds/statistics-memory-2-bg.png", "/backgrounds/statistics-memory-3-bg.png",
+    "/backgrounds/statistics-memory-4-bg.png", "/backgrounds/statistics-memory-5-bg.png", "/backgrounds/statistics-memory-6-bg.png",
   ];
 
   const windowCar2 = [...windowCar1].reverse();
@@ -55,7 +55,7 @@ const Statistics = () => {
           id="train-wrapper"
           className="flex flex-row items-center gap-[4vw] pl-[6vw] w-max h-[95vh] min-h-[450px] max-h-[1200px] z-10 shrink-0"
           style={{
-            backgroundImage: `url('https://i.ibb.co/VRWRBSH/Pixel-Train-Second-Half-Page-4.png'), url('https://i.ibb.co/pvLry1fW/Pixel-Train-First-Half-Page-3.png')`,
+            backgroundImage: "url('/backgrounds/statistics-train-second-half-bg.png'), url('/backgrounds/statistics-train-first-half-bg.png')",
             backgroundPosition: "left bottom, right bottom",
             backgroundRepeat: "no-repeat, no-repeat",
             backgroundSize: "50% 100%, 50% 100%",

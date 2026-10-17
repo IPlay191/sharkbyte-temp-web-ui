@@ -150,7 +150,7 @@ body {
 /* Explicit routing mapping CSS classes to their respective hosted assets */
 .hero-bg { background-image: url('/backgrounds/hero-bg.png'); background-position: center; }
 .stats-bg { background-image: url('/backgrounds/statistics-bg.png'); background-position: center; }
-.comingsoon-bg { background-image: url('https://i.ibb.co/2YMDf26n/Temporary-website-page-4.png'); background-position: center; }
+.comingsoon-bg { background-image: url('/backgrounds/coming-soon-bg.png'); background-position: center; }
 .sponsors-bg { background-image: url('/backgrounds/sponsors-bg.png'); background-position: center; }
 .socials-bg { background-image: url('/backgrounds/socials-bg.png'); background-position: center; }
 .about-bg { background-image: url('/backgrounds/about-bg.png'); background-position: center; }
