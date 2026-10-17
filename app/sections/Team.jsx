@@ -15,25 +15,25 @@ const Team = () => {
   // 2. PRIMARY DATASETS (Schema Definitions)
   // --------------------------------------------------------------------------
   const teamMembers = [
-    { name: "Jimmy Jean Baptiste", role: "Hack Project Manager", image: "https://i.ibb.co/HDC5L03D/image.png", linkedin: "https://www.linkedin.com/in/jimmy-jean-baptiste-01679436a/" },
-    { name: "Erick Gonzalez", role: "President of INIT", image: "https://i.ibb.co/PzTTyGRY/image.png", linkedin: "https://www.linkedin.com/in/erick-gonzalez-888b7a377/" },
-    { name: "Elias Estrada", role: "Vice President of INIT", image: "https://i.ibb.co/jZHvT0T1/image.png", linkedin: "https://www.linkedin.com/in/elias-estrada-1445ab2b5/" },
-    { name: "Dannia Dupotey", role: "Director of Marketing", image: "https://i.ibb.co/MxQPbXzd/image.png", linkedin: "https://www.linkedin.com/in/dannia-dupotey-1169193b5/" },
-    { name: "Kathween Vargas", role: "Director of Marketing", image: "https://i.ibb.co/hFH9PFjv/image.png", linkedin: "https://www.linkedin.com/in/kathween-vargas-villafuerte-6409941aa/" },
-    { name: "Mikhail Guevara", role: "Marketing", image: "https://i.ibb.co/hR4j6K5L/image.png", linkedin: "https://www.linkedin.com/in/mikhail-guevara-a425a6231/" },
-    { name: "Linet Lima", role: "Director of Industry Relations", image: "https://i.ibb.co/bRmj9dnn/image.png", linkedin: "https://www.linkedin.com/in/linet-lima-5437a0239/" },
-    { name: "Kelvin Rodriguez", role: "Director of Industry Relations", image: "https://i.ibb.co/3yv4J59B/image.png", linkedin: "https://www.linkedin.com/in/kelvin-rodriguez-a519a0265/" },
-    { name: "Richard Canina Miranda", role: "Director of Industry Relations", image: "https://i.ibb.co/JjxZyh6Q/image.png", linkedin: "https://www.linkedin.com/in/richardcm-info" },
-    { name: "Fritz Bonhomme", role: "Director of Technology", image: "https://i.ibb.co/CKSgyH64/Fritz-Headshot.jpg", linkedin: "" },
-    { name: "Oliver Martinez Fernandez", role: "Web Development", image: "https://i.ibb.co/LhkWsVTT/image.png", linkedin: "https://www.linkedin.com/in/oliver-martinez-9a1ba4340/" }
+    { name: "Jimmy Jean Baptiste", role: "Hack Project Manager", image: "/images/team/jimmy-jean-baptiste.png", linkedin: "https://www.linkedin.com/in/jimmy-jean-baptiste-01679436a/" },
+    { name: "Erick Gonzalez", role: "President of INIT", image: "/images/team/erick-gonzalez.png", linkedin: "https://www.linkedin.com/in/erick-gonzalez-888b7a377/" },
+    { name: "Elias Estrada", role: "Vice President of INIT", image: "/images/team/elias-estrada.png", linkedin: "https://www.linkedin.com/in/elias-estrada-1445ab2b5/" },
+    { name: "Dannia Dupotey", role: "Director of Marketing", image: "/images/team/dannia-dupotey.png", linkedin: "https://www.linkedin.com/in/dannia-dupotey-1169193b5/" },
+    { name: "Kathween Vargas", role: "Director of Marketing", image: "/images/team/kathween-vargas.png", linkedin: "https://www.linkedin.com/in/kathween-vargas-villafuerte-6409941aa/" },
+    { name: "Mikhail Guevara", role: "Marketing", image: "/images/team/mikhail-guevara.png", linkedin: "https://www.linkedin.com/in/mikhail-guevara-a425a6231/" },
+    { name: "Linet Lima", role: "Director of Industry Relations", image: "/images/team/linet-lima.png", linkedin: "https://www.linkedin.com/in/linet-lima-5437a0239/" },
+    { name: "Kelvin Rodriguez", role: "Director of Industry Relations", image: "/images/team/kelvin-rodriguez.png", linkedin: "https://www.linkedin.com/in/kelvin-rodriguez-a519a0265/" },
+    { name: "Richard Canina Miranda", role: "Director of Industry Relations", image: "/images/team/richard-canina-miranda.png", linkedin: "https://www.linkedin.com/in/richardcm-info" },
+    { name: "Fritz Bonhomme", role: "Director of Technology", image: "/images/team/fritz-bonhomme.jpg", linkedin: "" },
+    { name: "Oliver Martinez Fernandez", role: "Web Development", image: "/images/team/oliver-martinez-fernandez.png", linkedin: "https://www.linkedin.com/in/oliver-martinez-9a1ba4340/" }
   ];
 
   const communityPartners = [
-    { name: "City of Coral Gables", logo: "https://i.ibb.co/8LwsNNcX/image.png", website: "https://www.coralgables.com/department/innovation-and-technology" },
-    { name: "MDC Entec", logo: "https://i.ibb.co/ZRGcKBQz/image.png", website: "https://www.mdc.edu/entec/" }, 
-    { name: "MDC Magic Lab", logo: "https://i.ibb.co/hRjk6hwb/image.png", website: "https://magic.mdc.edu/" },
-    { name: "Major League Hacking", logo: "https://i.ibb.co/39dNcD2q/mlh-logo-white.jpg", website: "https://mlh.io/" },
-    { name: "ManaTech", logo: "https://i.ibb.co/F4KzC836/Mana-Tech-logo.png", website: "https://manatech.com/" }
+    { name: "City of Coral Gables", logo: "/images/partners/partner-coral-gables-logo.png", website: "https://www.coralgables.com/department/innovation-and-technology" },
+    { name: "MDC Entec", logo: "/images/partners/partner-mdc-entec-logo.png", website: "https://www.mdc.edu/entec/" },
+    { name: "MDC Magic Lab", logo: "/images/partners/partner-mdc-magic-lab-logo.png", website: "https://magic.mdc.edu/" },
+    { name: "Major League Hacking", logo: "/images/partners/partner-mlh-logo.jpg", website: "https://mlh.io/" },
+    { name: "ManaTech", logo: "/images/partners/partner-mana-tech-logo.png", website: "https://manatech.com/" }
   ];
 
   const facultyAdvisors = [
