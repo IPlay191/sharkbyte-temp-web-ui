@@ -86,15 +86,17 @@ export default function Hero() {
 
         {/* 
           [ MLH BADGE: THE CORRIDOR DROP ]
-          Mobile & PC: Anchored strictly to top-[60px] to clear the universal height of the top navigation bar.
+          Mobile: Anchored to the right to prevent overlap with the date bubble.
+          Tablet+: Restored to the left side using right-auto and left-12.
         */}
         <a 
           ref={badgeRef}
           id="mlh-trust-badge" 
-          className="absolute top-[60px] left-1 mobile:left-3 tablet:top-[60px] tablet:left-12 w-[12%] min-w-[55px] tablet:min-w-[60px] max-w-[100px] z-40 origin-top animate-badge-drop will-change-transform transform-gpu" 
+          className="absolute top-[60px] right-1 mobile:right-3 tablet:right-auto tablet:left-12 w-[12%] min-w-[55px] tablet:min-w-[60px] max-w-[100px] z-40 origin-top animate-badge-drop will-change-transform transform-gpu" 
           href="https://mlh.io/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2026-season&utm_content=yellow" 
           target="_blank" 
           rel="noopener noreferrer"
+          aria-label="Major League Hacking 2027 Trust Badge"
         >
           <img src="https://s3.amazonaws.com/logged-assets/trust-badge/2027/mlh-trust-badge-2027-yellow.svg" alt="Major League Hacking 2027" className="w-full drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]" />
         </a>
@@ -104,11 +106,8 @@ export default function Hero() {
           
           {/* 
             [ DATE BUBBLE: RIGHT-SHIFT & DOWN-SHIFT POSITIONAL FIX ]
-            Mobile: Shifted down (-top-2) and right (left-20 / left-24).
-            This physically tucks the bubble directly over the shark's nose, pulling it entirely 
-            out of the path of the MLH badge. Tablet+ remains untouched.
           */}
-          <div className="absolute -top-2 left-20 mobile:top-4 mobile:-left-4 tablet:-top-2 tablet:-left-6 laptop:-top-2 laptop:-left-8 desktop:-top-4 desktop:-left-12 min-[1440px]:-top-4 min-[1440px]:-left-16 z-30 pointer-events-none">
+          <div className="absolute -top-2 left-20 mobile:-top-2 mobile:-left-4 tablet:-top-2 tablet:-left-6 laptop:-top-2 laptop:-left-8 desktop:-top-4 desktop:-left-12 min-[1440px]:-top-4 min-[1440px]:-left-16 z-30 pointer-events-none">
             <Image 
               src="/svgs/date-bubble.png"
               alt="Date Bubble" 
@@ -121,8 +120,6 @@ export default function Hero() {
 
           {/* 
             [ PRIMARY LOGO: MICRO-SCALING ]
-            Mobile: Adjusted widths to 175px/160px to slightly increase negative space.
-            Tablet+ remains untouched.
           */}
           <Image 
             src="/svgs/logo.svg" 
@@ -144,7 +141,7 @@ export default function Hero() {
               alt="INIT Logo" 
               width={150} 
               height={75} 
-              className="w-[75px] tablet:w-[95px] laptop:w-[110x] desktop:w-[90px] h-auto object-contain rounded-lg drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" 
+              className="w-[75px] tablet:w-[95px] laptop:w-[110px] desktop:w-[90px] h-auto object-contain rounded-lg drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" 
             />
             
             <div className="w-[2px] h-[30px] tablet:h-[40px] bg-gray-700 rounded-full"></div>
@@ -162,19 +159,21 @@ export default function Hero() {
 
         {/* 
           ========================================================================
-          [ ACTION UI ZONE : RESPONSIVE STACK ] 
+          [ ACTION UI ZONE : RESPONSIVE CASCADING STACK ] 
           ========================================================================
         */}
-        <div className="z-30 flex flex-col gap-3 tablet:gap-5 w-full max-[700px]:relative max-[700px]:items-center max-[700px]:mt-6 min-[701px]:w-auto min-[701px]:absolute min-[701px]:bottom-6 min-[701px]:right-6 tablet:bottom-10 tablet:right-10 min-[701px]:items-end px-4 min-[701px]:px-0">
+        <div className="z-30 flex flex-col gap-3 tablet:gap-4 w-full max-[700px]:relative max-[700px]:items-center max-[700px]:mt-6 min-[701px]:w-auto min-[701px]:absolute min-[701px]:bottom-6 min-[701px]:right-6 tablet:bottom-10 tablet:right-10 min-[701px]:items-end px-4 min-[701px]:px-0">
           
+          {/* PRIMARY: REGISTER */}
           <a 
             href="https://airtable.com/appY1e4YbYhqNWdpE/shr5bPimkY7ck4v88"
             target="_blank"
             rel="noopener noreferrer"
-            className="group block transition-all duration-300 hover:-translate-y-2 active:translate-y-0 cursor-pointer will-change-transform transform-gpu max-[700px]:w-full max-[700px]:max-w-[280px]"
+            aria-label="Register for SharkByte Hackathon"
+            className="group block transition-all duration-300 hover:-translate-y-2 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00f3ff] rounded-xl cursor-pointer will-change-transform transform-gpu max-[700px]:w-full max-[700px]:max-w-[280px]"
           >
-            <div className="bg-gray-950/95 border-2 border-[#00f3ff]/40 shadow-[0_15px_35px_rgba(0,243,255,0.15)] rounded-xl py-3 px-4 tablet:p-6 w-full min-[701px]:w-[280px] tablet:w-[360px] text-center group-hover:bg-gray-900/95 group-hover:border-[#00f3ff] group-hover:shadow-[0_0_25px_rgba(0,243,255,0.4)] transition-all duration-300">
-              <p className="text-[10px] mobile:text-[12px] tablet:text-base font-bold text-gray-300 tracking-wide uppercase group-hover:text-white transition-colors duration-300">
+            <div className="bg-gray-950/95 border-2 border-[#00f3ff]/40 shadow-[0_15px_35px_rgba(0,243,255,0.15)] rounded-xl py-3 px-4 tablet:p-5 w-full min-[701px]:w-[280px] tablet:w-[360px] text-center group-hover:bg-gray-900/95 group-hover:border-[#00f3ff] group-hover:shadow-[0_0_25px_rgba(0,243,255,0.4)] transition-all duration-300">
+              <p className="text-[10px] mobile:text-[12px] tablet:text-[14px] font-bold text-gray-300 tracking-wide uppercase group-hover:text-white transition-colors duration-300">
                 Ready to dive in?
               </p>
               <span className="mt-1 tablet:mt-2 block text-[15px] mobile:text-[16px] tablet:text-[22px] font-mono font-bold text-[#00f3ff] drop-shadow-[0_0_8px_rgba(0,243,255,0.6)] group-hover:drop-shadow-[0_0_15px_rgba(0,243,255,1)] group-hover:text-white uppercase tracking-widest transition-all duration-300">
@@ -183,16 +182,36 @@ export default function Hero() {
             </div>
           </a>
 
+          {/* SECONDARY: GET INVOLVED (Volunteer/Mentor/Judge) */}
+          <a 
+            href="https://airtable.com/appY1e4YbYhqNWdpE/shrOTn8TvmH292eCi"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Register to Volunteer, Mentor, or Judge"
+            className="group block transition-all duration-300 hover:-translate-y-2 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff00aa] rounded-xl cursor-pointer will-change-transform transform-gpu max-[700px]:w-full max-[700px]:max-w-[270px]"
+          >
+            <div className="bg-gray-950/95 border-2 border-[#ff00aa]/30 shadow-[0_15px_35px_rgba(255,0,170,0.1)] rounded-xl py-3 px-4 tablet:p-5 w-full min-[701px]:w-[270px] tablet:w-[350px] text-center group-hover:bg-gray-900/95 group-hover:border-[#ff00aa] group-hover:shadow-[0_0_20px_rgba(255,0,170,0.3)] transition-all duration-300">
+              <p className="text-[10px] mobile:text-[12px] tablet:text-[14px] font-bold text-gray-300 tracking-wide uppercase group-hover:text-white transition-colors duration-300">
+                Mentor, Judge, or Volunteer?
+              </p>
+              <span className="mt-1 tablet:mt-2 block text-[15px] mobile:text-[16px] tablet:text-[20px] font-mono font-bold text-[#ff00aa] drop-shadow-[0_0_6px_rgba(255,0,170,0.5)] group-hover:drop-shadow-[0_0_12px_rgba(255,0,170,0.9)] group-hover:text-white uppercase tracking-widest transition-all duration-300">
+                Get Involved<span className="animate-blink text-[#ff00aa] ml-1 drop-shadow-[0_0_8px_rgba(255,0,170,0.8)] group-hover:text-white">_</span>
+              </span>
+            </div>
+          </a>
+
+          {/* TERTIARY: CONTACT US */}
           <a 
             href="mailto:Mdc-north@weareinit.org?subject=SharkByte%20Hackathon%20Inquiry" 
-            className="group block transition-all duration-300 hover:-translate-y-2 active:translate-y-0 cursor-pointer will-change-transform transform-gpu max-[700px]:w-full max-[700px]:max-w-[260px]"
+            aria-label="Contact the SharkByte Team"
+            className="group block transition-all duration-300 hover:-translate-y-2 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5cf6] rounded-xl cursor-pointer will-change-transform transform-gpu max-[700px]:w-full max-[700px]:max-w-[260px]"
           >
-            <div className="bg-gray-950/95 border-2 border-gray-700/80 shadow-[0_15px_35px_rgba(0,0,0,0.6)] rounded-xl py-3 px-4 tablet:p-6 w-full min-[701px]:w-[260px] tablet:w-[340px] text-center group-hover:border-[#8b5cf6] group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all duration-300">
-              <p className="text-[10px] mobile:text-[12px] tablet:text-base font-bold text-gray-300 tracking-wide uppercase group-hover:text-white transition-colors duration-300">
+            <div className="bg-gray-950/95 border-2 border-gray-700/80 shadow-[0_15px_35px_rgba(0,0,0,0.6)] rounded-xl py-3 px-4 tablet:p-5 w-full min-[701px]:w-[260px] tablet:w-[340px] text-center group-hover:border-[#8b5cf6] group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all duration-300">
+              <p className="text-[10px] mobile:text-[12px] tablet:text-[14px] font-bold text-gray-300 tracking-wide uppercase group-hover:text-white transition-colors duration-300">
                 Have Questions?
               </p>
               <span className="mt-1 tablet:mt-2 block break-all text-[14px] mobile:text-[15px] tablet:text-[18px] font-mono font-bold text-[#8b5cf6] group-hover:text-white group-hover:drop-shadow-[0_0_12px_rgba(139,92,246,1)] transition-all duration-300 uppercase tracking-widest">
-                Contact Us<span className="animate-blink text-[#39ff14] ml-1 drop-shadow-[0_0_8px_rgba(57,255,20,0.8)]">_</span>
+                Contact Us<span className="animate-blink text-[#39ff14] ml-1 drop-shadow-[0_0_8px_rgba(57,255,20,0.8)] group-hover:text-white">_</span>
               </span>
             </div>
           </a>
