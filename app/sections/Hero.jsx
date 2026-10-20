@@ -139,20 +139,20 @@ export default function Hero() {
             <Image 
               src="/svgs/init-logo.jpg"
               alt="INIT Logo" 
-              width={150} 
-              height={75} 
+              width={150}
+              height={75}
               className="w-[75px] tablet:w-[95px] laptop:w-[110px] desktop:w-[90px] h-auto object-contain rounded-lg drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" 
             />
             
             <div className="w-[2px] h-[30px] tablet:h-[40px] bg-gray-700 rounded-full"></div>
             
             <Image 
-              src="/svgs/miami-dade-college-logo.webp"
+              src="/svgs/miami-dade-college-logo.png"
               alt="Miami Dade College Logo" 
-              width={150} 
-              height={75} 
+              width={150}
+              height={75}
               className="w-[75px] tablet:w-[95px] laptop:w-[110px] desktop:w-[90px] h-auto object-contain drop-shadow-[0_5px_10px_rgba(0,0,0,0.5)]" 
-            />
+             />
           </div>
           
         </div>
