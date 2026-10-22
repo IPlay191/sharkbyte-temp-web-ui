@@ -25,7 +25,7 @@ const sponsorsRow2 = [
   { href: "https://weareinit.org", src: "/images/sponsors/init-logo.svg", alt: "init_logo", tier: 1 },
   { href: "https://momentum.miami/", src: "/images/sponsors/momentum-miami-logo.png", alt: "momentum_miami_logo", tier: 2 },
   { href: "https://www.miamigov.com/", src: "/images/sponsors/city-of-miami-logo-website.png", alt: "city_of_miami_logo", tier: 2 },
-  { href: "https://www.redbull.com/", src: "/images/sponsors/red-bull-logo-website.png", alt: "redbull_logo", tier: 3 },
+  { href: "https://www.redbull.com/", src: "/images/sponsors/red-bull-logo-website.png", alt: "redbull_logo", tier: 2 },
   { href: "https://www.purebuttons.com/", src: "/images/sponsors/pure-buttons-logo.png", alt: "pure_buttons_logo", tier: 3 }
 ];
 
