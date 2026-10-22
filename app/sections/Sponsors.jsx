@@ -22,7 +22,7 @@ const sponsorsRow2 = [
   { href: "https://www.blackstone.com/", src: "/images/sponsors/blackstone-logo.png", alt: "blackstone_logo", tier: 1 },
   { href: "https://www.microsoft.com/en-us/", src: "/images/sponsors/microsoft-logo.png", alt: "microsoft_logo", tier: 1 },
   { href: "https://starquix.com/", src: "/images/sponsors/starquix-logo.png", alt: "starquix_logo", tier: 1 },
-  { href: "https://weareinit.org", src: "/images/sponsors/init-logo.jpg", alt: "init_logo", tier: 1 },
+  { href: "https://weareinit.org", src: "/images/sponsors/init-logo.svg", alt: "init_logo", tier: 1 },
   { href: "https://momentum.miami/", src: "/images/sponsors/momentum-miami-logo.png", alt: "momentum_miami_logo", tier: 2 },
   { href: "https://www.miamigov.com/", src: "/images/sponsors/city-of-miami-logo.png", alt: "city_of_miami_logo", tier: 2 },
   { href: "https://www.redbull.com/", src: "/images/sponsors/red-bull-logo.png", alt: "redbull_logo", tier: 3 },
