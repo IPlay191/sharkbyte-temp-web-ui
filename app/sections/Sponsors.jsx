@@ -3,21 +3,22 @@
 import Image from "next/image"
 
 // --------------------------------------------------------------------------
-// [ ROW 1: 4x Tier 1, 3x Tier 2, 1x Tier 3 ] (8 Total)
+// [ ROW 1: 4x Tier 1, 3x Tier 2, 2x Tier 3 ] (9 Total)
 // --------------------------------------------------------------------------
 const sponsorsRow1 = [
   { href: "https://www.roocapital.com/", src: "/images/sponsors/roo-capital-logo.png", alt: "roo_capital_logo", tier: 1 },
   { href: "https://knightfoundation.org/", src: "/images/sponsors/knight-foundation-logo.png", alt: "knight_foundation_logo", tier: 1 },
-  { href: "https://www.wix.com/", src: "/images/sponsors/wix-logo.png", alt: "wix_logo", tier: 1 },
+  { href: "https://base44.com//", src: "/images/sponsors/base44-logo.png", alt: "base44_logo", tier: 1 },
   { href: "https://www.swarms.ai/", src: "/images/sponsors/swarms-logo.png", alt: "swarms_logo", tier: 1 },
   { href: "https://www.celsius.com/", src: "/images/sponsors/celsius-logo.webp", alt: "celsius_logo", tier: 2 },
   { href: "https://www.lab22c.com/", src: "/images/sponsors/lab22c-logo.png", alt: "lab22c_logo", tier: 2 },
   { href: "https://momentum.miami/", src: "/images/sponsors/momentum-miami-logo.png", alt: "momentum_miami_logo", tier: 2 },
-  { href: "https://www.milamsmarkets.com/", src: "/images/sponsors/milams-market-logo.png", alt: "milams_markets_logo", tier: 3 }
+  { href: "https://www.milamsmarkets.com/", src: "/images/sponsors/milams-market-logo.png", alt: "milams_markets_logo", tier: 3 },
+  { href: "https://www.kariaa.com/login", src: "/images/sponsors/kariaa-logo.svg", alt: "kariaa_logo", tier: 3 }
 ];
 
 // --------------------------------------------------------------------------
-// [ ROW 2: 4x Tier 1, 2x Tier 2, 1x Tier 3 ] (7 Total)
+// [ ROW 2: 4x Tier 1, 2x Tier 2, 2x Tier 3 ] (8 Total)
 // --------------------------------------------------------------------------
 const sponsorsRow2 = [
   { href: "https://www.blackstone.com/", src: "/images/sponsors/blackstone-logo.png", alt: "blackstone_logo", tier: 1 },
@@ -26,7 +27,8 @@ const sponsorsRow2 = [
   { href: "https://weareinit.org", src: "/images/sponsors/init-logo.svg", alt: "init_logo", tier: 1 },
   { href: "https://www.miamigov.com/", src: "/images/sponsors/city-of-miami-logo.png", alt: "city_of_miami_logo", tier: 2 },
   { href: "https://www.redbull.com/", src: "/images/sponsors/red-bull-logo.png", alt: "redbull_logo", tier: 2 },
-  { href: "https://www.purebuttons.com/", src: "/images/sponsors/pure-buttons-logo.png", alt: "pure_buttons_logo", tier: 3 }
+  { href: "https://www.purebuttons.com/", src: "/images/sponsors/pure-buttons-logo.png", alt: "pure_buttons_logo", tier: 3 },
+  { href: "https://www.withprune.com/", src: "/images/sponsors/prune-logo.png", alt: "prune_logo", tier: 3 }
 ];
 
 const SponsorCard = ({ sponsor }) => {
