@@ -8,7 +8,7 @@ import Image from "next/image"
 const sponsorsRow1 = [
   { href: "https://www.roocapital.com/", src: "/images/sponsors/roo-capital-logo.png", alt: "roo_capital_logo", tier: 1 },
   { href: "https://knightfoundation.org/", src: "/images/sponsors/knight-foundation-logo.png", alt: "knight_foundation_logo", tier: 1 },
-  { href: "https://www.wix.com/", src: "/images/sponsors/wix-logo.png", alt: "wix_logo", tier: 1 },
+  { href: "https://base44.com//", src: "/images/sponsors/base44-logo.png", alt: "base44_logo", tier: 1 },
   { href: "https://www.swarms.ai/", src: "/images/sponsors/swarms-logo.png", alt: "swarms_logo", tier: 1 },
   { href: "https://www.celsius.com/", src: "/images/sponsors/celsius-logo.webp", alt: "celsius_logo", tier: 2 },
   { href: "https://www.lab22c.com/", src: "/images/sponsors/lab22c-logo.png", alt: "lab22c_logo", tier: 2 },
