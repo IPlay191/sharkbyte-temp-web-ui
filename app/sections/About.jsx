@@ -12,6 +12,11 @@ const About = () => {
 
     if (!about) return undefined
 
+    // We only update opacity once per frame instead of on every scroll event.
+    // This avoids layout/paint thrash when the user scrolls quickly.
+    let ticking = false
+    let animationFrameId = null
+
     const updateTransition = () => {
       fadeOnScroll({
         page: about,
@@ -22,11 +27,27 @@ const About = () => {
       })
     }
 
+    const onScroll = () => {
+      if (ticking) return
+
+      ticking = true
+      animationFrameId = window.requestAnimationFrame(() => {
+        updateTransition()
+        ticking = false
+      })
+    }
+
     updateTransition()
-    window.addEventListener('scroll', updateTransition, { passive: true })
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
 
     return () => {
-      window.removeEventListener('scroll', updateTransition)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+
+      if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId)
+      }
     }
   }, [])
 

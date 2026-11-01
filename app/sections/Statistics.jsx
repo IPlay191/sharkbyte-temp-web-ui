@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 // ============================================================================
@@ -20,12 +21,12 @@ const TrainWindow = ({ images, interval = 3000 }) => {
       <div className="relative w-full h-full border-[3px] border-[#0a071a] rounded-sm overflow-hidden bg-black shadow-[inset_0_10px_40px_rgba(0,0,0,1)]">
         
         {/* Raw, full-color images with smooth fade transitions */}
-        <img
+        <Image
           key={currentIndex}
           src={images[currentIndex]}
           alt="Hackathon Memory"
-          loading="lazy"
-          decoding="async"
+          fill
+          sizes="(max-width: 767px) 384px, (max-width: 1279px) 512px, 576px"
           className="absolute inset-0 w-full h-full object-cover animate-fade-in"
         />
         

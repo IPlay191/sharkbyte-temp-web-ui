@@ -9,6 +9,12 @@ const Location = () => {
   const locationRef = useRef(null)
 
   useEffect(() => {
+    // [ PERFORMANCE FIX: RAF-THROTTLED FADE-IN FOR HORIZONTAL PANEL ]
+    // This section calculates its fade zone from the panel's horizontal offset,
+    // so the math is expensive enough to benefit from batching.
+    let ticking = false
+    let animationFrameId = null
+
     const updateTransition = () => {
       const el = locationRef.current;
       const anchor = document.getElementById('horizontal-anchor-1');
@@ -37,13 +43,27 @@ const Location = () => {
       }
     };
 
+    const onScroll = () => {
+      if (ticking) return
+
+      ticking = true
+      animationFrameId = window.requestAnimationFrame(() => {
+        updateTransition()
+        ticking = false
+      })
+    }
+
     updateTransition();
-    window.addEventListener('scroll', updateTransition, { passive: true });
-    window.addEventListener('resize', updateTransition);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', updateTransition);
-      window.removeEventListener('resize', updateTransition);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+
+      if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId)
+      }
     };
   }, []);
 
@@ -85,17 +105,22 @@ const Location = () => {
             </div>
 
             <div className="flex gap-2 z-20">
-              <button onClick={openInNewTab} className="w-7 h-7 cursor-pointer bg-gray-800 hover:bg-[#8b5cf6] text-gray-400 hover:text-white rounded flex items-center justify-center transition-colors duration-300" title="Open in new tab">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <button onClick={openInNewTab} className="w-7 h-7 cursor-pointer bg-gray-800 hover:bg-[#8b5cf6] text-gray-400 hover:text-white rounded flex items-center justify-center transition-colors duration-300" title="Open map in new tab" aria-label="Open map in new tab">
+                <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               </button>
-              <button onClick={() => { const iframe = document.querySelector('iframe'); if (iframe && iframe.requestFullscreen) iframe.requestFullscreen(); }} className="w-7 h-7 cursor-pointer bg-gray-800 hover:bg-[#8b5cf6] text-gray-400 hover:text-white rounded flex items-center justify-center transition-colors duration-300" title="Fullscreen">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              <button onClick={() => { const iframe = document.querySelector('iframe'); if (iframe && iframe.requestFullscreen) iframe.requestFullscreen(); }} className="w-7 h-7 cursor-pointer bg-gray-800 hover:bg-[#8b5cf6] text-gray-400 hover:text-white rounded flex items-center justify-center transition-colors duration-300" title="View map fullscreen" aria-label="View map fullscreen">
+                <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
               </button>
             </div>
           </div>
 
           <div className={`relative ${containerHeight} bg-gray-950`}>
-            <iframe src={src} className="w-full h-full relative z-10" {...commonIframeProps} />
+            <iframe
+              src={src}
+              title={activeMap === 0 ? 'Miami Dade College campus map' : 'Map to the John F. Kennedy Center'}
+              className="w-full h-full relative z-10"
+              {...commonIframeProps}
+            />
           </div>
 
         </div>
@@ -137,6 +162,7 @@ const Location = () => {
             <button
               key={index}
               onClick={() => setActiveMap(option.value)}
+              aria-pressed={activeMap === option.value}
               className={`px-5 py-2 rounded-md font-bold text-sm tablet:text-[15px] tracking-wide transition-all duration-300 border-2 ${
                 activeMap === option.value
                   ? 'bg-gray-950 text-white border-[#8b5cf6] shadow-[inset_0_4px_10px_rgba(0,0,0,0.8),0_0_15px_rgba(139,92,246,0.4)] translate-y-[2px]'
