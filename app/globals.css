@@ -1,14 +1,8 @@
 @import "tailwindcss";
 
 /* ============================================================================
-   1. TAILWIND V4 DIRECTIVES & DESIGN SYSTEM
+1. TAILWIND V4 DIRECTIVES & DESIGN SYSTEM
 ============================================================================ */
-/* 
-  @theme injects custom CSS variables directly into Tailwind's utility engine.
-  This allows developers to use custom classes (e.g., 'font-pixel' or 'laptop:flex')
-  natively inside React components without writing manual media queries.
-  Note: VS Code may flag '@theme' as an unknown rule; this is a known linter limitation, not a bug.
-*/
 @theme {
   --font-pixel: 'VT323', monospace;
   --breakpoint-mobile: 360px;
@@ -20,38 +14,42 @@
 /* ============================================================================
    2. GLOBAL UTILITY CLASSES
 ============================================================================ */
-/* 
-  .retro-box applies the standardized retro arcade cabinet aesthetic across 
-  all UI components. '@apply' dynamically injects Tailwind utility classes.
-  Note: VS Code may flag '@apply' as an unknown rule; this is normal for Tailwind.
-*/
 .retro-box {
   @apply bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 border-3 border-gray-600 text-white;
 }
 
-/* 
-  .carousel-mask uses webkit-mask-image to create a seamless alpha-gradient fade 
-  on the left and right edges of the scrolling marquees. This prevents UI elements 
-  from jarringly snapping in and out of existence at the screen edges.
-*/
 .carousel-mask {
   -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
   mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
 
+.custom-retro-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.custom-retro-scrollbar::-webkit-scrollbar-track {
+  background: rgba(17, 24, 39, 0.4); 
+  border-radius: 4px;
+}
+.custom-retro-scrollbar::-webkit-scrollbar-thumb {
+  background: #8b5cf6; 
+  border-radius: 4px;
+}
+.custom-retro-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a78bfa;
+}
+
 /* ============================================================================
    3. TYPOGRAPHY EFFECTS & KEYFRAME ANIMATIONS
 ============================================================================ */
-/* Standard retro terminal blinking cursor animation */
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
+.animate-blink { 
+  animation: blink 1s step-end infinite; 
+}
 
-/* 
-  1. HEAVY NEON GLOW (For Dark Backgrounds Only)
-  Creates a fluid, multi-layered text-shadow that simulates physical light emission.
-*/
 @keyframes glow-fade {
   0%, 100% {
     opacity: 0.98;
@@ -62,19 +60,12 @@
     text-shadow: 0 0 6px rgba(250, 21, 135, 0.36), 0 0 12px rgba(250, 21, 135, 0.24), 0 0 20px rgba(250, 21, 135, 0.16);
   }
 }
-
 .glow-text {
   color: #d65858;
   animation: glow-fade 4.2s ease-in-out infinite;
   will-change: opacity, text-shadow; 
 }
 
-/* 
-  2. SUBTLE AURA GLOW (For Light/White Backgrounds)
-  Uses a Deep Crimson/Rose base (#9F1239) for mathematically flawless 7:1 contrast on white.
-  The glow radius is heavily constrained to prevent visual smudging, providing a premium, 
-  highly readable retro pulse that doesn't cause eye strain.
-*/
 @keyframes subtle-glow {
   0%, 100% {
     text-shadow: 0 0 2px rgba(159, 18, 57, 0.3), 0 0 6px rgba(159, 18, 57, 0.1);
@@ -83,23 +74,62 @@
     text-shadow: 0 0 4px rgba(159, 18, 57, 0.6), 0 0 10px rgba(159, 18, 57, 0.2);
   }
 }
-
 .subtle-glow-text {
   color: #9F1239; 
   animation: subtle-glow 4s ease-in-out infinite;
   will-change: text-shadow; 
 }
 
-/* Utility animation used for floating cards and elements */
-@keyframes bounce-high {
-  0%, 100% {
-    transform: translateY(100%);
-    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+@keyframes smooth-levitate {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -8px, 0); }
+}
+.animate-smooth-levitate {
+  animation: smooth-levitate 5s ease-in-out infinite;
+}
+
+@keyframes faulty-neon {
+  0%, 2%, 4%, 8%, 33%, 35%, 37%, 39%, 100% { 
+    opacity: 1; 
+    text-shadow: 0 0 2px rgba(159,18,57,0.4), 0 0 6px rgba(159,18,57,0.2); 
   }
-  50% {
-    transform: translateY(-100%);
-    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  3%, 5%, 34%, 36% { 
+    opacity: 0.6; 
+    text-shadow: none; 
   }
+}
+.animate-faulty-neon {
+  animation: faulty-neon 5s infinite;
+}
+
+@keyframes marquee-left { 
+  0% { transform: translate3d(0, 0, 0); } 
+  100% { transform: translate3d(-33.33%, 0, 0); } 
+}
+@keyframes marquee-right { 
+  0% { transform: translate3d(-33.33%, 0, 0); } 
+  100% { transform: translate3d(0, 0, 0); } 
+}
+.marquee { position: relative; width: 100%; }
+.marquee__track { display: flex; gap: 1.5rem; width: max-content; will-change: transform; transform: translateZ(0); }
+.marquee__left { animation: marquee-left 35s linear infinite; }
+.marquee__right { animation: marquee-right 35s linear infinite; }
+.marquee:hover .marquee__track { animation-play-state: paused; }
+
+@keyframes ui-fade-in {
+  from { opacity: 0.5; filter: contrast(1.5); }
+  to { opacity: 1; filter: contrast(1); }
+}
+.animate-fade-in { animation: ui-fade-in 0.6s ease-out forwards; }
+
+@keyframes badge-drop {
+  0% { transform: translateY(-100%) rotate(0deg); opacity: 0; }
+  50% { transform: translateY(5%) rotate(8deg); opacity: 1; }
+  75% { transform: translateY(-2%) rotate(-4deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+.animate-badge-drop {
+  animation: badge-drop 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 /* ============================================================================
@@ -115,21 +145,14 @@ body {
   color: var(--foreground);
   font-family: var(--font-pixel);
   min-height: 100svh;
-  
-  /* System-level font optimization for clearer, sharper pixel art rendering */
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: subpixel-antialiased; /* macOS optimization */
-  -moz-osx-font-smoothing: grayscale; /* Firefox optimization */
+  -webkit-font-smoothing: subpixel-antialiased; 
+  -moz-osx-font-smoothing: grayscale; 
 }
 
 /* ============================================================================
    5. BACKGROUND IMAGE ASSET ROUTING
 ============================================================================ */
-/* 
-  Ensures all designated background elements strictly render as sharp pixel art.
-  Prevents modern browser engines from automatically applying anti-aliasing/blurring 
-  to scaled raster graphics.
-*/
 .statistics-bg,
 .hero-bg,
 .stats-bg,
@@ -147,7 +170,6 @@ body {
   image-rendering: crisp-edges;
 }
 
-/* Explicit routing mapping CSS classes to their respective hosted assets */
 .hero-bg { background-image: url('/backgrounds/hero-bg.png'); background-position: center; }
 .stats-bg { background-image: url('/backgrounds/statistics-bg.png'); background-position: center; }
 .comingsoon-bg { background-image: url('/backgrounds/coming-soon-bg.png'); background-position: center; }
@@ -157,22 +179,3 @@ body {
 .location-bg { background-image: url('/backgrounds/location-bg.png'); background-position: center; }
 .team-bg { background-image: url('/backgrounds/team-bg.png'); background-position: center; }
 .faq-bg { background-image: url('/backgrounds/faq-bg.png'); background-position: center; }
-
-/* ============================================================================
-   6. CUSTOM COMPONENT ANIMATIONS
-============================================================================ */
-/* 
-  MLH BADGE DROP-IN ANIMATION 
-  Simulates gravity and pendulum physics on initial page load. 
-  The badge falls from behind the navbar, swings past its resting point, and settles.
-*/
-@keyframes badge-drop {
-  0% { transform: translateY(-100%) rotate(0deg); opacity: 0; }
-  50% { transform: translateY(5%) rotate(8deg); opacity: 1; }
-  75% { transform: translateY(-2%) rotate(-4deg); }
-  100% { transform: translateY(0) rotate(0deg); }
-}
-
-.animate-badge-drop {
-  animation: badge-drop 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
