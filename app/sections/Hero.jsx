@@ -17,11 +17,9 @@ export default function Hero() {
 
     if (!track || !content) return undefined
     
-    // [ PERFORMANCE: Scroll Debouncing & Memory Management ]
     let ticking = false;
     let animationFrameId;
     
-    // Cache layout metrics to prevent layout thrashing inside the animation frame
     let start = 0;
     let end = 0;
     let badgeScrollRange = 0;
@@ -34,7 +32,6 @@ export default function Hero() {
       heroTransitionStart = start + (window.innerHeight * 0.10)
     }
 
-    // Initial calculation and listener for viewport changes
     calculateLayout()
     window.addEventListener('resize', calculateLayout, { passive: true })
 
@@ -70,7 +67,6 @@ export default function Hero() {
     updateTransition()
     window.addEventListener('scroll', updateTransition, { passive: true })
     
-    // Cleanup: Remove listeners and cancel pending animation frames to prevent memory leaks
     return () => {
       window.removeEventListener('scroll', updateTransition)
       window.removeEventListener('resize', calculateLayout)
@@ -84,11 +80,6 @@ export default function Hero() {
     <section ref={trackRef} id='hero' className="w-full h-[125vh] tablet:h-[130vh] laptop:h-[140vh] relative z-0">
       <div ref={contentRef} id='hero-content' className="sticky top-0 h-svh w-full hero-bg flex justify-center items-center flex-row max-[700px]:flex-col overflow-hidden will-change-transform">
 
-        {/* 
-          [ MLH BADGE: THE CORRIDOR DROP ]
-          Mobile: Anchored to the right to prevent overlap with the date bubble.
-          Tablet+: Restored to the left side using right-auto and left-12.
-        */}
         <a 
           ref={badgeRef}
           id="mlh-trust-badge" 
@@ -101,12 +92,8 @@ export default function Hero() {
           <img src="https://s3.amazonaws.com/logged-assets/trust-badge/2027/mlh-trust-badge-2027-yellow.svg" alt="Major League Hacking 2027" className="w-full drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]" />
         </a>
 
-        {/* [ MAIN CENTRAL CLUSTER ] */}
         <div className='relative flex flex-col justify-center items-center z-10 animate-smooth-levitate will-change-transform transform-gpu'>
           
-          {/* 
-            [ DATE BUBBLE: RIGHT-SHIFT & DOWN-SHIFT POSITIONAL FIX ]
-          */}
           <div className="absolute -top-2 left-20 mobile:top-2 mobile:-left-4 tablet:-top-2 tablet:-left-6 laptop:-top-2 laptop:-left-8 desktop:-top-4 desktop:-left-12 min-[1440px]:-top-4 min-[1440px]:-left-16 z-30 pointer-events-none">
             <Image 
               src="/svgs/date-bubble.png"
@@ -118,9 +105,6 @@ export default function Hero() {
             />
           </div>
 
-          {/* 
-            [ PRIMARY LOGO: MICRO-SCALING ]
-          */}
           <Image 
             src="/svgs/logo.svg" 
             alt="SharkByte Logo" 
@@ -134,7 +118,6 @@ export default function Hero() {
             Miami Dade College's Signature Hackathon 
           </div>
 
-          {/* [ INSTITUTIONAL ANCHOR: RESTORED SCALE ] */}
           <div className="mt-4 tablet:mt-6 flex items-center justify-center gap-4 tablet:gap-6 bg-gray-950/95 border border-gray-600/50 px-5 py-2.5 tablet:px-6 tablet:py-3 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.8)] z-20 transition-transform duration-300 hover:scale-[1.02]">
             <Image 
               src="/svgs/init-logo.jpg"
@@ -157,14 +140,8 @@ export default function Hero() {
           
         </div>
 
-        {/* 
-          ========================================================================
-          [ ACTION UI ZONE : RESPONSIVE CASCADING STACK ] 
-          ========================================================================
-        */}
         <div className="z-30 flex flex-col gap-3 tablet:gap-4 w-full max-[700px]:relative max-[700px]:items-center max-[700px]:mt-6 min-[701px]:w-auto min-[701px]:absolute min-[701px]:bottom-6 min-[701px]:right-6 tablet:bottom-10 tablet:right-10 min-[701px]:items-end px-4 min-[701px]:px-0">
           
-          {/* PRIMARY: REGISTER */}
           <a 
             href="https://airtable.com/appY1e4YbYhqNWdpE/shr5bPimkY7ck4v88"
             target="_blank"
@@ -182,7 +159,6 @@ export default function Hero() {
             </div>
           </a>
 
-          {/* SECONDARY: GET INVOLVED (Volunteer/Mentor/Judge) */}
           <a 
             href="https://airtable.com/appY1e4YbYhqNWdpE/shrOTn8TvmH292eCi"
             target="_blank"
@@ -200,7 +176,6 @@ export default function Hero() {
             </div>
           </a>
 
-          {/* TERTIARY: CONTACT US */}
           <a 
             href="mailto:Mdc-north@weareinit.org?subject=SharkByte%20Hackathon%20Inquiry" 
             aria-label="Contact the SharkByte Team"
@@ -219,23 +194,6 @@ export default function Hero() {
         </div>
         
       </div>
-
-      <style jsx>{`
-        @keyframes smooth-levitate {
-          0%, 100% { transform: translate3d(0, 0, 0); }
-          50% { transform: translate3d(0, -8px, 0); }
-        }
-        .animate-smooth-levitate {
-          animation: smooth-levitate 5s ease-in-out infinite;
-        }
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-        .animate-blink {
-          animation: blink 1s step-end infinite; 
-        }
-      `}</style>
     </section>
   )
 }

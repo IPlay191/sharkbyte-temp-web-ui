@@ -2,9 +2,6 @@
 
 import Image from "next/image"
 
-// --------------------------------------------------------------------------
-// [ ROW 1: 4x Tier 1, 3x Tier 2, 2x Tier 3 ] (9 Total)
-// --------------------------------------------------------------------------
 const sponsorsRow1 = [
   { href: "https://www.roocapital.com/", src: "/images/sponsors/roo-capital-logo.png", alt: "roo_capital_logo", tier: 1 },
   { href: "https://knightfoundation.org/", src: "/images/sponsors/knight-foundation-logo.png", alt: "knight_foundation_logo", tier: 1 },
@@ -17,9 +14,6 @@ const sponsorsRow1 = [
   { href: "https://www.kariaa.com/login", src: "/images/sponsors/kariaa-logo.svg", alt: "kariaa_logo", tier: 3 }
 ];
 
-// --------------------------------------------------------------------------
-// [ ROW 2: 4x Tier 1, 2x Tier 2, 2x Tier 3 ] (8 Total)
-// --------------------------------------------------------------------------
 const sponsorsRow2 = [
   { href: "https://www.blackstone.com/", src: "/images/sponsors/blackstone-logo.png", alt: "blackstone_logo", tier: 1 },
   { href: "https://www.microsoft.com/en-us/", src: "/images/sponsors/microsoft-logo.png", alt: "microsoft_logo", tier: 1 },
@@ -103,22 +97,6 @@ const Sponsors = () => {
           </p>
         </div>
       </div>
-
-      <style jsx>{`
-        .carousel-mask {
-          mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-          -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-        }
-        .marquee { position: relative; width: 100%; }
-        .marquee__track { display: flex; gap: 1.5rem; width: max-content; will-change: transform; transform: translateZ(0); }
-        .marquee__left { animation: marquee-left 35s linear infinite; }
-        .marquee__right { animation: marquee-right 35s linear infinite; }
-        @keyframes marquee-left { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-33.33%, 0, 0); } }
-        @keyframes marquee-right { 0% { transform: translate3d(-33.33%, 0, 0); } 100% { transform: translate3d(0, 0, 0); } }
-        .marquee:hover .marquee__track { animation-play-state: paused; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        .animate-blink { animation: blink 1s step-end infinite; }
-      `}</style>
     </section>
   )
 }

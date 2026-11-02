@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useEffect, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { getScrollFactor } from '../lib/scrollConfig';
@@ -9,21 +9,28 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+// [ SSR HYDRATION FIX ]
+// useLayoutEffect is not safe during server rendering in Next.js.
+// We use an isomorphic version so the browser still gets the layout-phase effect,
+// while SSR skips it entirely to avoid hydration warnings.
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
 const HorizontalScroll = ({ children }) => {
   const trackRef = useRef(null);
   const railRef = useRef(null);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const track = trackRef.current;
     const rail = railRef.current;
     if (!track || !rail) return;
 
-    let ctx = gsap.context(() => {
-      // [ SPEED CALIBRATION IMPORTED ] 
-      // Retrieves the single source of truth from the physics configuration.
-      const scrollFactor = getScrollFactor(window.innerWidth); 
+    const ctx = gsap.context(() => {
+      // [ SPEED CALIBRATION IMPORTED ]
+      // Retrieves the single source of truth from the scroll physics configuration.
+      const scrollFactor = getScrollFactor(window.innerWidth);
 
-      // Allows the rail to natively expand to the size of the giant train
+      // Allows the rail to expand to the full width of the enormous horizontal track.
       gsap.set(rail, {
         width: 'max-content',
         display: 'flex',
@@ -32,14 +39,14 @@ const HorizontalScroll = ({ children }) => {
       });
 
       gsap.to(rail, {
-        x: () => -(rail.scrollWidth - window.innerWidth), 
+        x: () => -(rail.scrollWidth - window.innerWidth),
         ease: 'none',
         scrollTrigger: {
           trigger: track,
           start: 'top top',
-          // Dynamically calculates the exact end point based on the physical width of the train + pages
-          end: () => `+=${(rail.scrollWidth - window.innerWidth) * scrollFactor}`, 
-          scrub: 0.8, // Slightly smoothed scrub for a premium feel
+          // Dynamically calculates the exact end point based on the physical width of the train + pages.
+          end: () => `+=${(rail.scrollWidth - window.innerWidth) * scrollFactor}`,
+          scrub: 0.8,
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
@@ -47,7 +54,7 @@ const HorizontalScroll = ({ children }) => {
       });
     }, trackRef);
 
-    return () => ctx.revert(); 
+    return () => ctx.revert();
   }, []);
 
   return (
