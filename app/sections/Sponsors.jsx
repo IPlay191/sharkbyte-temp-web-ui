@@ -5,7 +5,7 @@ import Image from "next/image"
 const sponsorsRow1 = [
   { href: "https://www.roocapital.com/", src: "/images/sponsors/roo-capital-logo.png", alt: "roo_capital_logo", tier: 1 },
   { href: "https://knightfoundation.org/", src: "/images/sponsors/knight-foundation-logo.png", alt: "knight_foundation_logo", tier: 1 },
-  { href: "https://base44.com//", src: "/images/sponsors/base44-logo.png", alt: "base44_logo", tier: 1 },
+  { href: "https://base44.com/", src: "/images/sponsors/base44-logo.png", alt: "base44_logo", tier: 1 },
   { href: "https://www.swarms.ai/", src: "/images/sponsors/swarms-logo.png", alt: "swarms_logo", tier: 1 },
   { href: "https://www.celsius.com/", src: "/images/sponsors/celsius-logo.webp", alt: "celsius_logo", tier: 2 },
   { href: "https://www.lab22c.com/", src: "/images/sponsors/lab22c-logo.png", alt: "lab22c_logo", tier: 2 },
@@ -55,7 +55,7 @@ const Sponsors = () => {
       
       <div className="w-full max-w-[1400px] mx-auto px-4 mt-[5vh] flex justify-center relative z-10">
         <div className="bg-gray-950/95 text-white px-8 py-3 border-2 border-gray-700 rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
-          <h1 className="font-bold text-center text-3xl laptop:text-4xl tracking-wider">Our Sponsors</h1>
+          <h1 className="font-bold text-center text-3xl laptop:text-4xl tracking-wider">Our 2026 Sponsors</h1>
         </div>
       </div>
 
@@ -86,9 +86,9 @@ const Sponsors = () => {
         <div className="bg-gray-950/95 border-2 border-gray-700 shadow-[0_15px_30px_rgba(0,0,0,0.6)] rounded-lg px-6 py-4 laptop:py-5 w-[90%] max-w-[850px]">
           <p className="text-left font-mono text-[14px] tablet:text-[18px] laptop:text-[24px] text-gray-300">
             <span className="text-[#39ff14] font-bold mr-3 drop-shadow-[0_0_8px_rgba(57,255,20,0.8)]">{">"}</span> 
-            Want to sponsor? Execute:{" "}
+            Want to sponsor SharkByte 2027? Execute:{" "}
             <a 
-              href="mailto:industry@weareinit.org?subject=SharkByte%20Sponsorship%20Inquiry"
+              href="mailto:industry@weareinit.org?subject=SharkByte%202027%20Sponsorship%20Inquiry"
               className="text-[#8b5cf6] break-all tablet:break-normal hover:text-white hover:drop-shadow-[0_0_12px_rgba(139,92,246,1)] transition-all duration-300 inline-block font-bold"
             >
               industry@weareinit.org

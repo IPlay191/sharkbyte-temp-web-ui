@@ -2,28 +2,21 @@
 
 const Socials = () => {
   return (
-    <section id='socials' className="w-full min-h-svh flex flex-col justify-center items-center relative overflow-hidden socials-bg px-4">
+    <section id="socials" className="w-full min-h-svh flex flex-col justify-center items-center relative overflow-hidden socials-bg px-4">
 
-      {/* 
-        [ STRUCTURAL WRAPPER ] 
-        Centers the content and controls responsive vertical gaps safely without 'vw' overrides.
-      */}
       <div className="flex flex-col items-center gap-10 tablet:gap-14 laptop:gap-16 z-10 w-full max-w-[1200px]">
 
-        {/* 
-          [ HEADER COMPONENT ]
-          Safe-Scale typography guarantees it maintains structural integrity across all devices.
-        */}
-        <div className="bg-gray-950/90 backdrop-blur-sm border-2 border-gray-700/50 shadow-[0_15px_40px_rgba(0,0,0,0.6)] rounded-2xl px-8 py-6 tablet:px-16 tablet:py-8 laptop:px-20 laptop:py-10">
+        {/* HEADER COMPONENT WITH 2027 CALLOUT */}
+        <div className="bg-gray-950/90 backdrop-blur-sm border-2 border-gray-700/50 shadow-[0_15px_40px_rgba(0,0,0,0.6)] rounded-2xl px-8 py-6 tablet:px-16 tablet:py-8 laptop:px-20 laptop:py-10 text-center max-w-[850px]">
           <h1 className="font-bold text-center text-4xl mobile:text-5xl tablet:text-6xl laptop:text-7xl text-gray-100 tracking-wide">
             Stay Updated
           </h1>
+          <p className="mt-3 tablet:mt-4 font-mono text-gray-300 text-sm mobile:text-base tablet:text-xl tracking-wide">
+            Thank you for making SharkByte 2026 unforgettable! Follow our socials for SharkByte 2027 announcements<span className="animate-blink text-[#00f3ff] ml-1">_</span>
+          </p>
         </div>
 
-        {/* 
-          [ INTERACTIVE CONTROL PAD ] 
-          Replaced flat squares with levitating 'Smoked Glass' keys.
-        */}
+        {/* INTERACTIVE CONTROL PAD */}
         <div className="flex gap-6 tablet:gap-10 laptop:gap-14">
           
           {/* DISCORD: Ignites Indigo */}

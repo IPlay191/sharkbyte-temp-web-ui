@@ -35,13 +35,10 @@ const Team = () => {
   const firstHalf = teamMembers.slice(0, Math.ceil(teamMembers.length / 2));
   const secondHalf = teamMembers.slice(Math.ceil(teamMembers.length / 2));
 
-  const TeamCard = ({ member }) => (
-    <a 
-      href={member.linkedin || '#'} 
-      target={member.linkedin ? "_blank" : "_self"} 
-      rel="noopener noreferrer"
-      className="group relative z-0 hover:z-50 flex flex-col justify-start items-center bg-gray-950/95 border-2 border-gray-700/50 hover:border-[#8b5cf6] rounded-xl p-3 tablet:p-4 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)] cursor-pointer flex-shrink-0 w-[120px] mobile:w-[140px] tablet:w-[150px] laptop:w-[170px] xl:w-[190px] 2xl:w-[220px] min-h-[160px] mobile:min-h-[180px] tablet:min-h-[190px] laptop:min-h-[210px] xl:min-h-[230px] 2xl:min-h-[250px]"
-    >
+  const TeamCard = ({ member }) => {
+    const cardClasses = "group relative z-0 hover:z-50 flex flex-col justify-start items-center bg-gray-950/95 border-2 border-gray-700/50 hover:border-[#8b5cf6] rounded-xl p-3 tablet:p-4 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(139,92,246,0.5)] flex-shrink-0 w-[120px] mobile:w-[140px] tablet:w-[150px] laptop:w-[170px] xl:w-[190px] 2xl:w-[220px] min-h-[160px] mobile:min-h-[180px] tablet:min-h-[190px] laptop:min-h-[210px] xl:min-h-[230px] 2xl:min-h-[250px]";
+
+    const cardInner = (
       <div className="flex flex-col items-center w-full h-full">
         <Image
           src={member.image} 
@@ -59,8 +56,23 @@ const Team = () => {
           </p>
         </div>
       </div>
-    </a>
-  );
+    );
+
+    if (!member.linkedin) {
+      return <div className={`${cardClasses} cursor-default`}>{cardInner}</div>;
+    }
+
+    return (
+      <a 
+        href={member.linkedin} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className={`${cardClasses} cursor-pointer`}
+      >
+        {cardInner}
+      </a>
+    );
+  };
 
   const CommunityPartnerCard = ({ member }) => (
     <a 
@@ -103,13 +115,13 @@ const Team = () => {
             onClick={() => setActiveTab('team')}
             className={`hover:cursor-pointer transition-colors px-4 py-2 tablet:px-6 tablet:py-3 border-2 sm:border-3 border-gray-600 rounded-lg shadow-lg ${activeTab === 'team' ? 'bg-violet-950 text-white border-[#8b5cf6]' : 'bg-gray-950/95 text-gray-300 hover:bg-gray-900'}`}
           >
-            <h2 className="text-sm tablet:text-lg laptop:text-xl desktop:text-2xl font-bold text-center">Our Team</h2>
+            <h2 className="text-sm tablet:text-lg laptop:text-xl desktop:text-2xl font-bold text-center">2026 Team</h2>
           </button>
           <button
             onClick={() => setActiveTab('partners')}
             className={`hover:cursor-pointer transition-colors px-4 py-2 tablet:px-6 tablet:py-3 border-2 sm:border-3 border-gray-600 rounded-lg shadow-lg ${activeTab === 'partners' ? 'bg-violet-950 text-white border-[#8b5cf6]' : 'bg-gray-950/95 text-gray-300 hover:bg-gray-900'}`}
           >
-            <h2 className="text-sm tablet:text-lg laptop:text-xl desktop:text-2xl font-bold text-center">Community Partners</h2>
+            <h2 className="text-sm tablet:text-lg laptop:text-xl desktop:text-2xl font-bold text-center">2026 Partners</h2>
           </button>
           <button
             onClick={() => setActiveTab('advisors')}

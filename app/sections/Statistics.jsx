@@ -33,6 +33,30 @@ const TrainWindow = ({ images, interval = 3000 }) => {
   );
 };
 
+const STATS_2026 = [
+  {
+    label: "SYS.ATTENDEES",
+    value: "145",
+    widthClass: "w-[85%]",
+    textClass: "text-[#00f3ff] drop-shadow-[0_0_10px_rgba(0,243,255,0.8)]",
+    barClass: "bg-[#00f3ff] shadow-[0_0_8px_rgba(0,243,255,1)]"
+  },
+  {
+    label: "SYS.PARTICIPANTS",
+    value: "109",
+    widthClass: "w-[64%]",
+    textClass: "text-[#ff003c] drop-shadow-[0_0_10px_rgba(255,0,60,0.8)]",
+    barClass: "bg-[#ff003c] shadow-[0_0_8px_rgba(255,0,60,1)]"
+  },
+  {
+    label: "SYS.PROJECTS",
+    value: "40",
+    widthClass: "w-[28%]",
+    textClass: "text-yellow-400 drop-shadow-[0_0_10px_rgba(250,204,21,0.8)]",
+    barClass: "bg-yellow-400 shadow-[0_0_8px_rgba(250,204,21,1)]"
+  }
+];
+
 const Statistics = () => {
   const windowCar1 = [
     "/backgrounds/statistics-memory-1-bg.png", "/backgrounds/statistics-memory-2-bg.png", "/backgrounds/statistics-memory-3-bg.png",
@@ -55,13 +79,14 @@ const Statistics = () => {
           }}
         >
           
+          {/* ARCADE LIGHTBOARD 1: THE 2026 PROMPT */}
           <div className="retro-box pixel-shadow p-2 relative overflow-hidden w-[22rem] h-[16rem] tablet:w-[28rem] tablet:h-[20rem] desktop:w-[25rem] desktop:h-[23rem] ml-[15vw] shrink-0 bg-[#060411] border-2 border-[#1e153b]">
             <div className="relative w-full h-full border-[3px] border-[#0a071a] rounded-sm overflow-hidden bg-[#030208] shadow-[inset_0_0_50px_rgba(0,0,0,1)] flex flex-col items-center justify-center p-6">
               
               <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(0,243,255,0.03)_1px,transparent_1px)] bg-[size:100%_4px] z-10"></div>
               
               <h1 className="font-mono font-bold text-center text-[#ff003c] text-4xl tablet:text-6xl uppercase tracking-widest drop-shadow-[0_0_15px_rgba(255,0,60,0.6)] z-20">
-                Last Year
+                In 2026
               </h1>
               <h2 className="font-mono font-bold text-center text-yellow-400 text-2xl tablet:text-4xl uppercase tracking-widest drop-shadow-[0_0_15px_rgba(250,204,21,0.6)] z-20 mt-1">
                 We Had
@@ -76,49 +101,39 @@ const Statistics = () => {
             </div>
           </div>
 
+          {/* TACTICAL HUD 2: 2026 DATA READOUT */}
           <div className="retro-box pixel-shadow p-2 relative overflow-hidden w-[24rem] h-[18rem] tablet:w-[32rem] tablet:h-[24rem] desktop:w-[28rem] desktop:h-[26rem] shrink-0 bg-[#060411] border-2 border-[#1e153b]">
             <div className="relative w-full h-full border-[3px] border-[#0a071a] rounded-sm overflow-hidden bg-[#030208] shadow-[inset_0_0_50px_rgba(0,0,0,1)] flex flex-col justify-center gap-6 p-6 tablet:p-8">
               <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100%_4px] z-10"></div>
               
-              <div className="relative z-20 group">
-                <div className="flex justify-between items-end pb-1">
-                  <span className="font-mono text-gray-500 text-[11px] tablet:text-[13px] tracking-widest">SYS.ATTENDEES</span>
-                  <span className="font-mono font-bold text-[#00f3ff] text-xl tablet:text-3xl drop-shadow-[0_0_10px_rgba(0,243,255,0.8)]">200+</span>
+              {STATS_2026.map((stat) => (
+                <div key={stat.label} className="relative z-20 group">
+                  <div className="flex justify-between items-end pb-1">
+                    <span className="font-mono text-gray-500 text-[11px] tablet:text-[13px] tracking-widest">{stat.label}</span>
+                    <span className={`font-mono font-bold text-xl tablet:text-3xl ${stat.textClass}`}>{stat.value}</span>
+                  </div>
+                  <div className="w-full bg-gray-900 h-1.5 rounded-full overflow-hidden">
+                    <div className={`h-full ${stat.widthClass} ${stat.barClass}`}></div>
+                  </div>
                 </div>
-                <div className="w-full bg-gray-900 h-1.5 rounded-full overflow-hidden"><div className="bg-[#00f3ff] h-full w-[85%] shadow-[0_0_8px_rgba(0,243,255,1)]"></div></div>
-              </div>
-
-              <div className="relative z-20 group">
-                <div className="flex justify-between items-end pb-1">
-                  <span className="font-mono text-gray-500 text-[11px] tablet:text-[13px] tracking-widest">SYS.PARTICIPANTS</span>
-                  <span className="font-mono font-bold text-[#ff003c] text-xl tablet:text-3xl drop-shadow-[0_0_10px_rgba(255,0,60,0.8)]">130</span>
-                </div>
-                <div className="w-full bg-gray-900 h-1.5 rounded-full overflow-hidden"><div className="bg-[#ff003c] h-full w-[65%] shadow-[0_0_8px_rgba(255,0,60,1)]"></div></div>
-              </div>
-
-              <div className="relative z-20 group">
-                <div className="flex justify-between items-end pb-1">
-                  <span className="font-mono text-gray-500 text-[11px] tablet:text-[13px] tracking-widest">SYS.PROJECTS</span>
-                  <span className="font-mono font-bold text-yellow-400 text-xl tablet:text-3xl drop-shadow-[0_0_10px_rgba(250,204,21,0.8)]">52</span>
-                </div>
-                <div className="w-full bg-gray-900 h-1.5 rounded-full overflow-hidden"><div className="bg-yellow-400 h-full w-[25%] shadow-[0_0_8px_rgba(250,204,21,1)]"></div></div>
-              </div>
+              ))}
             </div>
           </div>
 
           <TrainWindow images={windowCar1} interval={3500} />
           <TrainWindow images={windowCar2} interval={4000} />
 
+          {/* THE VOID TUNNEL: ROUTES DIRECTLY TO SPONSORS */}
           <div className="w-[200vw] h-full flex flex-row relative z-20">
             <div className="w-[100vw] h-full bg-gradient-to-r from-transparent via-[#030208] via-60% to-[#030208]"></div>
             <div className="w-[100vw] h-full bg-[#030208] flex flex-col justify-center items-center">
               <div className="flex flex-col items-center justify-center p-8 tablet:p-12 bg-[#060411]/80 border-2 border-[#1e153b] shadow-[0_0_50px_rgba(0,0,0,0.9)] rounded-xl backdrop-blur-md -translate-x-[50vw]">
                 
                 <h2 className="text-[#00f3ff] font-mono font-bold text-xl tablet:text-3xl laptop:text-5xl animate-pulse tracking-widest drop-shadow-[0_0_15px_rgba(0,243,255,0.6)] text-center">
-                  &gt;&gt; ROUTING TO: SHARKBYTE AVE &lt;&lt;
+                  &gt;&gt; ROUTING TO: 2026 SPONSORS &lt;&lt;
                 </h2>
                 <p className="text-gray-400 font-mono mt-4 tablet:mt-6 text-xs tablet:text-sm laptop:text-lg tracking-widest uppercase text-center">
-                  Prepare for Disembarkation
+                  Loading Partner Showcase
                 </p>
                 <div className="mt-6 tablet:mt-8 flex gap-3">
                   <div className="w-5 h-1.5 bg-[#00f3ff] animate-pulse shadow-[0_0_8px_rgba(0,243,255,0.8)]"></div>
