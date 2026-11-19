@@ -118,10 +118,14 @@ export default function Hero() {
             Miami Dade College&apos;s Signature Hackathon 
           </div>
 
-          {/* 2027 RETURN BANNER */}
-          <div className="mt-3 tablet:mt-4 bg-gray-950/90 border-2 border-[#00f3ff]/60 shadow-[0_0_25px_rgba(0,243,255,0.25)] rounded-lg px-4 py-2 tablet:px-6 tablet:py-2.5 z-20 max-w-[95vw]">
-            <p className="font-mono font-bold text-center text-[#00f3ff] text-[12px] mobile:text-[13px] tablet:text-[16px] laptop:text-[18px] tracking-widest uppercase drop-shadow-[0_0_8px_rgba(0,243,255,0.6)]">
-              SEA YOU SOON. WE&apos;RE COMING BACK WITH A SPLASH!<span className="animate-blink text-white ml-1">_</span>
+          {/* 2027 RETURN BANNER + DATES */}
+          <div className="mt-3 tablet:mt-4 bg-gray-950/90 border-2 border-[#00f3ff]/60 shadow-[0_0_25px_rgba(0,243,255,0.25)] rounded-lg px-4 py-2 tablet:px-6 tablet:py-2.5 z-20 max-w-[95vw] flex flex-col items-center">
+            <p className="font-mono font-bold text-center text-[#00f3ff] text-[11px] mobile:text-[12px] tablet:text-[15px] laptop:text-[17px] tracking-widest uppercase drop-shadow-[0_0_8px_rgba(0,243,255,0.6)]">
+              SEA YOU SOON. WE&apos;RE COMING BACK WITH A SPLASH!
+            </p>
+            <div className="w-3/4 h-[1px] bg-gradient-to-r from-transparent via-[#00f3ff]/40 to-transparent my-1.5"></div>
+            <p className="font-mono font-bold text-center text-yellow-400 text-[13px] mobile:text-[14px] tablet:text-[18px] laptop:text-[20px] tracking-[0.2em] uppercase drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]">
+              November 5th - 7th, 2027<span className="animate-blink text-white ml-1">_</span>
             </p>
           </div>
 

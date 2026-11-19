@@ -15,7 +15,7 @@ const Team = () => {
     { name: "Linet Lima", role: "Director of Industry Relations", image: "/images/team/linet-lima.png", linkedin: "https://www.linkedin.com/in/linet-lima-5437a0239/" },
     { name: "Kelvin Rodriguez", role: "Director of Industry Relations", image: "/images/team/kelvin-rodriguez.png", linkedin: "https://www.linkedin.com/in/kelvin-rodriguez-a519a0265/" },
     { name: "Richard Canina Miranda", role: "Director of Industry Relations", image: "/images/team/richard-canina-miranda.png", linkedin: "https://www.linkedin.com/in/richardcm-info" },
-    { name: "Fritz Bonhomme", role: "Director of Technology", image: "/images/team/fritz-bonhomme.jpg", linkedin: "" },
+    { name: "Fritz Bonhomme", role: "Director of Technology", image: "/images/team/fritz-bonhomme.jpg", linkedin: "https://www.linkedin.com/in/fritz-bonhomme-78a12644a/" },
     { name: "Oliver Martinez Fernandez", role: "Web Development", image: "/images/team/oliver-martinez-fernandez.png", linkedin: "https://www.linkedin.com/in/oliver-martinez-9a1ba4340/" }
   ];
 
