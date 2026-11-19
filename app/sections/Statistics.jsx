@@ -59,8 +59,11 @@ const STATS_2026 = [
 
 const Statistics = () => {
   const windowCar1 = [
-    "/backgrounds/statistics-memory-1-bg.png", "/backgrounds/statistics-memory-2-bg.png", "/backgrounds/statistics-memory-3-bg.png",
-    "/backgrounds/statistics-memory-4-bg.png", "/backgrounds/statistics-memory-5-bg.png", "/backgrounds/statistics-memory-6-bg.png",
+    "/backgrounds/SharkByte2026_memory_1.jpg", "/backgrounds/SharkByte2026_memory_2.jpg", "/backgrounds/SharkByte2026_memory_3.jpg",
+    "/backgrounds/SharkByte2026_memory_4.jpg", "/backgrounds/SharkByte2026_memory_5.jpg", "/backgrounds/SharkByte2026_memory_6.JPG",
+    "/backgrounds/SharkByte2026_memory_7.JPG", "/backgrounds/SharkByte2026_memory_8.JPG", "/backgrounds/SharkByte2026_memory_9.JPG",
+     "/backgrounds/SharkByte2026_memory_10.jpg","/backgrounds/SharkByte2026_memory_11.jpg", "/backgrounds/SharkByte2026_memory_12.jpg", "/backgrounds/SharkByte2026_memory_13.jpg", 
+    "/backgrounds/SharkByte2026_memory_14.jpg", "/backgrounds/SharkByte2026_memory_15.jpg"
   ];
 
   const windowCar2 = [...windowCar1].reverse();
