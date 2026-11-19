@@ -83,17 +83,20 @@ const Sponsors = () => {
       </div>
         
       <div className="w-full max-w-[1400px] mx-auto px-4 mb-[4vh] flex justify-center relative z-10 transition-transform duration-300 hover:-translate-y-2">
-        <div className="bg-gray-950/95 border-2 border-gray-700 shadow-[0_15px_30px_rgba(0,0,0,0.6)] rounded-lg px-6 py-4 laptop:py-5 w-[90%] max-w-[850px]">
-          <p className="text-left font-mono text-[14px] tablet:text-[18px] laptop:text-[24px] text-gray-300">
-            <span className="text-[#39ff14] font-bold mr-3 drop-shadow-[0_0_8px_rgba(57,255,20,0.8)]">{">"}</span> 
-            Want to sponsor SharkByte 2027? Execute:{" "}
-            <a 
-              href="mailto:industry@weareinit.org?subject=SharkByte%202027%20Sponsorship%20Inquiry"
-              className="text-[#8b5cf6] break-all tablet:break-normal hover:text-white hover:drop-shadow-[0_0_12px_rgba(139,92,246,1)] transition-all duration-300 inline-block font-bold"
-            >
-              industry@weareinit.org
-            </a>
-            <span className="animate-blink text-[#39ff14] ml-1">_</span>
+        <div className="bg-gray-950/95 border-2 border-gray-700 shadow-[0_15px_30px_rgba(0,0,0,0.6)] rounded-lg px-5 py-4 tablet:px-8 laptop:py-5 w-fit max-w-[95%]">
+          <p className="text-center laptop:text-left font-mono text-[13px] mobile:text-[14px] tablet:text-[17px] laptop:text-[18px] desktop:text-[21px] text-gray-300 leading-relaxed">
+            <span className="text-[#39ff14] font-bold mr-2.5 drop-shadow-[0_0_8px_rgba(57,255,20,0.8)]">{">"}</span>
+            <span>Want to sponsor SharkByte 2027? </span>
+            <span className="inline-block">
+              Execute:{" "}
+              <a 
+                href="mailto:industry@weareinit.org?subject=SharkByte%202027%20Sponsorship%20Inquiry"
+                className="text-[#8b5cf6] break-all mobile:break-normal hover:text-white hover:drop-shadow-[0_0_12px_rgba(139,92,246,1)] transition-all duration-300 font-bold"
+              >
+                industry@weareinit.org
+              </a>
+              <span className="animate-blink text-[#39ff14] ml-1">_</span>
+            </span>
           </p>
         </div>
       </div>

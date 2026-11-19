@@ -125,7 +125,7 @@ export default function Hero() {
             </p>
             <div className="w-3/4 h-[1px] bg-gradient-to-r from-transparent via-[#00f3ff]/40 to-transparent my-1.5"></div>
             <p className="font-mono font-bold text-center text-yellow-400 text-[13px] mobile:text-[14px] tablet:text-[18px] laptop:text-[20px] tracking-[0.2em] uppercase drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]">
-              November 5th - 7th, 2027<span className="animate-blink text-white ml-1">_</span>
+              November 5th - 7th, 2027
             </p>
           </div>
 
@@ -167,7 +167,7 @@ export default function Hero() {
                 SharkByte 2026 Concluded!
               </p>
               <span className="mt-1 tablet:mt-2 block text-[15px] mobile:text-[16px] tablet:text-[22px] font-mono font-bold text-[#00f3ff] drop-shadow-[0_0_8px_rgba(0,243,255,0.6)] group-hover:drop-shadow-[0_0_15px_rgba(0,243,255,1)] group-hover:text-white uppercase tracking-widest transition-all duration-300">
-                View 2026 Stats<span className="animate-blink text-white ml-1">_</span>
+                View 2026 Stats
               </span>
             </div>
           </button>
@@ -183,7 +183,7 @@ export default function Hero() {
                 Have Questions?
               </p>
               <span className="mt-1 tablet:mt-2 block break-all text-[14px] mobile:text-[15px] tablet:text-[18px] font-mono font-bold text-[#8b5cf6] group-hover:text-white group-hover:drop-shadow-[0_0_12px_rgba(139,92,246,1)] transition-all duration-300 uppercase tracking-widest">
-                Contact Us<span className="animate-blink text-[#39ff14] ml-1 drop-shadow-[0_0_8px_rgba(57,255,20,0.8)] group-hover:text-white">_</span>
+                Contact Us
               </span>
             </div>
           </a>
