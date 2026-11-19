@@ -88,20 +88,6 @@
   animation: smooth-levitate 5s ease-in-out infinite;
 }
 
-@keyframes faulty-neon {
-  0%, 2%, 4%, 8%, 33%, 35%, 37%, 39%, 100% { 
-    opacity: 1; 
-    text-shadow: 0 0 2px rgba(159,18,57,0.4), 0 0 6px rgba(159,18,57,0.2); 
-  }
-  3%, 5%, 34%, 36% { 
-    opacity: 0.6; 
-    text-shadow: none; 
-  }
-}
-.animate-faulty-neon {
-  animation: faulty-neon 5s infinite;
-}
-
 @keyframes marquee-left { 
   0% { transform: translate3d(0, 0, 0); } 
   100% { transform: translate3d(-33.33%, 0, 0); } 
@@ -156,13 +142,9 @@ body {
 .statistics-bg,
 .hero-bg,
 .stats-bg,
-.comingsoon-bg,
 .sponsors-bg,
 .socials-bg,
-.about-bg,
-.location-bg, 
-.team-bg,
-.faq-bg {
+.team-bg {
   background-repeat: no-repeat;
   background-size: cover;
   image-rendering: pixelated;
@@ -172,10 +154,6 @@ body {
 
 .hero-bg { background-image: url('/backgrounds/hero-bg.png'); background-position: center; }
 .stats-bg { background-image: url('/backgrounds/statistics-bg.png'); background-position: center; }
-.comingsoon-bg { background-image: url('/backgrounds/coming-soon-bg.png'); background-position: center; }
 .sponsors-bg { background-image: url('/backgrounds/sponsors-bg.png'); background-position: center; }
 .socials-bg { background-image: url('/backgrounds/socials-bg.png'); background-position: center; }
-.about-bg { background-image: url('/backgrounds/about-bg.png'); background-position: center; }
-.location-bg { background-image: url('/backgrounds/location-bg.png'); background-position: center; }
 .team-bg { background-image: url('/backgrounds/team-bg.png'); background-position: center; }
-.faq-bg { background-image: url('/backgrounds/faq-bg.png'); background-position: center; }

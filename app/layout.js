@@ -23,10 +23,10 @@ export const VT323 = localFont({
 })
 
 export const metadata = {
-  metadataBase: new URL('https://shark-byte.io'), // Required for Next.js to resolve OG images
-  title: 'SharkByte 2026 | Miami Dade College Hackathon',
-  description: 'Join SharkByte, Miami Dade College\'s official hackathon! A free 3-day tech sprint November 6-8, 2026 in Miami, FL. Build innovative projects, learn new skills, and connect with fellow developers. Open to anyone 18+.',
-  keywords: 'hackathon, Miami Dade College, INIT, miami dade college hackathon, mdc hackathon, SharkByte, coding, programming, Miami, Florida, event, SharkByte 2026, FL Hackathon, tech event, software development',
+  metadataBase: new URL('https://shark-byte.io'),
+  title: 'SharkByte | Miami Dade College Signature Hackathon',
+  description: 'SharkByte 2026 has officially concluded! Explore our 2026 stats, projects, and sponsors as we gear up to return with a splash in 2027.',
+  keywords: 'hackathon, Miami Dade College, INIT, miami dade college hackathon, mdc hackathon, SharkByte, coding, programming, Miami, Florida, SharkByte 2026, SharkByte 2027, tech event',
   authors: [{ name: 'INIT MDC North' }],
   creator: 'INIT MDC North',
   publisher: 'Miami Dade College',
@@ -45,22 +45,22 @@ export const metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://shark-byte.io',
-    siteName: 'SharkByte 2026 | Miami Dade College Signature Hackathon',
-    title: 'SharkByte 2026 | Miami Dade College Signature Hackathon',
-    description: 'Join SharkByte, Miami Dade College\'s official hackathon! A free 3-day tech sprint November 6-8, 2026 in Miami, FL. Build innovative projects, learn new skills, and connect with fellow developers.',
+    siteName: 'SharkByte | Miami Dade College Signature Hackathon',
+    title: 'SharkByte | Sea You Soon in 2027',
+    description: 'Thank you to all the hackers, mentors, and sponsors who made SharkByte 2026 unforgettable. We are coming back with a splash in 2027!',
     images: [
       {
-        url: '/sharkbyte-website-image.png', // Ensure you rename the file in your public folder!
+        url: '/sharkbyte-website-image.png',
         width: 1200,
         height: 630,
-        alt: 'SharkByte 2026 Hackathon - Miami Dade College',
+        alt: 'SharkByte Hackathon - Miami Dade College',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SharkByte 2026 | Miami Dade College Signature Hackathon',
-    description: 'Join SharkByte, Miami Dade College\'s official hackathon! A free 3-day tech sprint November 6-8, 2026 in Miami, FL.',
+    title: 'SharkByte | Miami Dade College Signature Hackathon',
+    description: 'Thank you for making SharkByte 2026 unforgettable. Sea you soon in 2027!',
     images: ['/sharkbyte-website-image.png'],
   },
 }

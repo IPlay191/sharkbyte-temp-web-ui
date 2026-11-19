@@ -10,6 +10,16 @@ export default function Hero() {
   const contentRef = useRef(null)
   const badgeRef = useRef(null)
 
+  const scrollToStats = () => {
+    const anchor = document.getElementById('horizontal-anchor-1')
+    if (anchor) {
+      window.scrollTo({
+        top: anchor.offsetTop,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   useEffect(() => {
     const track = trackRef.current
     const content = contentRef.current
@@ -77,8 +87,8 @@ export default function Hero() {
   }, [])
 
   return (
-    <section ref={trackRef} id='hero' className="w-full h-[125vh] tablet:h-[130vh] laptop:h-[140vh] relative z-0">
-      <div ref={contentRef} id='hero-content' className="sticky top-0 h-svh w-full hero-bg flex justify-center items-center flex-row max-[700px]:flex-col overflow-hidden will-change-transform">
+    <section ref={trackRef} id="hero" className="w-full h-[125vh] tablet:h-[130vh] laptop:h-[140vh] relative z-0">
+      <div ref={contentRef} id="hero-content" className="sticky top-0 h-svh w-full hero-bg flex justify-center items-center flex-row max-[700px]:flex-col overflow-hidden will-change-transform">
 
         <a 
           ref={badgeRef}
@@ -92,18 +102,8 @@ export default function Hero() {
           <img src="https://s3.amazonaws.com/logged-assets/trust-badge/2027/mlh-trust-badge-2027-yellow.svg" alt="Major League Hacking 2027" className="w-full drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]" />
         </a>
 
-        <div className='relative flex flex-col justify-center items-center z-10 animate-smooth-levitate will-change-transform transform-gpu'>
-          
-          <div className="absolute -top-2 left-20 mobile:top-2 mobile:-left-4 tablet:-top-2 tablet:-left-6 laptop:-top-2 laptop:-left-8 desktop:-top-4 desktop:-left-12 min-[1440px]:-top-4 min-[1440px]:-left-16 z-30 pointer-events-none">
-            <Image 
-              src="/svgs/date-bubble.png"
-              alt="Date Bubble" 
-              width={300} 
-              height={300} 
-              priority 
-              className="w-[80px] mobile:w-[100px] tablet:w-[115px] laptop:w-[130px] desktop:w-[150px] min-[1440px]:w-[180px] h-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.4)]" 
-            />
-          </div>
+        {/* MAIN CENTRAL CLUSTER */}
+        <div className="relative flex flex-col justify-center items-center z-10 animate-smooth-levitate will-change-transform transform-gpu px-4">
 
           <Image 
             src="/svgs/logo.svg" 
@@ -114,11 +114,23 @@ export default function Hero() {
             className="w-[175px] mobile:w-[160px] tablet:w-[250px] laptop:w-[280px] desktop:w-[300px] min-[1440px]:w-[380px] h-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)] relative z-10" 
           />
 
-          <div className="mt-3 tablet:mt-4 laptop:mt-6 font-bold text-center text-white text-[1rem] tablet:text-[1.1rem] laptop:text-[1.3rem] desktop:text-[1.5rem] min-[1440px]:text-[2.2rem] drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] z-20 tracking-wide px-4"> 
-            Miami Dade College's Signature Hackathon 
+          <div className="mt-3 tablet:mt-4 laptop:mt-6 font-bold text-center text-white text-[1rem] tablet:text-[1.1rem] laptop:text-[1.3rem] desktop:text-[1.5rem] min-[1440px]:text-[2.2rem] drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] z-20 tracking-wide"> 
+            Miami Dade College&apos;s Signature Hackathon 
           </div>
 
-          <div className="mt-4 tablet:mt-6 flex items-center justify-center gap-4 tablet:gap-6 bg-gray-950/95 border border-gray-600/50 px-5 py-2.5 tablet:px-6 tablet:py-3 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.8)] z-20 transition-transform duration-300 hover:scale-[1.02]">
+          {/* 2027 RETURN BANNER + DATES */}
+          <div className="mt-3 tablet:mt-4 bg-gray-950/90 border-2 border-[#00f3ff]/60 shadow-[0_0_25px_rgba(0,243,255,0.25)] rounded-lg px-4 py-2 tablet:px-6 tablet:py-2.5 z-20 max-w-[95vw] flex flex-col items-center">
+            <p className="font-mono font-bold text-center text-[#00f3ff] text-[11px] mobile:text-[12px] tablet:text-[15px] laptop:text-[17px] tracking-widest uppercase drop-shadow-[0_0_8px_rgba(0,243,255,0.6)]">
+              SEA YOU SOON. WE&apos;RE COMING BACK WITH A SPLASH!
+            </p>
+            <div className="w-3/4 h-[1px] bg-gradient-to-r from-transparent via-[#00f3ff]/40 to-transparent my-1.5"></div>
+            <p className="font-mono font-bold text-center text-yellow-400 text-[13px] mobile:text-[14px] tablet:text-[18px] laptop:text-[20px] tracking-[0.2em] uppercase drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]">
+              November 5th - 7th, 2027
+            </p>
+          </div>
+
+          {/* INSTITUTIONAL ANCHOR */}
+          <div className="mt-4 tablet:mt-5 flex items-center justify-center gap-4 tablet:gap-6 bg-gray-950/95 border border-gray-600/50 px-5 py-2.5 tablet:px-6 tablet:py-3 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.8)] z-20 transition-transform duration-300 hover:scale-[1.02]">
             <Image 
               src="/svgs/init-logo.jpg"
               alt="INIT Logo" 
@@ -140,42 +152,27 @@ export default function Hero() {
           
         </div>
 
+        {/* ACTION UI ZONE: POST-EVENT STACK */}
         <div className="z-30 flex flex-col gap-3 tablet:gap-4 w-full max-[700px]:relative max-[700px]:items-center max-[700px]:mt-6 min-[701px]:w-auto min-[701px]:absolute min-[701px]:bottom-6 min-[701px]:right-6 tablet:bottom-10 tablet:right-10 min-[701px]:items-end px-4 min-[701px]:px-0">
           
-          <a 
-            href="https://airtable.com/appY1e4YbYhqNWdpE/shr5bPimkY7ck4v88"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Register for SharkByte Hackathon"
+          {/* PRIMARY: 2026 STATS SCROLL */}
+          <button 
+            type="button"
+            onClick={scrollToStats}
+            aria-label="Scroll to SharkByte 2026 Stats"
             className="group block transition-all duration-300 hover:-translate-y-2 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00f3ff] rounded-xl cursor-pointer will-change-transform transform-gpu max-[700px]:w-full max-[700px]:max-w-[280px]"
           >
-            <div className="bg-gray-950/95 border-2 border-[#00f3ff]/40 shadow-[0_15px_35px_rgba(0,243,255,0.15)] rounded-xl py-3 px-4 tablet:p-5 w-full min-[701px]:w-[280px] tablet:w-[360px] text-center group-hover:bg-gray-900/95 group-hover:border-[#00f3ff] group-hover:shadow-[0_0_25px_rgba(0,243,255,0.4)] transition-all duration-300">
+            <div className="bg-gray-950/95 border-2 border-gray-700/80 shadow-[0_15px_35px_rgba(0,0,0,0.6)] rounded-xl py-3 px-4 tablet:p-5 w-full min-[701px]:w-[280px] tablet:w-[360px] text-center group-hover:bg-gray-900/95 group-hover:border-[#00f3ff] transition-all duration-300">
               <p className="text-[10px] mobile:text-[12px] tablet:text-[14px] font-bold text-gray-300 tracking-wide uppercase group-hover:text-white transition-colors duration-300">
-                Ready to dive in?
+                SharkByte 2026 Concluded!
               </p>
-              <span className="mt-1 tablet:mt-2 block text-[15px] mobile:text-[16px] tablet:text-[22px] font-mono font-bold text-[#00f3ff] drop-shadow-[0_0_8px_rgba(0,243,255,0.6)] group-hover:drop-shadow-[0_0_15px_rgba(0,243,255,1)] group-hover:text-white uppercase tracking-widest transition-all duration-300">
-                Register Here<span className="animate-blink text-white ml-1">_</span>
+              <span className="mt-1 tablet:mt-2 block text-[15px] mobile:text-[16px] tablet:text-[22px] font-mono font-bold text-[#00f3ff] group-hover:text-white uppercase tracking-widest transition-all duration-300">
+                View 2026 Stats
               </span>
             </div>
-          </a>
+          </button>
 
-          <a 
-            href="https://airtable.com/appY1e4YbYhqNWdpE/shrOTn8TvmH292eCi"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Register to Volunteer, Mentor, or Judge"
-            className="group block transition-all duration-300 hover:-translate-y-2 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff00aa] rounded-xl cursor-pointer will-change-transform transform-gpu max-[700px]:w-full max-[700px]:max-w-[270px]"
-          >
-            <div className="bg-gray-950/95 border-2 border-[#ff00aa]/30 shadow-[0_15px_35px_rgba(255,0,170,0.1)] rounded-xl py-3 px-4 tablet:p-5 w-full min-[701px]:w-[270px] tablet:w-[350px] text-center group-hover:bg-gray-900/95 group-hover:border-[#ff00aa] group-hover:shadow-[0_0_20px_rgba(255,0,170,0.3)] transition-all duration-300">
-              <p className="text-[10px] mobile:text-[12px] tablet:text-[14px] font-bold text-gray-300 tracking-wide uppercase group-hover:text-white transition-colors duration-300">
-                Mentor, Judge, or Volunteer?
-              </p>
-              <span className="mt-1 tablet:mt-2 block text-[15px] mobile:text-[16px] tablet:text-[20px] font-mono font-bold text-[#ff00aa] drop-shadow-[0_0_6px_rgba(255,0,170,0.5)] group-hover:drop-shadow-[0_0_12px_rgba(255,0,170,0.9)] group-hover:text-white uppercase tracking-widest transition-all duration-300">
-                Get Involved<span className="animate-blink text-[#ff00aa] ml-1 drop-shadow-[0_0_8px_rgba(255,0,170,0.8)] group-hover:text-white">_</span>
-              </span>
-            </div>
-          </a>
-
+          {/* SECONDARY: CONTACT US */}
           <a 
             href="mailto:Mdc-north@weareinit.org?subject=SharkByte%20Hackathon%20Inquiry" 
             aria-label="Contact the SharkByte Team"
@@ -186,7 +183,7 @@ export default function Hero() {
                 Have Questions?
               </p>
               <span className="mt-1 tablet:mt-2 block break-all text-[14px] mobile:text-[15px] tablet:text-[18px] font-mono font-bold text-[#8b5cf6] group-hover:text-white group-hover:drop-shadow-[0_0_12px_rgba(139,92,246,1)] transition-all duration-300 uppercase tracking-widest">
-                Contact Us<span className="animate-blink text-[#39ff14] ml-1 drop-shadow-[0_0_8px_rgba(57,255,20,0.8)] group-hover:text-white">_</span>
+                Contact Us
               </span>
             </div>
           </a>
