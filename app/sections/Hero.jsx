@@ -162,11 +162,11 @@ export default function Hero() {
             aria-label="Scroll to SharkByte 2026 Stats"
             className="group block transition-all duration-300 hover:-translate-y-2 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00f3ff] rounded-xl cursor-pointer will-change-transform transform-gpu max-[700px]:w-full max-[700px]:max-w-[280px]"
           >
-            <div className="bg-gray-950/95 border-2 border-[#00f3ff]/40 shadow-[0_15px_35px_rgba(0,243,255,0.15)] rounded-xl py-3 px-4 tablet:p-5 w-full min-[701px]:w-[280px] tablet:w-[360px] text-center group-hover:bg-gray-900/95 group-hover:border-[#00f3ff] group-hover:shadow-[0_0_25px_rgba(0,243,255,0.4)] transition-all duration-300">
+            <div className="bg-gray-950/95 border-2 border-gray-700/80 shadow-[0_15px_35px_rgba(0,0,0,0.6)] rounded-xl py-3 px-4 tablet:p-5 w-full min-[701px]:w-[280px] tablet:w-[360px] text-center group-hover:bg-gray-900/95 group-hover:border-[#00f3ff] transition-all duration-300">
               <p className="text-[10px] mobile:text-[12px] tablet:text-[14px] font-bold text-gray-300 tracking-wide uppercase group-hover:text-white transition-colors duration-300">
                 SharkByte 2026 Concluded!
               </p>
-              <span className="mt-1 tablet:mt-2 block text-[15px] mobile:text-[16px] tablet:text-[22px] font-mono font-bold text-[#00f3ff] drop-shadow-[0_0_8px_rgba(0,243,255,0.6)] group-hover:drop-shadow-[0_0_15px_rgba(0,243,255,1)] group-hover:text-white uppercase tracking-widest transition-all duration-300">
+              <span className="mt-1 tablet:mt-2 block text-[15px] mobile:text-[16px] tablet:text-[22px] font-mono font-bold text-[#00f3ff] group-hover:text-white uppercase tracking-widest transition-all duration-300">
                 View 2026 Stats
               </span>
             </div>
